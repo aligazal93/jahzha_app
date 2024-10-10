@@ -1,0 +1,75 @@
+part of '../view.dart';
+class InfoCard extends StatelessWidget {
+  const InfoCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+              width: 2,
+              color: AppColors.tGray
+          ),
+          borderRadius: BorderRadius.circular(12)
+      ),
+      padding: EdgeInsets.symmetric(vertical: 8,horizontal: 12),
+      margin: EdgeInsets.symmetric(vertical: 20,horizontal: 12),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Image.asset(
+              'assets/images/ma.png',
+              fit: BoxFit.fill,
+              width: 50,
+              height: 50,
+              errorBuilder: (context, error, stackTrace) => Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: AppColors.primary
+                ),
+                child: Icon(
+                  FontAwesomeIcons.image,
+                  size: 20,
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppText(
+                title: 'Mohamed ahmed',
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                color: AppColors.secondary,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+              SizedBox(height: 4,),
+              AppText(
+                title: '+955 654654654',
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                color: AppColors.txtGray,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ],
+          ),
+          Spacer(),
+          AppButton(
+            title: 'Edit'.tr(),
+            titleFontSize: 12,
+            padding: EdgeInsets.symmetric(vertical: 12,horizontal: 30),
+            onTap: () {
+              RouteUtils.navigateTo(AccountDetailsView());
+            },
+            height: 40,
+          ),
+          SizedBox(width: 12,),
+        ],
+      ),
+    );
+  }
+}

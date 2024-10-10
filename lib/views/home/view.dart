@@ -1,0 +1,114 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jahzha_app/core/helpers/app_colors.dart';
+import 'package:jahzha_app/core/helpers/utils.dart';
+import 'package:jahzha_app/core/route_utils/route_utils.dart';
+import 'package:jahzha_app/views/coupons/view.dart';
+import 'package:jahzha_app/views/international_shipping/view.dart';
+import 'package:jahzha_app/views/local_shipping/view.dart';
+import 'package:jahzha_app/views/my_points/view.dart';
+import 'package:jahzha_app/views/order_tracking/view.dart';
+import 'package:jahzha_app/widgets/app/app_bar.dart';
+import 'package:jahzha_app/widgets/app/home_app_bar.dart';
+import 'package:jahzha_app/widgets/app_text.dart';
+part 'units/slider.dart';
+part 'units/service_card.dart';
+part 'units/customer_service_card.dart';
+
+class HomeView extends StatelessWidget {
+  const HomeView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: HomeAppBar(
+        name: 'Mohamed',
+        icon: FontAwesomeIcons.bagShopping,
+        title: 'Welcome'.tr(),
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 0),
+        child: ListView(
+          children: [
+            Slider(),
+            AppText(
+             title: 'Our services'.tr(),
+             fontWeight: FontWeight.w700,
+             color: AppColors.secondary,
+             padding: EdgeInsets.symmetric(vertical: 16,horizontal: 12),
+             fontSize: 16,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  ServiceCar(
+                    title: 'Local shipping'.tr(),
+                    colorCard: Color(0xFFFFFEEEA),
+                    imgColor: Color(0XFFFFE2DC),
+                    image: 'truck',
+                    onTap: () {
+                      RouteUtils.navigateTo(LocalShippingView());
+                    },
+                  ),
+                  ServiceCar(
+                    title: 'international shipping'.tr(),
+                    colorCard: Color(0xFFFFFAED),
+                    imgColor: Color(0XFFFEEEC6),
+                    image: 'serv',
+                    onTap: () {
+                      RouteUtils.navigateTo(InterNationalShippingView());
+                    },
+                  ),
+                  ServiceCar(
+                    title: 'order tracking'.tr(),
+                    colorCard: Color(0xFFE8FCF0),
+                    imgColor: Color(0XFFCEF8DF),
+                    image: 'track',
+                    onTap: () {
+                      RouteUtils.navigateTo(OrderTrackingView());
+                    },
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 12,),
+            AppText(
+              title: 'Customer services'.tr(),
+              fontWeight: FontWeight.w700,
+              color: AppColors.secondary,
+              padding: EdgeInsets.symmetric(vertical: 16,horizontal: 12),
+              fontSize: 16,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  CustomerServiceCard(
+                    onTap: () {
+                      RouteUtils.navigateTo(CouponsView());
+                    },
+                    image: 'coupons',
+                    title: 'Coupons'.tr(),
+                    colorCard: Color(0xFFE7F6FB),
+                  ),
+                  CustomerServiceCard(
+                    onTap: () {
+                      RouteUtils.navigateTo(MyPointsView());
+                    },
+                    image: 'points',
+                    title: 'Points'.tr(),
+                    colorCard: Color(0XFFFFFAED),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 30,),
+          ],
+        ),
+      ),
+    );
+  }
+}
