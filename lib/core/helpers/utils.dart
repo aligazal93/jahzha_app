@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jahzha_app/core/extensions/string.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
@@ -17,8 +16,6 @@ import 'app_colors.dart';
 class Utils {
 
   static const double DEFAULT_MAP_ZOOM = 16.0;
-  static const String MAP_API_KEY = 'AIzaSyAdvXvIQSrguEjx4zPLkjxCYJDYK-tBIrE';
-
 
   static Color getColor(String color) {
     final myColor = "0xff${color.replaceFirst("#", "")}";
@@ -209,20 +206,20 @@ class Utils {
   //   return true;
   // }
 
-  static const LatLng defaultLatLng = LatLng(
-    24.774265,
-    46.738586,
-  );
-
-  static const CameraPosition defaultMapCameraPosition = CameraPosition(
-    target: defaultLatLng,
-    zoom: 1,
-  );
-
-  static CameraPosition getMapCameraPosition(LatLng latLng, [double zoom = 12]) => CameraPosition(
-    target: latLng,
-    zoom: zoom,
-  );
+  // static const LatLng defaultLatLng = LatLng(
+  //   24.774265,
+  //   46.738586,
+  // );
+  //
+  // static const CameraPosition defaultMapCameraPosition = CameraPosition(
+  //   target: defaultLatLng,
+  //   zoom: 1,
+  // );
+  //
+  // static CameraPosition getMapCameraPosition(LatLng latLng, [double zoom = 12]) => CameraPosition(
+  //   target: latLng,
+  //   zoom: zoom,
+  // );
 
   static double sizeFromHeight(double fraction,
       {bool removeAppBarSize = true}) {
