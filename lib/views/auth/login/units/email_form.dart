@@ -35,32 +35,26 @@ class ViaEmailForm extends StatelessWidget {
               color: AppColors.txtGray,
               fontSize: 14,
             ),
-            Form(
-              key: cubit.formKey,
-              child: Column(
-              children: [
-                AppTextField(
-                  fillColor: AppColors.tGray,
-                  vMargin: 20,
-                  hint: 'Enter Email Address'.tr(),
-                  validator: Validator.email,
-                  inputType: TextInputType.emailAddress,
-                  suffixIcon: Icon(FontAwesomeIcons.envelope,color: AppColors.primary,),
-                  onSaved: (v) => cubit.email = v,
-                ),
-                AppButton(
-                  title: 'Continue'.tr(),
-                  color: AppColors.primary,
-                  isLoading: state is AuthLoading ? true : false,
-                  constrainedAxis: Axis.horizontal,
-                  margin: EdgeInsets.symmetric(vertical: 12),
-                  onTap: () {
-                    cubit.loginByEmail();
-                    // RouteUtils.navigateAndPopAll(OtpView());
-                  },
-                ),
-              ],
-            ),),
+            AppTextField(
+              fillColor: AppColors.tGray,
+              vMargin: 20,
+              hint: 'Enter Email Address'.tr(),
+              validator: Validator.email,
+              inputType: TextInputType.emailAddress,
+              suffixIcon: Icon(FontAwesomeIcons.envelope,color: AppColors.primary,),
+              onSaved: (v) => cubit.email = v,
+            ),
+            AppButton(
+              title: 'Continue'.tr(),
+              color: AppColors.primary,
+              isLoading: state is AuthLoading ? true : false,
+              constrainedAxis: Axis.horizontal,
+              margin: EdgeInsets.symmetric(vertical: 12),
+              onTap: () {
+                cubit.loginByEmail();
+                // RouteUtils.navigateAndPopAll(OtpView());
+              },
+            ),
             AppText(
               title: 'It will provide a message to the input number on the code to continue... Make sure your number is correct.'.tr(),
               textAlign: TextAlign.center,

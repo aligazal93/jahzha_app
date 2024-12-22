@@ -39,65 +39,58 @@ class ViaMobileForm extends StatelessWidget {
               color: AppColors.txtGray,
               fontSize: 14,
             ),
-            Form(
-              key: cubit.formKey,
-              child: Column(
+            Container(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            child: AppTextField(
-                              fillColor: AppColors.tGray,
-                              hint: '5xxxxxxxx',
-                              textAlign: TextAlign.left,
-                              inputType: TextInputType.number,
-                              onSaved: (v) => cubit.phone = v,
-                              validator: Validator.phone,
-                              // TODO 9 NUMBER -- Not 10
-                              maxLength: 10,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Container(
-                              width: 70,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  color: AppColors.primary,
-                                  border: Border.all(
-                                    color: AppColors.darkGrayBlue,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12)),
-                              child: Center(
-                                child: AppText(
-                                  title: '966+',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.white,
-                                  padding: EdgeInsets.symmetric(horizontal: 8),
-                                  textAlign: TextAlign.center,
-                                ),
-                              )),
-                        ),
-                      ],
+                  Expanded(
+                    child: Container(
+                      child: AppTextField(
+                        fillColor: AppColors.tGray,
+                        hint: '5xxxxxxxx',
+                        textAlign: TextAlign.left,
+                        inputType: TextInputType.number,
+                        onSaved: (v) => cubit.phone = v,
+                        validator: Validator.phone,
+                        // TODO 9 NUMBER -- Not 10
+                        maxLength: 10,
+                      ),
                     ),
                   ),
-                  AppButton(
-                      title: 'Continue'.tr(),
-                      color: AppColors.primary,
-                      constrainedAxis: Axis.horizontal,
-                      isLoading: state is AuthLoading ? true : false,
-                      margin: EdgeInsets.symmetric(vertical: 12),
-                      onTap: () {
-                        cubit.loginByPhone();
-                      },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Container(
+                        width: 70,
+                        height: 60,
+                        decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            border: Border.all(
+                              color: AppColors.darkGrayBlue,
+                            ),
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Center(
+                          child: AppText(
+                            title: '966+',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            textAlign: TextAlign.center,
+                          ),
+                        )),
                   ),
                 ],
               ),
+            ),
+            AppButton(
+                title: 'Continue'.tr(),
+                color: AppColors.primary,
+                constrainedAxis: Axis.horizontal,
+                isLoading: state is AuthLoading ? true : false,
+                margin: EdgeInsets.symmetric(vertical: 12),
+                onTap: () {
+                  cubit.loginByPhone();
+                },
             ),
             AppText(
               title:

@@ -90,27 +90,35 @@ class _LoginViewState extends State<LoginView> with SingleTickerProviderStateMix
                 ],
               ),
             ),
-            Container(
-              height: Utils.sizeFromHeight(1.7),
-              child: TabBarView(
-                controller: _tabController,
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 12),
-                    child: Container(
-                        child: ViaMobileForm()
+            BlocBuilder<AuthCubit,AuthStates>(
+              builder: (context, state) {
+                final cubit = AuthCubit.of(context);
+                return Form(
+                  key: cubit.formKey,
+                  child: Container(
+                    height: Utils.sizeFromHeight(1.7),
+                    child: TabBarView(
+                      controller: _tabController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 12),
+                          child: Container(
+                              child: ViaMobileForm()
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 12),
+                          child: Container(
+                              child: ViaEmailForm()
+                          ),
+                        )
+
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 12),
-                    child: Container(
-                        child: ViaEmailForm()
-                    ),
-                  )
-
-                ],
-              ),
+                );
+              },
             )
           ],
         )
