@@ -217,5 +217,12 @@
   "Arabic" : "Arabic",
   "welcome" : "welcome",
   "language" : "language",
-  "Gender" : "Gender"
+  "Gender" : "Gender",
+  "in Jahzha" : "in Jahzha",
+  "your name here" : "your name here",
+  "empty_field" : "empty_field",
+  "write_email" : "write_email",
+  "write_correct_email": "write_correct_email",
+  "write_phone" : "write_phone",
+  "write_correct_phone" : "write_correct_phone"
 }

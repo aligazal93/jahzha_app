@@ -83,7 +83,7 @@ class ChangeMobileNumber extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           titleFontSize: 16,
                           onTap: () {
-                            RouteUtils.navigateAndPopAll(OtpView());
+                            // RouteUtils.navigateAndPopAll(OtpView());
                           },
                         ),
                         flex: 2,

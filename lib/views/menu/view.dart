@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
@@ -245,25 +246,29 @@ class MenuView extends StatelessWidget {
                         ),
                       ],
                     )),
-                Container(
-                  padding: EdgeInsets.all(12),
-                  margin: EdgeInsets.symmetric(vertical: 24),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.red)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/logout.png'),
-                      AppText(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        textAlign: TextAlign.center,
-                        title: 'sign out'.tr(),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.red,
-                      ),
-                    ],
+                InkWell(
+                  onTap: () {
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(12),
+                    margin: EdgeInsets.symmetric(vertical: 24),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.red)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/logout.png'),
+                        AppText(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          textAlign: TextAlign.center,
+                          title: 'sign out'.tr(),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.red,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(

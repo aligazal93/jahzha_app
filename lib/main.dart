@@ -11,9 +11,9 @@ import 'my_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Future.value([
-    // await NetworkUtils.init(),
+    await NetworkUtils.init(),
     await EasyLocalization.ensureInitialized(),
-    // await CachingUtils.init(),
+    await CachingUtils.init(),
     await ThemeUtils.init(),
     // await Firebase.initializeApp(
     //   options: Platform.isIOS ? null : FirebaseOptions(

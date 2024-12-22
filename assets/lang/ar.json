@@ -8,7 +8,7 @@
   "Log in/Create a new account" : "تسجيل الدخول / انشاء حساب جديد",
   "Next" : "التالي",
   "Skip" : "تخطي",
-  "Via mobile" : "عبر الهاتف",
+  "Via mobile" : "عبر الجوال",
   "By email" : "عبر البريد الالكتروني",
   "Hey, you !" : "أهلاً بك!",
   "Enter your mobile number to create an account or log in." : "أدخل رقم الجوال لإنشاء حساب أو تسجيل الدخول.",
@@ -217,7 +217,12 @@
   "Arabic" : "العربية",
   "welcome" : "اهلا بك",
   "language" : "اللغة",
-  "Gender" : "الجنس"
-
-
+  "Gender" : "الجنس",
+  "in Jahzha" : "في جهزها",
+  "your name here" : "اسمك هنا",
+  "empty_field" : "حقل فارغ",
+  "write_email" : "ادخل البريد الالكتروني",
+  "write_correct_email": "ادخل البريد الالكتروني بشكل صحيح",
+  "write_phone" : "ادخل رقم الجوال",
+  "write_correct_phone" : "ادخل رقم الجوال بشكل صحيح"
 }

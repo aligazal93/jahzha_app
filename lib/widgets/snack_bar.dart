@@ -24,6 +24,7 @@ void showSnackBar(
       elevation: 0.0,
       content: AppText(
         title: message,
+        fontSize: 14,
         color: AppColors.white,
       ),
       action: action ??

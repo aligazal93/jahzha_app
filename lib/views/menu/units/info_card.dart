@@ -41,7 +41,7 @@ class InfoCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppText(
-                title: 'Mohamed ahmed',
+                title: CachingUtils.user?.data.name == null ? 'your name here'.tr() : CachingUtils.user?.data.name,
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 color: AppColors.secondary,
                 fontSize: 14,
@@ -49,7 +49,7 @@ class InfoCard extends StatelessWidget {
               ),
               SizedBox(height: 4,),
               AppText(
-                title: '+955 654654654',
+                title: CachingUtils.user?.data.telephone  == null ? CachingUtils.user?.data.email : CachingUtils.user?.data.telephone,
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 color: AppColors.txtGray,
                 fontSize: 14,

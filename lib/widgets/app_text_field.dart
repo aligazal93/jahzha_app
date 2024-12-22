@@ -28,6 +28,7 @@ class AppTextField extends StatefulWidget {
     this.focusNode,
     this.suffixIcon,
     this.maxLength,
+    this.textAlign = TextAlign.start,
   });
 
 
@@ -36,6 +37,7 @@ class AppTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final TextInputAction textInputAction;
+  final TextAlign textAlign;
   final TextInputType inputType;
   final VoidCallback? onTap;
   final Widget? trailing;
@@ -102,6 +104,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 cursorColor: AppColors.secondary,
                 enabled: widget.enabled,
                 validator: widget.validator,
+                textAlign: widget.textAlign,
                 onChanged: widget.onChanged,
                 maxLength: widget.maxLength,
                 textInputAction: TextInputAction.done,
@@ -115,7 +118,7 @@ class _AppTextFieldState extends State<AppTextField> {
                   filled: true,
                   hintStyle: TextStyle(
                     color: AppColors.secondary.theme,
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                   suffixIcon: widget.suffixIcon != null ? widget.suffixIcon : widget.secure ? IconButton(

@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 class Validator {
   static String? empty(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return tr("empty_field");
+      return tr("empty_field".tr());
     }
     return null;
   }
@@ -37,22 +37,22 @@ class Validator {
 
   static String? email(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return tr("write_email");
+      return tr("write_email".tr());
     } else if (!RegExp(r"""
 ^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""").hasMatch(value)) {
-      return tr("write_correct_email");
+      return tr("write_correct_email".tr());
     }
     return null;
   }
 
   static String? phone(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return tr("write_phone");
+      return tr("write_phone".tr());
     }
     final cleanedPhoneNumber = value.replaceAll(RegExp(r'[^0-9]'), '');
     final phonePattern = RegExp(r'^[0-9]{7,15}$');
     if (!phonePattern.hasMatch(cleanedPhoneNumber)) {
-      return tr("write_correct_phone");
+      return tr("write_correct_phone".tr());
     }
     return null;
   }
