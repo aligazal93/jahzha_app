@@ -19,9 +19,9 @@ class Validator {
 
   static String? name(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return tr("write_name");
+      return tr("write_name".tr());
     } else if (value.length < 2 || value.length > 30) {
-      return tr("write_correct_name");
+      return tr("write_correct_name".tr());
     }
     return null;
   }

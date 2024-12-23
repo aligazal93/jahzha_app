@@ -3,28 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/views/usage_policy/cubit.dart';
+import 'package:jahzha_app/views/point_policy/cubit.dart';
+import 'package:jahzha_app/views/privacy_policy/cubit.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/no_data_found.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
-class UsagePolicyView extends StatelessWidget {
-  const UsagePolicyView({Key? key}) : super(key: key);
+class PointPolicyView extends StatelessWidget {
+  const PointPolicyView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UsagePolicyCubit()..usagePolicyData(),
+      create: (context) => PointPolicyCubit()..getPointPolicy(),
       child: Scaffold(
         appBar: CustomAppBar(
-          title: 'Usage policy'.tr(),
+          title: 'point policy'.tr(),
         ),
-        body: BlocBuilder<UsagePolicyCubit,UsagePolicyStates>(
+        body: BlocBuilder<PointPolicyCubit,PointPolicyStates>(
           builder: (context, state) {
-            final cubit = UsagePolicyCubit.of(context);
-            final data = cubit.usagePolicyModel?.data;
-            if(state is UsagePolicyLoading){
+            final cubit = PointPolicyCubit.of(context);
+            final data = cubit.pointPolicyModel?.data;
+            if(state is PointPolicyLoading){
               return AppLoadingIndicator();
             }else if(data == null ){
               return NoDataFoundView();
@@ -33,7 +34,7 @@ class UsagePolicyView extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20,horizontal: 16),
               children: [
                 AppText(
-                  title:data.title,
+                  title: data.title,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: AppColors.secondary,
@@ -42,9 +43,13 @@ class UsagePolicyView extends StatelessWidget {
                 ),
                 Html(data: data.description,style: {
                   "p": Style(
-                      fontSize: FontSize(12),
-                      padding: HtmlPaddings.zero,
-                      color: AppColors.txtGray
+                    fontSize: FontSize(12),
+                    padding: HtmlPaddings.zero,
+                  ),
+                  "ul": Style(
+                    fontSize: FontSize(12),
+                    listStyleType: ListStyleType.none,
+                    padding: HtmlPaddings.zero,
                   ),
                 },),
               ],

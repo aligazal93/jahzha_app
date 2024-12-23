@@ -18,15 +18,22 @@ class AboutCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              child: Image.asset(image),
-              padding: EdgeInsets.all(12),
+              width: 50,
+              height: 50,
+              padding: EdgeInsets.all(8),
+              child: AppNetworkImage(
+                url: image,
+                width: 30,
+                height: 30,
+                fit: BoxFit.cover,
+              ),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   color: AppColors.primary.withOpacity(.3)
               ),
             ),
           ),
-          SizedBox(width: 12,),
+          SizedBox(width: 8,),
           Expanded(
             flex: 5,
             child: Column(
@@ -34,16 +41,17 @@ class AboutCard extends StatelessWidget {
               children: [
                 AppText(
                   title: title,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
                   color: AppColors.secondary,
                   fontSize: 14,
                 ),
-                SizedBox(height: 8,),
-                AppText(
-                  title: content,
-                  color: AppColors.txtGray,
-                  fontSize: 12,
-                  height: 20,
-                ),
+                Html(data: content,style: {
+                  "p": Style(
+                      fontSize: FontSize(12),
+                      padding: HtmlPaddings.zero,
+                      color: AppColors.txtGray
+                  ),
+                },),
               ],
             ),
           )

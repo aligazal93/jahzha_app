@@ -224,5 +224,9 @@
   "write_email" : "ادخل البريد الالكتروني",
   "write_correct_email": "ادخل البريد الالكتروني بشكل صحيح",
   "write_phone" : "ادخل رقم الجوال",
-  "write_correct_phone" : "ادخل رقم الجوال بشكل صحيح"
+  "write_correct_phone" : "ادخل رقم الجوال بشكل صحيح",
+  "write_name" : "ادخل الاسم",
+  "write_correct_name": "أدخل الاسم بشكل صحيح",
+  "point policy" : "سياسة النقاط"
+
 }

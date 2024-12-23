@@ -16,6 +16,7 @@ import 'package:jahzha_app/views/my_balance/view.dart';
 import 'package:jahzha_app/views/my_coupons/view.dart';
 import 'package:jahzha_app/views/my_points/view.dart';
 import 'package:jahzha_app/views/my_shipments/view.dart';
+import 'package:jahzha_app/views/point_policy/view.dart';
 import 'package:jahzha_app/views/privacy_policy/view.dart';
 import 'package:jahzha_app/views/terms_conditions/view.dart';
 import 'package:jahzha_app/views/usage_policy/view.dart';
@@ -214,9 +215,23 @@ class MenuView extends StatelessWidget {
                             RouteUtils.navigateTo(UsagePolicyView());
                           },
                         ),
+                        AccountTile(
+                          image: 'shield',
+                          title: 'privacy policy'.tr(),
+                          onTap: () {
+                            RouteUtils.navigateTo(PrivacyPolicyView());
+                          },
+                        ),
+                        AccountTile(
+                          image: 'coupons',
+                          title: 'point policy'.tr(),
+                          onTap: () {
+                            RouteUtils.navigateTo(PointPolicyView(),);
+                          },
+                        ),
                         ListTile(
                           onTap: () {
-                            RouteUtils.navigateTo(ChooseLanguageView());
+                            RouteUtils.navigateTo(ChooseLanguageView(),);
                           },
                           title: AppText(
                             title: 'language'.tr(),
@@ -225,7 +240,7 @@ class MenuView extends StatelessWidget {
                           ),
                           leading: Icon(
                             FontAwesomeIcons.earthAfrica,
-                            color: Color(0XFF606487),
+                            color:AppColors.lightGray,
                             size: 22,
                           ),
                           trailing: Icon(
@@ -234,18 +249,10 @@ class MenuView extends StatelessWidget {
                             color: AppColors.secondary,
                           ),
                         ),
-                        Divider(
-                          height: 8,
-                        ),
-                        AccountTile(
-                          image: 'shield',
-                          title: 'privacy policy'.tr(),
-                          onTap: () {
-                            RouteUtils.navigateTo(PrivacyPolicyView());
-                          },
-                        ),
+
+
                       ],
-                    )),
+                    ),),
                 InkWell(
                   onTap: () {
                   },

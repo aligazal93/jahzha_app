@@ -224,5 +224,8 @@
   "write_email" : "write_email",
   "write_correct_email": "write_correct_email",
   "write_phone" : "write_phone",
-  "write_correct_phone" : "write_correct_phone"
+  "write_correct_phone" : "write_correct_phone",
+  "write_name" : "write_name",
+  "write_correct_name": "write_correct_name",
+  "point policy" : "point policy"
 }

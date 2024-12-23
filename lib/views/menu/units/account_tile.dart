@@ -14,7 +14,7 @@ class AccountTile extends StatelessWidget {
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
-      leading: Image.asset('assets/images/${image}.png'),
+      leading: Image.asset('assets/images/${image}.png',color: AppColors.lightGray,width: 28,),
       trailing:Icon( Utils.isAR ? FontAwesomeIcons.chevronLeft : FontAwesomeIcons.chevronRight ,size: 18,color: AppColors.secondary,),
     );
   }
