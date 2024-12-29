@@ -83,7 +83,7 @@ class NetworkUtils {
 
   static void _setHeaders({required Map<String, dynamic>? headers}) {
     _dio.options.headers = {
-      'X-LOCALE': RouteUtils.context.locale.languageCode,
+      'lang': RouteUtils.context.locale.languageCode,
       'Accept': 'application/json',
       if (CachingUtils.isLogged)
         'API-TOKEN': 'Bearer ${CachingUtils.token}'

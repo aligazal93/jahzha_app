@@ -10,6 +10,7 @@ import 'package:jahzha_app/views/coupons/view.dart';
 import 'package:jahzha_app/views/international_shipping/view.dart';
 import 'package:jahzha_app/views/local_shipping/view.dart';
 import 'package:jahzha_app/views/my_points/view.dart';
+import 'package:jahzha_app/views/navbar/cubit/cubit.dart';
 import 'package:jahzha_app/views/order_tracking/view.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/home_app_bar.dart';
@@ -88,9 +89,7 @@ class HomeView extends StatelessWidget {
               child: Row(
                 children: [
                   CustomerServiceCard(
-                    onTap: () {
-                      RouteUtils.navigateTo(CouponsView());
-                    },
+                    onTap: () => NavBarCubit.of(context).toggleTab(2),
                     image: 'coupons',
                     title: 'Coupons'.tr(),
                     colorCard: Color(0xFFE7F6FB),
