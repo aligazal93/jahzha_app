@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
+import 'package:jahzha_app/views/coupons/cubit.dart';
 import 'package:jahzha_app/views/navbar/cubit/cubit.dart';
 import 'package:jahzha_app/views/navbar/cubit/states.dart';
 import 'package:jahzha_app/views/navbar/units/bottom_navbar.dart';
@@ -15,6 +16,9 @@ class NavBarView extends StatelessWidget {
         BlocProvider(
           create: (context) => NavBarCubit(),
         ),
+        BlocProvider(
+          create: (context) => StoreCouponsCubit()..getAllCouponsStore(),
+        )
       ],
       child: BlocBuilder<NavBarCubit, NavBarStates>(
         builder: (context, state) {

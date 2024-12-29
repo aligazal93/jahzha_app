@@ -1,6 +1,8 @@
 part of '../view.dart';
 class CouponCard extends StatelessWidget {
-  const CouponCard({Key? key}) : super(key: key);
+  const CouponCard({Key? key, required this.discountValue, required this.availabilityText, required this.coupon, required this.featureOne, required this.featureTwo, required this.couponId}) : super(key: key);
+  final String discountValue,availabilityText,coupon,featureOne,featureTwo;
+  final int couponId;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +21,14 @@ class CouponCard extends StatelessWidget {
           Row(
             children: [
               AppText(
-                title: '20% خصم',
+                title: 'خصم ${discountValue} %',
                 color: AppColors.primary,
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
               ),
               SizedBox(width: 12,),
               AppText(
-                title: 'نمشي 2024 | حتى 418 ريال',
+                title: availabilityText,
                 color: AppColors.secondary,
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
@@ -41,7 +43,7 @@ class CouponCard extends StatelessWidget {
                   children: [
                     Icon(FontAwesomeIcons.fireFlameCurved,color: AppColors.primary,),
                     AppText(
-                      title: 'Special offers'.tr(),
+                      title: featureOne,
                       padding: EdgeInsets.symmetric(horizontal: 8),
                       fontWeight: FontWeight.w700,
                       fontSize: 14,
@@ -56,7 +58,7 @@ class CouponCard extends StatelessWidget {
                   children: [
                     Icon(FontAwesomeIcons.thumbsUp,color: AppColors.primary,),
                     AppText(
-                      title: 'Verified coupon'.tr(),
+                      title: featureTwo,
                       padding: EdgeInsets.symmetric(horizontal: 8),
                       fontWeight: FontWeight.w700,
                       fontSize: 14,
@@ -81,7 +83,7 @@ class CouponCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppText(title: 'ASD FDSFS'),
+                AppText(title: coupon),
                 InkWell(
                     onTap: () {
                       Utils.copyToClipboard(context, 'ASD FDSFS');
@@ -91,7 +93,7 @@ class CouponCard extends StatelessWidget {
             ),
           ),
           AppText(
-            title: 'Copy the code and use it when sending a shipment',
+            title: 'Copy the code and use it when sending a shipment'.tr(),
             color: AppColors.txtGray,
             fontSize: 14,
             padding: EdgeInsets.symmetric(vertical: 4,horizontal: 8),

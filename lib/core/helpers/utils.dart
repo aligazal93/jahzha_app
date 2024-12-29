@@ -22,6 +22,12 @@ class Utils {
     return Color(int.parse(myColor));
   }
 
+  static void log(String text) {
+    final pattern = RegExp('.{1,800}');
+    pattern.allMatches(text).forEach((match) => print(match.group(0)));
+  }
+
+ static void closeKeyboard() => FocusScope.of(RouteUtils.context).unfocus();
 
   static String getAssetPNGPath(String image) {
     return 'assets/images/$image.png';

@@ -7,135 +7,128 @@ class _FormFields extends StatefulWidget {
 }
 
 class _FormFieldsState extends State<_FormFields> {
-  String? _selectedGender = 'Male';
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountDetailsCubit,AccountDetailsStates>(
       builder: (context, state) {
         final cubit = AccountDetailsCubit.of(context);
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppTextField(
-              label: 'Mobile number'.tr(),
-              enabled: false,
-              fillColor: AppColors.whiteBk,
-              onTap: () {
-                cubit.showChangeNumberSheet();
-              },
-              suffixIcon: Image.asset('assets/images/edit.png'),
-              hint: '66565555000',
-            ),
-            AppTextField(
-              label: 'email Address'.tr(),
-              fillColor: AppColors.whiteBk,
-              suffixIcon: Image.asset('assets/images/edit.png'),
-              hint: 'info@gmail.com',
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: AppTextField(
-                    label: 'First Name'.tr(),
-                    hint: 'Mohamed',
-                    fillColor: AppColors.whiteBk,
-                  ),
-                ),
-                Expanded(
-                  child: AppTextField(
-                    label: 'family name'.tr(),
-                    fillColor: AppColors.whiteBk,
-                    hint: 'Ahmed',
-                  ),
-                ),
-
-              ],
-            ),
-            AppTextField(
-              validator: Validator.empty,
-              onTap: cubit.selectDate,
-              label: 'date of birth'.tr(),
-              suffixIcon: Icon(FontAwesomeIcons.calendarDays,color: AppColors.primary,),
-              fillColor: AppColors.whiteBk,
-            ),
-            AppText(
-             title: 'Gender'.tr(),
-              color: AppColors.secondary,
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              padding: EdgeInsets.symmetric(vertical: 8,horizontal: 12),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          _selectedGender = 'Male'.tr();
-                          print(_selectedGender);
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color:  AppColors.white,
-                            border: Border.all(
-                                color:_selectedGender == 'Male'.tr() ? AppColors.primary : AppColors.txtGray
-                            )
-                        ),
-                        child: AppText(
-                          textAlign: TextAlign.center,
-                          title: 'Male'.tr(),
-                          fontSize: 18,
-                          color: _selectedGender == 'Male'.tr() ? AppColors.primary : AppColors.secondary,
-
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 12,),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          _selectedGender = 'Female'.tr();
-                          print(_selectedGender);
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color:  AppColors.white,
-                            border: Border.all(
-                                color:_selectedGender == 'Female'.tr() ? AppColors.primary : AppColors.txtGray
-                            )
-                        ),
-                        child: AppText(
-                          textAlign: TextAlign.center,
-                          title: 'Female'.tr(),
-                          fontSize: 18,
-                          color: _selectedGender == 'Female'.tr() ? AppColors.primary : AppColors.secondary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AppDropDownMenu(
-                hint: 'المملكة العربية السعودية',
+        return Form(
+          key: cubit.formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppTextField(
+                label: 'Mobile number'.tr(),
+                controller:  TextEditingController(text: cubit.phone),
                 fillColor: AppColors.whiteBk,
-                onChange: (p0) {},
-                label: 'Nationality'.tr(),
-                items: [
-                  'المملكة العربية السعودية',
-                  'المملكة العربية السعودية'
-                ]),
-          ],
+                suffixIcon: Image.asset('assets/images/edit.png'),
+                onSaved:(p0) => TextEditingController(text: CachingUtils.user!.data.phoneNumber) ,
+              ),
+              AppTextField(
+                label: 'email Address'.tr(),
+                fillColor: AppColors.whiteBk,
+                inputType: TextInputType.emailAddress,
+                controller:  TextEditingController(text: cubit.email),
+                onSaved: (v) => cubit.email = v,
+                validator: Validator.email,
+                suffixIcon: Image.asset('assets/images/edit.png'),
+                hint: CachingUtils.user?.data.email == null ? '' : CachingUtils.user?.data.email,
+              ),
+              AppTextField(
+                label: 'full name'.tr(),
+                controller:  TextEditingController(text: cubit.name),
+                onSaved: (v) => cubit.name = v,
+                validator: Validator.name,
+                fillColor: AppColors.whiteBk,
+              ),
+              // AppTextField(
+              //   controller: cubit.dateController,
+              //   validator: Validator.empty,
+              //   onTap: cubit.selectDate,
+              //   label: 'date of birth'.tr(),
+              //   suffixIcon: Icon(FontAwesomeIcons.calendarDays,color: AppColors.primary,),
+              //   fillColor: AppColors.whiteBk,
+              // ),
+              DatePicker(
+                upperText: 'date of birth'.tr(),
+                onPick: (v){
+                  cubit.dateTime = v;
+                },
+                hint:Utils.formatDate(CachingUtils.user?.data.birthdate)
+              ),
+              AppText(
+               title: 'Gender'.tr(),
+                color: AppColors.secondary,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                padding: EdgeInsets.symmetric(vertical: 8,horizontal: 12),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() => cubit.changeGender('male'));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color:  AppColors.white,
+                              border: Border.all(
+                                  color:cubit.gender == 'male' ? AppColors.primary : AppColors.txtGray
+                              )
+                          ),
+                          child: AppText(
+                            textAlign: TextAlign.center,
+                            title: 'Male'.tr(),
+                            fontSize: 18,
+                            color: cubit.gender == 'male'  ? AppColors.primary : AppColors.secondary,
+
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 12,),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() => cubit.changeGender('female'));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color:  AppColors.white,
+                              border: Border.all(
+                                  color: cubit.gender == 'female'  ? AppColors.primary : AppColors.txtGray
+                              )
+                          ),
+                          child: AppText(
+                            textAlign: TextAlign.center,
+                            title: 'Female'.tr(),
+                            fontSize: 18,
+                            color: cubit.gender == 'female' ? AppColors.primary : AppColors.secondary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // AppDropDownMenu(
+              //     hint: 'المملكة العربية السعودية',
+              //     fillColor: AppColors.whiteBk,
+              //     onChange: (p0) {},
+              //     label: 'Nationality'.tr(),
+              //     items: [
+              //       'المملكة العربية السعودية',
+              //       'المملكة العربية السعودية'
+              //     ]),
+            ],
+          ),
         );
       },
     );

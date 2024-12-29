@@ -1,86 +1,46 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:jahzha_app/core/route_utils/route_utils.dart';
-import 'package:jahzha_app/widgets/app_button.dart';
-import 'package:jahzha_app/widgets/app_text.dart';
-class AppDatePicker extends StatefulWidget {
-  const AppDatePicker({Key? key, required this.title}) : super(key: key);
+import 'package:jahzha_app/core/helpers/utils.dart';
+import 'package:jahzha_app/widgets/app_text_field.dart';
 
-  final String title;
+class DatePicker extends StatefulWidget {
+  const DatePicker({Key? key, this.hint, this.upperText, required this.onPick, this.firstDate})
+      : super(key: key);
 
-  static Future<DateTime?> show({required String title}) {
-    return showModalBottomSheet(
-      context: RouteUtils.context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-      ),
-      builder: (context) {
-        return AppDatePicker(
-          title: title,
-        );
-      },
-    );
-  }
+  final String? hint;
+  final String? upperText;
+  final Function(DateTime) onPick;
+  final DateTime? firstDate;
 
   @override
-  State<AppDatePicker> createState() => _AppDatePickerState();
+  State<DatePicker> createState() => _DatePickerState();
 }
 
-class _AppDatePickerState extends State<AppDatePicker> {
-  final now = DateTime.now();
-  DateTime? selectedDate;
+class _DatePickerState extends State<DatePicker> {
+  DateTime? date;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BottomSheet(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        onClosing: () {},
-        builder: (context) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 20),
-              AppText(
-                title: widget.title,
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-              Expanded(
-                child: CupertinoDatePicker(
-                  itemExtent: 50,
-                  minimumDate: now,
-                  onDateTimeChanged: (value) => selectedDate = value,
-                  mode: CupertinoDatePickerMode.date,
-                  // onSelectedItemChanged: (value) => selectedIndex = value,
-                  // useMagnifier: true,
-                  // children: years.map((e) {
-                  //   return Container(
-                  //     alignment: Alignment.center,
-                  //     child: AppText(
-                  //       title: e.toString(),
-                  //       fontSize: 24,
-                  //       fontWeight: FontWeight.w600,
-                  //     ),
-                  //   );
-                  // }).toList(),
-                ),
-              ),
-              AppButton(
-                title: 'save'.tr(),
-                onTap: () {
-                  Navigator.pop(context, selectedDate);
-                  print(selectedDate);
-                },
-              ),
-              SizedBox(height: 16),
-            ],
-          );
-        },
-      ),
+    return AppTextField(
+      hint: widget.hint!,
+      controller: controller,
+      label: widget.upperText!,
+      onTap: () async {
+        final date = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: widget.firstDate ?? DateTime.now().subtract(Duration(days: 9999 * 9999)),
+          lastDate: DateTime.now(),
+        );
+        if (date != null) {
+          this.date = date;
+          controller.text = Utils.formatDate(date);
+          widget.onPick(date);
+          setState(() {});
+          Utils.closeKeyboard();
+        }
+      },
     );
   }
 }

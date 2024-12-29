@@ -41,7 +41,7 @@ class InfoCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppText(
-                title: CachingUtils.user?.data.name == null ? 'your name here'.tr() : CachingUtils.user?.data.name,
+                title: CachingUtils.user?.data.name == null ? 'your name here'.tr() : CachingUtils.user?.data.name ?? "",
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 color: AppColors.secondary,
                 fontSize: 14,
@@ -49,7 +49,7 @@ class InfoCard extends StatelessWidget {
               ),
               SizedBox(height: 4,),
               AppText(
-                title: CachingUtils.user?.data.telephone  == null ? CachingUtils.user?.data.email : CachingUtils.user?.data.telephone,
+                title: CachingUtils.user!.data.phoneNumber == null ? CachingUtils.user!.data.email! : CachingUtils.user!.data.phoneNumber!,
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 color: AppColors.txtGray,
                 fontSize: 14,
@@ -61,7 +61,7 @@ class InfoCard extends StatelessWidget {
           AppButton(
             title: 'Edit'.tr(),
             titleFontSize: 12,
-            padding: EdgeInsets.symmetric(vertical: 12,horizontal: 30),
+            padding: EdgeInsets.symmetric(vertical: 0,horizontal: 30),
             onTap: () {
               RouteUtils.navigateTo(AccountDetailsView());
             },

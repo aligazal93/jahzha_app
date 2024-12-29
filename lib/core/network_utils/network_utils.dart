@@ -1,49 +1,80 @@
-import 'dart:developer';
-import 'dart:io';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jahzha_app/views/auth/login/view.dart';
+import 'package:jahzha_app/widgets/snack_bar.dart';
 
 import '../caching_utils/caching_utils.dart';
 import '../helpers/utils.dart';
+import '../route_utils/route_utils.dart';
+
+export 'package:dio/dio.dart';
 
 class NetworkUtils {
-  static final String _baseUrl = "https://jahzha22.web2html5.com/api/v1/";
+  static const String baseUrl = "https://jahzha22.web2html5.com/api/v1/";
 
   static late Dio _dio;
 
-  static String get baseURL => _baseUrl.replaceAll('/api/v1/', '');
-
   static Future<void> init() async {
-    if (kDebugMode) {
-      HttpOverrides.global = _MyHttpOverrides();
-    }
-    _dio = Dio()..options.baseUrl = _baseUrl;
+    _dio = Dio()..options.baseUrl = baseUrl;
     _dio.options.validateStatus = (status) => true;
   }
 
-  static Future<Response<dynamic>> get(String path, {Map<String, dynamic>? headers, Map<String, dynamic>? queryParams}) async {
+  static Future<Response<dynamic>> get(
+      String path, {
+        Map<String, dynamic>? headers,
+        Map<String, dynamic>? queryParams,
+      }) async {
     _setHeaders(headers: headers);
     final response = await _dio.get(path, queryParameters: queryParams);
     _logResponse(response);
     return response;
   }
 
-  static Future<Response<dynamic>> post(String path, {Map<String, dynamic>? data, FormData? formData, Map<String, dynamic>? headers}) async {
+  static Future<Response<dynamic>> post(
+      String path, {
+        Map<String, dynamic>? data,
+        FormData? formData,
+        Map<String, dynamic>? headers,
+      }) async {
     _setHeaders(headers: headers);
     final response = await _dio.post(path, data: formData ?? data);
     _logResponse(response);
     return response;
   }
 
-  static Future<Response<dynamic>> patch(String path, {Map<String, dynamic>? data, FormData? formData, Map<String, dynamic>? headers}) async {
+  static Future<Response<dynamic>> patch(
+      String path, {
+        Map<String, dynamic>? data,
+        FormData? formData,
+        Map<String, dynamic>? headers,
+      }) async {
     _setHeaders(headers: headers);
     final response = await _dio.patch(path, data: formData ?? data);
     _logResponse(response);
     return response;
   }
 
-  static Future<Response<dynamic>> delete(String path, {Map<String, dynamic>? data, FormData? formData, Map<String, dynamic>? headers}) async {
+  static Future<Response<dynamic>> put(
+      String path, {
+        Map<String, dynamic>? data,
+        FormData? formData,
+        Map<String, dynamic>? headers,
+      }) async {
+    _setHeaders(headers: headers);
+    final response = await _dio.put(path, data: formData ?? data);
+    _logResponse(response);
+    return response;
+  }
+
+  static Future<Response<dynamic>> delete(
+      String path, {
+        Map<String, dynamic>? data,
+        FormData? formData,
+        Map<String, dynamic>? headers,
+      }) async {
     _setHeaders(headers: headers);
     final response = await _dio.delete(path, data: formData ?? data);
     _logResponse(response);
@@ -52,10 +83,10 @@ class NetworkUtils {
 
   static void _setHeaders({required Map<String, dynamic>? headers}) {
     _dio.options.headers = {
-      // if(CachingUtils.isLogged)
-      //   'API-TOKEN': "Bearer " + (CachingUtils.token ?? ''),
-      //   // 'Api-Secure-Key' :  "\$2y\$12\$N2zFrcVOTIzwCxF4Y0CPseAhdi3hs12Hg3w41zvM.sz/p6asveIh.",
-      //   'App-Language' : Utils.isAR ?  'sa' : 'en'
+      'X-LOCALE': RouteUtils.context.locale.languageCode,
+      'Accept': 'application/json',
+      if (CachingUtils.isLogged)
+        'API-TOKEN': 'Bearer ${CachingUtils.token}'
     };
     if (headers != null) {
       _dio.options.headers.addAll(headers);
@@ -63,25 +94,48 @@ class NetworkUtils {
   }
 
   static void _logResponse(Response response) {
+    if (response.data['message'] == 'Unauthenticated.' ||
+        response.statusCode == 401) {
+      showSnackBar(
+        'session_expired'.tr(),
+        errorMessage: true,
+      );
+      CachingUtils.clearCache();
+      RouteUtils.navigateAndPopAll(LoginView());
+    }
     if (!kDebugMode) {
       return;
     }
-    log('='*100);
-    log('Path : ${response.requestOptions.baseUrl + response.requestOptions.path}');
-    log('-'*100);
-    log('Headers : ${response.requestOptions.headers}');
-    log('-'*100);
-    log('Body : ${response.requestOptions.data}');
-    log('-'*100);
-    log('Response : ${response.data}');
-    log('='*100);
+    Utils.log('=' * 100);
+    Utils.log(
+      '🌐 Path: [${response.requestOptions.method}] ${response.requestOptions.baseUrl + response.requestOptions.path}',
+    );
+    Utils.log('-' * 100);
+    Utils.log('📋 Headers: ${response.requestOptions.headers}');
+    Utils.log('-' * 100);
+    Utils.log('🛠️ Query Params: ${response.requestOptions.queryParameters}');
+    Utils.log('-' * 100);
+    _logFormData(response.requestOptions.data);
+    Utils.log('-' * 100);
+    Utils.log('🛑 Status Code: ${response.statusCode}');
+    Utils.log('✅ Response: ${jsonEncode(response.data)}');
+    Utils.log('=' * 100);
   }
-}
 
-class _MyHttpOverrides extends HttpOverrides{
-  @override
-  HttpClient createHttpClient(SecurityContext? context){
-    return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  static void _logFormData(dynamic data) {
+    if (data.runtimeType != FormData) {
+      Utils.log('📝 Body: $data');
+      return;
+    }
+    StringBuffer buffer = StringBuffer();
+    data.fields.forEach((field) {
+      buffer.write(', Field: ${field.key}: ${field.value}');
+    });
+    data.files.forEach((file) {
+      buffer.write(
+        ', File: ${file.key}: ${file.value.filename}, ${file.value.length} bytes',
+      );
+    });
+    Utils.log('📝 FormData: $buffer'.replaceFirst(', ', ''));
   }
 }

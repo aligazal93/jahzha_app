@@ -63,15 +63,15 @@ class HomeView extends StatelessWidget {
                       RouteUtils.navigateTo(InterNationalShippingView());
                     },
                   ),
-                  ServiceCar(
-                    title: 'order tracking'.tr(),
-                    colorCard: Color(0xFFE8FCF0),
-                    imgColor: Color(0XFFCEF8DF),
-                    image: 'track',
-                    onTap: () {
-                      RouteUtils.navigateTo(OrderTrackingView());
-                    },
-                  ),
+                  // ServiceCar(
+                  //   title: 'order tracking'.tr(),
+                  //   colorCard: Color(0xFFE8FCF0),
+                  //   imgColor: Color(0XFFCEF8DF),
+                  //   image: 'track',
+                  //   onTap: () {
+                  //     RouteUtils.navigateTo(OrderTrackingView());
+                  //   },
+                  // ),
                 ],
               ),
             ),

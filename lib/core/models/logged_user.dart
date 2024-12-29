@@ -12,102 +12,90 @@ class LoggedUser {
   final int statusCode;
   final String message;
   final Data data;
+  final List<dynamic> additionalData;
 
   LoggedUser({
     required this.statusCode,
     required this.message,
     required this.data,
+    required this.additionalData,
   });
 
   factory LoggedUser.fromJson(Map<String, dynamic> json) => LoggedUser(
     statusCode: json["status_code"],
     message: json["message"],
     data: Data.fromJson(json["data"]),
+    additionalData: List<dynamic>.from(json["additional_data"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
     "status_code": statusCode,
     "message": message,
     "data": data.toJson(),
+    "additional_data": List<dynamic>.from(additionalData.map((x) => x)),
   };
 }
 
 class Data {
   final int id;
-  final dynamic name;
-  final String? telephone;
-  final dynamic email;
-  final dynamic birthdate;
-  final int countryId;
-  final String countryName;
-  final int gender;
+  final String? name;
+  final String? phoneNumber;
+  final String? email;
+  final DateTime? birthdate;
+  final Country country;
+  final String gender;
   final String isBlocked;
   final int maximumNumberOfInternationalShipments;
-  final List<Country> countries;
 
   Data({
     required this.id,
-    required this.name,
-    this.telephone,
-    required this.email,
-    required this.birthdate,
-    required this.countryId,
-    required this.countryName,
+     this.name,
+     this.phoneNumber,
+     this.email,
+     this.birthdate,
+    required this.country,
     required this.gender,
     required this.isBlocked,
     required this.maximumNumberOfInternationalShipments,
-    required this.countries,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["id"],
-    name: json["name"],
-    telephone: json["telephone"] == null ? null : json["telephone"],
-    email: json["email"],
-    birthdate: json["birthdate"],
-    countryId: json["country_id"],
-    countryName: json["country_name"],
+    name: json["name"] == null ? null : json["name"],
+    phoneNumber: json["phone_number"] == null ? null : json["phone_number"],
+    email: json["email"] == null ?  null: json["email"],
+    birthdate: json["birthdate"] == null ? null : DateTime.parse(json["birthdate"]),
+    country: Country.fromJson(json["country"]),
     gender: json["gender"],
     isBlocked: json["is_blocked"],
     maximumNumberOfInternationalShipments: json["maximum_number_of_international_shipments"],
-    countries: List<Country>.from(json["countries"].map((x) => Country.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
-    "telephone": telephone,
+    "phone_number": phoneNumber,
     "email": email,
-    "birthdate": birthdate,
-    "country_id": countryId,
-    "country_name": countryName,
+    "birthdate": "${birthdate!.year.toString().padLeft(4, '0')}-${birthdate!.month.toString().padLeft(2, '0')}-${birthdate!.day.toString().padLeft(2, '0')}",
+    "country": country.toJson(),
     "gender": gender,
     "is_blocked": isBlocked,
     "maximum_number_of_international_shipments": maximumNumberOfInternationalShipments,
-    "countries": List<dynamic>.from(countries.map((x) => x.toJson())),
   };
 }
 
 class Country {
-  final int id;
   final String name;
-  final String nationality;
 
   Country({
-    required this.id,
     required this.name,
-    required this.nationality,
   });
 
   factory Country.fromJson(Map<String, dynamic> json) => Country(
-    id: json["id"],
     name: json["name"],
-    nationality: json["nationality"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
     "name": name,
-    "nationality": nationality,
   };
 }
