@@ -28,7 +28,7 @@ class Validator {
 
   static String? password(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return tr("write_password");
+      return tr("write_password".tr());
     } else if (value.length < 6) {
       return tr("password_must_be_at_least_6_char");
     }
@@ -59,7 +59,7 @@ class Validator {
 
   static String? passwordConfirmation({required String? password, required String? value}) {
     if (value == null || value.trim().isEmpty) {
-      return tr("please_confirm_password");
+      return tr("please_confirm_password".tr());
     } else if (value != password) {
       return tr("password_dose_not_match");
     }

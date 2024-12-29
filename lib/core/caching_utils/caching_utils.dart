@@ -1,6 +1,10 @@
 import 'dart:convert';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/models/logged_user.dart';
 import 'package:jahzha_app/core/network_utils/network_utils.dart';
+import 'package:jahzha_app/core/route_utils/route_utils.dart';
+import 'package:jahzha_app/views/splash.dart';
 import 'package:jahzha_app/widgets/snack_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,23 +38,22 @@ class CachingUtils {
     await _sharedPreferences.remove(_cachingTokenKey);
   }
 
-  // static Future<void> signOut() async {
-  //   try {
-  //     final response = await NetworkUtils.post(
-  //       'logout',
-  //     );
-  //     if (response.statusCode == 200) {
-  //       showSnackBar(response.data['message']);
-  //       await CachingUtils.clearCache();
-  //       RouteUtils.navigateAndPopAll(SplashView());
-  //     } else {
-  //       showSnackBar('something_went_wrong'.tr(), errorMessage: true);
-  //     }
-  //   } catch (e) {
-  //     print(e.toString());
-  //     handleGenericException(e);
-  //   }
-  // }
+  static Future<void> signOut() async {
+    try {
+      final response = await NetworkUtils.post(
+        'logout',
+      );
+      if (response.statusCode == 200) {
+        showSnackBar(response.data['message']);
+        await CachingUtils.clearCache();
+        RouteUtils.navigateAndPopAll(SplashView());
+      } else {
+        showSnackBar('something_went_wrong'.tr(), errorMessage: true);
+      }
+    } catch (e) {
+      handleGenericException(e);
+    }
+  }
 
   static bool get isLogged {
     return user != null;

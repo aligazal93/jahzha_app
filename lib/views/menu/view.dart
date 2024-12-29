@@ -254,8 +254,7 @@ class MenuView extends StatelessWidget {
                       ],
                     ),),
                 InkWell(
-                  onTap: () {
-                  },
+                  onTap: CachingUtils.signOut,
                   child: Container(
                     padding: EdgeInsets.all(12),
                     margin: EdgeInsets.symmetric(vertical: 24),

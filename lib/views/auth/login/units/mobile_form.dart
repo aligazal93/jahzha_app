@@ -47,7 +47,7 @@ class ViaMobileForm extends StatelessWidget {
                     child: Container(
                       child: AppTextField(
                         fillColor: AppColors.tGray,
-                        hint: '5xxxxxxxx',
+                        hint: '5XXXXXXXXX',
                         textAlign: TextAlign.left,
                         inputType: TextInputType.number,
                         onSaved: (v) => cubit.phone = v,

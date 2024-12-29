@@ -1,15 +1,15 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
-import 'package:jahzha_app/views/navbar/view.dart';
 import 'package:jahzha_app/views/otp/cubit.dart';
-import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/pin_code_field.dart';
+part 'units/resend_code_section.dart';
 
 class OtpView extends StatelessWidget {
   const OtpView({Key? key, required this.userId,  this.phone, this.email}) : super(key: key);
@@ -107,6 +107,7 @@ class OtpView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 8),
                     ),
                   ),
+                  _ResendCodeSection(),
                 ],
               );
             },

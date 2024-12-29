@@ -17,17 +17,16 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
 
   static AccountDetailsCubit of(context) => BlocProvider.of(context);
   final formKey = GlobalKey<FormState>();
-
+  String? birthdate = Utils.formatDate(CachingUtils.user?.data.birthdate);
   String? name = CachingUtils.user?.data.name;
   String? email = CachingUtils.user?.data.email;
   String? phone = CachingUtils.user?.data.phoneNumber;
   String? gender = CachingUtils.user?.data.gender;
   bool? isSelected;
-  DateTime? dateTime;
 
   void changeGender(String v) {
     gender = v;
-    emit(AccountDetailsGenderStates());
+    emit(AccountDetailsInitState());
   }
   // void selectDate() async {
   //   final result = await DatePicker(onPick: (DateTime ) {
@@ -52,6 +51,11 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
     );
   }
 
+  void toggleGender(String value) {
+    gender = value;
+    emit(AccountDetailsInitState());
+  }
+
   Future<void> updateInfo() async {
     formKey.currentState?.save();
     if (formKey.currentState?.validate() == false) return;
@@ -63,7 +67,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
           "name": name,
           "email": email,
           "phone": phone,
-          "birthdate": Utils.formatDate(dateTime),
+          "birthdate": birthdate,
           "gender": gender,
         },
       );
@@ -86,6 +90,19 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
     }
     emit(AccountDetailsInitState());
   }
+
+
+  // void selectBirthDate() async {
+  //   final result = await DatePicker.show(title: 'اختر تاريخ ميلادك');
+  //
+  //   if (result != null) {
+  //     birthDateController.text = Utils.formatDate(result);
+  //     print('تاريخ الميلاد المختار: ${birthDateController.text}');
+  //   } else {
+  //     print('لم يتم اختيار أي تاريخ');
+  //   }
+  // }
+
 
   // void showOtpSheet() {
   //   showModalBottomSheet(

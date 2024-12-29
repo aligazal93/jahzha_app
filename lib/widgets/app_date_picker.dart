@@ -1,5 +1,8 @@
 
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
 
@@ -23,15 +26,16 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return AppTextField(
-      hint: widget.hint!,
+      hint: widget.hint,
       controller: controller,
-      label: widget.upperText!,
+      label: widget.upperText,
+      fillColor: AppColors.whiteBk,
       onTap: () async {
         final date = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
           firstDate: widget.firstDate ?? DateTime.now().subtract(Duration(days: 9999 * 9999)),
-          lastDate: DateTime.now(),
+          lastDate: DateTime.now().add(Duration(days: 99 * 99)),
         );
         if (date != null) {
           this.date = date;

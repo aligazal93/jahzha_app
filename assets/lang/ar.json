@@ -227,6 +227,9 @@
   "write_correct_phone" : "ادخل رقم الجوال بشكل صحيح",
   "write_name" : "ادخل الاسم",
   "write_correct_name": "أدخل الاسم بشكل صحيح",
-  "point policy" : "سياسة النقاط"
+  "point policy" : "سياسة النقاط",
+  "write_password" : "اكتب كلمة المرور",
+  "please_confirm_password": "الرجاء تأكيد كلمة المرور"
+
 
 }

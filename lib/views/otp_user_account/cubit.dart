@@ -43,4 +43,25 @@ class OtpUserAccountCubit extends Cubit<OtpUserAccountStates> {
     emit(OtpUserAccountInit());
   }
 
+  Future<void> resetVerifyCode() async {
+    emit(OtpUserAccountLoading());
+    try {
+      final response = await NetworkUtils.post(
+        'resend-code-to-update-info',
+        data: {
+          "user_id": userId,
+        },
+      );
+      final data = response.data;
+      if (data['status_code'] == 200 ) {
+        showSnackBar(data['message']);
+      } else {
+        showSnackBar(data['message'], color: AppColors.red.theme);
+      }
+    } catch (e) {
+      handleGenericException(e);
+    }
+    emit(OtpUserAccountInit());
+  }
+
 }
