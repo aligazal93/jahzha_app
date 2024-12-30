@@ -1,8 +1,7 @@
 part of '../view.dart';
 class MyPointsCard extends StatelessWidget {
-  const MyPointsCard({Key? key, required this.idNumber, required this.point}) : super(key: key);
-  final String idNumber;
-  final String point;
+  const MyPointsCard({Key? key, required this.idNumber, required this.point, required this.createAt,required this.type}) : super(key: key);
+  final String point , createAt , type ,idNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +28,32 @@ class MyPointsCard extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   color: AppColors.secondary,
                 ),
-                SizedBox(height: 8,),
-                AppText(
-                  title:'From executing shipment no'.tr()  + ' ' + '${idNumber}',
+                if (type == "shipment_created") ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: AppText(
+                      title:'From executing shipment no'.tr()  + ' ' + '${idNumber}',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.txtGray,
+                    ),
+                  ),
+                ] else if (type == "admin_gift") ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: AppText(
+                      title:'🎁 A gift from the admin'.tr(),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.txtGray,
+                    ),
+                  ),
+                ],
+                AppText(title: createAt,
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.txtGray,
-                ),
+                  color: AppColors.secondary,
+                )
               ],
             ),
           ),

@@ -126,7 +126,7 @@ class Utils {
       SnackBar(
         content: AppText(
           title: 'Copied'.tr(),
-          fontSize: 22,
+          fontSize: 14,
           color: AppColors.white.theme,
           fontWeight: FontWeight.w700,
         ),

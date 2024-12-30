@@ -86,7 +86,7 @@ class CouponCard extends StatelessWidget {
                 AppText(title: coupon),
                 InkWell(
                     onTap: () {
-                      Utils.copyToClipboard(context, 'ASD FDSFS');
+                      Utils.copyToClipboard(context, coupon);
                     },
                     child: Icon(FontAwesomeIcons.solidCopy,color: AppColors.lightGray,))
               ],

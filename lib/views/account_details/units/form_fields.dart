@@ -48,7 +48,7 @@ class _FormFieldsState extends State<_FormFields> {
                 fillColor: AppColors.whiteBk,
               ),
               DatePicker(
-                hint: Utils.formatDate(CachingUtils.user!.data.birthdate!),
+                hint: CachingUtils.user?.data.birthdate == null ? 'Select your date of birth'.tr() : Utils.formatDate(CachingUtils.user?.data.birthdate!),
                 upperText: "date of birth".tr(),
                 onPick: (v) {
                   cubit.birthdate = Utils.formatDate(v);

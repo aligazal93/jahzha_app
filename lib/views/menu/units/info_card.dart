@@ -40,8 +40,9 @@ class InfoCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              CachingUtils.user?.data.name == null ? SizedBox() :
               AppText(
-                title: CachingUtils.user?.data.name == null ? 'your name here'.tr() : CachingUtils.user?.data.name ?? "",
+                title: CachingUtils.user!.data.name!,
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 color: AppColors.secondary,
                 fontSize: 14,

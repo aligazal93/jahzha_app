@@ -15,7 +15,6 @@ import 'package:jahzha_app/views/language/view.dart';
 import 'package:jahzha_app/views/my_balance/view.dart';
 import 'package:jahzha_app/views/my_coupons/view.dart';
 import 'package:jahzha_app/views/my_points/view.dart';
-import 'package:jahzha_app/views/my_shipments/view.dart';
 import 'package:jahzha_app/views/point_policy/view.dart';
 import 'package:jahzha_app/views/privacy_policy/view.dart';
 import 'package:jahzha_app/views/terms_conditions/view.dart';
@@ -33,7 +32,12 @@ class MenuView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: UnconstrainedBox(child: SupportButton()),
+      floatingActionButton: UnconstrainedBox(
+          child: InkWell(
+              onTap: () => RouteUtils.navigateTo(
+                ContactUsView(),
+              ),
+              child: SupportButton())),
       body: Column(
         children: [
           SizedBox(
@@ -182,77 +186,82 @@ class MenuView extends StatelessWidget {
                   fontSize: 16,
                 ),
                 Container(
-                    margin: EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.tGray)),
-                    child: Column(
-                      children: [
-                        AccountTile(
-                          image: 'info',
-                          title: 'about us'.tr(),
-                          onTap: () {
-                            RouteUtils.navigateTo(AboutsUsView());
-                          },
+                  margin: EdgeInsets.symmetric(vertical: 12),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: AppColors.tGray)),
+                  child: Column(
+                    children: [
+                      AccountTile(
+                        image: 'info',
+                        title: 'about us'.tr(),
+                        onTap: () {
+                          RouteUtils.navigateTo(AboutsUsView());
+                        },
+                      ),
+                      Divider(
+                        height: 8,
+                      ),
+                      AccountTile(
+                        image: 'terms',
+                        title: 'Terms and Conditions'.tr(),
+                        onTap: () {
+                          RouteUtils.navigateTo(TermsAndConditions());
+                        },
+                      ),
+                      Divider(
+                        height: 8,
+                      ),
+                      AccountTile(
+                        image: 'usage',
+                        title: 'Usage policy'.tr(),
+                        onTap: () {
+                          RouteUtils.navigateTo(UsagePolicyView());
+                        },
+                      ),
+                      AccountTile(
+                        image: 'shield',
+                        title: 'privacy policy'.tr(),
+                        onTap: () {
+                          RouteUtils.navigateTo(PrivacyPolicyView());
+                        },
+                      ),
+                      AccountTile(
+                        image: 'coupons',
+                        title: 'point policy'.tr(),
+                        onTap: () {
+                          RouteUtils.navigateTo(
+                            PointPolicyView(),
+                          );
+                        },
+                      ),
+                      ListTile(
+                        onTap: () {
+                          RouteUtils.navigateTo(
+                            ChooseLanguageView(),
+                          );
+                        },
+                        title: AppText(
+                          title: 'language'.tr(),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                         ),
-                        Divider(
-                          height: 8,
+                        leading: Icon(
+                          FontAwesomeIcons.earthAfrica,
+                          color: AppColors.lightGray,
+                          size: 22,
                         ),
-                        AccountTile(
-                          image: 'terms',
-                          title: 'Terms and Conditions'.tr(),
-                          onTap: () {
-                            RouteUtils.navigateTo(TermsAndConditions());
-                          },
+                        trailing: Icon(
+                          Utils.isAR
+                              ? FontAwesomeIcons.chevronLeft
+                              : FontAwesomeIcons.chevronRight,
+                          size: 18,
+                          color: AppColors.secondary,
                         ),
-                        Divider(
-                          height: 8,
-                        ),
-                        AccountTile(
-                          image: 'usage',
-                          title: 'Usage policy'.tr(),
-                          onTap: () {
-                            RouteUtils.navigateTo(UsagePolicyView());
-                          },
-                        ),
-                        AccountTile(
-                          image: 'shield',
-                          title: 'privacy policy'.tr(),
-                          onTap: () {
-                            RouteUtils.navigateTo(PrivacyPolicyView());
-                          },
-                        ),
-                        AccountTile(
-                          image: 'coupons',
-                          title: 'point policy'.tr(),
-                          onTap: () {
-                            RouteUtils.navigateTo(PointPolicyView(),);
-                          },
-                        ),
-                        ListTile(
-                          onTap: () {
-                            RouteUtils.navigateTo(ChooseLanguageView(),);
-                          },
-                          title: AppText(
-                            title: 'language'.tr(),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          leading: Icon(
-                            FontAwesomeIcons.earthAfrica,
-                            color:AppColors.lightGray,
-                            size: 22,
-                          ),
-                          trailing: Icon(
-                            Utils.isAR ? FontAwesomeIcons.chevronLeft : FontAwesomeIcons.chevronRight ,
-                            size: 18,
-                            color: AppColors.secondary,
-                          ),
-                        ),
-
-
-                      ],
-                    ),),
+                      ),
+                    ],
+                  ),
+                ),
                 InkWell(
                   onTap: CachingUtils.signOut,
                   child: Container(

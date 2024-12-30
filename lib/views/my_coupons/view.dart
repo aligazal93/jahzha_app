@@ -1,9 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
+import 'package:jahzha_app/views/my_coupons/cubit.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
+import 'package:jahzha_app/widgets/app/no_data_found.dart';
+import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 part 'units/myCoupons_card.dart';
 class MyCouponsView extends StatelessWidget {
@@ -11,30 +15,43 @@ class MyCouponsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-       title: 'My coupons'.tr(),
-      ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        children: [
-          MyCouponsCard(
-            color: AppColors.green,
-            statue: 'valid'.tr(),
-            discount: '20%',
-          ),
-          MyCouponsCard(
-            discount: '35%',
-            color: AppColors.red,
-            statue: 'Expired'.tr(),
-          ),
-          MyCouponsCard(
-            discount: '50%',
-            color: AppColors.txtGray,
-            statue: 'Used'.tr(),
-          ),
-
-        ],
+    return BlocProvider(
+      create: (context) => UserCouponsCubit()..getAllCoupons(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+         title: 'My coupons'.tr(),
+        ),
+        body: BlocBuilder<UserCouponsCubit,UserCouponsStates>(
+          builder: (context, state) {
+            final cubit = UserCouponsCubit.of(context);
+            final data = cubit.allUserCoupons?.data;
+            if(state is UserCouponsLoading){
+              return AppLoadingIndicator();
+            }else if(data == null){
+              return NoDataFoundView();
+            }
+            return ListView(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              children: [
+                Column(
+                  children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                      return MyCouponsCard(
+                        color: AppColors.green,
+                        statue: data[index].status,
+                        discount: data[index].discount.toString(),
+                      );
+                    },),
+                  ],
+                )
+              ],
+            );
+          },
+        ),
       ),
     );
   }

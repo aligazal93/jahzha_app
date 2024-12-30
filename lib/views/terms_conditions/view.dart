@@ -20,17 +20,17 @@ class TermsAndConditions extends StatelessWidget {
         appBar: CustomAppBar(
           title: 'Terms and Conditions'.tr(),
         ),
-        body: BlocBuilder<TermsCubit,TermsStates>(
+        body: BlocBuilder<TermsCubit, TermsStates>(
           builder: (context, state) {
             final cubit = TermsCubit.of(context);
             final data = cubit.termsModel?.data;
-            if(state is TermsLoading){
+            if (state is TermsLoading) {
               return AppLoadingIndicator();
-            }else if (data == null){
+            } else if (data == null) {
               return NoDataFoundView();
             }
             return ListView(
-              padding: EdgeInsets.symmetric(vertical: 20,horizontal: 16),
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
               children: [
                 AppText(
                   title: data.title,
@@ -40,9 +40,12 @@ class TermsAndConditions extends StatelessWidget {
                   textAlign: TextAlign.center,
                   height: 26,
                 ),
-                // TODO Fix From Api
                 Html(
-                    data: data.description,
+                  data: data.description,
+                  style: {
+                    "p": Style(
+                        fontSize: FontSize.large,color: AppColors.black, textAlign: TextAlign.justify),
+                  },
                 ),
               ],
             );

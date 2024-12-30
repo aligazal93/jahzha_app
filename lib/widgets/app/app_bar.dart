@@ -21,8 +21,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         color: color,
         height: 100,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            InkWell(
+              onTap: () {
+                RouteUtils.pop();
+              },
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                    color: AppColors.tGray,
+                    borderRadius: BorderRadius.circular(150)
+                ),
+                child: Icon(Utils.isAR ? FontAwesomeIcons.arrowRightLong : FontAwesomeIcons.arrowLeftLong,size: 20,),
+              ),
+            ),
+            SizedBox(width: 20,),
             Column(
               mainAxisAlignment:  MainAxisAlignment.center,
               children: [
@@ -33,20 +47,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-            InkWell(
-              onTap: () {
-                RouteUtils.pop();
-              },
-              child: Container(
-                height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: AppColors.tGray,
-                    borderRadius: BorderRadius.circular(150)
-                  ),
-                  child: Icon(Utils.isAR ? FontAwesomeIcons.arrowLeftLong : FontAwesomeIcons.arrowRightLong,size: 20,),
-              ),
-            )
           ],
         ),
       ),

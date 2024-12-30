@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,17 +94,6 @@ class OtpView extends StatelessWidget {
                     color: AppColors.txtGray,
                     textAlign: TextAlign.center,
                     padding: EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  InkWell(
-                    onTap: cubit.resetVerifyCode,
-                    child: AppText(
-                      title: 'Resend'.tr(),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primary,
-                      textAlign: TextAlign.center,
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                    ),
                   ),
                   _ResendCodeSection(),
                 ],

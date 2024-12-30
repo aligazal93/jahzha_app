@@ -9,6 +9,7 @@ import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 part 'units/coupon_card.dart';
 
 class CouponsDetailsView extends StatelessWidget {
@@ -81,13 +82,23 @@ class CouponsDetailsView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  //TODO Go To URL
                   AppButton(
                     title: 'Shop now'.tr(),
                     constrainedAxis: Axis.horizontal,
                     color: AppColors.primary,
-                    onTap: () {},
+                    onTap: () async {
+                      final Uri url = Uri.parse(storeData.url);
+                      if (await canLaunchUrl(url)) {
+                        await launchUrl(
+                          url,
+                          mode: LaunchMode.externalApplication, // Opens in the browser
+                        );
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
                     height: 50,
+                    isLoading: state is CouponsDetailsLoading ? true : false ,
                     titleFontSize: 16,
                     margin: EdgeInsets.symmetric(vertical: 12),
                   ),

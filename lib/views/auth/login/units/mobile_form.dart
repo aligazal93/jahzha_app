@@ -52,8 +52,7 @@ class ViaMobileForm extends StatelessWidget {
                         inputType: TextInputType.number,
                         onSaved: (v) => cubit.phone = v,
                         validator: Validator.phone,
-                        // TODO 9 NUMBER -- Not 10
-                        maxLength: 10,
+                        maxLength: 9,
                       ),
                     ),
                   ),
