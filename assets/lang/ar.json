@@ -76,7 +76,7 @@
   "company name": "اسم الشركة",
   "Leave us your order details": "اترك لنا تفاصيل طلبك",
   "Number of shipments": "عدد الشحنات",
-  "Get a quote": "احصل على عرض",
+  "Get a quote": "احصل على عرض سعر",
   "Your request has been received successfully": "تم استلام طلبك بنجاح",
   "We will contact you as soon as possible to obtain a price quote. Thank you": "سنتواصل معك في أقرب وقت ممكن للحصول على عرض سعر. شكرا لك",
   "valid": "صالح",
@@ -231,9 +231,22 @@
   "write_password" : "اكتب كلمة المرور",
   "please_confirm_password": "الرجاء تأكيد كلمة المرور",
   "Select your date of birth" : "اختر تاريخ ميلادك",
-  "\uD83C\uDF81 A gift from the admin": "\uD83C\uDF81 هدية من الأدمن"
-
-
-
-
+  "\uD83C\uDF81 A gift from the admin": "\uD83C\uDF81 هدية من الأدمن",
+  "used" : "تم الاستخدام",
+  "not_used" : "صالح",
+  "inactive" : "انتهت الصلاحية",  "first name": "الاسم الأول",
+  "last name": "الاسم الأخير",
+  "email": "البريد الإلكتروني",
+  "country": "البلد",
+  "shipment type": "نوع الشحنة",
+  "goods type" : "نوع البضاعة",
+  "company Name": "اسم الشركة",
+  "average shipments per month": "متوسط الشحنات في الشهر",
+  "average shipment weight": "متوسط وزن الشحنة",
+  "average dimensions per shipment": "الأبعاد المتوسطة لكل شحنة",
+  "upload File (PDF)": "رفع ملف (PDF)",
+  "Upload File": "رفع ملف",
+  "recent uploaded": "تم رفع الملف",
+  "Your request has been received successfully.": "تم استلام طلبك بنجاح.",
+  "You will be contacted as soon as possible to get a quote. Thank you.": "سيتم التواصل معك في أقرب وقت للحصول على عرض سعر. شكراً."
 }

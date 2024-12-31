@@ -52,7 +52,7 @@ class _AppDropDownMenuState extends State<AppDropDownMenu> {
               child: AppText(
                 title: widget.label!,
                 fontWeight: FontWeight.w500,
-                fontSize: 16,
+                fontSize: 14,
               ),
             ),
           DropdownButtonFormField(
@@ -69,7 +69,7 @@ class _AppDropDownMenuState extends State<AppDropDownMenu> {
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
               ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 12.width, vertical: 8.height),
+              contentPadding: EdgeInsets.symmetric(horizontal: 12.width, vertical: 20.height),
               border: _border(AppColors.darkGray.theme),
               enabledBorder: _border(AppColors.darkGray.theme),
               focusedBorder: _border(AppColors.darkGray.theme),

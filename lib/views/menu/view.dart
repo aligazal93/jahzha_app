@@ -149,16 +149,16 @@ class MenuView extends StatelessWidget {
                         border: Border.all(color: AppColors.tGray)),
                     child: Column(
                       children: [
-                        AccountTile(
-                          image: 'location',
-                          title: 'addresses'.tr(),
-                          onTap: () {
-                            RouteUtils.navigateTo(AddressesView());
-                          },
-                        ),
-                        Divider(
-                          height: 8,
-                        ),
+                        // AccountTile(
+                        //   image: 'location',
+                        //   title: 'addresses'.tr(),
+                        //   onTap: () {
+                        //     RouteUtils.navigateTo(AddressesView());
+                        //   },
+                        // ),
+                        // Divider(
+                        //   height: 8,
+                        // ),
                         AccountTile(
                           image: 'chats',
                           title: 'call us'.tr(),
@@ -168,6 +168,7 @@ class MenuView extends StatelessWidget {
                         ),
                         Divider(
                           height: 8,
+                          color: AppColors.tGray,
                         ),
                         AccountTile(
                           image: 'about',
@@ -177,7 +178,7 @@ class MenuView extends StatelessWidget {
                           },
                         ),
                       ],
-                    )),
+                    ),),
                 AppText(
                   title: 'About the App'.tr(),
                   fontWeight: FontWeight.w700,
@@ -201,6 +202,7 @@ class MenuView extends StatelessWidget {
                       ),
                       Divider(
                         height: 8,
+                        color: AppColors.tGray,
                       ),
                       AccountTile(
                         image: 'terms',
@@ -210,6 +212,7 @@ class MenuView extends StatelessWidget {
                         },
                       ),
                       Divider(
+                        color: AppColors.tGray,
                         height: 8,
                       ),
                       AccountTile(

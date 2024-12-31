@@ -5,7 +5,13 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String initials = CachingUtils.user?.data.name?.isNotEmpty ?? false ? CachingUtils.user!.data.name!.split(' ').map((word) => word[0]).take(2).join() : "";
+    String initials = CachingUtils.user?.data.name?.isNotEmpty ?? false
+        ? CachingUtils.user!.data.name!
+            .split(' ')
+            .map((word) => word[0])
+            .take(2)
+            .join()
+        : "";
     return Container(
       decoration: BoxDecoration(
           border: Border.all(width: 2, color: AppColors.tGray),
@@ -35,12 +41,11 @@ class InfoCard extends StatelessWidget {
           //     ),
           //   ),
           // ),
-          CachingUtils.user?.data.name == null
-              ? Container(
+          CachingUtils.user?.data.name == null ? Container(
                   width: 50,
                   height: 50,
                   decoration: BoxDecoration(
-                      color: AppColors.GrayLight,
+                      color: AppColors.darkBlue,
                       borderRadius: BorderRadius.circular(150)),
                   child: Center(
                     child: Image.asset(
@@ -48,13 +53,13 @@ class InfoCard extends StatelessWidget {
                       width: 20,
                     ),
                   ),
-                )
-              : Container(
+                ) : Container(
                   width: 50,
                   height: 50,
                   decoration: BoxDecoration(
-                      color: AppColors.GrayLight,
-                      borderRadius: BorderRadius.circular(150)),
+                    color: AppColors.darkBlue.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(150),
+                  ),
                   child: Center(
                     child: AppText(
                       title: initials,

@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:jahzha_app/core/enums/coupons_status.dart';
+
 AllUserCoupons allUserCouponsFromJson(String str) => AllUserCoupons.fromJson(json.decode(str));
 
 String allUserCouponsToJson(AllUserCoupons data) => json.encode(data.toJson());
@@ -41,15 +43,14 @@ class Datum {
   final String code;
   final dynamic discount;
   final String discountType;
-  final String status;
-
+  final CouponsStatus couponsStatus;
 
   Datum({
     required this.id,
     required this.code,
     required this.discount,
     required this.discountType,
-    required this.status,
+    required this.couponsStatus
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -57,15 +58,14 @@ class Datum {
     code: json["code"],
     discount: json["discount"],
     discountType: json["discount_type"],
-    status: json["status"],
+      couponsStatus: CouponsStatus.fromString(json["status"]), // Convert string to CouponsStatus
   );
-
   Map<String, dynamic> toJson() => {
     "id": id,
     "code": code,
     "discount": discount,
     "discount_type": discountType,
-    "status": status,
+    "status": couponsStatus.title,
   };
 }
 
