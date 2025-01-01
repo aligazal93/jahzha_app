@@ -14,7 +14,7 @@ class ChooseLanguageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'اختر اللغة',
+        title: 'select_language'.tr(),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 10),

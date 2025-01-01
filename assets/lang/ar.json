@@ -250,6 +250,6 @@
   "Your request has been received successfully.": "تم استلام طلبك بنجاح.",
   "You will be contacted as soon as possible to get a quote. Thank you.": "سيتم التواصل معك في أقرب وقت للحصول على عرض سعر. شكراً.",
   "Are you about to delete your account?" : "انت علي وشك حذف الحساب ؟",
-  "Delete account" : "حذف الحساب"
-
+  "Delete account" : "حذف الحساب",
+  "select_language": "اختر اللغة"
 }
