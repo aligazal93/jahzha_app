@@ -30,11 +30,12 @@ class _DatePickerState extends State<DatePicker> {
       controller: controller,
       label: widget.upperText,
       fillColor: AppColors.whiteBk,
+
       onTap: () async {
         final date = await showDatePicker(
           context: context,
-          initialDate: DateTime.now(),
-          firstDate: widget.firstDate ?? DateTime.now().subtract(Duration(days: 9999 * 9999)),
+          initialDate: DateTime(1970, 1, 1),
+          firstDate: DateTime(1950, 1, 1),
           lastDate: DateTime.now().add(Duration(days: 99 * 99)),
         );
         if (date != null) {

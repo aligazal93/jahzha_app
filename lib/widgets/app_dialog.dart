@@ -55,7 +55,7 @@ class AppDialog extends StatelessWidget {
                     child: Icon(
                       FontAwesomeIcons.xmark,
                       color: AppColors.secondary,
-                      size: 20,
+                      size: 26,
                     ),
                   ),
                 ),

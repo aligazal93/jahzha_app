@@ -23,7 +23,7 @@ class CouponsView extends StatelessWidget {
         appBar: HomeAppBar(
           name: CachingUtils.user?.data.name == null ? 'in Jahzha'.tr() : CachingUtils.user?.data.name,
           icon: FontAwesomeIcons.bagShopping,
-          title: 'Welcome'.tr(),
+          title: 'My coupons'.tr(),
         ),
         body: BlocBuilder<StoreCouponsCubit , StoreCouponsStates>(
           builder: (context, state) {

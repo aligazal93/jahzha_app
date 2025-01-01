@@ -20,6 +20,7 @@ import 'package:jahzha_app/views/privacy_policy/view.dart';
 import 'package:jahzha_app/views/terms_conditions/view.dart';
 import 'package:jahzha_app/views/usage_policy/view.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
+import 'package:jahzha_app/widgets/app_dialog.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 part 'units/info_card.dart';
 part 'units/card.dart';
@@ -265,11 +266,50 @@ class MenuView extends StatelessWidget {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                AppButton(
+                 title: 'Delete account'.tr(),
+                 color: AppColors.red,
+                 constrainedAxis: Axis.horizontal,
+                  onTap: () {
+                    AppDialog.show(child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.userSlash,color: AppColors.red,size: 50,),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          child: AppText(title: 'Are you about to delete your account?'.tr(),fontWeight: FontWeight.w700,color: AppColors.secondary,fontSize: 14,),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AppButton(title: 'cancel'.tr(),
+                              onTap: () => RouteUtils.pop(),
+                                titleFontSize: 12,
+                              color: AppColors.secondary,
+                              ),
+                              SizedBox(width: 6,),
+                              AppButton(title: 'Delete account'.tr(),
+                                onTap: () => CachingUtils.signOut,
+                                titleFontSize: 12,
+                                color: AppColors.red,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ), title: '');
+                  },
+                ),
                 InkWell(
                   onTap: CachingUtils.signOut,
                   child: Container(
                     padding: EdgeInsets.all(12),
-                    margin: EdgeInsets.symmetric(vertical: 24),
+                    margin: EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: AppColors.red)),

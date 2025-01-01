@@ -19,34 +19,47 @@ class ReceivingDestination extends StatelessWidget {
             label: 'email Address'.tr(),
             inputType: TextInputType.emailAddress,
           ),
-          Stack(
-            children: [
-              Container(
-                child: AppTextField(
-                  label: 'Mobile number',
-                  fillColor: AppColors.tGray,
-                  vMargin: 20,
-                  inputType: TextInputType.number,
-                ),
-              ),
-              Positioned(
-                  left: 10,
-                  top: 44,
+          Container(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
                   child: Container(
-                    height: 70,
-                    width: 90,
-                    child: AppDropDownMenu(
-                      fillColor: Colors.transparent,
-                      items: [
-                        '966',
-                        '050',
-                        '002'
-                      ],
-                      hint: '966+',
-                      onChange: (p0) {},
+                    child: AppTextField(
+                      fillColor: AppColors.tGray,
+                      hint: '5XXXXXXXXX',
+                      label: 'Mobile number'.tr(),
+                      textAlign: TextAlign.left,
+                      inputType: TextInputType.number,
+                      validator: Validator.phone,
+                      maxLength: 9,
                     ),
-                  ))
-            ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Container(
+                      width: 70,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          border: Border.all(
+                            color: AppColors.darkGrayBlue,
+                          ),
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Center(
+                        child: AppText(
+                          title: '966+',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.white,
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          textAlign: TextAlign.center,
+                        ),
+                      )),
+                ),
+              ],
+            ),
           ),
           AppDropDownMenu(
               fillColor: AppColors.whiteBk,

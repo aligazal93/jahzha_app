@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
+import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
@@ -28,13 +29,7 @@ class SendShipmentAppBar extends StatelessWidget implements PreferredSizeWidget 
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppText(title: title ?? "",
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                  color: AppColors.white,
-                ),
                 InkWell(
                   onTap: () {
                     RouteUtils.pop();
@@ -46,9 +41,15 @@ class SendShipmentAppBar extends StatelessWidget implements PreferredSizeWidget 
                         color: Color(0XFFD54A25),
                         borderRadius: BorderRadius.circular(150)
                     ),
-                    child: Icon(FontAwesomeIcons.arrowLeftLong,size: 20,color: AppColors.white,),
+                    child: Icon(Utils.isAR ? FontAwesomeIcons.arrowRightLong : FontAwesomeIcons.arrowLeftLong,size: 20,color: AppColors.white,),
                   ),
-                )
+                ),
+                SizedBox(width: 12,),
+                AppText(title: title ?? "",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                  color: AppColors.white,
+                ),
               ],
             ),
             Padding(

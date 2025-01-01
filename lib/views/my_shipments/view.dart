@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/views/my_shipments/cubit/cubit.dart';
 import 'package:jahzha_app/views/my_shipments/cubit/states.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
+import 'package:jahzha_app/widgets/app/home_app_bar.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
 import 'package:jahzha_app/widgets/loading_indicator.dart';
@@ -34,7 +36,9 @@ class _MyShipmentsViewState extends State<MyShipmentsView> with SingleTickerProv
     return BlocProvider(
       create: (context) => MyShipmentsCubit(),
       child: Scaffold(
-        appBar: CustomAppBar(
+        appBar: HomeAppBar(
+          name: CachingUtils.user?.data.name == null ? 'in Jahzha'.tr() : CachingUtils.user?.data.name,
+          icon: FontAwesomeIcons.bagShopping,
           title: 'My shipments'.tr(),
         ),
         body: BlocBuilder<MyShipmentsCubit , MyShipmentsStates>(

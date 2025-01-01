@@ -18,17 +18,47 @@ class _FormFieldsState extends State<_FormFields> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppTextField(
-                label: 'Mobile number'.tr(),
-                controller: TextEditingController(text: cubit.phone),
-                inputType: TextInputType.phone,
-                fillColor: AppColors.whiteBk,
-                suffixIcon: Image.asset('assets/images/edit.png'),
-                onSaved: (v) => cubit.phone = v,
-                validator: Validator.phone,
-                maxLength: 10,
-                hint: CachingUtils.user?.data.phoneNumber == null ? '' : CachingUtils.user?.data.phoneNumber,
-                // onSaved: (p0) => TextEditingController(text: CachingUtils.user!.data.phoneNumber),
+              Container(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: AppTextField(
+                        label: 'Mobile number'.tr(),
+                        controller: TextEditingController(text: cubit.phone),
+                        inputType: TextInputType.phone,
+                        fillColor: AppColors.whiteBk,
+                        suffixIcon: Image.asset('assets/images/edit.png'),
+                        onSaved: (v) => cubit.phone = v,
+                        validator: Validator.phone,
+                        maxLength: 9,
+                        hint: CachingUtils.user?.data.phoneNumber == null ? '' : CachingUtils.user?.data.phoneNumber,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: Container(
+                          width: 70,
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: AppColors.primary,
+                              border: Border.all(
+                                color: AppColors.darkGrayBlue,
+                              ),
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Center(
+                            child: AppText(
+                              title: '966+',
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.white,
+                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              textAlign: TextAlign.center,
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
               ),
               AppTextField(
                 label: 'email Address'.tr(),

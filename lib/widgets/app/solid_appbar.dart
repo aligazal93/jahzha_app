@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
+import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
@@ -28,13 +29,7 @@ class SolidAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppText(title: title ?? "",
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                  color: AppColors.white,
-                ),
                 InkWell(
                   onTap: () {
                     RouteUtils.pop();
@@ -46,13 +41,19 @@ class SolidAppBar extends StatelessWidget implements PreferredSizeWidget {
                         color: Color(0XFF02062B),
                         borderRadius: BorderRadius.circular(150)
                     ),
-                    child: Icon(FontAwesomeIcons.arrowLeftLong,size: 20,color: AppColors.txtGray,),
+                    child: Icon(Utils.isAR ? FontAwesomeIcons.arrowRightLong : FontAwesomeIcons.arrowLeftLong,size: 20,color: AppColors.white,),
                   ),
-                )
+                ),
+                SizedBox(width: 8,),
+                AppText(title: title ?? "",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                  color: AppColors.white,
+                ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,6 +67,7 @@ class SolidAppBar extends StatelessWidget implements PreferredSizeWidget {
                             padding: EdgeInsets.symmetric(vertical: 20),
                             title: 'Shipment details'.tr(),
                             color:AppColors.primary,
+                            textAlign: TextAlign.center,
                             fontSize: 10,
                           )
                         ],
