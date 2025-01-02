@@ -37,6 +37,7 @@ class HomeView extends StatelessWidget {
             Slider(),
             AppText(
              title: 'Our services'.tr(),
+             textAlign:Utils.isAR ? TextAlign.start : TextAlign.left,
              fontWeight: FontWeight.w700,
              color: AppColors.secondary,
              padding: EdgeInsets.symmetric(vertical: 16,horizontal: 12),
@@ -45,6 +46,7 @@ class HomeView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ServiceCar(
                     title: 'Local shipping'.tr(),
@@ -80,6 +82,7 @@ class HomeView extends StatelessWidget {
             AppText(
               title: 'Customer services'.tr(),
               fontWeight: FontWeight.w700,
+              textAlign:Utils.isAR ? TextAlign.start : TextAlign.left,
               color: AppColors.secondary,
               padding: EdgeInsets.symmetric(vertical: 16,horizontal: 12),
               fontSize: 16,

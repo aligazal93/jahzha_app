@@ -77,12 +77,19 @@ class _FormFieldsState extends State<_FormFields> {
                 validator: Validator.name,
                 fillColor: AppColors.whiteBk,
               ),
-              DatePicker(
-                hint: CachingUtils.user?.data.birthdate == null ? 'Select your date of birth'.tr() : Utils.formatDate(CachingUtils.user?.data.birthdate!),
-                upperText: "date of birth".tr(),
-                onPick: (v) {
-                  cubit.birthdate = Utils.formatDate(v);
-                },
+              // DatePicker(
+              //   hint: CachingUtils.user?.data.birthdate == null ? 'Select your date of birth'.tr() : Utils.formatDate(CachingUtils.user?.data.birthdate!),
+              //   upperText: "date of birth".tr(),
+              //   onPick: (v) {
+              //     cubit.birthdate = Utils.formatDate(v);
+              //   },
+              // ),
+              AppTextField(
+                label: 'date of birth'.tr(),
+                validator: Validator.empty,
+                controller: cubit.birthdateTXController,
+                suffixIcon:Icon(FontAwesomeIcons.calendarDay,size: 20,color: AppColors.primary,) ,
+                onTap: cubit.selectBirthdate,
               ),
               AppText(
                 title: 'Gender'.tr(),
@@ -107,16 +114,21 @@ class _FormFieldsState extends State<_FormFields> {
                               borderRadius: BorderRadius.circular(25),
                               color: AppColors.white,
                               border: Border.all(
-                                  color: cubit.gender == 'male'
-                                      ? AppColors.primary
-                                      : AppColors.txtGray)),
-                          child: AppText(
-                            textAlign: TextAlign.center,
-                            title: 'Male'.tr(),
-                            fontSize: 18,
-                            color: cubit.gender == 'male'
-                                ? AppColors.primary
-                                : AppColors.secondary,
+                                  color: cubit.gender == 'male' ? AppColors.primary : AppColors.txtGray),),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(FontAwesomeIcons.person,color: cubit.gender == 'male' ? AppColors.primary : AppColors.secondary,size: 20,),
+                              SizedBox(width: 4,),
+                              AppText(
+                                textAlign: TextAlign.center,
+                                title: 'Male'.tr(),
+                                fontSize: 18,
+                                color: cubit.gender == 'male'
+                                    ? AppColors.primary
+                                    : AppColors.secondary,
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -140,13 +152,18 @@ class _FormFieldsState extends State<_FormFields> {
                                   color: cubit.gender == 'female'
                                       ? AppColors.primary
                                       : AppColors.txtGray)),
-                          child: AppText(
-                            textAlign: TextAlign.center,
-                            title: 'Female'.tr(),
-                            fontSize: 18,
-                            color: cubit.gender == 'female'
-                                ? AppColors.primary
-                                : AppColors.secondary,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(FontAwesomeIcons.personDress,color: cubit.gender == 'female' ? AppColors.primary : AppColors.secondary,size: 20,),
+                              SizedBox(width: 4,),
+                              AppText(
+                                textAlign: TextAlign.center,
+                                title: 'Female'.tr(),
+                                fontSize: 18,
+                                color: cubit.gender == 'female' ? AppColors.primary : AppColors.secondary,
+                              ),
+                            ],
                           ),
                         ),
                       ),

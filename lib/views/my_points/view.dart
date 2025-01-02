@@ -47,7 +47,7 @@ class MyPointsView extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 12),
                     child: Align(
-                      alignment: Alignment.centerRight,
+                      alignment:Utils.isAR ? Alignment.centerRight : Alignment.centerLeft,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

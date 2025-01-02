@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
@@ -17,7 +18,8 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
 
   static AccountDetailsCubit of(context) => BlocProvider.of(context);
   final formKey = GlobalKey<FormState>();
-  String? birthdate = Utils.formatDate(CachingUtils.user?.data.birthdate);
+  // String? birthdate = Utils.formatDate(CachingUtils.user?.data.birthdate);
+  final birthdateTXController = TextEditingController(text: Utils.formatDate(CachingUtils.user?.data.birthdate));
   String? name = CachingUtils.user?.data.name;
   String? email = CachingUtils.user?.data.email;
   String? phone = CachingUtils.user?.data.phoneNumber;
@@ -67,7 +69,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
           "name": name,
           "email": email,
           "phone": phone,
-          "birthdate": birthdate,
+          "birthdate": birthdateTXController.text,
           "gender": gender,
         },
       );
@@ -91,6 +93,21 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
     emit(AccountDetailsInitState());
   }
 
+  void selectBirthdate() async {
+    final maximumDate = DateTime.now().subtract(Duration(days: 365 * 18));
+    final minimumDate = Utils.getMinimumDate;
+    final initialDate = Utils.getMinimumDate;
+    final result = await AppDatePicker.show(
+      title: 'select date of birth'.tr(),
+      initialDate: initialDate,
+      maximumDate: maximumDate,
+      minimumDate: minimumDate,
+    );
+    if (result != null) {
+      birthdateTXController.text = Utils.formatDate(result);
+      print(birthdateTXController.text);
+    }
+  }
 
   // void selectBirthDate() async {
   //   final result = await DatePicker.show(title: 'اختر تاريخ ميلادك');

@@ -39,7 +39,7 @@ class MyCouponsCard extends StatelessWidget {
           Row(
             children: [
               AppText(
-                title: 'خصم',
+                title: 'discount'.tr(),
                 color: AppColors.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,

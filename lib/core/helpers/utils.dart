@@ -22,6 +22,14 @@ class Utils {
     return Color(int.parse(myColor));
   }
 
+  static DateTime get getMinimumDate {
+    return DateTime.now().subtract(Duration(days: 365 * 100));
+  }
+
+  static DateTime get getMaximumDate {
+    return DateTime.now().add(Duration(days: 365 * 100));
+  }
+
   static void log(String text) {
     final pattern = RegExp('.{1,800}');
     pattern.allMatches(text).forEach((match) => print(match.group(0)));

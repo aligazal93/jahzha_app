@@ -31,6 +31,7 @@ class ServiceCar extends StatelessWidget {
               ),
               AppText(
                 title: title,
+                textAlign: TextAlign.center,
                 fontSize: 12,
                 color: AppColors.secondary,
                 padding: EdgeInsets.symmetric(vertical: 12),

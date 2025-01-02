@@ -21,7 +21,7 @@ class CouponCard extends StatelessWidget {
           Row(
             children: [
               AppText(
-                title: 'خصم ${discountValue} %',
+                title: ' ${discountValue} % discount '.tr(),
                 color: AppColors.primary,
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
@@ -97,7 +97,7 @@ class CouponCard extends StatelessWidget {
             color: AppColors.txtGray,
             fontSize: 14,
             padding: EdgeInsets.symmetric(vertical: 4,horizontal: 8),
-            textAlign: TextAlign.start,
+            textAlign: Utils.isAR ? TextAlign.right : TextAlign.left,
             fontWeight: FontWeight.w400,
           )
 

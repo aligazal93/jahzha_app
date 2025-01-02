@@ -118,6 +118,7 @@
   "First Name" : "First Name",
   "family name" : "family name",
   "date of birth" : "date of birth",
+  "select date of birth" : "select date of birth",
   "Male" : "Male",
   "Female" : "Female",
   "Nationality" : "Nationality",

@@ -74,13 +74,19 @@ class InfoCard extends StatelessWidget {
             children: [
               CachingUtils.user?.data.name == null
                   ? SizedBox()
-                  : AppText(
-                      title: CachingUtils.user!.data.name!,
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      color: AppColors.secondary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  : Container(
+                    width: 170,
+                    child: AppText(
+                        title: CachingUtils.user!.data.name!,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign:Utils.isAR ? TextAlign.right : TextAlign.left,
+                        maxLines: 1,
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        color: AppColors.secondary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                  ),
               SizedBox(
                 height: 4,
               ),

@@ -66,6 +66,7 @@ class CouponsDetailsView extends StatelessWidget {
                                   title:storeData.name,
                                   color: AppColors.primary,
                                   fontSize: 14,
+                                  textAlign:Utils.isAR ? TextAlign.right : TextAlign.left,
                                   fontWeight: FontWeight.w700,
                                 ),
                                 SizedBox(height: 8,),

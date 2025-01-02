@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
+import 'package:jahzha_app/core/extensions/string.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
@@ -137,9 +138,10 @@ class MenuView extends StatelessWidget {
                   ),
                 ),
                 AppText(
-                  title: 'the account'.tr(),
+                  title: 'the account'.tr().capitalize,
                   fontWeight: FontWeight.w700,
                   color: AppColors.txtGray,
+                  textAlign:Utils.isAR ? TextAlign.start : TextAlign.left,
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
                   fontSize: 16,
                 ),
@@ -182,6 +184,7 @@ class MenuView extends StatelessWidget {
                     ),),
                 AppText(
                   title: 'About the App'.tr(),
+                  textAlign:Utils.isAR ? TextAlign.start : TextAlign.left,
                   fontWeight: FontWeight.w700,
                   color: AppColors.txtGray,
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
@@ -294,7 +297,7 @@ class MenuView extends StatelessWidget {
                               ),
                               SizedBox(width: 6,),
                               AppButton(title: 'Delete account'.tr(),
-                                onTap: () => CachingUtils.signOut,
+                                onTap: CachingUtils.signOut,
                                 titleFontSize: 12,
                                 color: AppColors.red,
                               ),
