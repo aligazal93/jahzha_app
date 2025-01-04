@@ -39,8 +39,8 @@ class _MyShipmentsRequestViewState extends State<MyShipmentsRequestView> with Si
           titleColor: AppColors.white,
           margin: EdgeInsets.zero,
           padding: EdgeInsets.symmetric(
-            vertical: 16,
-            horizontal: 16,
+            vertical: 16.height,
+            horizontal: 16.width,
           ),
         ),
         body: BlocBuilder<ShipmentRequestCubit,ShipmentsRequestsStates>(
