@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
+import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/views/Myshipment_request/cubit/cubit.dart';
 import 'package:jahzha_app/views/Myshipment_request/cubit/states.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
@@ -36,6 +37,11 @@ class _MyShipmentsRequestViewState extends State<MyShipmentsRequestView> with Si
           color: AppColors.secondary,
          title: 'My shipments'.tr(),
           titleColor: AppColors.white,
+          margin: EdgeInsets.zero,
+          padding: EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: 16,
+          ),
         ),
         body: BlocBuilder<ShipmentRequestCubit,ShipmentsRequestsStates>(
           builder: (context, state) {
