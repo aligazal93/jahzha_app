@@ -20,22 +20,22 @@ class MyPointsCubit extends Cubit<MyPointsStates> {
       allUserPoints?.data?.clear();
       emit(MyPointsLoading());
     }
+    AllUserPoints? result;
     try {
       final response = await NetworkUtils.get(
         'all-user-points?page=$page',
       );
-      final result = AllUserPoints.fromJson(response.data);
+      result = AllUserPoints.fromJson(response.data);
       if (allUserPoints == null) {
         allUserPoints = result;
       } else {
         allUserPoints!.data!.addAll(result.data!);
       }
-      return result.data ?? [];
     } catch (e) {
       handleGenericException(e);
     }
     emit(MyPointsInit());
-    return [];
+    return result?.data ?? [];
   }
 
 

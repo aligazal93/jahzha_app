@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Jahzha App</string>
+	<string>جهزها</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,15 +13,15 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>jahzha_app</string>
+	<string>جهزها</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>1.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -45,5 +45,27 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+		<key>NSCameraUsageDescription</key>
+    	<string>App would like to use your camera to edit your profile photo</string>
+    	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    	<string>Location is required to detect user latitude and longitude for easy location picking when requesting order.</string>
+    	<key>NSLocationAlwaysUsageDescription</key>
+    	<string>Location is required to detect user latitude and longitude for easy location picking when requesting order.</string>
+    	<key>NSLocationUsageDescription</key>
+    	<string>Location is required to detect user latitude and longitude for easy location picking when requesting order.</string>
+    	<key>NSLocationWhenInUseUsageDescription</key>
+    	<string>Location is required to detect user latitude and longitude for easy location picking when requesting order.</string>
+    	<key>NSMicrophoneUsageDescription</key>
+    	<string>Used to capture audio for Voice Notes in chats</string>
+    	<key>NSPhotoLibraryUsageDescription</key>
+    	<string>$(PRODUCT_NAME) would like access to your photo gallery,to help you set your profile</string>
+    	<key>UIApplicationSupportsIndirectInputEvents</key>
+    	<true/>
+    	<key>UIBackgroundModes</key>
+    	<array>
+    		<string>fetch</string>
+    		<string>remote-notification</string>
+    	</array>
 </dict>
 </plist>
