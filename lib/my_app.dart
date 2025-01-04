@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
       child:SplashView(),
       builder: (_, child) => KeyboardPopScaffold(
         child: MaterialApp(
-          title: 'Jahzha App',
+          title: 'جهزها',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             hoverColor: Colors.transparent,

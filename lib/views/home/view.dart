@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
+import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/coupons/view.dart';
@@ -108,7 +109,7 @@ class HomeView extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 64.height),
           ],
         ),
       ),

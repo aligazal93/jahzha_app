@@ -47,9 +47,9 @@ class Utils {
 
   static double get bottomDevicePadding {
     final bottom = MediaQuery.of(RouteUtils.context).padding.bottom;
-    if (bottom < 34) {
-      return 34.height;
-    }
+    // if (bottom < 34) {
+    //   return 34.height;
+    // }
     return bottom;
   }
 

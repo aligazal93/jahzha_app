@@ -23,87 +23,52 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 110,
-      child: SafeArea(
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            Container(
-              height: 80,
-              decoration: BoxDecoration(
-                color: AppColors.white.theme,
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 0),
-                    blurRadius: 7,
-                    spreadRadius: .6,
-                    color: AppColors.tGray.theme,
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  _bottomNavItem(
-                    index: 0,
-                    icon: 'icon-1',
-                    title: 'Home'.tr(),
-                  ),
-                  _bottomNavItem(
-                    index: 1,
-                    icon: 'icon-2',
-                    title: 'My shipments'.tr(),
-                  ),
-                  if (Utils.isAR) SizedBox(width: 20.width),
-                  Spacer(),
-                  if (Utils.isAR) SizedBox(width: 20.width),
-                  _bottomNavItem(
-                    index: 2,
-                    title: 'Coupons'.tr(),
-                    icon: 'icon-4',
-                  ),
-                  _bottomNavItem(
-                    index: 3,
-                    title: 'Menu'.tr(),
-                    icon: 'icon-5',
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              bottom: 10,
-              left: 0,
-              right: 0,
-              child: UnconstrainedBox(
-                child: InkWell(
-                  onTap: () {
-                    RouteUtils.navigateTo(SendShipmentsView());
-                  },
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 14),
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.theme,
-                          borderRadius: BorderRadius.circular(500),
-                        ),
-                        child: Image.asset('assets/images/icon-3.png'),
-                      ),
-                      AppText(
-                        title: 'Send Shipment'.tr(),
-                        fontSize: 12,
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w700,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+    final bottomPadding = Utils.bottomDevicePadding;
+    return Container(
+      padding: EdgeInsets.only(
+        top: 4.height,
+        bottom: bottomPadding == 0 ? 16.height : bottomPadding,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _bottomNavItem(
+            index: 0,
+            icon: 'icon-1',
+            title: 'Home'.tr(),
+          ),
+          _bottomNavItem(
+            index: 1,
+            icon: 'icon-2',
+            title: 'My shipments'.tr(),
+          ),
+          if (Utils.isAR) SizedBox(width: 20.width),
+          Spacer(),
+          if (Utils.isAR) SizedBox(width: 20.width),
+          _bottomNavItem(
+            index: 2,
+            title: 'Coupons'.tr(),
+            icon: 'icon-4',
+          ),
+          _bottomNavItem(
+            index: 3,
+            title: 'Menu'.tr(),
+            icon: 'icon-5',
+          ),
+        ],
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
         ),
+        color: AppColors.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.lightGray.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 2,
+          ),
+        ],
       ),
     );
   }
@@ -115,34 +80,30 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Expanded(
       child: InkWell(
         onTap: () => cubit.toggleTab(index),
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors.white.theme,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: Image.asset(
-                  'assets/images/$icon.png',
-                  color: isActive
-                      ? AppColors.secondary.theme
-                      : AppColors.GrayLight.theme,
-                ),
-              ),
-              AppText(
-                title: title,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: Image.asset(
+                'assets/images/$icon.png',
                 color: isActive
                     ? AppColors.secondary.theme
                     : AppColors.GrayLight.theme,
-                fontWeight: FontWeight.w500,
-                fontSize: 12,
-              )
-            ],
-          ),
+              ),
+            ),
+            AppText(
+              title: title,
+              color: isActive
+                  ? AppColors.secondary.theme
+                  : AppColors.GrayLight.theme,
+              fontWeight: FontWeight.w500,
+              fontSize: 12,
+            )
+          ],
         ),
       ),
     );

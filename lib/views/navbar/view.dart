@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
@@ -6,6 +7,10 @@ import 'package:jahzha_app/views/navbar/cubit/cubit.dart';
 import 'package:jahzha_app/views/navbar/cubit/states.dart';
 import 'package:jahzha_app/views/navbar/units/bottom_navbar.dart';
 import 'package:jahzha_app/widgets/loading_indicator.dart';
+
+import '../../core/route_utils/route_utils.dart';
+import '../../widgets/app_text.dart';
+import '../send_shipments/view.dart';
 
 
 class NavBarView extends StatelessWidget {
@@ -33,6 +38,32 @@ class NavBarView extends StatelessWidget {
             body: state is NavBarLoadingState
                 ? LoadingIndicator()
                 : cubit.getCurrentView,
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: UnconstrainedBox(
+              child: InkWell(
+                onTap: () => RouteUtils.navigateTo(SendShipmentsView()),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 14),
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.theme,
+                        borderRadius: BorderRadius.circular(500),
+                      ),
+                      child: Image.asset('assets/images/icon-3.png'),
+                    ),
+                    AppText(
+                      title: 'Send Shipment'.tr(),
+                      fontSize: 12,
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w700,
+                    )
+                  ],
+                ),
+              ),
+            ),
           );
         },
       ),
