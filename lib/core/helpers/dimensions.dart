@@ -7,6 +7,8 @@ extension Dimentions on int {
 
   double get font => _font();
 
+  double get radius => _radius();
+
   double _height() {
     return (this).h;
   }
@@ -17,5 +19,9 @@ extension Dimentions on int {
 
   double _font() {
     return (this).sp;
+  }
+
+  double _radius() {
+    return (this).r;
   }
 }

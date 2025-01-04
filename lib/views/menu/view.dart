@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/extensions/string.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
+import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/Myshipment_request/view.dart';
@@ -23,9 +24,13 @@ import 'package:jahzha_app/views/usage_policy/view.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_dialog.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
+
 part 'units/info_card.dart';
+
 part 'units/card.dart';
+
 part 'units/account_tile.dart';
+
 part 'units/support_button.dart';
 
 class MenuView extends StatelessWidget {
@@ -34,12 +39,6 @@ class MenuView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: UnconstrainedBox(
-          child: InkWell(
-              onTap: () => RouteUtils.navigateTo(
-                ContactUsView(),
-              ),
-              child: SupportButton())),
       body: Column(
         children: [
           SizedBox(
@@ -141,50 +140,51 @@ class MenuView extends StatelessWidget {
                   title: 'the account'.tr().capitalize,
                   fontWeight: FontWeight.w700,
                   color: AppColors.txtGray,
-                  textAlign:Utils.isAR ? TextAlign.start : TextAlign.left,
+                  textAlign: Utils.isAR ? TextAlign.start : TextAlign.left,
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
                   fontSize: 16,
                 ),
                 Container(
-                    margin: EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.tGray)),
-                    child: Column(
-                      children: [
-                        // AccountTile(
-                        //   image: 'location',
-                        //   title: 'addresses'.tr(),
-                        //   onTap: () {
-                        //     RouteUtils.navigateTo(AddressesView());
-                        //   },
-                        // ),
-                        // Divider(
-                        //   height: 8,
-                        // ),
-                        AccountTile(
-                          image: 'chats',
-                          title: 'call us'.tr(),
-                          onTap: () {
-                            RouteUtils.navigateTo(ContactUsView());
-                          },
-                        ),
-                        Divider(
-                          height: 8,
-                          color: AppColors.tGray,
-                        ),
-                        AccountTile(
-                          image: 'about',
-                          title: 'Jahzha for businesses'.tr(),
-                          onTap: () {
-                            RouteUtils.navigateTo(JahzhaForCompaniesView());
-                          },
-                        ),
-                      ],
-                    ),),
+                  margin: EdgeInsets.symmetric(vertical: 12),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: AppColors.tGray)),
+                  child: Column(
+                    children: [
+                      // AccountTile(
+                      //   image: 'location',
+                      //   title: 'addresses'.tr(),
+                      //   onTap: () {
+                      //     RouteUtils.navigateTo(AddressesView());
+                      //   },
+                      // ),
+                      // Divider(
+                      //   height: 8,
+                      // ),
+                      AccountTile(
+                        image: 'chats',
+                        title: 'call us'.tr(),
+                        onTap: () {
+                          RouteUtils.navigateTo(ContactUsView());
+                        },
+                      ),
+                      Divider(
+                        height: 8,
+                        color: AppColors.tGray,
+                      ),
+                      AccountTile(
+                        image: 'about',
+                        title: 'Jahzha for businesses'.tr(),
+                        onTap: () {
+                          RouteUtils.navigateTo(JahzhaForCompaniesView());
+                        },
+                      ),
+                    ],
+                  ),
+                ),
                 AppText(
                   title: 'About the App'.tr(),
-                  textAlign:Utils.isAR ? TextAlign.start : TextAlign.left,
+                  textAlign: Utils.isAR ? TextAlign.start : TextAlign.left,
                   fontWeight: FontWeight.w700,
                   color: AppColors.txtGray,
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
@@ -273,39 +273,56 @@ class MenuView extends StatelessWidget {
                   height: 20,
                 ),
                 AppButton(
-                 title: 'Delete account'.tr(),
-                 color: AppColors.red,
-                 constrainedAxis: Axis.horizontal,
+                  title: 'Delete account'.tr(),
+                  color: AppColors.red,
+                  constrainedAxis: Axis.horizontal,
                   onTap: () {
-                    AppDialog.show(child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(FontAwesomeIcons.userSlash,color: AppColors.red,size: 50,),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          child: AppText(title: 'Are you about to delete your account?'.tr(),fontWeight: FontWeight.w700,color: AppColors.secondary,fontSize: 14,),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AppButton(title: 'cancel'.tr(),
-                              onTap: () => RouteUtils.pop(),
-                                titleFontSize: 12,
-                              color: AppColors.secondary,
-                              ),
-                              SizedBox(width: 6,),
-                              AppButton(title: 'Delete account'.tr(),
-                                onTap: CachingUtils.signOut,
-                                titleFontSize: 12,
-                                color: AppColors.red,
-                              ),
-                            ],
+                    AppDialog.show(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.userSlash,
+                            color: AppColors.red,
+                            size: 50,
                           ),
-                        )
-                      ],
-                    ), title: '');
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            child: AppText(
+                              title:
+                                  'Are you about to delete your account?'.tr(),
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.secondary,
+                              fontSize: 14,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AppButton(
+                                  title: 'cancel'.tr(),
+                                  onTap: () => RouteUtils.pop(),
+                                  titleFontSize: 12,
+                                  color: AppColors.secondary,
+                                ),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                                AppButton(
+                                  title: 'Delete account'.tr(),
+                                  onTap: CachingUtils.signOut,
+                                  titleFontSize: 12,
+                                  color: AppColors.red,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      title: '',
+                    );
                   },
                 ),
                 InkWell(
@@ -314,8 +331,9 @@ class MenuView extends StatelessWidget {
                     padding: EdgeInsets.all(12),
                     margin: EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.red)),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: AppColors.red),
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -332,13 +350,18 @@ class MenuView extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 40,
-                ),
+                SizedBox(height: 92.height),
               ],
             ),
           ),
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: UnconstrainedBox(
+        child: InkWell(
+          onTap: () => RouteUtils.navigateTo(ContactUsView()),
+          child: SupportButton(),
+        ),
       ),
     );
   }

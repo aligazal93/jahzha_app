@@ -5,21 +5,21 @@ class SupportButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
-      margin: EdgeInsets.symmetric(vertical: 0),
+      padding: EdgeInsets.all(12.width),
+      margin: EdgeInsets.symmetric(vertical: 40.height),
       decoration: BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.radius),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset('assets/images/support.png'),
           AppText(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16.width),
             textAlign: TextAlign.center,
             title: 'Support Center'.tr(),
-            fontSize: 14,
+            fontSize: 14.font,
             fontWeight: FontWeight.w700,
             color: AppColors.white,
           ),
