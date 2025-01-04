@@ -15,18 +15,27 @@ class MyPointsCubit extends Cubit<MyPointsStates> {
     return state is MyPointsLoading;
   }
 
-  Future<void> getAllPoints() async {
-    emit(MyPointsLoading());
-    //TODO Pagination
+  Future<List<Data>> getAllPoints({int page = 1}) async {
+    if (page == 1) {
+      allUserPoints?.data?.clear();
+      emit(MyPointsLoading());
+    }
     try {
       final response = await NetworkUtils.get(
-        'all-user-points?page=1',
+        'all-user-points?page=$page',
       );
-      allUserPoints = AllUserPoints.fromJson(response.data);
+      final result = AllUserPoints.fromJson(response.data);
+      if (allUserPoints == null) {
+        allUserPoints = result;
+      } else {
+        allUserPoints!.data!.addAll(result.data!);
+      }
+      return result.data ?? [];
     } catch (e) {
       handleGenericException(e);
     }
     emit(MyPointsInit());
+    return [];
   }
 
 
