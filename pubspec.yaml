@@ -11,52 +11,47 @@ dependencies:
     sdk: flutter
 
   # Icons
-  cupertino_icons: ^1.0.6
   carousel_slider: ^5.0.0
-  font_awesome_flutter: ^10.6.0
+  font_awesome_flutter: ^10.8.0
   # Local DB
-  lottie: ^2.7.0
-  shared_preferences: ^2.2.2
+  lottie: ^3.0.0
+  shared_preferences: ^2.3.5
   # State Management
-  flutter_bloc: ^8.1.3
-  # Overlays
-  fluttertoast: ^8.2.2
+  flutter_bloc: ^8.1.6
   # Launching Intents
-  url_launcher: ^6.2.1
-  flutter_share: ^2.0.0
+  url_launcher: ^6.3.1
   # Device paths
-  path_provider: ^2.1.1
+  path_provider: ^2.1.5
   # Picking files
-  image_picker: ^1.0.4
+  image_picker: ^1.1.2
   #  file_picker: ^8.0.3
   # Animation
-  animate_do: ^3.0.2
+  animate_do: ^3.3.4
   # SVG Widget
   flutter_svg: ^2.0.9
   # Localization
-  easy_localization: ^3.0.3
+  easy_localization: ^3.0.7
   # Responsive
-  flutter_screenutil: ^5.9.0
+  flutter_screenutil: ^5.9.3
   # HTTP Client
-  dio: ^5.3.3
+  dio: ^5.7.0
   # Caching images
-  cached_network_image: ^3.3.0
+  cached_network_image: ^3.4.1
   # Firebase
-  firebase_messaging: ^14.6.4
-  firebase_core: ^2.14.0
+  firebase_messaging: ^15.1.6
+  firebase_core: ^3.9.0
   # Sounds
-  flutter_ringtone_player: ^3.2.0
+  flutter_ringtone_player: ^4.0.0+3
   # HTML
   flutter_html: ^3.0.0-beta.2
   # UI
   pin_code_fields: ^8.0.1
   flutter_rating_bar: ^4.0.1
-  image_cropper: ^4.0.1
-  file_picker: ^8.0.0
+  file_picker: ^8.1.7
   # Convert speech to text
-  webview_flutter: ^4.2.2
-  smooth_page_indicator: ^1.1.0
-  dotted_line: ^3.2.2
+  webview_flutter: ^4.10.0
+  smooth_page_indicator: ^1.2.0+3
+  dotted_line: ^3.2.3
 
 dependency_overrides:
   firebase_core_platform_interface: ^4.8.0

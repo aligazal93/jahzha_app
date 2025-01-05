@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
@@ -94,37 +93,37 @@ class MediaManager {
     }
   }
 
-  static Future<File?> cropImage(String filePath) async {
-    CroppedFile? croppedFile = await ImageCropper().cropImage(
-      sourcePath: filePath,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio16x9
-      ],
-      uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: '',
-          toolbarColor: Colors.black,
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.original,
-          hideBottomControls: true,
-          lockAspectRatio: false,
-        ),
-        IOSUiSettings(
-          title: '',
-          aspectRatioLockEnabled: false,
-          hidesNavigationBar: true,
-        ),
-      ],
-    );
-    if (croppedFile != null) {
-      return File(croppedFile.path);
-    }
-    return null;
-  }
+  // static Future<File?> cropImage(String filePath) async {
+  //   CroppedFile? croppedFile = await ImageCropper().cropImage(
+  //     sourcePath: filePath,
+  //     aspectRatioPresets: [
+  //       CropAspectRatioPreset.square,
+  //       CropAspectRatioPreset.ratio3x2,
+  //       CropAspectRatioPreset.original,
+  //       CropAspectRatioPreset.ratio4x3,
+  //       CropAspectRatioPreset.ratio16x9
+  //     ],
+  //     uiSettings: [
+  //       AndroidUiSettings(
+  //         toolbarTitle: '',
+  //         toolbarColor: Colors.black,
+  //         toolbarWidgetColor: Colors.white,
+  //         initAspectRatio: CropAspectRatioPreset.original,
+  //         hideBottomControls: true,
+  //         lockAspectRatio: false,
+  //       ),
+  //       IOSUiSettings(
+  //         title: '',
+  //         aspectRatioLockEnabled: false,
+  //         hidesNavigationBar: true,
+  //       ),
+  //     ],
+  //   );
+  //   if (croppedFile != null) {
+  //     return File(croppedFile.path);
+  //   }
+  //   return null;
+  // }
 
 }
 
