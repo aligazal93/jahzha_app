@@ -252,6 +252,8 @@ class MenuView extends StatelessWidget {
                           title: 'language'.tr(),
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
+                          textAlign: Utils.isAR ? TextAlign.right : TextAlign.left,
+
                         ),
                         leading: Icon(
                           FontAwesomeIcons.earthAfrica,

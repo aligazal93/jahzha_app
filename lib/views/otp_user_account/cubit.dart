@@ -48,9 +48,6 @@ class OtpUserAccountCubit extends Cubit<OtpUserAccountStates> {
     try {
       final response = await NetworkUtils.post(
         'resend-code-to-update-info',
-        data: {
-          "user_id": userId,
-        },
       );
       final data = response.data;
       if (data['status_code'] == 200 ) {

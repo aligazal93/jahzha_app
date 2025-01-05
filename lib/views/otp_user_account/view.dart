@@ -99,17 +99,17 @@ class OtpUserVerifyView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     padding: EdgeInsets.symmetric(vertical: 16),
                   ),
-                  InkWell(
-                    onTap: cubit.resetVerifyCode,
-                    child: AppText(
-                      title: 'Resend'.tr(),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primary,
-                      textAlign: TextAlign.center,
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: cubit.resetVerifyCode,
+                  //   child: AppText(
+                  //     title: 'Resend'.tr(),
+                  //     fontSize: 16,
+                  //     fontWeight: FontWeight.w700,
+                  //     color: AppColors.primary,
+                  //     textAlign: TextAlign.center,
+                  //     padding: EdgeInsets.symmetric(vertical: 8),
+                  //   ),
+                  // ),
                   _ResendCodeSection(),
                 ],
               );

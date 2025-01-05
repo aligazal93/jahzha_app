@@ -76,7 +76,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
       final success = response.data['status_code'] == 200;
       if (response.data['message'] == "تم إرسال الرمز بنجاح") {
         await getUserAndCache(CachingUtils.token!);
-        RouteUtils.navigateAndPopAll(
+        RouteUtils.navigateTo(
           OtpUserVerifyView(
           userId: CachingUtils.user!.data.id,
           email: email,

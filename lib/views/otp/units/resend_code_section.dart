@@ -33,28 +33,34 @@ class __ResendCodeSectionState extends State<_ResendCodeSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (_secondsRemaining > 0)
-          Text(
-            '00:' + _secondsRemaining.toString().padLeft(2, '0'),
-            style: TextStyle(fontSize: 16, color: AppColors.primary),
-          ),
-        if (_secondsRemaining == 0)
-          InkWell(
-            onTap: () {
-              _startTimer();
-            },
-            child: AppText(
-              title: 'Resend'.tr(),
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              color: AppColors.primary,
-              textAlign: TextAlign.center,
-              padding: EdgeInsets.symmetric(vertical: 8),
-            ),
-          ),
-      ],
+    return BlocBuilder<OtpCubit,OtpStates>(
+      builder: (context, state) {
+        final cubit = OtpCubit.of(context);
+        return Column(
+          children: [
+            if (_secondsRemaining > 0)
+              Text(
+                '00:' + _secondsRemaining.toString().padLeft(2, '0'),
+                style: TextStyle(fontSize: 16, color: AppColors.primary),
+              ),
+            if (_secondsRemaining == 0)
+              InkWell(
+                onTap: () {
+                  cubit.resetVerifyCode();
+                  _startTimer();
+                },
+                child: AppText(
+                  title: 'Resend'.tr(),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary,
+                  textAlign: TextAlign.center,
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

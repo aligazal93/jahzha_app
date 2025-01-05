@@ -13,6 +13,8 @@ class AccountTile extends StatelessWidget {
         title: title,
         fontSize: 14,
         fontWeight: FontWeight.w400,
+        textAlign: Utils.isAR ? TextAlign.right : TextAlign.left,
+
       ),
       leading: Image.asset('assets/images/${image}.png',color: AppColors.lightGray,width: 28,),
       trailing:Icon( Utils.isAR ? FontAwesomeIcons.chevronLeft : FontAwesomeIcons.chevronRight ,size: 18,color: AppColors.secondary,),
