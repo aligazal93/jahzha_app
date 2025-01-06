@@ -107,7 +107,7 @@ class _AvailableOffersViewState extends State<AvailableOffersView> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Icon(FontAwesomeIcons.ticket,size: 20,color: AppColors.primary,),
+                                          Icon(FontAwesomeIcons.ticket,size: 12,color: AppColors.primary,),
                                           AppText(
                                             title: 'saving'.tr(),
                                             padding: EdgeInsets.symmetric(horizontal: 8),
@@ -130,7 +130,7 @@ class _AvailableOffersViewState extends State<AvailableOffersView> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Icon(FontAwesomeIcons.rocket,size: 20,color: AppColors.blue,),
+                                          Icon(FontAwesomeIcons.rocket,size: 12,color: AppColors.blue,),
                                           AppText(
                                             title: 'fastest'.tr(),
                                             padding: EdgeInsets.symmetric(horizontal: 8),
@@ -153,7 +153,7 @@ class _AvailableOffersViewState extends State<AvailableOffersView> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Icon(FontAwesomeIcons.star,size: 20,color: AppColors.primary,),
+                                          Icon(FontAwesomeIcons.star,size: 12,color: AppColors.primary,),
                                           AppText(
                                             title: 'new'.tr(),
                                             padding: EdgeInsets.symmetric(horizontal: 8),
