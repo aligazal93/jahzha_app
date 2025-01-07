@@ -79,6 +79,7 @@ flutter:
     - assets/fonts/
     - assets/lang/ar.json
     - assets/lang/en.json
+    - assets/images/lottie/
 
   fonts:
     - family: Alexandria

@@ -253,5 +253,6 @@
   "You will be contacted as soon as possible to get a quote. Thank you.": "You will be contacted as soon as possible to get a quote. Thank you.",
   "Are you about to delete your account?" : "Are you about to delete your account?",
   "Delete account" : "Delete account",
-"select_language": "Select Language"
+"select_language": "Select Language",
+  "no_content_available": "No content available"
 }
