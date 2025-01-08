@@ -21,9 +21,8 @@ class LocalShippingCubit extends Cubit<LocalShippingStates> {
   Prediction? receiverPrediction;
 
   Future<void> getOffers() async {
-    print('sender:\n${senderPrediction!.lat}\n${senderPrediction!.lng}\n${senderPrediction!.description}');
-    print('receiver:\n${receiverPrediction!.lat}\n${receiverPrediction!.lng}\n${receiverPrediction!.description}');
-    // RouteUtils.navigateTo(AvailableOffersView());
+    print(senderPrediction!.city);
+    print(receiverPrediction!.city);
   }
 
   void nextPage() {

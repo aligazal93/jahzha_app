@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_places_flutter/model/place_bounds.dart';
 import 'package:google_places_flutter/model/place_type.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
@@ -85,8 +86,13 @@ class LocalShippingView extends StatelessWidget {
                                 fillColor: AppColors.whiteBk,
                                 controller: cubit.receiverTXController,
                                 countries: ['SA'],
-                                placeType: PlaceType.cities,
                                 onSelected: (value) => cubit.receiverPrediction = value,
+                                placeBounds: PlaceBounds(
+                                  latNE: 21.54333,
+                                  lngNE: 39.17278,
+                                  latSW: 21.27903,
+                                  lngSW: 39.69024,
+                                ),
                               ),
                             ],
                           ),

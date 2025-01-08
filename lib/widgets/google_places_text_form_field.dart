@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/place_bounds.dart';
 import 'package:google_places_flutter/model/place_type.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
@@ -18,6 +19,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
     this.countries,
     this.placeType = PlaceType.geocode,
     this.controller,
+    this.placeBounds,
   }) : super(key: key);
 
   final String? label;
@@ -26,6 +28,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
   final List<String>? countries;
   final PlaceType placeType;
   final TextEditingController? controller;
+  final PlaceBounds? placeBounds;
 
   @override
   State<GooglePlacesTextFormField> createState() =>
@@ -69,6 +72,7 @@ class _GooglePlacesTextFormFieldState extends State<GooglePlacesTextFormField> {
           googleAPIKey: Utils.mapAPIKey,
           countries: widget.countries,
           showError: false,
+          placeBounds: widget.placeBounds,
           itemClick: (Prediction prediction) {
             if (prediction.description != null) {
               controller.text = prediction.description!;
