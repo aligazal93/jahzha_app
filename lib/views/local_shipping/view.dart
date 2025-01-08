@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_places_flutter/model/place_type.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/availiable_offers/view.dart';
@@ -10,193 +12,133 @@ import 'package:jahzha_app/widgets/app_drop_down_menu.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
 
-class LocalShippingView extends StatefulWidget {
+import '../../widgets/google_places_text_form_field.dart';
+import 'cubit.dart';
+
+class LocalShippingView extends StatelessWidget {
   const LocalShippingView({Key? key}) : super(key: key);
 
   @override
-  State<LocalShippingView> createState() => _InterNationalShippingViewState();
-}
-
-class _InterNationalShippingViewState extends State<LocalShippingView> {
-  PageController _pageController = PageController();
-  int currentPage = 0;
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SolidAppBar(
-        currentPage: currentPage,
-        title: 'Local shipping'.tr(),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  setState(() {
-                    currentPage = index;
-                  });
-                },
+    return BlocProvider(
+      create: (context) => LocalShippingCubit(),
+      child: BlocBuilder<LocalShippingCubit, LocalShippingStates>(
+        builder: (context, state) {
+          final cubit = LocalShippingCubit.of(context);
+          return Scaffold(
+            appBar: SolidAppBar(
+              currentPage: cubit.currentPage,
+              title: 'Local shipping'.tr(),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
                 children: [
-                  Container(
-                    child: ListView(
+                  Expanded(
+                    child: PageView(
+                      controller: cubit.pageController,
+                      physics: NeverScrollableScrollPhysics(),
                       children: [
-                        SizedBox(height: 12,),
-                        AppTextField(
-                          fillColor: AppColors.whiteBk,
-                          suffixIcon: AppText(
-                            title: 'kg'.tr(),
-                            color: AppColors.txtGray,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            padding: EdgeInsets.symmetric(vertical: 14),
+                        Container(
+                          child: ListView(
+                            children: [
+                              SizedBox(
+                                height: 12,
+                              ),
+                              AppTextField(
+                                fillColor: AppColors.whiteBk,
+                                suffixIcon: AppText(
+                                  title: 'kg'.tr(),
+                                  color: AppColors.txtGray,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                ),
+                                label: 'Approximate weight'.tr(),
+                                inputType: TextInputType.number,
+                                controller: cubit.weightTXController,
+                              ),
+                            ],
                           ),
-                          label: 'Approximate weight'.tr(),
-                          inputType: TextInputType.number,
                         ),
-                        AppDropDownMenu(
-                          fillColor: AppColors.whiteBk,
-                          onChange:(p0) {},
-                          items: [
-                            'Box'.tr(),
-                            'Documents'.tr()
-                          ],
-                          hint: '',
-                          label: 'Shipment type'.tr(),
+                        Container(
+                          child: ListView(
+                            children: [
+                              SizedBox(height: 12),
+                              GooglePlacesTextFormField(
+                                label: 'Transmitting destination'.tr(),
+                                fillColor: AppColors.whiteBk,
+                                controller: cubit.senderTXController,
+                                countries: ['SA'],
+                                placeType: PlaceType.cities,
+                                onSelected: (value) => cubit.senderPrediction = value,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: ListView(
+                            children: [
+                              SizedBox(height: 12),
+                              GooglePlacesTextFormField(
+                                label: 'Receiving destination'.tr(),
+                                fillColor: AppColors.whiteBk,
+                                controller: cubit.receiverTXController,
+                                countries: ['SA'],
+                                placeType: PlaceType.cities,
+                                onSelected: (value) => cubit.receiverPrediction = value,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  Container(
-                    child: ListView(
-                      children: [
-                        SizedBox(height: 12,),
-                        AppDropDownMenu(
-                          fillColor: AppColors.whiteBk,
-                          onChange:(p0) {},
-                          items: [
-                            'السعودية',
-                            'السعودية',
-                          ],
-                          hint: 'Select country'.tr(),
-                          label: 'Transmitting destination'.tr(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (cubit.currentPage < 2)
+                        Expanded(
+                          child: AppButton(
+                            titleFontSize: 14,
+                            padding: EdgeInsets.zero,
+                            margin: EdgeInsets.symmetric(horizontal: 8),
+                            constrainedAxis: Axis.horizontal,
+                            title: 'Next'.tr(),
+                            onTap: cubit.nextPage,
+                          ),
                         ),
-                        AppDropDownMenu(
-                          fillColor: AppColors.whiteBk,
-                          onChange:(p0) {},
-                          items: [
-                            'السعودية',
-                            'السعودية',
-                          ],
-                          hint: 'Select city'.tr(),
-                          label: 'city'.tr(),
+                      if (cubit.currentPage == 2)
+                        Expanded(
+                          child: AppButton(
+                            titleFontSize: 14,
+                            padding: EdgeInsets.zero,
+                            margin: EdgeInsets.symmetric(horizontal: 4),
+                            constrainedAxis: Axis.horizontal,
+                            title: 'Get offers'.tr(),
+                            onTap: cubit.getOffers,
+                          ),
                         ),
-                        AppTextField(
-                          fillColor: AppColors.whiteBk,
-                          label: 'Postal code'.tr(),
-                          inputType: TextInputType.number,
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: ListView(
-                      children: [
-                        SizedBox(height: 12,),
-                        AppDropDownMenu(
-                          fillColor: AppColors.whiteBk,
-                          onChange:(p0) {},
-                          items: [
-                            'السعودية',
-                            'السعودية',
-                          ],
-                          hint: 'Select country'.tr(),
-                          label: 'Receiving destination'.tr(),
+                      if (cubit.currentPage > 0)
+                        Expanded(
+                          child: AppButton(
+                            titleFontSize: 14,
+                            padding: EdgeInsets.zero,
+                            margin: EdgeInsets.symmetric(horizontal: 8),
+                            constrainedAxis: Axis.horizontal,
+                            color: AppColors.darkGrayBlue,
+                            titleColor: AppColors.txtGray,
+                            title: 'Previous'.tr(),
+                            onTap: cubit.previousPage,
+                          ),
                         ),
-                        AppDropDownMenu(
-                          fillColor: AppColors.whiteBk,
-                          onChange:(p0) {},
-                          items: [
-                            'السعودية',
-                            'السعودية',
-                          ],
-                          hint: 'Select city'.tr(),
-                          label: 'city'.tr(),
-                        ),
-                        AppTextField(
-                          fillColor: AppColors.whiteBk,
-                          label: 'Postal code'.tr(),
-                          inputType: TextInputType.number,
-                        )
-                      ],
-                    ),
+                    ],
                   ),
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (currentPage < 2)
-                  Expanded(
-                    child: AppButton(
-                      titleFontSize: 14,
-                      padding: EdgeInsets.zero,
-                      margin: EdgeInsets.symmetric(horizontal: 8),
-                      constrainedAxis: Axis.horizontal,
-                      title: 'Next'.tr(),
-                      onTap: () {
-                        _pageController.nextPage(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.ease,
-                        );
-                      },
-
-                    ),
-                  ),
-                if (currentPage ==  2)
-                  Expanded(
-                    child: AppButton(
-                      titleFontSize: 14,
-                      padding: EdgeInsets.zero,
-                      margin: EdgeInsets.symmetric(horizontal: 4),
-                      constrainedAxis: Axis.horizontal,
-                      title: 'Get offers'.tr(),
-                      onTap: () {
-                        RouteUtils.navigateTo(AvailableOffersView());
-                        _pageController.nextPage(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.ease,
-                        );
-                      },
-
-                    ),
-                  ),
-                if (currentPage > 0)
-                  Expanded(
-                    child: AppButton(
-                      titleFontSize: 14,
-                      padding: EdgeInsets.zero,
-                      margin: EdgeInsets.symmetric(horizontal: 8),
-                      constrainedAxis: Axis.horizontal,
-                      color: AppColors.darkGrayBlue,
-                      titleColor:AppColors.txtGray,
-                      title: 'Previous'.tr(),
-                      onTap: () {
-                        _pageController.previousPage(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.ease,
-                        );
-                      },
-
-                    ),
-                  ),
-              ],
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -14,7 +14,7 @@ import '../route_utils/route_utils.dart';
 import 'app_colors.dart';
 
 class Utils {
-
+  static const mapAPIKey = 'AIzaSyA5rARsu5IE9C448JTjRXuxMfkCbbXFV4w';
   static const double DEFAULT_MAP_ZOOM = 16.0;
 
   static Color getColor(String color) {
