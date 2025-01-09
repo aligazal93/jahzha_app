@@ -18,8 +18,6 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   final InputDecoration inputDecoration;
   final ItemClick? itemClick;
   final GetPlaceDetailswWithLatLng? getPlaceDetailWithLatLng;
-  final bool isLatLngRequired;
-
   final TextStyle textStyle;
   final String googleAPIKey;
   final int debounceTime;
@@ -27,7 +25,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   final TextEditingController textEditingController;
   final ListItemBuilder? itemBuilder;
   final Widget? seperatedBuilder;
-  final void clearData;
+  final VoidCallback? onClearData;
   final BoxDecoration? boxDecoration;
   final bool isCrossBtnShown;
   final bool showError;
@@ -45,7 +43,6 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
     this.debounceTime = 600,
     this.inputDecoration = const InputDecoration(),
     this.itemClick,
-    this.isLatLngRequired = true,
     this.textStyle = const TextStyle(),
     this.countries,
     this.getPlaceDetailWithLatLng,
@@ -60,7 +57,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
     this.placeType,
     this.placeBounds,
     this.language = 'en',
-    this.clearData,
+    this.onClearData,
     this.validator,
   });
 
@@ -249,15 +246,12 @@ class _GooglePlaceAutoCompleteTextFieldState
                   widget.seperatedBuilder ?? SizedBox(),
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
-                  onTap: () {
+                  onTap: () async {
                     var selectedData = alPredictions[index];
                     if (index < alPredictions.length) {
-                      widget.itemClick!(selectedData);
-
-                      if (widget.isLatLngRequired) {
-                        getPlaceDetailsFromPlaceId(selectedData);
-                      }
                       removeOverlay();
+                      await getPlaceDetailsFromPlaceId(selectedData);
+                      widget.itemClick!(selectedData);
                     }
                   },
                   child: widget.itemBuilder != null
@@ -307,12 +301,12 @@ class _GooglePlaceAutoCompleteTextFieldState
       for (var i in placeDetails.result!.addressComponents!) {
         if (i.types!.contains('administrative_area_level_1')) {
           prediction.region = i.longName;
-          break;
+        }
+        if (i.types!.contains('country')) {
+          prediction.countryCode = i.shortName;
+          prediction.country = i.longName;
         }
       }
-      prediction.countryCode =
-          placeDetails.result!.addressComponents!.last.shortName;
-
       widget.getPlaceDetailWithLatLng!(prediction);
     } catch (e) {
       var errorHandler = ErrorHandler.internal().handleError(e);
@@ -337,6 +331,7 @@ class _GooglePlaceAutoCompleteTextFieldState
         this._overlayEntry?.remove();
       } catch (e) {}
     }
+    widget.onClearData?.call();
   }
 
   bool _showCrossIconWidget() {

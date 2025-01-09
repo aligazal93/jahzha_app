@@ -203,7 +203,6 @@ class _InterNationalShippingViewState extends State<InterNationalShippingView> {
                           curve: Curves.ease,
                         );
                       },
-
                     ),
                   ),
                 if (currentPage ==  2)

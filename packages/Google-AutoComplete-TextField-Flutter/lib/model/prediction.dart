@@ -39,6 +39,7 @@ class Prediction {
   String? lng;
   String? city;
   String? region;
+  String? country;
   String? countryCode;
   PlaceBounds? bounds;
 
@@ -56,6 +57,7 @@ class Prediction {
     this.city,
     this.region,
     this.countryCode,
+    this.country,
     this.bounds,
   });
 

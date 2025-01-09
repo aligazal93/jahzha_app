@@ -55,7 +55,7 @@ class HomeView extends StatelessWidget {
                     imgColor: Color(0XFFFFE2DC),
                     image: 'truck',
                     onTap: () {
-                      RouteUtils.navigateTo(LocalShippingView());
+                      RouteUtils.navigateTo(LocalShippingView(isLocal: true));
                     },
                   ),
                   ServiceCar(
@@ -64,7 +64,7 @@ class HomeView extends StatelessWidget {
                     imgColor: Color(0XFFFEEEC6),
                     image: 'serv',
                     onTap: () {
-                      RouteUtils.navigateTo(InterNationalShippingView());
+                      RouteUtils.navigateTo(LocalShippingView(isLocal: false));
                     },
                   ),
                   // ServiceCar(

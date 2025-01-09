@@ -21,6 +21,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
     this.controller,
     this.placeBounds,
     this.validator,
+    this.onClearData,
   }) : super(key: key);
 
   final String? label;
@@ -31,6 +32,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final PlaceBounds? placeBounds;
   final String? Function(String?)? validator;
+  final VoidCallback? onClearData;
 
   @override
   State<GooglePlacesTextFormField> createState() =>
@@ -74,6 +76,7 @@ class _GooglePlacesTextFormFieldState extends State<GooglePlacesTextFormField> {
           googleAPIKey: Utils.mapAPIKey,
           countries: widget.countries,
           showError: false,
+          onClearData: widget.onClearData,
           placeBounds: widget.placeBounds,
           validator: widget.validator,
           itemClick: (Prediction prediction) {
@@ -116,7 +119,6 @@ class _GooglePlacesTextFormFieldState extends State<GooglePlacesTextFormField> {
             color: AppColors.darkGrayBlue,
           ),
           debounceTime: 1200,
-          isLatLngRequired: true,
           isCrossBtnShown: true,
           placeType: widget.placeType,
           language: context.locale.languageCode,

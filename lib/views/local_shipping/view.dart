@@ -13,12 +13,17 @@ import '../../widgets/google_places_text_form_field.dart';
 import 'cubit.dart';
 
 class LocalShippingView extends StatelessWidget {
-  const LocalShippingView({Key? key}) : super(key: key);
+  const LocalShippingView({
+    Key? key,
+    required this.isLocal,
+  }) : super(key: key);
+
+  final bool isLocal;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LocalShippingCubit(),
+      create: (context) => LocalShippingCubit(isLocal: isLocal),
       child: BlocBuilder<LocalShippingCubit, LocalShippingStates>(
         builder: (context, state) {
           final cubit = LocalShippingCubit.of(context);
@@ -26,7 +31,7 @@ class LocalShippingView extends StatelessWidget {
           return Scaffold(
             appBar: SolidAppBar(
               currentPage: cubit.currentPage,
-              title: 'Local shipping'.tr(),
+              title: (isLocal ? 'Local shipping' : 'international shipping').tr(),
             ),
             body: Form(
               key: cubit.formKey,
@@ -66,6 +71,15 @@ class LocalShippingView extends StatelessWidget {
                             child: ListView(
                               children: [
                                 SizedBox(height: 12),
+                                if (!isLocal) ...[
+                                  AppTextField(
+                                    label: "Country".tr(),
+                                    hint: "Saudi Arabia".tr(),
+                                    fillColor: AppColors.whiteBk,
+                                    onTap: () {},
+                                  ),
+                                  SizedBox(height: 12),
+                                ],
                                 GooglePlacesTextFormField(
                                   label: 'Transmitting destination'.tr(),
                                   fillColor: AppColors.whiteBk,
@@ -74,6 +88,9 @@ class LocalShippingView extends StatelessWidget {
                                   placeType: PlaceType.cities,
                                   onSelected: (value) => dto.origin = value,
                                   validator: (_) => Validator.empty(dto.origin?.city),
+                                  onClearData: () {
+                                    dto.origin = null;
+                                  },
                                 ),
                               ],
                             ),
@@ -82,15 +99,47 @@ class LocalShippingView extends StatelessWidget {
                             child: ListView(
                               children: [
                                 SizedBox(height: 12),
-                                GooglePlacesTextFormField(
-                                  label: 'Receiving destination'.tr(),
-                                  fillColor: AppColors.whiteBk,
-                                  controller: dto.destinationTXController,
-                                  countries: ['SA'],
-                                  placeType: PlaceType.cities,
-                                  onSelected: (value) => dto.destination = value,
-                                  validator: (_) => Validator.empty(dto.destination?.city),
-                                ),
+                                if (!isLocal) ...[
+                                  GooglePlacesTextFormField(
+                                    label: 'Country'.tr(),
+                                    fillColor: AppColors.whiteBk,
+                                    controller: dto.destinationCountryTXController,
+                                    placeType: PlaceType.cities,
+                                    onSelected: (value) {
+                                      dto.destination = null;
+                                      dto.destinationTXController.clear();
+                                      dto.destinationCountry = value;
+                                      dto.destinationCountryTXController.text = value.country ?? '';
+                                      cubit.updateUI();
+                                    },
+                                    validator: (_) => Validator.empty(dto.destinationCountry?.city),
+                                    onClearData: () {
+                                      dto.destination = null;
+                                      dto.destinationCountry = null;
+                                      cubit.updateUI();
+                                    },
+                                  ),
+                                  SizedBox(height: 12),
+                                ],
+                                if (dto.destinationCountry?.countryCode != null)
+                                  GooglePlacesTextFormField(
+                                    label: 'Receiving destination'.tr(),
+                                    fillColor: AppColors.whiteBk,
+                                    controller: dto.destinationTXController,
+                                    countries: isLocal
+                                        ? ['SA']
+                                        : [dto.destinationCountry!.countryCode!],
+                                    placeType: PlaceType.cities,
+                                    onSelected: (value) {
+                                      dto.destination = value;
+                                      dto.destinationTXController.text = value.city ?? '';
+                                    },
+                                    validator: (_) =>
+                                        Validator.empty(dto.destination?.city),
+                                    onClearData: () {
+                                      dto.destination = null;
+                                    },
+                                  ),
                               ],
                             ),
                           ),

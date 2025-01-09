@@ -24,6 +24,7 @@ class AppTextField extends StatefulWidget {
     this.controller,
     this.secure = false,
     this.vMargin = 8,
+    this.hMargin = 0,
     this.enabled = true,
     this.focusNode,
     this.suffixIcon,
@@ -53,6 +54,7 @@ class AppTextField extends StatefulWidget {
   final void Function(String?)? onSaved;
   final TextEditingController? controller;
   final double vMargin;
+  final double hMargin;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -75,7 +77,10 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: widget.vMargin,horizontal: 5),
+      padding: EdgeInsets.symmetric(
+        vertical: widget.vMargin,
+        horizontal: widget.hMargin,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

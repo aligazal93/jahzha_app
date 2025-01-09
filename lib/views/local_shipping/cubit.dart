@@ -9,7 +9,9 @@ import '../shipping_offers/view.dart';
 part 'states.dart';
 
 class LocalShippingCubit extends Cubit<LocalShippingStates> {
-  LocalShippingCubit() : super(LocalShippingInit());
+  LocalShippingCubit({required this.isLocal}) : super(LocalShippingInit());
+
+  final bool isLocal;
 
   static LocalShippingCubit of(context) => BlocProvider.of(context);
 
@@ -23,7 +25,7 @@ class LocalShippingCubit extends Cubit<LocalShippingStates> {
     if (currentPage >= 2) {
       RouteUtils.navigateTo(ShippingOffersView(
         dto: dto,
-        isLocal: true,
+        isLocal: isLocal,
       ));
       return;
     }
@@ -63,5 +65,10 @@ class LocalShippingCubit extends Cubit<LocalShippingStates> {
     pageController.dispose();
     dto.dispose();
     return super.close();
+  }
+
+  void updateUI() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    _emit(LocalShippingInit());
   }
 }

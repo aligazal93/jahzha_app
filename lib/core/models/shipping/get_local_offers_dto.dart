@@ -7,8 +7,10 @@ class GetOffersDTO {
   final weightTXController = TextEditingController();
   final originTXController = TextEditingController();
   final destinationTXController = TextEditingController();
+  final destinationCountryTXController = TextEditingController();
   Prediction? origin;
   Prediction? destination;
+  Prediction? destinationCountry;
   bool? filterPriceInDescendingOrder;
   bool? orderByFastest;
   bool? orderByNewest;
