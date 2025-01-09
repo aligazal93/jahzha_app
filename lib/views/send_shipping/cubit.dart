@@ -8,12 +8,12 @@ import '../shipping_offers/view.dart';
 
 part 'states.dart';
 
-class LocalShippingCubit extends Cubit<LocalShippingStates> {
-  LocalShippingCubit({required this.isLocal}) : super(LocalShippingInit());
+class SendShippingCubit extends Cubit<SendShippingStates> {
+  SendShippingCubit({required this.isLocal}) : super(SendShippingInit());
 
   final bool isLocal;
 
-  static LocalShippingCubit of(context) => BlocProvider.of(context);
+  static SendShippingCubit of(context) => BlocProvider.of(context);
 
   final formKey = GlobalKey<FormState>();
   final pageController = PageController();
@@ -34,7 +34,7 @@ class LocalShippingCubit extends Cubit<LocalShippingStates> {
       curve: Curves.easeInOut,
     );
     currentPage++;
-    _emit(LocalShippingInit());
+    _emit(SendShippingInit());
   }
 
   void previousPage() {
@@ -47,14 +47,14 @@ class LocalShippingCubit extends Cubit<LocalShippingStates> {
       curve: Curves.easeInOut,
     );
     currentPage--;
-    _emit(LocalShippingInit());
+    _emit(SendShippingInit());
   }
 
   bool get isStateLoading {
-    return state is LocalShippingLoading;
+    return state is SendShippingLoading;
   }
 
-  void _emit(LocalShippingStates state) {
+  void _emit(SendShippingStates state) {
     if (!isClosed) {
       emit(state);
     }
@@ -69,6 +69,6 @@ class LocalShippingCubit extends Cubit<LocalShippingStates> {
 
   void updateUI() async {
     await Future.delayed(Duration(milliseconds: 500));
-    _emit(LocalShippingInit());
+    _emit(SendShippingInit());
   }
 }

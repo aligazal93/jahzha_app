@@ -42,9 +42,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
             icon: 'icon-2',
             title: 'My shipments'.tr(),
           ),
-          if (Utils.isAR) SizedBox(width: 20.width),
-          Spacer(),
-          if (Utils.isAR) SizedBox(width: 20.width),
+          // if (Utils.isAR) SizedBox(width: 20.width),
+          // Spacer(),
+          // if (Utils.isAR) SizedBox(width: 20.width),
           _bottomNavItem(
             index: 2,
             title: 'Coupons'.tr(),

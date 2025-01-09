@@ -8,14 +8,14 @@ import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/coupons/view.dart';
-import 'package:jahzha_app/views/international_shipping/view.dart';
-import 'package:jahzha_app/views/local_shipping/view.dart';
 import 'package:jahzha_app/views/my_points/view.dart';
 import 'package:jahzha_app/views/navbar/cubit/cubit.dart';
 import 'package:jahzha_app/views/order_tracking/view.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/home_app_bar.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
+
+import '../send_shipping/view.dart';
 part 'units/slider.dart';
 part 'units/service_card.dart';
 part 'units/customer_service_card.dart';
@@ -55,7 +55,7 @@ class HomeView extends StatelessWidget {
                     imgColor: Color(0XFFFFE2DC),
                     image: 'truck',
                     onTap: () {
-                      RouteUtils.navigateTo(LocalShippingView(isLocal: true));
+                      RouteUtils.navigateTo(SendShippingView(isLocal: true));
                     },
                   ),
                   ServiceCar(
@@ -64,7 +64,7 @@ class HomeView extends StatelessWidget {
                     imgColor: Color(0XFFFEEEC6),
                     image: 'serv',
                     onTap: () {
-                      RouteUtils.navigateTo(LocalShippingView(isLocal: false));
+                      RouteUtils.navigateTo(SendShippingView(isLocal: false));
                     },
                   ),
                   // ServiceCar(

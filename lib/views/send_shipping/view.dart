@@ -12,8 +12,8 @@ import 'package:jahzha_app/widgets/app_text_field.dart';
 import '../../widgets/google_places_text_form_field.dart';
 import 'cubit.dart';
 
-class LocalShippingView extends StatelessWidget {
-  const LocalShippingView({
+class SendShippingView extends StatelessWidget {
+  const SendShippingView({
     Key? key,
     required this.isLocal,
   }) : super(key: key);
@@ -23,10 +23,10 @@ class LocalShippingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LocalShippingCubit(isLocal: isLocal),
-      child: BlocBuilder<LocalShippingCubit, LocalShippingStates>(
+      create: (context) => SendShippingCubit(isLocal: isLocal),
+      child: BlocBuilder<SendShippingCubit, SendShippingStates>(
         builder: (context, state) {
-          final cubit = LocalShippingCubit.of(context);
+          final cubit = SendShippingCubit.of(context);
           final dto = cubit.dto;
           return Scaffold(
             appBar: SolidAppBar(
