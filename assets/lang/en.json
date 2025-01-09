@@ -260,5 +260,8 @@
   "Deliver to the nearest branch": "Deliver to the nearest branch (myself)",
   "Deliver to the representative": "Deliver to the representative from (my address)",
   "Delivery via Careem": "Delivery via Careem",
-  "tracking available - in the app": "available - in the app"
+  "tracking available - in the app": "available - in the app",
+  "reorder_result": "Reorder result",
+  "cheapest_first": "Cheapest first",
+  "expensive_first": "Expensive first"
 }

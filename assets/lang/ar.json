@@ -259,5 +259,8 @@
   "Deliver to the nearest branch": "التسليم لأقرب فرع (بنفسي)",
   "Deliver to the representative": "التسليم للمندوب من (عنواني)",
   "Delivery via Careem": "التسليم عبر شركة كريم",
-  "tracking available - in the app": "متاح - من خلال التطبيق"
+  "tracking available - in the app": "متاح - من خلال التطبيق",
+  "reorder_result": "ترتيب النتائج حسب",
+  "cheapest_first": "الاقل سعر اولا",
+  "expensive_first": "الاعلي سعر اولا"
 }

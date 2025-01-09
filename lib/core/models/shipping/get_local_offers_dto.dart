@@ -13,6 +13,12 @@ class GetOffersDTO {
   bool? orderByFastest;
   bool? orderByNewest;
 
+  bool get isFilterApplied {
+    return orderByNewest != null ||
+        orderByFastest != null ||
+        filterPriceInDescendingOrder != null;
+  }
+
   Map<String, dynamic> toJson({required bool isLocal}) {
     final additions = <String, dynamic>{
       if (filterPriceInDescendingOrder != null)

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
+import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/models/shipping/get_local_offers_dto.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/shipping_offers/units/accordion.dart';
@@ -12,6 +13,7 @@ import 'package:jahzha_app/widgets/app/shipping_offer_card.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_drop_down_menu.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
+import 'package:jahzha_app/widgets/app_sheet.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/empty_view.dart';
 
@@ -51,7 +53,7 @@ class ShippingOffersView extends StatelessWidget {
           child: BlocBuilder<ShippingOffersCubit, ShippingOffersStates>(
             builder: (context, state) {
               final cubit = ShippingOffersCubit.of(context);
-              final offers = cubit.offers;
+              final offers = cubit.filteredOffers.isNotEmpty ? cubit.filteredOffers : cubit.offers;
               if (cubit.isStateLoading) {
                 return AppLoadingIndicator();
               } else if (offers.isEmpty) {

@@ -20,6 +20,7 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
 
   List<ShippingOffer> offers = [];
   List<ShippingOffer> comparisonOffers = [];
+  List<ShippingOffer> filteredOffers = [];
 
   Future<void> getOffers() async {
     _emit(ShippingOffersLoading());
@@ -40,6 +41,27 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
       }
       comparisonOffers.add(offer);
     }
+    _emit(ShippingOffersInit());
+  }
+
+  void updateUI() {
+    _emit(ShippingOffersInit());
+  }
+
+  void resetFilters() {
+    dto.filterPriceInDescendingOrder = null;
+    dto.orderByFastest = null;
+    dto.orderByNewest = null;
+    filteredOffers.clear();
+    _emit(ShippingOffersInit());
+  }
+
+  Future<void> filterOffers() async {
+    _emit(ShippingOffersLoading());
+    filteredOffers = await ShippingDatasource().getOffers(
+      isLocal: isLocal,
+      dto: dto,
+    );
     _emit(ShippingOffersInit());
   }
 

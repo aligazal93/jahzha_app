@@ -5,18 +5,11 @@ class ResultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = ShippingOffersCubit.of(context);
     return InkWell(
       onTap: () {
-        showModalBottomSheet(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(20),
-            ),
-          ),
-          context: RouteUtils.context,
-          builder: (context) {
-            return ResultBottomSheetView();
-          },
+        AppSheet.show(
+          child: ResultBottomSheetView(cubit: cubit),
         );
       },
       child: Container(
