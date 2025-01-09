@@ -19,6 +19,7 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
   static ShippingOffersCubit of(context) => BlocProvider.of(context);
 
   List<ShippingOffer> offers = [];
+  List<ShippingOffer> comparisonOffers = [];
 
   Future<void> getOffers() async {
     _emit(ShippingOffersLoading());
@@ -26,6 +27,19 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
       isLocal: isLocal,
       dto: dto,
     );
+    _emit(ShippingOffersInit());
+  }
+
+  Future<void> toggleComparison(ShippingOffer offer) async {
+    if (comparisonOffers.contains(offer)) {
+      comparisonOffers.remove(offer);
+    } else {
+      if (comparisonOffers.length == 2) {
+        comparisonOffers[0].addToComparison = false;
+        comparisonOffers.removeAt(0);
+      }
+      comparisonOffers.add(offer);
+    }
     _emit(ShippingOffersInit());
   }
 

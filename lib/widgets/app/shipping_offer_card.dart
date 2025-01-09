@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
 import 'package:jahzha_app/widgets/app_network_image.dart';
+import 'package:jahzha_app/widgets/app_sheet.dart';
 
 import '../../core/helpers/app_colors.dart';
 import '../../core/route_utils/route_utils.dart';
@@ -11,9 +13,14 @@ import '../app_button.dart';
 import '../app_text.dart';
 
 class ShippingOfferCard extends StatefulWidget {
-  const ShippingOfferCard({Key? key, required this.offer}) : super(key: key);
+  const ShippingOfferCard({
+    Key? key,
+    required this.offer,
+    required this.onComparisonTap,
+  }) : super(key: key);
 
   final ShippingOffer offer;
+  final void Function(bool v) onComparisonTap;
 
   @override
   State<ShippingOfferCard> createState() => _ShippingOfferCardState();
@@ -43,7 +50,13 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                   height: 64,
                 ),
               ),
-              Spacer(),
+              SizedBox(width: 8),
+              Expanded(
+                child: AppText(
+                  title: offer.company.name,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
               InkWell(
                 child: Icon(
                   FontAwesomeIcons.circleInfo,
@@ -51,16 +64,49 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                   color: AppColors.txtGray,
                 ),
                 onTap: () {
-                  showModalBottomSheet(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      ),
+                  AppSheet.show(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        UnconstrainedBox(
+                          child: AppNetworkImage(
+                            url: offer.company.logo,
+                            height: 64,
+                            width: 64,
+                          ),
+                        ),
+                        SizedBox(height: 12),
+                        AppText(
+                          title: offer.company.name,
+                          textAlign: TextAlign.center,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        SizedBox(height: 12),
+                        if (offer.estimatedDeliveryTime != null) ...[
+                          AppText(
+                            title: 'Delivery time'.tr() +
+                                ': ' +
+                                offer.estimatedDeliveryTime!,
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(height: 12),
+                        ],
+                        AppText(
+                          title: offer.price.toString() +
+                              ' ' +
+                              offer.currency,
+                          textAlign: TextAlign.center,
+                          color: AppColors.primary,
+                        ),
+                        SizedBox(height: 12),
+                        Html(data: offer.company.description),
+                        SizedBox(height: 12),
+                        AppButton(
+                          title: 'Order now'.tr(),
+                          onTap: () {},
+                        ),
+                      ],
                     ),
-                    context: RouteUtils.context,
-                    builder: (context) {
-                      return InfoBottomSheetView();
-                    },
                   );
                 },
               ),
@@ -276,50 +322,56 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
             ),
           ),
           SizedBox(height: 12),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 16),
-          //   child: Row(
-          //     children: [
-          //       GestureDetector(
-          //         onTap: () {},
-          //         child: AnimatedContainer(
-          //           duration: Duration(microseconds: 5000),
-          //           height: 30,
-          //           width: 30,
-          //           curve: Curves.bounceInOut,
-          //           margin: EdgeInsets.symmetric(vertical: 20),
-          //           padding: EdgeInsets.all(5),
-          //           decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(8),
-          //             border: Border.all(
-          //               color: AppColors.darkGray.theme,
-          //             ),
-          //             color: false ? AppColors.primary : AppColors.darkGray,
-          //           ),
-          //           child: Icon(
-          //             FontAwesomeIcons.check,
-          //             color: AppColors.white.theme,
-          //             size: 12,
-          //           ),
-          //         ),
-          //       ),
-          //       SizedBox(width: 12),
-          //       AppText(
-          //         title: 'Add to compare'.tr(),
-          //         color: AppColors.secondary,
-          //         padding: EdgeInsets.symmetric(horizontal: 4),
-          //         fontWeight: FontWeight.w700,
-          //         fontSize: 14,
-          //       ),
-          //       Spacer(),
-          //       Icon(
-          //         FontAwesomeIcons.lifeRing,
-          //         color: AppColors.primary,
-          //         size: 22,
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    offer.addToComparison = !offer.addToComparison;
+                    setState(() {});
+                    widget.onComparisonTap(offer.addToComparison);
+                  },
+                  child: AnimatedContainer(
+                    duration: Duration(microseconds: 5000),
+                    height: 30,
+                    width: 30,
+                    curve: Curves.bounceInOut,
+                    margin: EdgeInsets.symmetric(vertical: 20),
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: AppColors.darkGray.theme,
+                      ),
+                      color: offer.addToComparison
+                          ? AppColors.primary
+                          : AppColors.darkGray,
+                    ),
+                    child: Icon(
+                      FontAwesomeIcons.check,
+                      color: AppColors.white.theme,
+                      size: 12,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12),
+                AppText(
+                  title: 'Add to compare'.tr(),
+                  color: AppColors.secondary,
+                  padding: EdgeInsets.symmetric(horizontal: 4),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+                Spacer(),
+                Icon(
+                  FontAwesomeIcons.lifeRing,
+                  color: AppColors.primary,
+                  size: 22,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

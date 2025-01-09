@@ -43,7 +43,7 @@ class CompareCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: AppText(
-                    title: value2,
+                    title: value1,
                     fontSize: fontSize,
                     fontWeight: FontWeight.w700,
                     color: color,

@@ -66,19 +66,23 @@ class ShippingOffersView extends StatelessWidget {
                       itemCount: offers.length,
                       itemBuilder: (context, index) {
                         final offer = offers[index];
-                        return ShippingOfferCard(offer: offer);
+                        return ShippingOfferCard(
+                          offer: offer,
+                          onComparisonTap: (v) => cubit.toggleComparison(offer),
+                        );
                       },
                     ),
                   ),
-                  AppButton(
-                    title: 'Compare'.tr(),
-                    onTap: () {
-                      RouteUtils.navigateTo(ComparingView());
-                    },
-                    color: AppColors.primary,
-                    margin: EdgeInsets.symmetric(vertical: 22),
-                    constrainedAxis: Axis.horizontal,
-                  ),
+                  if (cubit.comparisonOffers.length == 2)
+                    AppButton(
+                      title: 'Compare'.tr(),
+                      onTap: () => RouteUtils.navigateTo(ComparingView(
+                        offers: cubit.comparisonOffers,
+                      )),
+                      color: AppColors.primary,
+                      margin: EdgeInsets.symmetric(vertical: 22),
+                      constrainedAxis: Axis.horizontal,
+                    ),
                 ],
               );
             },

@@ -16,6 +16,7 @@ class ShippingOffer {
   final num pickupByCompanyFees;
 
   PickupType pickupType = PickupType.myself;
+  bool addToComparison = false;
 
   num get priceWithFees {
     switch (pickupType) {

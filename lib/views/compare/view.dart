@@ -3,17 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
+import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
+import 'package:jahzha_app/widgets/app_network_image.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
+
 part 'units/line-v.dart';
+part 'units/company_card.dart';
 part 'units/compare_card.dart';
 
 class ComparingView extends StatelessWidget {
-  const ComparingView({Key? key}) : super(key: key);
+  const ComparingView({Key? key, required this.offers}) : super(key: key);
+
+  final List<ShippingOffer> offers;
 
   @override
   Widget build(BuildContext context) {
+    final firstOffer = offers.first;
+    final secondOffer = offers.last;
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Compare'.tr(),
@@ -23,133 +31,42 @@ class ComparingView extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                border: Border.all(
-                    color: AppColors.tGray
-                )
+              border: Border.all(
+                color: AppColors.tGray,
+              ),
             ),
             child: Row(
               children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/images/logo-h.png'),
-                        AppText(
-                          title: 'شركة جهزها للشحن',
-                          fontSize: 12,
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.secondary,
-
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(FontAwesomeIcons.ticket,color: AppColors.primary,size: 12,),
-                                AppText(
-                                  title: 'saving'.tr(),
-                                  fontSize: 10,
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColors.primary,
-
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(FontAwesomeIcons.rocket,color: AppColors.blue,size: 12,),
-                                AppText(
-                                  title: 'fastest'.tr(),
-                                  fontSize: 10,
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColors.blue,
-
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                _CompanyCard(offer: firstOffer),
                 LineVertical(height: 100),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/images/zagel.png'),
-                        AppText(
-                          title: 'شركة زاجل للشحن',
-                          fontSize: 12,
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.secondary,
-
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(FontAwesomeIcons.ticket,color: AppColors.primary,size: 12,),
-                                AppText(
-                                  title: 'saving'.tr(),
-                                  fontSize: 10,
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColors.primary,
-
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-
+                _CompanyCard(offer: secondOffer),
               ],
             ),
           ),
           CompareCard(
-            titleCard: 'service type'.tr(),
-            value1: 'التوصيل خلال 14 إلى 20 يوم',
-            value2: 'التوصيل خلال 14 إلى 20 يوم',
-          ),
-          CompareCard(
             titleCard: 'Delivery time'.tr(),
-            value1: 'التوصيل خلال 14 إلى 20 يوم',
-            value2: 'التوصيل خلال 14 إلى 20 يوم',
+            value1: firstOffer.estimatedDeliveryTime ?? '',
+            value2: secondOffer.estimatedDeliveryTime ?? '',
           ),
           CompareCard(
             titleCard: 'Protection cover'.tr(),
-            value1: 'على الطرود بقيمة 1000 ريال',
-            value2: 'على الطرود بقيمة 1000 ريال',
+            value1: firstOffer.insuranceText,
+            value2: secondOffer.insuranceText,
           ),
-          CompareCard(
-            titleCard: 'Maximum weight'.tr(),
-            value1: '50 كيلو جرام',
-            value2: '50 كيلو جرام',
-          ),
+          // CompareCard(
+          //   titleCard: 'Maximum weight'.tr(),
+          //   value1: '50 كيلو جرام',
+          //   value2: '50 كيلو جرام',
+          // ),
           CompareCard(
             titleCard: 'tracking'.tr(),
-            value1: 'متاح - من خلال الموقع',
-            value2: 'متاح - من خلال الموقع',
+            value1: 'available - in the app'.tr(),
+            value2: 'available - in the app'.tr(),
           ),
           CompareCard(
-            titleCard: 'Home delivery'.tr(),
-            value1: ' 50 ' + ' ' + ' ر.س ',
-            value2: ' 50 ' + ' ' + 'ر.س',
+            titleCard: 'Deliver to the representative'.tr(),
+            value1: ' ${firstOffer.pickupByCompanyFees} ' + ' ' + ' ${firstOffer.currency} ',
+            value2: ' ${secondOffer.pickupByCompanyFees} ' + ' ' + ' ${secondOffer.currency} ',
             fontSize: 20,
             color: AppColors.primary,
           ),
@@ -157,12 +74,11 @@ class ComparingView extends StatelessWidget {
             titleCard: 'price'.tr(),
             fontSize: 20,
             color: AppColors.primary,
-            value1: ' 700 ' + ' ' + ' ر.س ',
-            value2: ' 700 ' + ' ' + 'ر.س',
-
+            value1: ' ${firstOffer.price} ' + ' ' + ' ${firstOffer.currency} ',
+            value2: ' ${secondOffer.price} ' + ' ' + ' ${secondOffer.currency} ',
           ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 20,horizontal: 6),
+            margin: EdgeInsets.symmetric(vertical: 20, horizontal: 6),
             child: Row(
               children: [
                 Expanded(
@@ -174,7 +90,9 @@ class ComparingView extends StatelessWidget {
                     title: 'order now'.tr(),
                   ),
                 ),
-                SizedBox(width: 12,),
+                SizedBox(
+                  width: 12,
+                ),
                 Expanded(
                   child: AppButton(
                     color: AppColors.primary,
@@ -184,10 +102,10 @@ class ComparingView extends StatelessWidget {
                     title: 'order now'.tr(),
                   ),
                 ),
-
               ],
             ),
-          )
+          ),
+          SizedBox(height: 20),
         ],
       ),
     );
