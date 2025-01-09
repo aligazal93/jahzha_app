@@ -253,5 +253,10 @@
   "Are you about to delete your account?" : "انت علي وشك حذف الحساب ؟",
   "Delete account" : "حذف الحساب",
   "select_language": "اختر اللغة",
-  "no_content_available": "لا يوجد محتوى"
+  "no_content_available": "لا يوجد محتوى",
+  "invalid_weight": "الوزن غير صحيح",
+  "minimum_weight_must_be_1_kg": "يجب ان يكون الوزن الادنى 1 كجم",
+  "Deliver to the nearest branch": "التسليم لأقرب فرع (بنفسي)",
+  "Deliver to the representative": "التسليم للمندوب من (عنواني)",
+  "Delivery via Careem": "Delivery via Careem"
 }

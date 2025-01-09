@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jahzha_app/core/helpers/dimensions.dart';
+
 import '../core/helpers/app_colors.dart';
 import '../core/helpers/utils.dart';
 import 'app_loading_indicator.dart';
@@ -50,36 +52,36 @@ class AppNetworkImage extends StatelessWidget {
       );
     }
     return CachedNetworkImage(
-        cacheKey: url,
-        imageUrl: url,
-        width: width,
-        height: height,
-        imageBuilder: (context, imageProvider) {
-          return Container(
-            width: width,
-            height: height,
-            margin: EdgeInsets.symmetric(vertical: 0),
-            child: child,
-            decoration: decoration.copyWith(
-              image: DecorationImage(
-                image: imageProvider,
-                fit: fit,
-              ),
+      cacheKey: url,
+      imageUrl: url,
+      width: width,
+      height: height,
+      imageBuilder: (context, imageProvider) {
+        return Container(
+          width: width,
+          height: height,
+          margin: EdgeInsets.symmetric(vertical: 0),
+          child: child,
+          decoration: decoration.copyWith(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: fit,
             ),
-            alignment: alignment ?? Alignment.center,
-          );
-        },
-        // placeholder: ( _) => _loading(),
-    errorWidget: (context, url, error) {
-    return Container(
-    child: Icon(
-    FontAwesomeIcons.circleExclamation,
-    color: AppColors.yellow,
-    size: height != null ? height! / 3 : null,
-    ),
-    decoration: decoration,
-    );
-    },
+          ),
+          alignment: alignment ?? Alignment.center,
+        );
+      },
+      placeholder: (_, __) => _loading(),
+      errorWidget: (context, url, error) {
+        return Container(
+          child: Icon(
+            FontAwesomeIcons.circleExclamation,
+            color: AppColors.red,
+            size: height != null ? height! / 3 : null,
+          ),
+          decoration: decoration,
+        );
+      },
     );
   }
 
@@ -96,7 +98,7 @@ class AppNetworkImage extends StatelessWidget {
     return BoxDecoration(
       color: bgColor,
       borderRadius: shape == null
-          ? BorderRadius.circular(borderRadius ?? 5)
+          ? BorderRadius.circular(borderRadius ?? 5.radius)
           : null,
       shape: shape ?? BoxShape.rectangle,
       border: Border.all(

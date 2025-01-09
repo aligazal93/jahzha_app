@@ -1,23 +1,30 @@
 part of '../view.dart';
+
 class OffersInfo extends StatelessWidget {
   const OffersInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cubit = ShippingOffersCubit.of(context);
+    final dto = cubit.dto;
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: AppColors.tGray
+        borderRadius: BorderRadius.circular(12),
+        color: AppColors.tGray,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          Expanded(
             child: Row(
               children: [
-                Icon(FontAwesomeIcons.locationDot,size:20,color: AppColors.primary,),
-                SizedBox(width: 12,),
+                Icon(
+                  FontAwesomeIcons.locationDot,
+                  size: 20,
+                  color: AppColors.primary,
+                ),
+                SizedBox(width: 12),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -28,7 +35,7 @@ class OffersInfo extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                     AppText(
-                      title: 'السعودية',
+                      title: dto.origin!.city!,
                       fontSize: 12,
                       color: AppColors.secondary,
                       fontWeight: FontWeight.w700,
@@ -39,11 +46,15 @@ class OffersInfo extends StatelessWidget {
               ],
             ),
           ),
-          Container(
+          Expanded(
             child: Row(
               children: [
-                Icon(FontAwesomeIcons.locationDot,size: 20,color: AppColors.primary,),
-                SizedBox(width: 12,),
+                Icon(
+                  FontAwesomeIcons.locationDot,
+                  size: 20,
+                  color: AppColors.primary,
+                ),
+                SizedBox(width: 12),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -54,7 +65,7 @@ class OffersInfo extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                     AppText(
-                      title: 'الامارات',
+                      title: dto.destination!.city!,
                       fontSize: 12,
                       color: AppColors.secondary,
                       fontWeight: FontWeight.w700,
@@ -68,8 +79,14 @@ class OffersInfo extends StatelessWidget {
           Container(
             child: Row(
               children: [
-                Icon(FontAwesomeIcons.bagShopping,size: 20,color: AppColors.primary,),
-                SizedBox(width: 8,),
+                Icon(
+                  FontAwesomeIcons.bagShopping,
+                  size: 20,
+                  color: AppColors.primary,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -83,13 +100,15 @@ class OffersInfo extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AppText(
-                          title: '20',
+                          title: dto.weightTXController.text,
                           fontSize: 12,
                           color: AppColors.secondary,
                           fontWeight: FontWeight.w700,
                           padding: EdgeInsets.symmetric(vertical: 8),
                         ),
-                        SizedBox(width: 12,),
+                        SizedBox(
+                          width: 12,
+                        ),
                         AppText(
                           title: 'kgm'.tr(),
                           fontSize: 10,
@@ -98,10 +117,8 @@ class OffersInfo extends StatelessWidget {
                         ),
                       ],
                     )
-
                   ],
                 ),
-
               ],
             ),
           ),

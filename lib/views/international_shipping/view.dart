@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
-import 'package:jahzha_app/views/availiable_offers/view.dart';
+import 'package:jahzha_app/views/shipping_offers/view.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/solid_appbar.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
@@ -219,7 +219,7 @@ class _InterNationalShippingViewState extends State<InterNationalShippingView> {
                           duration: Duration(milliseconds: 300),
                           curve: Curves.ease,
                         );
-                        RouteUtils.navigateTo(AvailableOffersView());
+                        // RouteUtils.navigateTo(AvailableOffersView());
                       },
 
                     ),

@@ -1,10 +1,24 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/core/route_utils/route_utils.dart';
+import 'package:jahzha_app/core/helpers/dimensions.dart';
+
+import '../core/helpers/app_colors.dart';
+import '../core/route_utils/route_utils.dart';
+import 'basic_card_decoration.dart';
+
 class AppLoadingIndicator extends StatelessWidget {
-  const AppLoadingIndicator();
+  const AppLoadingIndicator({
+    super.key,
+    this.padding,
+    this.unconstrained = true,
+  });
+
+  final EdgeInsetsGeometry? padding;
+  final bool unconstrained;
 
   static bool _isVisible = false;
+
   static bool get isVisible => _isVisible;
 
   static Future<void> show() async {
@@ -13,15 +27,14 @@ class AppLoadingIndicator extends StatelessWidget {
     }
     _isVisible = true;
     await Future.delayed(Duration(milliseconds: 50));
-    await showDialog(
+    showDialog(
       context: RouteUtils.context,
       barrierDismissible: false,
-      barrierColor: Colors.black.withOpacity(0.7),
+      barrierColor: Colors.black.withValues(alpha: 0.7),
       builder: (context) {
         return AppLoadingIndicator();
       },
     );
-    _isVisible = false;
   }
 
   static Future<void> hide() async {
@@ -30,14 +43,39 @@ class AppLoadingIndicator extends StatelessWidget {
     }
     RouteUtils.pop();
     _isVisible = false;
+    await Future.delayed(Duration(milliseconds: 100));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator(
-        strokeWidth: 1.5,
-        color: AppColors.primary,
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: Center(
+        child: Builder(
+          builder: (context) {
+            if (unconstrained) {
+              return UnconstrainedBox(
+                child: _loadingIndicator(),
+              );
+            }
+            return _loadingIndicator();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _loadingIndicator() {
+    return Material(
+      color: Colors.transparent,
+      child: BasicCard(
+        radius: 12.radius,
+        padding: _isVisible ? EdgeInsets.all(32.width) : EdgeInsets.zero,
+        color: _isVisible ? AppColors.white : Colors.transparent,
+        child: CircularProgressIndicator(
+          color: AppColors.primary,
+          strokeWidth: 1.5,
+        ),
       ),
     );
   }

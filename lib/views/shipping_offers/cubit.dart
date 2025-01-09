@@ -1,0 +1,41 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jahzha_app/core/models/shipping/get_local_offers_dto.dart';
+import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
+import 'package:jahzha_app/widgets/app_loading_indicator.dart';
+
+import '../../core/datasources/shipping.dart';
+
+part 'states.dart';
+
+class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
+  ShippingOffersCubit({
+    required this.dto,
+    required this.isLocal,
+  }) : super(ShippingOffersInit());
+
+  final bool isLocal;
+  final GetOffersDTO dto;
+
+  static ShippingOffersCubit of(context) => BlocProvider.of(context);
+
+  List<ShippingOffer> offers = [];
+
+  Future<void> getOffers() async {
+    _emit(ShippingOffersLoading());
+    offers = await ShippingDatasource().getOffers(
+      isLocal: isLocal,
+      dto: dto,
+    );
+    _emit(ShippingOffersInit());
+  }
+
+  bool get isStateLoading {
+    return state is ShippingOffersLoading;
+  }
+
+  void _emit(ShippingOffersStates state) {
+    if (!isClosed) {
+      emit(state);
+    }
+  }
+}

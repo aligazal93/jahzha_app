@@ -11,6 +11,8 @@ import '../helpers/utils.dart';
 import '../route_utils/route_utils.dart';
 
 export 'package:dio/dio.dart';
+export '/core/extensions/response.dart';
+export '/core/helpers/utils.dart';
 
 class NetworkUtils {
   static const String baseUrl = "https://jahzha22.web2html5.com/api/v1/";

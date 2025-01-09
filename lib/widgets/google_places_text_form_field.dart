@@ -20,6 +20,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
     this.placeType = PlaceType.geocode,
     this.controller,
     this.placeBounds,
+    this.validator,
   }) : super(key: key);
 
   final String? label;
@@ -29,6 +30,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
   final PlaceType placeType;
   final TextEditingController? controller;
   final PlaceBounds? placeBounds;
+  final String? Function(String?)? validator;
 
   @override
   State<GooglePlacesTextFormField> createState() =>
@@ -73,6 +75,7 @@ class _GooglePlacesTextFormFieldState extends State<GooglePlacesTextFormField> {
           countries: widget.countries,
           showError: false,
           placeBounds: widget.placeBounds,
+          validator: widget.validator,
           itemClick: (Prediction prediction) {
             if (prediction.description != null) {
               controller.text = prediction.description!;

@@ -37,6 +37,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   final PlaceType? placeType;
   final String? language;
   final PlaceBounds? placeBounds;
+  final String? Function(String?)? validator;
 
   GooglePlaceAutoCompleteTextField({
     required this.textEditingController,
@@ -60,6 +61,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
     this.placeBounds,
     this.language = 'en',
     this.clearData,
+    this.validator,
   });
 
   @override
@@ -120,6 +122,7 @@ class _GooglePlaceAutoCompleteTextFieldState
                     setState(() {});
                   }
                 },
+                validator: widget.validator,
               ),
             ),
             (!widget.isCrossBtnShown)

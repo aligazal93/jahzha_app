@@ -87,4 +87,15 @@ class Validator {
     }
     return null;
   }
+
+  static String? weight(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return tr("empty_field");
+    } else if (num.tryParse(value) == null) {
+      return 'invalid_weight'.tr();
+    } else if (num.tryParse(value)! < 1) {
+      return 'minimum_weight_must_be_1_kg'.tr();
+    }
+    return null;
+  }
 }

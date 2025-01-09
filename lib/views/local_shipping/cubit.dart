@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_places_flutter/model/prediction.dart';
+import 'package:jahzha_app/core/models/shipping/get_local_offers_dto.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 
-import '../availiable_offers/view.dart';
+import '../shipping_offers/view.dart';
 
 part 'states.dart';
 
@@ -12,22 +13,18 @@ class LocalShippingCubit extends Cubit<LocalShippingStates> {
 
   static LocalShippingCubit of(context) => BlocProvider.of(context);
 
+  final formKey = GlobalKey<FormState>();
   final pageController = PageController();
+  final dto = GetOffersDTO();
   int currentPage = 0;
-  final weightTXController = TextEditingController();
-  final senderTXController = TextEditingController();
-  final receiverTXController = TextEditingController();
-  Prediction? senderPrediction;
-  Prediction? receiverPrediction;
-
-  Future<void> getOffers() async {
-    print(senderPrediction!.city);
-    print(receiverPrediction!.city);
-  }
 
   void nextPage() {
+    if (!formKey.currentState!.validate()) return;
     if (currentPage >= 2) {
-      getOffers();
+      RouteUtils.navigateTo(ShippingOffersView(
+        dto: dto,
+        isLocal: true,
+      ));
       return;
     }
     pageController.nextPage(
@@ -64,9 +61,7 @@ class LocalShippingCubit extends Cubit<LocalShippingStates> {
   @override
   Future<void> close() {
     pageController.dispose();
-    weightTXController.dispose();
-    receiverTXController.dispose();
-    senderTXController.dispose();
+    dto.dispose();
     return super.close();
   }
 }
