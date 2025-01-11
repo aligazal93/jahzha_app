@@ -21,7 +21,7 @@ class CouponCard extends StatelessWidget {
           Row(
             children: [
               AppText(
-                title: ' ${discountValue} % discount '.tr(),
+                title: ' ${discountValue} % ${'discount'.tr()} ',
                 color: AppColors.primary,
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
