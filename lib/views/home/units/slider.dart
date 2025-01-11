@@ -9,6 +9,23 @@ class Slider extends StatefulWidget {
 
 class _SliderState extends State<Slider> {
   int currentIndex = 0;
+  static List<AppBanner> banners = [];
+
+  @override
+  void initState() {
+    getBanners();
+    super.initState();
+  }
+
+  void getBanners() async {
+    if (banners.isNotEmpty) return;
+    banners = await GeneralDatasource().getBanners();
+    rebuild();
+  }
+
+  void rebuild() {
+    if (mounted) setState(() {});
+  }
 
   void changeIndex(int value) {
     currentIndex = value;
@@ -17,29 +34,34 @@ class _SliderState extends State<Slider> {
 
   @override
   Widget build(BuildContext context) {
+    if (banners.isEmpty) {
+      return SizedBox();
+    }
     return Container(
+      height: Utils.sizeFromHeight(4),
       padding: EdgeInsets.symmetric(vertical: 20),
       child: CarouselSlider(
-        options: CarouselOptions(height: Utils.sizeFromHeight(4),),
-        items: [1,2,3,4,5].map((i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 10.0),
-                child:
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12.0),
-                  child: Image.asset(
-                    'assets/images/banner-1.png',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              );
-            },
-          );
+        options: CarouselOptions(),
+        items: banners.map((i) {
+          return _banner(i.image);
         }).toList(),
       ),
+    );
+  }
+
+  Widget _banner(String image) {
+    return Builder(
+      builder: (BuildContext context) {
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: 10.0),
+          child: AppNetworkImage(
+            url: image,
+            fit: BoxFit.fill,
+            borderRadius: 12,
+          ),
+        );
+      },
     );
   }
 }
