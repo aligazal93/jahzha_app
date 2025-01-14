@@ -65,7 +65,10 @@ class ShippingOffer {
 }
 
 enum PickupType {
-  myself,
-  company,
-  careem,
+  myself('drop_off'),
+  company('company_pickup'),
+  careem('third_party_careem');
+
+  const PickupType(this.id);
+  final String id;
 }

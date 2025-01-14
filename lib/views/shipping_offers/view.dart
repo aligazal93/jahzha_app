@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
-import 'package:jahzha_app/core/models/shipping/get_local_offers_dto.dart';
+import 'package:jahzha_app/core/models/shipping/get_offers_dto.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/shipping_offers/units/accordion.dart';
 import 'package:jahzha_app/views/compare/view.dart';
@@ -71,6 +71,7 @@ class ShippingOffersView extends StatelessWidget {
                         return ShippingOfferCard(
                           offer: offer,
                           onComparisonTap: (v) => cubit.toggleComparison(offer),
+                          onOrder: () => cubit.orderOffer(offer: offer),
                         );
                       },
                     ),
@@ -78,9 +79,7 @@ class ShippingOffersView extends StatelessWidget {
                   if (cubit.comparisonOffers.length == 2)
                     AppButton(
                       title: 'Compare'.tr(),
-                      onTap: () => RouteUtils.navigateTo(ComparingView(
-                        offers: cubit.comparisonOffers,
-                      )),
+                      onTap: () => RouteUtils.navigateTo(ComparingView(cubit: cubit)),
                       color: AppColors.primary,
                       margin: EdgeInsets.symmetric(vertical: 22),
                       constrainedAxis: Axis.horizontal,

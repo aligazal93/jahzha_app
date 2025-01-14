@@ -1,9 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jahzha_app/core/models/shipping/get_local_offers_dto.dart';
+import 'package:jahzha_app/core/models/shipping/get_offers_dto.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
+import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 
 import '../../core/datasources/shipping.dart';
+import '../create_shipment/view.dart';
 
 part 'states.dart';
 
@@ -18,13 +20,15 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
 
   static ShippingOffersCubit of(context) => BlocProvider.of(context);
 
+  final _datasource = ShippingDatasource();
+
   List<ShippingOffer> offers = [];
   List<ShippingOffer> comparisonOffers = [];
   List<ShippingOffer> filteredOffers = [];
 
   Future<void> getOffers() async {
     _emit(ShippingOffersLoading());
-    offers = await ShippingDatasource().getOffers(
+    offers = await _datasource.getOffers(
       isLocal: isLocal,
       dto: dto,
     );
@@ -42,6 +46,20 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
       comparisonOffers.add(offer);
     }
     _emit(ShippingOffersInit());
+  }
+
+  Future<void> orderOffer({
+    required ShippingOffer offer,
+  }) async {
+    await AppLoadingIndicator.show();
+    final result = await _datasource.getOfferInputs(
+      offerID: offer.id,
+      type: offer.pickupType,
+    );
+    await AppLoadingIndicator.hide();
+    if (result != null) {
+      RouteUtils.navigateTo(CreateShipmentView(inputs: result));
+    }
   }
 
   void updateUI() {

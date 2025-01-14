@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_places_flutter/model/prediction.dart';
-import 'package:jahzha_app/core/models/shipping/get_local_offers_dto.dart';
+import 'package:jahzha_app/core/models/shipping/get_offers_dto.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 
 import '../shipping_offers/view.dart';

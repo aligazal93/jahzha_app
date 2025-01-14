@@ -6,7 +6,6 @@ import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
-import 'package:jahzha_app/views/send_shipments/view.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
 import '../cubit/cubit.dart';

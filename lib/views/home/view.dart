@@ -16,7 +16,6 @@ import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/home_app_bar.dart';
 import 'package:jahzha_app/widgets/app_network_image.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../core/datasources/general.dart';
 import '../send_shipping/view.dart';

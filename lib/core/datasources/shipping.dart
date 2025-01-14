@@ -1,6 +1,7 @@
 import '../../widgets/snack_bar.dart';
-import '../models/shipping/get_local_offers_dto.dart';
+import '../models/shipping/get_offers_dto.dart';
 import '../models/shipping/shipping_offer.dart';
+import '../models/shipping/shipping_offer_inputs.dart';
 import '../network_utils/network_utils.dart';
 
 class ShippingDatasource {
@@ -27,5 +28,31 @@ class ShippingDatasource {
       handleGenericException(e);
     }
     return [];
+  }
+
+  Future<ShippingOfferInputs?> getOfferInputs({
+    required String offerID,
+    required PickupType type,
+  }) async {
+    try {
+      final response = await NetworkUtils.post(
+        'submit-shipping-offer',
+        data: {
+          'offer_id': offerID,
+          'pickup_type': type.id,
+        },
+      );
+      final success = response.statusCode! < 300;
+      if (success) {
+        return ShippingOfferInputs.fromJson(response.data['data']);
+      }
+      showSnackBar(
+        response.getMessage,
+        errorMessage: true,
+      );
+    } catch (e) {
+      handleGenericException(e);
+    }
+    return null;
   }
 }

@@ -1,6 +1,7 @@
 part of '../view.dart';
-class ReceivingDestination extends StatelessWidget {
-  const ReceivingDestination({Key? key}) : super(key: key);
+
+class _ReceiverPage extends StatelessWidget {
+  const _ReceiverPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -10,8 +10,6 @@ import 'package:jahzha_app/widgets/loading_indicator.dart';
 
 import '../../core/route_utils/route_utils.dart';
 import '../../widgets/app_text.dart';
-import '../send_shipments/view.dart';
-
 
 class NavBarView extends StatelessWidget {
   @override

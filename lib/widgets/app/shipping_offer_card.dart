@@ -17,10 +17,12 @@ class ShippingOfferCard extends StatefulWidget {
     Key? key,
     required this.offer,
     required this.onComparisonTap,
+    required this.onOrder,
   }) : super(key: key);
 
   final ShippingOffer offer;
   final void Function(bool v) onComparisonTap;
+  final void Function() onOrder;
 
   @override
   State<ShippingOfferCard> createState() => _ShippingOfferCardState();
@@ -314,7 +316,7 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                   color: AppColors.primary,
                   constrainedAxis: Axis.horizontal,
                   padding: EdgeInsets.all(14),
-                  onTap: () {},
+                  onTap: widget.onOrder,
                   margin: EdgeInsets.symmetric(vertical: 8),
                   title: 'Order now'.tr(),
                 )

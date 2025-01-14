@@ -58,7 +58,8 @@ dependencies:
   google_maps_flutter: ^2.10.0
   geolocator: ^13.0.2
   custom_map_markers: ^0.0.2+1
-  skeletonizer: ^1.4.3
+  world_zipcode_validator: ^0.0.2
+  collection: ^1.17.0
 
 dependency_overrides:
   firebase_core_platform_interface: ^4.8.0

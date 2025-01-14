@@ -5,9 +5,6 @@ import 'package:jahzha_app/views/home/view.dart';
 import 'package:jahzha_app/views/menu/view.dart';
 import 'package:jahzha_app/views/my_shipments/view.dart';
 import 'package:jahzha_app/views/navbar/cubit/states.dart';
-import 'package:jahzha_app/views/send_shipments/view.dart';
-
-
 
 class NavBarCubit extends Cubit<NavBarStates> {
   NavBarCubit() : super(NavBarInitState());

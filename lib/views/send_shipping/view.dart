@@ -121,7 +121,7 @@ class SendShippingView extends StatelessWidget {
                                   ),
                                   SizedBox(height: 12),
                                 ],
-                                if (dto.destinationCountry?.countryCode != null)
+                                if (isLocal || dto.destinationCountry?.countryCode != null)
                                   GooglePlacesTextFormField(
                                     label: 'Receiving destination'.tr(),
                                     fillColor: AppColors.whiteBk,
