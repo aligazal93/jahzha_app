@@ -263,5 +263,10 @@
   "reorder_result": "ترتيب النتائج حسب",
   "cheapest_first": "الاقل سعر اولا",
   "expensive_first": "الاعلي سعر اولا",
-  "Saudi Arabia": "السعودية"
+  "Saudi Arabia": "السعودية",
+  "invalid_postal_code": "الرمز البريدي غير صحيح",
+  "invalid_number": "الرقم غير صحيح",
+  "max_length_is": "الحد الاقصى هو",
+  "min_length_is": "الحد الادنى هو",
+  "required": "مطلوب"
 }

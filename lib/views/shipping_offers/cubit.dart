@@ -58,7 +58,10 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
     );
     await AppLoadingIndicator.hide();
     if (result != null) {
-      RouteUtils.navigateTo(CreateShipmentView(inputs: result));
+      RouteUtils.navigateTo(CreateShipmentView(
+        dto: dto,
+        inputs: result,
+      ));
     }
   }
 

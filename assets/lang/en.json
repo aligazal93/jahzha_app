@@ -264,5 +264,11 @@
   "reorder_result": "Reorder result",
   "cheapest_first": "Cheapest first",
   "expensive_first": "Expensive first",
-  "Saudi Arabia": "Saudi Arabia"
+  "Saudi Arabia": "Saudi Arabia",
+  "invalid_postal_code": "Invalid postal code",
+  "invalid_number": "Invalid number",
+  "max_length_is": "Max length is",
+  "min_length_is": "Min length is",
+  "required": "Required",
+
 }

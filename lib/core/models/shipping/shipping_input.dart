@@ -1,11 +1,15 @@
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:jahzha_app/core/helpers/validator.dart';
+import 'package:world_zipcode_validator/world_zipcode_validator.dart';
 
 class ShippingInput {
+  final controller = TextEditingController();
   final String name;
   final bool getDropDownItemsBySearch;
-  final bool required;
   final ShippingInputType type;
-  final ShippingInputValidationType? validationType;
+  final ShippingValidation validation;
 
   /// For Getting DropDownItems
   final String? id;
@@ -26,9 +30,8 @@ class ShippingInput {
     required this.note,
     required this.defaultValue,
     required this.getDropDownItemsBySearch,
-    required this.required,
     required this.type,
-    required this.validationType,
+    required this.validation,
   });
 
   factory ShippingInput.fromJson(Map<String, dynamic> json) {
@@ -37,17 +40,89 @@ class ShippingInput {
       name: json['name'],
       requestKey: json['request_name'],
       note: json['input_note'],
-      defaultValue: json['value'],
+      defaultValue: json['value']?.toString(),
       getDropDownItemsBySearch: json['using_search'] ?? false,
-      required: json['validation']?['required'] ?? false,
-      validationType: ShippingInputValidationType.values.firstWhereOrNull(
-        (e) => e.id == json['validation']?['validation_type'],
-      ),
+      validation: ShippingValidation.fromJson(json['validation']),
       type: ShippingInputType.values.firstWhere(
         (e) => e.id == json['type'],
         orElse: () => ShippingInputType.textField,
       ),
+    )..controller.text = json['value']?.toString() ?? '';
+  }
+
+  String? validate([String? countryCode]) {
+    final value = controller.text.trim();
+    if (validation.required) {
+      final type = validation.type;
+      if (value.isEmpty) {
+        return 'required'.tr();
+      } else if (validation.minLength != null && value.length < validation.minLength!) {
+        return 'min_length_is'.tr() + ' ${validation.minLength}';
+      } else if (validation.maxLength != null && value.length > validation.maxLength!) {
+        return 'max_length_is'.tr() + ' ${validation.maxLength}';
+      } else if (type == ShippingInputValidationType.email && Validator.email(value) != null) {
+        return Validator.email(value);
+      } else if (type == ShippingInputValidationType.number && num.tryParse(value) == null) {
+        return 'invalid_number'.tr();
+      } else if (type == ShippingInputValidationType.double && double.tryParse(value) == null) {
+        return 'invalid_number'.tr();
+      } else if (type == ShippingInputValidationType.phone && Validator.phone(value) != null) {
+        return Validator.phone(value);
+      } else if (type == ShippingInputValidationType.postalCode &&
+          !WorldZipcodeValidator.isValid(
+              countryCode?.toLowerCase() ?? 'sa', value)) {
+        return 'invalid_postal_code'.tr();
+      }
+    }
+    return null;
+  }
+}
+
+class ShippingValidation {
+  final bool required;
+  final ShippingInputValidationType? type;
+  // final double? minDouble;
+  // final double? maxDouble;
+  final int? minLength;
+  final int? maxLength;
+  final double? maxMapRadiusInKM;
+
+  ShippingValidation({
+    required this.required,
+    required this.type,
+    required this.minLength,
+    required this.maxLength,
+    required this.maxMapRadiusInKM,
+  });
+
+  factory ShippingValidation.fromJson(Map<String, dynamic> json) {
+    return ShippingValidation(
+      required: json['required'] ?? false,
+      type: ShippingInputValidationType.values.firstWhere(
+        (e) => e.id == json['validation_type'],
+        orElse: () => ShippingInputValidationType.byLength,
+      ),
+      minLength: int.tryParse(json['min_length'].toString()),
+      maxLength: int.tryParse(json['max_length'].toString()),
+      // minDouble: json['min_float'],
+      // maxDouble: json['max_float'],
+      maxMapRadiusInKM: double.tryParse(json['max_radius'].toString()),
     );
+  }
+
+  TextInputType get inputType {
+    if (type == ShippingInputValidationType.number) {
+      return TextInputType.numberWithOptions();
+    } else if (type == ShippingInputValidationType.phone) {
+      return TextInputType.numberWithOptions();
+    } else if (type == ShippingInputValidationType.email) {
+      return TextInputType.emailAddress;
+    } else if (type == ShippingInputValidationType.postalCode) {
+      return TextInputType.numberWithOptions();
+    } else if (type == ShippingInputValidationType.double) {
+      return TextInputType.numberWithOptions(decimal: true);
+    }
+    return TextInputType.text;
   }
 }
 
@@ -66,11 +141,11 @@ enum ShippingInputType {
 
 enum ShippingInputValidationType {
   email('email'),
-  number('phone'),
+  number('number'),
   double('float'),
   phone('phone'),
   postalCode('postal_code'),
-  byLength('by_length');
+  byLength('byLength');
 
   const ShippingInputValidationType(this.id);
 

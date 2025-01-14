@@ -7,29 +7,38 @@ class _Buttons extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = CreateShipmentCubit.of(context);
     final currentPage = cubit.currentPage;
-    final pageController = cubit.pageController;
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(
-          bottom: Platform.isIOS ? 0 : 20,
-        ),
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 20,
+        bottom: Platform.isIOS ? 0 : 20,
+      ),
+      child: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            SizedBox(width: 20),
+            if (currentPage > 0) ...[
+              Expanded(
+                child: AppButton(
+                  titleFontSize: 14,
+                  padding: EdgeInsets.zero,
+                  constrainedAxis: Axis.horizontal,
+                  color: AppColors.darkGrayBlue,
+                  titleColor: AppColors.txtGray,
+                  title: 'Previous'.tr(),
+                  onTap: cubit.previousPage,
+                ),
+              ),
+              SizedBox(width: 16),
+            ],
             if (currentPage < 2)
               Expanded(
                 child: AppButton(
                   titleFontSize: 14,
                   padding: EdgeInsets.zero,
-                  margin: EdgeInsets.symmetric(horizontal: 8),
                   constrainedAxis: Axis.horizontal,
                   title: 'Next'.tr(),
-                  onTap: () {
-                    pageController.nextPage(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.ease,
-                    );
-                  },
+                  onTap: cubit.nextPage,
                 ),
               ),
             if (currentPage == 2)
@@ -37,36 +46,12 @@ class _Buttons extends StatelessWidget {
                 child: AppButton(
                   titleFontSize: 14,
                   padding: EdgeInsets.zero,
-                  margin: EdgeInsets.symmetric(horizontal: 4),
                   constrainedAxis: Axis.horizontal,
                   title: 'add to cart'.tr(),
-                  onTap: () {
-                    pageController.nextPage(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.ease,
-                    );
-                    RouteUtils.navigateTo(CartPageView());
-                  },
+                  onTap: cubit.addToCart,
                 ),
               ),
-            if (currentPage > 0)
-              Expanded(
-                child: AppButton(
-                  titleFontSize: 14,
-                  padding: EdgeInsets.zero,
-                  margin: EdgeInsets.symmetric(horizontal: 8),
-                  constrainedAxis: Axis.horizontal,
-                  color: AppColors.darkGrayBlue,
-                  titleColor: AppColors.txtGray,
-                  title: 'Previous'.tr(),
-                  onTap: () {
-                    pageController.previousPage(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.ease,
-                    );
-                  },
-                ),
-              ),
+            SizedBox(width: 20),
           ],
         ),
       ),

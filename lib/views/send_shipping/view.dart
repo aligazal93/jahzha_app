@@ -37,155 +37,154 @@ class SendShippingView extends StatelessWidget {
               key: cubit.formKey,
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Column(
+                child: PageView(
+                  controller: cubit.pageController,
+                  physics: NeverScrollableScrollPhysics(),
                   children: [
-                    Expanded(
-                      child: PageView(
-                        controller: cubit.pageController,
-                        physics: NeverScrollableScrollPhysics(),
+                    Container(
+                      child: ListView(
                         children: [
-                          Container(
-                            child: ListView(
-                              children: [
-                                SizedBox(
-                                  height: 12,
-                                ),
-                                AppTextField(
-                                  fillColor: AppColors.whiteBk,
-                                  suffixIcon: AppText(
-                                    title: 'kg'.tr(),
-                                    color: AppColors.txtGray,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    padding: EdgeInsets.symmetric(vertical: 14),
-                                  ),
-                                  label: 'Approximate weight'.tr(),
-                                  inputType: TextInputType.number,
-                                  controller: dto.weightTXController,
-                                  validator: Validator.weight,
-                                ),
-                              ],
-                            ),
+                          SizedBox(
+                            height: 12,
                           ),
-                          Container(
-                            child: ListView(
-                              children: [
-                                SizedBox(height: 12),
-                                if (!isLocal) ...[
-                                  AppTextField(
-                                    label: "Country".tr(),
-                                    hint: "Saudi Arabia".tr(),
-                                    fillColor: AppColors.whiteBk,
-                                    onTap: () {},
-                                  ),
-                                  SizedBox(height: 12),
-                                ],
-                                GooglePlacesTextFormField(
-                                  label: 'Transmitting destination'.tr(),
-                                  fillColor: AppColors.whiteBk,
-                                  controller: dto.originTXController,
-                                  countries: ['SA'],
-                                  placeType: PlaceType.cities,
-                                  onSelected: (value) => dto.origin = value,
-                                  validator: (_) => Validator.empty(dto.origin?.city),
-                                  onClearData: () {
-                                    dto.origin = null;
-                                  },
-                                ),
-                              ],
+                          AppTextField(
+                            fillColor: AppColors.whiteBk,
+                            suffixIcon: AppText(
+                              title: 'kg'.tr(),
+                              color: AppColors.txtGray,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              padding: EdgeInsets.symmetric(vertical: 14),
                             ),
-                          ),
-                          Container(
-                            child: ListView(
-                              children: [
-                                SizedBox(height: 12),
-                                if (!isLocal) ...[
-                                  GooglePlacesTextFormField(
-                                    label: 'Country'.tr(),
-                                    fillColor: AppColors.whiteBk,
-                                    controller: dto.destinationCountryTXController,
-                                    placeType: PlaceType.cities,
-                                    onSelected: (value) {
-                                      dto.destination = null;
-                                      dto.destinationTXController.clear();
-                                      dto.destinationCountry = value;
-                                      dto.destinationCountryTXController.text = value.country ?? '';
-                                      cubit.updateUI();
-                                    },
-                                    validator: (_) => Validator.empty(dto.destinationCountry?.city),
-                                    onClearData: () {
-                                      dto.destination = null;
-                                      dto.destinationCountry = null;
-                                      cubit.updateUI();
-                                    },
-                                  ),
-                                  SizedBox(height: 12),
-                                ],
-                                if (isLocal || dto.destinationCountry?.countryCode != null)
-                                  GooglePlacesTextFormField(
-                                    label: 'Receiving destination'.tr(),
-                                    fillColor: AppColors.whiteBk,
-                                    controller: dto.destinationTXController,
-                                    countries: isLocal
-                                        ? ['SA']
-                                        : [dto.destinationCountry!.countryCode!],
-                                    placeType: PlaceType.cities,
-                                    onSelected: (value) {
-                                      dto.destination = value;
-                                      dto.destinationTXController.text = value.city ?? '';
-                                    },
-                                    validator: (_) =>
-                                        Validator.empty(dto.destination?.city),
-                                    onClearData: () {
-                                      dto.destination = null;
-                                    },
-                                  ),
-                              ],
-                            ),
+                            label: 'Approximate weight'.tr(),
+                            inputType: TextInputType.number,
+                            controller: dto.weightTXController,
+                            validator: Validator.weight,
                           ),
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        if (cubit.currentPage > 0)
-                          Expanded(
-                            child: AppButton(
-                              titleFontSize: 14,
-                              padding: EdgeInsets.zero,
-                              margin: EdgeInsets.symmetric(horizontal: 8),
-                              constrainedAxis: Axis.horizontal,
-                              color: AppColors.darkGrayBlue,
-                              titleColor: AppColors.txtGray,
-                              title: 'Previous'.tr(),
-                              onTap: cubit.previousPage,
+                    Container(
+                      child: ListView(
+                        children: [
+                          SizedBox(height: 12),
+                          if (!isLocal) ...[
+                            AppTextField(
+                              label: "Country".tr(),
+                              hint: "Saudi Arabia".tr(),
+                              fillColor: AppColors.whiteBk,
+                              onTap: () {},
                             ),
+                            SizedBox(height: 12),
+                          ],
+                          GooglePlacesTextFormField(
+                            label: 'Transmitting destination'.tr(),
+                            fillColor: AppColors.whiteBk,
+                            controller: dto.originTXController,
+                            countries: ['SA'],
+                            placeType: PlaceType.cities,
+                            onSelected: (value) => dto.origin = value,
+                            validator: (_) => Validator.empty(dto.origin?.city),
+                            onClearData: () {
+                              dto.origin = null;
+                            },
                           ),
-                        if (cubit.currentPage < 2)
-                          Expanded(
-                            child: AppButton(
-                              titleFontSize: 14,
-                              padding: EdgeInsets.zero,
-                              margin: EdgeInsets.symmetric(horizontal: 8),
-                              constrainedAxis: Axis.horizontal,
-                              title: 'Next'.tr(),
-                              onTap: cubit.nextPage,
-                            ),
-                          ),
-                        if (cubit.currentPage == 2)
-                          Expanded(
-                            child: AppButton(
-                              titleFontSize: 14,
-                              padding: EdgeInsets.zero,
-                              margin: EdgeInsets.symmetric(horizontal: 4),
-                              constrainedAxis: Axis.horizontal,
-                              title: 'Get offers'.tr(),
-                              onTap: cubit.nextPage,
-                            ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
+                    Container(
+                      child: ListView(
+                        children: [
+                          SizedBox(height: 12),
+                          if (!isLocal) ...[
+                            GooglePlacesTextFormField(
+                              label: 'Country'.tr(),
+                              fillColor: AppColors.whiteBk,
+                              controller: dto.destinationCountryTXController,
+                              placeType: PlaceType.cities,
+                              onSelected: (value) {
+                                dto.destination = null;
+                                dto.destinationTXController.clear();
+                                dto.destinationCountry = value;
+                                dto.destinationCountryTXController.text = value.country ?? '';
+                                cubit.updateUI();
+                              },
+                              validator: (_) => Validator.empty(dto.destinationCountry?.city),
+                              onClearData: () {
+                                dto.destination = null;
+                                dto.destinationCountry = null;
+                                cubit.updateUI();
+                              },
+                            ),
+                            SizedBox(height: 12),
+                          ],
+                          if (isLocal || dto.destinationCountry?.countryCode != null)
+                            GooglePlacesTextFormField(
+                              label: 'Receiving destination'.tr(),
+                              fillColor: AppColors.whiteBk,
+                              controller: dto.destinationTXController,
+                              countries: isLocal
+                                  ? ['SA']
+                                  : [dto.destinationCountry!.countryCode!],
+                              placeType: PlaceType.cities,
+                              onSelected: (value) {
+                                dto.destination = value;
+                                dto.destinationTXController.text = value.city ?? '';
+                              },
+                              validator: (_) =>
+                                  Validator.empty(dto.destination?.city),
+                              onClearData: () {
+                                dto.destination = null;
+                              },
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            bottomNavigationBar: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (cubit.currentPage > 0)
+                      Expanded(
+                        child: AppButton(
+                          titleFontSize: 14,
+                          padding: EdgeInsets.zero,
+                          margin: EdgeInsets.symmetric(horizontal: 8),
+                          constrainedAxis: Axis.horizontal,
+                          color: AppColors.darkGrayBlue,
+                          titleColor: AppColors.txtGray,
+                          title: 'Previous'.tr(),
+                          onTap: cubit.previousPage,
+                        ),
+                      ),
+                    if (cubit.currentPage < 2)
+                      Expanded(
+                        child: AppButton(
+                          titleFontSize: 14,
+                          padding: EdgeInsets.zero,
+                          margin: EdgeInsets.symmetric(horizontal: 8),
+                          constrainedAxis: Axis.horizontal,
+                          title: 'Next'.tr(),
+                          onTap: cubit.nextPage,
+                        ),
+                      ),
+                    if (cubit.currentPage == 2)
+                      Expanded(
+                        child: AppButton(
+                          titleFontSize: 14,
+                          padding: EdgeInsets.zero,
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          constrainedAxis: Axis.horizontal,
+                          title: 'Get offers'.tr(),
+                          onTap: cubit.nextPage,
+                        ),
+                      ),
                   ],
                 ),
               ),

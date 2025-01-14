@@ -21,6 +21,7 @@ class AppDropDownMenu<T> extends StatefulWidget {
     this.multiSelect = false,
     this.enableAllOption = false,
     this.enableSearch = false,
+    this.showRequiredSign = false,
     this.fillColor = AppColors.white,
     this.borderColor = AppColors.darkGrayBlue,
     this.label,
@@ -38,6 +39,7 @@ class AppDropDownMenu<T> extends StatefulWidget {
   final bool multiSelect;
   final bool enableAllOption;
   final bool enableSearch;
+  final bool showRequiredSign;
   final String? label;
   final Widget? leading;
   final String? Function(dynamic)? validator;
@@ -97,6 +99,7 @@ class _AppDropDownMenuState<T> extends State<AppDropDownMenu> {
       // suffixIcon: widget.leading,
       fillColor: widget.fillColor,
       borderColor: widget.borderColor,
+      showRequiredSign: widget.showRequiredSign,
       suffixIcon: Icon(
         Icons.keyboard_arrow_down_rounded,
         size: 28.height,
@@ -220,9 +223,9 @@ class _SheetState<T> extends State<_Sheet> {
               child: AppTextField(
                 hint: 'search'.tr(),
                 controller: searchTXController,
-                suffixIcon: UnconstrainedBox(
-                  child: Icon(FontAwesomeIcons.magnifyingGlass, size: 16),
-                ),
+                // suffixIcon: UnconstrainedBox(
+                //   child: Icon(FontAwesomeIcons.magnifyingGlass, size: 16),
+                // ),
                 onChanged: (v) {
                   if (v.isEmpty) {
                     searchedItems = null;
@@ -237,7 +240,7 @@ class _SheetState<T> extends State<_Sheet> {
                   }
                   setState(() {});
                 },
-                trailing: Builder(builder: (context) {
+                suffixIcon: Builder(builder: (context) {
                   if (searchedItems == null) {
                     return SizedBox();
                   }

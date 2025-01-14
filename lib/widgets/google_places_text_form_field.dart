@@ -88,6 +88,7 @@ class _GooglePlacesTextFormFieldState extends State<GooglePlacesTextFormField> {
                 ),
               );
               widget.onSelected?.call(prediction);
+              Utils.dismissKeyboard();
             }
           },
           itemBuilder: (context, index, Prediction prediction) {
