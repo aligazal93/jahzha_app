@@ -26,6 +26,7 @@ class AppTextField extends StatefulWidget {
     this.hMargin = 0,
     this.enabled = true,
     this.focusNode,
+    this.prefixIcon,
     this.suffixIcon,
     this.maxLength,
     this.showRequiredSign = false,
@@ -48,6 +49,7 @@ class AppTextField extends StatefulWidget {
   final int? maxLength;
   final Color fillColor;
   final FocusNode? focusNode;
+  final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool secure;
   final bool enabled;
@@ -146,6 +148,7 @@ class _AppTextFieldState extends State<AppTextField> {
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
+                  prefixIcon: widget.prefixIcon,
                   suffixIcon: widget.suffixIcon != null ? widget.suffixIcon : widget.secure ? IconButton(
                     padding: const EdgeInsets.all(0),
                     icon: Icon(

@@ -59,6 +59,7 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
     await AppLoadingIndicator.hide();
     if (result != null) {
       RouteUtils.navigateTo(CreateShipmentView(
+        offerID: offer.id,
         dto: dto,
         inputs: result,
       ));

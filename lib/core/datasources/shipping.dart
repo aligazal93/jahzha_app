@@ -1,5 +1,6 @@
 import '../../widgets/snack_bar.dart';
 import '../models/shipping/get_offers_dto.dart';
+import '../models/shipping/shipping_drop_down_item.dart';
 import '../models/shipping/shipping_offer.dart';
 import '../models/shipping/shipping_offer_inputs.dart';
 import '../network_utils/network_utils.dart';
@@ -54,5 +55,36 @@ class ShippingDatasource {
       handleGenericException(e);
     }
     return null;
+  }
+
+  Future<List<ShippingDropDownItem>> getDropDownItems({
+    required int page,
+    required String offerID,
+    required String inputID,
+    String? search,
+}) async {
+    try {
+      final response = await NetworkUtils.post(
+        'all-inputs-select-data?page=$page',
+        data: {
+          "offer_id": offerID,
+          "input_select_id": inputID,
+          if (search?.trim().isNotEmpty ?? false) "keyword": search,
+        },
+      );
+      final success = response.statusCode! < 300;
+      if (success) {
+        return (response.data['data'] as List)
+            .map((e) => ShippingDropDownItem.fromJson(e))
+            .toList();
+      }
+      showSnackBar(
+        response.getMessage,
+        errorMessage: true,
+      );
+    } catch (e) {
+      handleGenericException(e);
+    }
+    return [];
   }
 }

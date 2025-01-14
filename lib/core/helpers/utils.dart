@@ -95,7 +95,6 @@ class Utils {
 
   static double keyboardHeight(BuildContext context) {
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-    print(keyboardHeight);
     if (keyboardHeight == 0) {
       return keyboardHeight;
     }

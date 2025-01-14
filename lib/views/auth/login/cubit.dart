@@ -48,7 +48,6 @@ class AuthCubit extends Cubit<AuthStates> {
       }
     } catch (e) {
       handleGenericException(e);
-      print(e);
     }
     emit(AuthInit());
   }
@@ -73,7 +72,6 @@ class AuthCubit extends Cubit<AuthStates> {
       }
     } catch (e) {
       handleGenericException(e);
-      print(e);
     }
     emit(AuthInit());
   }

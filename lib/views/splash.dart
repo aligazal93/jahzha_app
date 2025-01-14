@@ -28,8 +28,6 @@ class _SplashViewState extends State<SplashView> {
   }
   @override
   Widget build(BuildContext context) {
-    print(CachingUtils.token);
-    print(CachingUtils.isLogged);
     return Scaffold(
       body: Container(
         width: double.infinity,

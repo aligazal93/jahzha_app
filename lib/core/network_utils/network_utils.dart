@@ -96,8 +96,7 @@ class NetworkUtils {
   }
 
   static void _logResponse(Response response) {
-    if (response.data['message'] == 'Unauthenticated.' ||
-        response.statusCode == 401) {
+    if (response.statusCode == 401) {
       showSnackBar(
         'session_expired'.tr(),
         errorMessage: true,

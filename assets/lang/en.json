@@ -270,5 +270,6 @@
   "max_length_is": "Max length is",
   "min_length_is": "Min length is",
   "required": "Required",
-
+  "no_results_found": "No results found",
+  "search": "Search"
 }

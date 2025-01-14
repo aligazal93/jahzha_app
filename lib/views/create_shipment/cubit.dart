@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 
+import '../../core/datasources/shipping.dart';
 import '../../core/models/shipping/get_offers_dto.dart';
+import '../../core/models/shipping/shipping_drop_down_item.dart';
 import '../../core/models/shipping/shipping_offer_inputs.dart';
 import '../../core/route_utils/route_utils.dart';
 import '../cart/view.dart';
@@ -10,15 +13,18 @@ part 'states.dart';
 
 class CreateShipmentCubit extends Cubit<CreateShipmentStates> {
   CreateShipmentCubit({
+    required this.offerID,
     required this.inputs,
     required this.dto,
   }) : super(CreateShipmentInit());
 
+  final String offerID;
   final GetOffersDTO dto;
   final ShippingOfferInputs inputs;
 
   static CreateShipmentCubit of(context) => BlocProvider.of(context);
 
+  final _datasource = ShippingDatasource();
   final formKey = GlobalKey<FormState>();
   final pageController = PageController();
   int currentPage = 0;
@@ -44,6 +50,10 @@ class CreateShipmentCubit extends Cubit<CreateShipmentStates> {
       duration: Duration(milliseconds: 300),
       curve: Curves.ease,
     );
+    _emit(CreateShipmentInit());
+  }
+
+  void updateUI() {
     _emit(CreateShipmentInit());
   }
 

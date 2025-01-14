@@ -106,7 +106,6 @@ class _FormFieldsState extends State<_FormFields> {
                       child: GestureDetector(
                         onTap: () {
                           cubit.toggleGender('male');
-                          print(cubit.gender);
                         },
                         child: Container(
                           padding: EdgeInsets.all(16),
@@ -140,7 +139,6 @@ class _FormFieldsState extends State<_FormFields> {
                       child: GestureDetector(
                         onTap: () {
                           cubit.toggleGender('female');
-                          print(cubit.gender);
 
                         },
                         child: Container(

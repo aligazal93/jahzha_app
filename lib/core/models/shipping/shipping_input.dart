@@ -2,14 +2,17 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:jahzha_app/core/helpers/validator.dart';
+import 'package:jahzha_app/core/models/shipping/shipping_drop_down_item.dart';
 import 'package:world_zipcode_validator/world_zipcode_validator.dart';
 
 class ShippingInput {
   final controller = TextEditingController();
   final String name;
-  final bool getDropDownItemsBySearch;
+  final bool enableDropDownSearch;
   final ShippingInputType type;
   final ShippingValidation validation;
+  String phoneCode = '+966';
+  ShippingDropDownItem? selectedValue;
 
   /// For Getting DropDownItems
   final String? id;
@@ -29,7 +32,7 @@ class ShippingInput {
     required this.requestKey,
     required this.note,
     required this.defaultValue,
-    required this.getDropDownItemsBySearch,
+    required this.enableDropDownSearch,
     required this.type,
     required this.validation,
   });
@@ -41,7 +44,7 @@ class ShippingInput {
       requestKey: json['request_name'],
       note: json['input_note'],
       defaultValue: json['value']?.toString(),
-      getDropDownItemsBySearch: json['using_search'] ?? false,
+      enableDropDownSearch: json['using_search'] ?? false,
       validation: ShippingValidation.fromJson(json['validation']),
       type: ShippingInputType.values.firstWhere(
         (e) => e.id == json['type'],

@@ -39,7 +39,6 @@ class ContactUsCubit extends Cubit<ContactUsStates> {
       RouteUtils.navigateAndPopAll(NavBarView());
     } catch (e) {
       handleGenericException(e);
-      print(e);
     }
     emit(ContactUsInit());
   }

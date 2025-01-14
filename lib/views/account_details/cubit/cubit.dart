@@ -105,7 +105,6 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
     );
     if (result != null) {
       birthdateTXController.text = Utils.formatDate(result);
-      print(birthdateTXController.text);
     }
   }
 
