@@ -323,7 +323,6 @@ class MenuView extends StatelessWidget {
                           )
                         ],
                       ),
-                      title: '',
                     );
                   },
                 ),

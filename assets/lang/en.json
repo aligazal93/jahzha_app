@@ -271,5 +271,9 @@
   "min_length_is": "Min length is",
   "required": "Required",
   "no_results_found": "No results found",
-  "search": "Search"
+  "search": "Search",
+  "keep": "Keep",
+  "discard_and_leave": "Discard and Leave",
+  "discard_changes": "Discard changes?",
+  "close": "Close"
 }

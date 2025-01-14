@@ -9,48 +9,89 @@ class _Input extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = CreateShipmentCubit.of(context);
     final dto = cubit.dto;
-    if (input.type == ShippingInputType.textField ||
-        input.type == ShippingInputType.textFieldArea ||
-        input.type == ShippingInputType.readOnlyField) {
-      final isReadOnly = input.type == ShippingInputType.readOnlyField;
-      return AppTextField(
-        prefixIcon: !isReadOnly &&
-                input.validation.type == ShippingInputValidationType.phone
-            ? AppCountryPicker(
-                initialPhoneCode: input.phoneCode,
-                onSelect: (country, code) => input.phoneCode = code,
-              )
-            : null,
-        controller: input.controller,
-        fillColor: isReadOnly ? AppColors.darkGrayBlue : AppColors.whiteBk,
-        label: input.name,
-        hint: input.note,
-        suffixIcon: isReadOnly
-            ? Icon(
-                FontAwesomeIcons.lock,
-                color: AppColors.lightGray,
-                size: 16,
-              )
-            : null,
-        inputType: input.validation.inputType,
-        onTap: isReadOnly ? () {} : null,
-        maxLines: input.type == ShippingInputType.textFieldArea ? 5 : 1,
-        validator: (v) => input.validate(
-          cubit.currentPage == 1
-              ? dto.destination?.countryCode
-              : dto.origin?.countryCode,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Builder(
+          builder: (context) {
+            if (input.type == ShippingInputType.textField ||
+                input.type == ShippingInputType.textFieldArea ||
+                input.type == ShippingInputType.readOnlyField) {
+              final isReadOnly = input.type == ShippingInputType.readOnlyField;
+              return AppTextField(
+                prefixIcon: !isReadOnly &&
+                    input.validation.type == ShippingInputValidationType.phone
+                    ? AppCountryPicker(
+                  initialPhoneCode: input.phoneCode,
+                  onSelect: (country, code) => input.phoneCode = code,
+                )
+                    : null,
+                controller: input.controller,
+                fillColor: isReadOnly ? AppColors.darkGrayBlue : AppColors.whiteBk,
+                label: input.name,
+                suffixIcon: isReadOnly
+                    ? Icon(
+                  FontAwesomeIcons.lock,
+                  color: AppColors.lightGray,
+                  size: 16,
+                )
+                    : null,
+                inputType: input.validation.inputType,
+                onTap: isReadOnly ? () {} : null,
+                maxLines: input.type == ShippingInputType.textFieldArea ? 5 : 1,
+                validator: (v) => input.validate(
+                  cubit.currentPage == 1
+                      ? dto.destination?.countryCode
+                      : dto.origin?.countryCode,
+                ),
+                showRequiredSign: input.validation.required,
+              );
+            } else if (input.type == ShippingInputType.dropdown) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _DropMenu(input: input),
+                  if (input.selectedValue?.helpImage != null) ...[
+                    SizedBox(height: 12),
+                    InkWell(
+                      onTap: ImageView(url: input.selectedValue!.helpImage!).show,
+                      child: AppNetworkImage(
+                        url: input.selectedValue!.helpImage!,
+                        // height: 260,
+                        borderColor: AppColors.darkGrayBlue,
+                        borderRadius: 16,
+                      ),
+                    ),
+                  ],
+                ],
+              );
+            }
+            return AppText(
+              title: 'Unsupported input type\n${input.type.name}',
+              color: AppColors.red,
+              fontSize: 16,
+              textAlign: TextAlign.center,
+              fontWeight: FontWeight.w700,
+            );
+          },
         ),
-        showRequiredSign: input.validation.required,
-      );
-    } else if (input.type == ShippingInputType.dropdown) {
-      return _DropMenu(input: input);
-    }
-    return AppText(
-      title: 'Unsupported input type\n${input.type.name}',
-      color: AppColors.red,
-      fontSize: 16,
-      textAlign: TextAlign.center,
-      fontWeight: FontWeight.w700,
+        if (input.note != null) ...[
+          Html(
+            data: input.note!,
+            style: {
+              "html": Style(
+                color: AppColors.lightGray,
+                fontSize: FontSize(12),
+                lineHeight: LineHeight(24 / 12),
+              ),
+            },
+            onLinkTap: (url, attributes, element) {
+              if (url == null) return;
+              launchUrl(Uri.parse(url));
+            },
+          ),
+        ],
+      ],
     );
   }
 }
@@ -76,7 +117,6 @@ class _DropMenu extends StatelessWidget {
       ).show,
       controller: input.controller,
       label: input.name,
-      hint: input.note,
       validator: (v) => input.validate(),
     );
   }
@@ -158,86 +198,144 @@ class _DropMenuSheetState extends State<_DropMenuSheet> {
   @override
   Widget build(BuildContext context) {
     final input = widget.input;
+    final bottomPadding = EdgeInsets.only(
+      bottom: Utils.bottomDevicePadding == 0
+          ? 16.height
+          : Utils.bottomDevicePadding,
+    );
     if (isLoading) {
-      return AppLoadingIndicator();
+      return SafeArea(
+        child: AppLoadingIndicator(
+          padding: bottomPadding,
+        ),
+      );
     }
-    return BlocBuilder(
-      bloc: widget.cubit,
-      builder: (context, state) {
-        return Container(
-          constraints: BoxConstraints(
-            maxHeight: context.height(input.enableDropDownSearch ? 1.25 : 2.5) - Utils.keyboardHeight(context),
-          ),
-          child: Column(
-            children: [
-              if (input.enableDropDownSearch)
-                AppTextField(
-                  fillColor: AppColors.whiteBk,
-                  controller: txController,
-                  label: 'search'.tr(),
-                  onChanged: (v) {
-                    if (v.trim().isEmpty) {
-                      return;
-                    }
-                    _debouncingTimer?.cancel();
-                    _debouncingTimer = Timer(
-                      Duration(milliseconds: 1200),
-                      () => getItems(1),
-                    );
-                  },
-                  suffixIcon: txController.text.trim().isEmpty
-                      ? null
-                      : InkWell(
-                          onTap: resetSearch,
-                          child: Icon(
-                            FontAwesomeIcons.xmark,
-                            color: AppColors.darkGrayBlue,
-                            size: 16,
+    return SafeArea(
+      child: BlocBuilder(
+        bloc: widget.cubit,
+        builder: (context, state) {
+          return Container(
+            margin: bottomPadding,
+            constraints: BoxConstraints(
+              maxHeight: context.height(input.enableDropDownSearch ? 1.25 : 2.5) -
+                  Utils.keyboardHeight(context),
+            ),
+            child: Column(
+              children: [
+                if (input.enableDropDownSearch)
+                  AppTextField(
+                    fillColor: AppColors.whiteBk,
+                    controller: txController,
+                    label: 'search'.tr(),
+                    onChanged: (v) {
+                      if (v.trim().isEmpty) {
+                        return;
+                      }
+                      _debouncingTimer?.cancel();
+                      _debouncingTimer = Timer(
+                        Duration(milliseconds: 1200),
+                        () => getItems(1),
+                      );
+                    },
+                    suffixIcon: txController.text.trim().isEmpty
+                        ? null
+                        : InkWell(
+                            onTap: resetSearch,
+                            child: Icon(
+                              FontAwesomeIcons.xmark,
+                              color: AppColors.darkGrayBlue,
+                              size: 16,
+                            ),
                           ),
-                        ),
-                ),
-              if (items.isEmpty)
-                EmptyView(
-                  title: "no_result".tr(),
-                )
-              else
+                  ),
                 Expanded(
                   child: AppPaginatedScroll(
                     enabled: input.enableDropDownSearch,
                     items: items,
                     getPaginatedItems: getItems,
-                    builder: (context) => ListView.separated(
-                      itemCount: items.length,
-                      itemBuilder: (context, index) {
-                        final item = items[index];
-                        return CheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          title: AppText(
-                            title: item.name,
-                          ),
-                          visualDensity:
-                              VisualDensity(horizontal: -4, vertical: -4),
-                          contentPadding: EdgeInsets.zero,
-                          value: input.selectedValue?.id == item.id,
-                          activeColor: AppColors.primary,
-                          onChanged: (value) {
-                            if (value == true) {
+                    builder: (context) {
+                      if (items.isEmpty) {
+                        EmptyView(
+                          title: "no_result".tr(),
+                        );
+                      }
+                      return ListView.separated(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          final isSelected = input.selectedValue?.id == item.id;
+                          if (item.image != null) {
+                            return InkWell(
+                              onTap: () {
+                                if (isSelected) {
+                                  return;
+                                }
+                                input.selectedValue = item;
+                                input.controller.text = item.name;
+                                widget.cubit.updateUI();
+                                RouteUtils.pop();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 16,
+                                ),
+                                child: Row(
+                                  children: [
+                                    AppNetworkImage(
+                                      url: item.image!,
+                                      width: 64,
+                                      height: 64,
+                                    ),
+                                    SizedBox(width: 12),
+                                    Expanded(
+                                      child: AppText(
+                                        title: item.name,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: isSelected ? AppColors.primary : AppColors.darkGrayBlue,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          return CheckboxListTile(
+                            controlAffinity: ListTileControlAffinity.leading,
+                            title: AppText(
+                              title: item.name,
+                            ),
+                            visualDensity:
+                            VisualDensity(horizontal: -4, vertical: -4),
+                            contentPadding: EdgeInsets.zero,
+                            value: isSelected,
+                            activeColor: AppColors.primary,
+                            onChanged: (value) {
+                              if (isSelected) {
+                                return;
+                              }
                               input.selectedValue = item;
                               input.controller.text = item.name;
                               widget.cubit.updateUI();
                               RouteUtils.pop();
-                            }
-                          },
-                        );
-                      },
-                      separatorBuilder: (context, index) => SizedBox(height: 8),
-                    ),
+                            },
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 8),
+                      );
+                    },
                   ),
                 ),
-            ],
-          ),
-        );
-      },
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

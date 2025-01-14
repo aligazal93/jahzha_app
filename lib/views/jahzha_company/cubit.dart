@@ -23,13 +23,22 @@ class CompanyRequestsCubit extends Cubit<CompanyRequestsStates> {
 
   static CompanyRequestsCubit of(context) => BlocProvider.of(context);
   final formKey = GlobalKey<FormState>();
-  String? firstName,lastName,email,mobile,country,companyName,goodsType,shipmentType;
-  dynamic averageShipmentsPerMonth,averageShipmentWeight,averageDimensionsPerShipment;
+  String? firstName,
+      lastName,
+      email,
+      mobile,
+      country,
+      companyName,
+      goodsType,
+      shipmentType;
+  dynamic averageShipmentsPerMonth,
+      averageShipmentWeight,
+      averageDimensionsPerShipment;
   File? file;
+
   bool get isStateLoading {
     return state is CompanyRequestsLoading;
   }
-
 
   Future<void> sendCompanyRequest() async {
     formKey.currentState?.save();
@@ -48,37 +57,45 @@ class CompanyRequestsCubit extends Cubit<CompanyRequestsStates> {
       final data = response.data;
       if (data['status_code'] == 200) {
         showSnackBar(data['message']);
-        AppDialog.show(child: Column(
-          children: [
-            Icon( FontAwesomeIcons.solidCircleCheck ,size: 120,color: AppColors.green,),
-            AppText(
-              title:'Your request has been received successfully.'.tr(),
-              fontWeight: FontWeight.w700,
-              color: AppColors.green,
-              padding: EdgeInsets.symmetric(vertical: 20),
-              fontSize: 18,
-            ),
-            AppText(
-              title: 'You will be contacted as soon as possible to get a quote. Thank you.'.tr(),
-              fontSize: 14,
-              textAlign: TextAlign.center,
-              color: AppColors.green,
-              fontWeight: FontWeight.w500,
-            ),
-            AppButton(
-              title: 'Home'.tr(),
-              constrainedAxis: Axis.horizontal,
-              color: AppColors.primary,
-              margin: EdgeInsets.symmetric(vertical: 14),
-              onTap: () {
-                RouteUtils.navigateTo(NavBarView());
-              },
-            )
-          ],
-        ), title: '');
+        AppDialog.show(
+          child: Column(
+            children: [
+              Icon(
+                FontAwesomeIcons.solidCircleCheck,
+                size: 120,
+                color: AppColors.green,
+              ),
+              AppText(
+                title: 'Your request has been received successfully.'.tr(),
+                fontWeight: FontWeight.w700,
+                color: AppColors.green,
+                padding: EdgeInsets.symmetric(vertical: 20),
+                fontSize: 18,
+              ),
+              AppText(
+                title:
+                    'You will be contacted as soon as possible to get a quote. Thank you.'
+                        .tr(),
+                fontSize: 14,
+                textAlign: TextAlign.center,
+                color: AppColors.green,
+                fontWeight: FontWeight.w500,
+              ),
+              AppButton(
+                title: 'Home'.tr(),
+                constrainedAxis: Axis.horizontal,
+                color: AppColors.primary,
+                margin: EdgeInsets.symmetric(vertical: 14),
+                onTap: () {
+                  RouteUtils.navigateTo(NavBarView());
+                },
+              )
+            ],
+          ),
+        );
         // RouteUtils.navigateAndPopAll(NavBarView());
       } else {
-        showSnackBar(data['message'],errorMessage: true);
+        showSnackBar(data['message'], errorMessage: true);
       }
     } catch (e) {
       handleGenericException(e);
@@ -94,20 +111,17 @@ class CompanyRequestsCubit extends Cubit<CompanyRequestsStates> {
       'mobile_number': mobile,
       'country': country,
       'shipment_type': shipmentType,
-      'company_name' :companyName,
+      'company_name': companyName,
       'average_shipments_per_month': averageShipmentsPerMonth,
-      'average_shipment_weight' : averageShipmentWeight,
-      'goods_type' : goodsType,
-      'average_dimensions_per_shipment' : averageDimensionsPerShipment
+      'average_shipment_weight': averageShipmentWeight,
+      'goods_type': goodsType,
+      'average_dimensions_per_shipment': averageDimensionsPerShipment
     };
     final formData = FormData.fromMap(data);
-    formData.files.addAll(
-        {MapEntry('file', await MultipartFile.fromFile(file!.path))});
+    formData.files
+        .addAll({MapEntry('file', await MultipartFile.fromFile(file!.path))});
     return formData;
   }
-
-
-
 
   void changeShipmentType(String v) {
     if (v == 'Air_freight' || v == 'Sea_shipping' || v == 'Land_shipping') {
@@ -140,8 +154,6 @@ class CompanyRequestsCubit extends Cubit<CompanyRequestsStates> {
   }
 }
 
-
-
 Future<void> _showMyDialog(BuildContext context) async {
   return showDialog<void>(
     context: context,
@@ -170,8 +182,8 @@ Future<void> _showMyDialog(BuildContext context) async {
               AppText(
                 textAlign: TextAlign.center,
                 title:
-                'We will contact you as soon as possible to obtain a price quote. Thank you'
-                    .tr(),
+                    'We will contact you as soon as possible to obtain a price quote. Thank you'
+                        .tr(),
                 fontSize: 14,
                 color: AppColors.txtGray,
                 fontWeight: FontWeight.w700,

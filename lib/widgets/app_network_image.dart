@@ -61,7 +61,12 @@ class AppNetworkImage extends StatelessWidget {
           width: width,
           height: height,
           margin: EdgeInsets.symmetric(vertical: 0),
-          child: child,
+          child: child == null
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(borderRadius ?? 5),
+                  child: Image(image: imageProvider),
+                )
+              : child,
           decoration: decoration.copyWith(
             image: DecorationImage(
               image: imageProvider,

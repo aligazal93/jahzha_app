@@ -30,7 +30,7 @@ class AppLoadingIndicator extends StatelessWidget {
     showDialog(
       context: RouteUtils.context,
       barrierDismissible: false,
-      barrierColor: Colors.black.withValues(alpha: 0.7),
+      barrierColor: Colors.black.withOpacity(0.7),
       builder: (context) {
         return AppLoadingIndicator();
       },

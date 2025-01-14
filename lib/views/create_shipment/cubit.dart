@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
@@ -7,6 +8,7 @@ import '../../core/models/shipping/get_offers_dto.dart';
 import '../../core/models/shipping/shipping_drop_down_item.dart';
 import '../../core/models/shipping/shipping_offer_inputs.dart';
 import '../../core/route_utils/route_utils.dart';
+import '../../widgets/alerting_dialog.dart';
 import '../cart/view.dart';
 
 part 'states.dart';
@@ -44,7 +46,18 @@ class CreateShipmentCubit extends Cubit<CreateShipmentStates> {
     _emit(CreateShipmentInit());
   }
 
-  void previousPage() {
+  void previousPage() async {
+    if (currentPage == 0) {
+      final result = await AlertingDialog.show(
+        alertTitle: "discard_changes".tr(),
+        confirmTitle: "discard_and_leave".tr(),
+        cancelTitle: "keep".tr(),
+      );
+      if (result) {
+        RouteUtils.pop();
+      }
+      return;
+    }
     currentPage--;
     pageController.previousPage(
       duration: Duration(milliseconds: 300),

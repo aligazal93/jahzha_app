@@ -71,6 +71,7 @@ class _GooglePlaceAutoCompleteTextFieldState
   final subject = new PublishSubject<String>();
   OverlayEntry? _overlayEntry;
   List<Prediction> alPredictions = [];
+  final focusNode = FocusNode();
 
   TextEditingController controller = TextEditingController();
   final LayerLink _layerLink = LayerLink();
@@ -80,6 +81,12 @@ class _GooglePlaceAutoCompleteTextFieldState
   late Dio _dio;
 
   CancelToken? _cancelToken = CancelToken();
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +118,7 @@ class _GooglePlaceAutoCompleteTextFieldState
                 decoration: widget.inputDecoration,
                 style: widget.textStyle,
                 controller: widget.textEditingController,
-                focusNode: widget.focusNode ?? FocusNode(),
+                focusNode: widget.focusNode ?? focusNode,
                 onChanged: (string) {
                   subject.add(string);
                   if (widget.isCrossBtnShown) {
@@ -134,6 +141,8 @@ class _GooglePlaceAutoCompleteTextFieldState
   }
 
   Future<void> getLocation(String text) async {
+    widget.focusNode?.unfocus();
+    focusNode.unfocus();
     String apiURL =
         "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=${widget.googleAPIKey}&language=${widget.language}";
 
@@ -331,6 +340,8 @@ class _GooglePlaceAutoCompleteTextFieldState
         this._overlayEntry?.remove();
       } catch (e) {}
     }
+    widget.focusNode?.unfocus();
+    focusNode.unfocus();
     widget.onClearData?.call();
   }
 

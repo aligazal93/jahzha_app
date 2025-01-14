@@ -270,5 +270,9 @@
   "min_length_is": "الحد الادنى هو",
   "required": "مطلوب",
   "no_results_found": "لم يتم العثور على نتايج",
-  "search": "بحث"
+  "search": "بحث",
+  "keep": "البقاء",
+  "discard_and_leave": "التجاهل والخروج",
+  "discard_changes": "تجاهل التغييرات ؟",
+  "close": "اغلاق"
 }

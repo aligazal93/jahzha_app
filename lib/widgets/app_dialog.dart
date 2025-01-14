@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
-import 'package:jahzha_app/core/route_utils/route_utils.dart';
+
 import '../core/helpers/app_colors.dart';
-import '../core/helpers/utils.dart';
+import '../core/route_utils/route_utils.dart';
 
 class AppDialog extends StatelessWidget {
   const AppDialog({
@@ -17,12 +17,12 @@ class AppDialog extends StatelessWidget {
 
   static Future<dynamic> show({
     required Widget child,
-    bool dismissible = true, required String title,
+    bool dismissible = true,
   }) {
     return showDialog(
       context: RouteUtils.context,
       barrierDismissible: false,
-      barrierColor: AppColors.secondary.withOpacity(0.7),
+      // barrierColor: AppColors.secondary.withOpacity(0.7),
       builder: (context) {
         return AppDialog(
           child: child,
@@ -34,6 +34,7 @@ class AppDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     return Material(
       color: Colors.transparent,
       child: UnconstrainedBox(
@@ -42,29 +43,45 @@ class AppDialog extends StatelessWidget {
           margin: EdgeInsets.only(
             left: 20,
             right: 20,
-            bottom: Utils.keyboardHeight(context),
+            bottom: keyboardHeight,
           ),
-          padding: EdgeInsets.all(20),
           child: Column(
             children: [
-              if (dismissible)
-                Align(
-                  alignment: Utils.isAR ? Alignment.centerLeft : Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: Icon(
-                      FontAwesomeIcons.xmark,
-                      color: AppColors.secondary,
-                      size: 26,
+              Stack(
+                children: [
+                  if (dismissible)
+                    Positioned(
+                      top: 16,
+                      right: 16,
+                      child: UnconstrainedBox(
+                        child: InkWell(
+                          onTap: () => Navigator.pop(context),
+                          child: Container(
+                            height: 32.height,
+                            width: 32.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: AppColors.darkGrayBlue,
+                            ),
+                            child: Icon(
+                              FontAwesomeIcons.xmark,
+                              color: AppColors.black,
+                              size: 16,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
+                  Padding(
+                    padding: EdgeInsets.only(top: dismissible ? 16 : 0),
+                    child: child,
                   ),
-                ),
-              SizedBox(height: 12.height),
-              child,
+                ],
+              ),
             ],
           ),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(28),
             color: AppColors.white,
           ),
         ),

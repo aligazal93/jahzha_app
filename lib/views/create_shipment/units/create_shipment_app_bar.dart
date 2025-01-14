@@ -9,6 +9,7 @@ class _CreateShipmentAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final cubit = CreateShipmentCubit.of(context);
     return SafeArea(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 20),
@@ -27,7 +28,7 @@ class _CreateShipmentAppBar extends StatelessWidget
               children: [
                 SizedBox(width: 16),
                 InkWell(
-                  onTap: RouteUtils.pop,
+                  onTap: cubit.previousPage,
                   child: Container(
                     height: 47,
                     width: 47,
