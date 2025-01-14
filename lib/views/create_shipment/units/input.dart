@@ -90,7 +90,11 @@ class _DropMenuSheet extends StatefulWidget {
   }) : super(key: key);
 
   Future<void> show() {
-    return AppSheet.show(child: this);
+    return AppSheet.show(
+      title: input.name,
+      subtitle: '',
+      child: this,
+    );
   }
 
   final CreateShipmentCubit cubit;
@@ -162,7 +166,7 @@ class _DropMenuSheetState extends State<_DropMenuSheet> {
       builder: (context, state) {
         return Container(
           constraints: BoxConstraints(
-            maxHeight: context.height(1.25) - Utils.keyboardHeight(context),
+            maxHeight: context.height(input.enableDropDownSearch ? 1.25 : 2.5) - Utils.keyboardHeight(context),
           ),
           child: Column(
             children: [
@@ -199,6 +203,7 @@ class _DropMenuSheetState extends State<_DropMenuSheet> {
               else
                 Expanded(
                   child: AppPaginatedScroll(
+                    enabled: input.enableDropDownSearch,
                     items: items,
                     getPaginatedItems: getItems,
                     builder: (context) => ListView.separated(

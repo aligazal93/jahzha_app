@@ -13,7 +13,7 @@ class ShippingDropDownItem {
 
   factory ShippingDropDownItem.fromJson(Map<String, dynamic> json) {
     return ShippingDropDownItem(
-      id: json['id'],
+      id: json['id'].toString(),
       name: json['name'],
       image: json['vehicle_image'],
       helpImage: json['dimensions_image'],
