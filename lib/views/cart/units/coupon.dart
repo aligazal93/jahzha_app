@@ -5,6 +5,8 @@ class _Coupon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = CartCubit.of(context);
+    final isCouponApplied = cubit.cart?.couponCode != null;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,21 +24,53 @@ class _Coupon extends StatelessWidget {
                 child: AppTextField(
                   hint: 'Enter the discount code from the coupons'.tr(),
                   fillColor: AppColors.tGray,
+                  controller: cubit.couponTXController,
                 ),
               ),
               SizedBox(width: 10),
               AppButton(
-                title: 'apply'.tr(),
-                color: AppColors.primary,
+                title: (isCouponApplied ? 'cancel' : 'apply').tr(),
+                color: isCouponApplied ? AppColors.red : AppColors.primary,
                 margin: EdgeInsets.symmetric(
                   vertical: 8,
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                onTap: () {},
+                onTap: () {
+                  if (isCouponApplied) {
+                    cubit.removeCoupon();
+                  } else {
+                    cubit.applyCoupon();
+                  }
+                },
               )
             ],
           ),
         ),
+        if (isCouponApplied)
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: AppColors.orangeLight),
+            child: Row(
+              children: [
+                Expanded(
+                  child: AppText(
+                    title: "coupon_applied_with_value"
+                            .tr(args: [cubit.cart!.couponCode!]) +
+                        ' ${cubit.cart?.couponDiscount} ${"SAR".tr()}',
+                    color: AppColors.secondary,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                  ),
+                ),
+                Icon(
+                  FontAwesomeIcons.percent,
+                  size: 16,
+                ),
+              ],
+            ),
+          ),
         AppButton(
           title: 'Completion of payment'.tr(),
           onTap: () {},
@@ -48,26 +82,3 @@ class _Coupon extends StatelessWidget {
     );
   }
 }
-
-/*
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10,vertical: 14),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: AppColors.orangeLight
-              ),
-              child: Row(
-                children: [
-                  AppText(
-                    title: 'code 12',
-                    color: AppColors.secondary,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                  Spacer(),
-                  Icon(FontAwesomeIcons.circleXmark,size: 16,)
-                ],
-              ),
-            ),
-
- */

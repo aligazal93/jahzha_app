@@ -282,5 +282,6 @@
   "add_another_order": "Add another order",
   "Receipt details": "Receipt details",
   "order summary": "Order summary",
-  "pickup cost": "Pickup cost"
+  "pickup cost": "Pickup cost",
+  "coupon_applied_with_value": "Coupon {} applied with value"
 }

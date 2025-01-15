@@ -67,4 +67,40 @@ class CartDatasource {
     }
     return false;
   }
+
+  Future<bool> applyCoupon({required String code}) async {
+    try {
+      final response = await NetworkUtils.post(
+        'apply-coupon',
+        data: {'code': code},
+      );
+      final success = response.statusCode! < 300;
+      showSnackBar(
+        response.getMessage,
+        errorMessage: !success,
+      );
+      return success;
+    } catch (e) {
+      handleGenericException(e);
+    }
+    return false;
+  }
+
+  Future<bool> removeCoupon({required String code}) async {
+    try {
+      final response = await NetworkUtils.post(
+        'remove-coupon',
+        data: {'code': code}
+      );
+      final success = response.statusCode! < 300;
+      showSnackBar(
+        response.getMessage,
+        errorMessage: !success,
+      );
+      return success;
+    } catch (e) {
+      handleGenericException(e);
+    }
+    return false;
+  }
 }

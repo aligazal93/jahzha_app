@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/datasources/cart.dart';
 import 'package:jahzha_app/core/models/cart/cart_response.dart';
@@ -13,21 +14,19 @@ class CartCubit extends Cubit<CartStates> {
 
   final _datasource = CartDatasource();
 
+  final couponTXController = TextEditingController();
   CartResponse? cart;
-  int _page = 1;
 
   Future<List<CartShipment>> getCart([int page = 1]) async {
-    _page = page;
     if (page == 1) {
       cart?.shipments.clear();
       _emit(CartLoading());
     }
     final result = await _datasource.getCart(page: page);
     if (result != null) {
+      couponTXController.text = result.couponCode ?? '';
       if (page == 1) {
         cart = result;
-      } else if (result.shipments.isEmpty) {
-        _page--;
       }
     }
     _emit(CartInit());
@@ -43,9 +42,34 @@ class CartCubit extends Cubit<CartStates> {
       if (cart!.shipments.isEmpty) {
         cart = null;
       } else {
-        getCart(_page + 1);
+        getCart();
       }
       _emit(CartInit());
+    }
+  }
+
+  Future<void> applyCoupon() async {
+    if (couponTXController.text.trim().isEmpty) {
+      return;
+    }
+    await AppLoadingIndicator.show();
+    final result = await _datasource.applyCoupon(
+      code: couponTXController.text,
+    );
+    await AppLoadingIndicator.hide();
+    if (result) {
+      await getCart();
+    }
+  }
+
+  Future<void> removeCoupon() async {
+    await AppLoadingIndicator.show();
+    final result = await _datasource.removeCoupon(
+      code: cart!.couponCode!
+    );
+    await AppLoadingIndicator.hide();
+    if (result) {
+      await getCart();
     }
   }
 
@@ -57,5 +81,11 @@ class CartCubit extends Cubit<CartStates> {
     if (!isClosed) {
       emit(state);
     }
+  }
+
+  @override
+  Future<void> close() {
+    couponTXController.dispose();
+    return super.close();
   }
 }

@@ -281,5 +281,6 @@
   "add_another_order": "اضف طلب اخر",
   "Receipt details": "تفاصيل الاستلام",
   "order summary": "ملخص الطلب",
-  "pickup cost": "تكلفة الاستلام"
+  "pickup cost": "تكلفة الاستلام",
+  "coupon_applied_with_value": "تم تطبيق الكوبون {} بقيمة"
 }

@@ -6,6 +6,7 @@ class CartResponse {
   final String? note2;
   final String? shippingPrice;
   final String? couponDiscount;
+  final String? couponCode;
   final String? pickupPrice;
   final String? totalPrice;
   final String? totalShipmentsCount;
@@ -16,6 +17,7 @@ class CartResponse {
     required this.note2,
     required this.shippingPrice,
     required this.couponDiscount,
+    required this.couponCode,
     required this.pickupPrice,
     required this.totalPrice,
     required this.totalShipmentsCount,
@@ -32,6 +34,7 @@ class CartResponse {
       note2: additionalData?['note2'],
       shippingPrice: additionalData?['shipping_price'],
       couponDiscount: additionalData?['coupon_discount'],
+      couponCode: additionalData?['coupon_code'],
       pickupPrice: additionalData?['pickup_price'],
       totalPrice: additionalData?['total_price'],
       totalShipmentsCount: additionalData?['total_items']?.toString(),
