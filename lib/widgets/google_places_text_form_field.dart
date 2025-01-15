@@ -22,6 +22,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
     this.placeBounds,
     this.validator,
     this.onClearData,
+    this.showRequiredSign = true,
   }) : super(key: key);
 
   final String? label;
@@ -33,6 +34,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
   final PlaceBounds? placeBounds;
   final String? Function(String?)? validator;
   final VoidCallback? onClearData;
+  final bool showRequiredSign;
 
   @override
   State<GooglePlacesTextFormField> createState() =>
@@ -63,12 +65,32 @@ class _GooglePlacesTextFormFieldState extends State<GooglePlacesTextFormField> {
       children: [
         if (widget.label != null)
           Padding(
-            padding: EdgeInsets.only(bottom: 12.height, right: 8, left: 8),
-            child: AppText(
-              fontSize: 14,
-              title: widget.label!,
-              color: AppColors.secondary.theme,
-              fontWeight: FontWeight.w500,
+            padding: EdgeInsets.only(
+              bottom: widget.showRequiredSign ? 0 : 8.height,
+              right: 8,
+              left: 8,
+            ),
+            child: Row(
+              children: [
+                Flexible(
+                  child: AppText(
+                    fontSize: 14,
+                    padding: widget.showRequiredSign ? EdgeInsets.only(
+                      bottom: 8.height,
+                    ) : EdgeInsets.zero,
+                    title: widget.label!,
+                    color: AppColors.secondary.theme,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                if (widget.showRequiredSign)
+                  AppText(
+                    fontSize: 20,
+                    title: ' *',
+                    color: AppColors.red,
+                    fontWeight: FontWeight.w500,
+                  ),
+              ],
             ),
           ),
         GooglePlaceAutoCompleteTextField(

@@ -113,6 +113,26 @@ class _Input extends StatelessWidget {
                   ]
                 ],
               );
+            } else if (input.type == ShippingInputType.googlePlacesField) {
+              final prediction = cubit.currentPage == 1 ? dto.destination : dto.origin;
+              return Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: GooglePlacesTextFormField(
+                  controller: input.controller,
+                  label: input.name,
+                  fillColor: AppColors.whiteBk,
+                  showRequiredSign: input.validation.required,
+                  validator: input.validate,
+                  countries: [
+                    prediction!.countryCode!
+                  ],
+                  placeType: PlaceType.address,
+                  placeBounds: prediction.bounds!,
+                  onSelected: (value) {
+                    input.controller.text = value.structuredFormatting?.mainText ?? '';
+                  },
+                ),
+              );
             }
             return AppText(
               title: 'Unsupported input type\n${input.type.name}',

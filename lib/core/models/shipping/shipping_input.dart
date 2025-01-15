@@ -95,8 +95,7 @@ class ShippingInput {
 
   Map<String, dynamic> toJson({required String replaceAsteriskWith}) {
     return {
-      // TODO: [Create] Remove postcode replacement
-      '${requestKey.replaceFirst('*', replaceAsteriskWith).replaceFirst('postcode', 'postal_code')}': type == ShippingInputType.dropdown
+      '${requestKey.replaceFirst('*', replaceAsteriskWith)}': type == ShippingInputType.dropdown
           ? selectedValue!.id
           : controller.text.trim(),
       if (requestKey.contains('phone'))
@@ -160,6 +159,7 @@ enum ShippingInputType {
   // map('map'),
   readOnlyField('read_only'),
   radio('radios'),
+  googlePlacesField('google_places_field'),
   textFieldArea('textarea');
 
   const ShippingInputType(this.id);
