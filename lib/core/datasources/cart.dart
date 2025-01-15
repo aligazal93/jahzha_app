@@ -1,6 +1,7 @@
 import 'package:jahzha_app/core/models/shipping/shipping_offer_inputs.dart';
 
 import '../../widgets/snack_bar.dart';
+import '../models/cart/cart_response.dart';
 import '../models/shipping/shipping_offer.dart';
 import '../network_utils/network_utils.dart';
 
@@ -28,5 +29,24 @@ class CartDatasource {
       handleGenericException(e);
     }
     return false;
+  }
+
+  Future<CartResponse?> getCart({required int page}) async {
+    try {
+      final response = await NetworkUtils.get(
+        'cart-items?page=$page',
+      );
+      final success = response.statusCode! < 300;
+      if (success) {
+        return CartResponse.fromJson(response.data);
+      }
+      showSnackBar(
+        response.getMessage,
+        errorMessage: true,
+      );
+    } catch (e) {
+      handleGenericException(e);
+    }
+    return null;
   }
 }

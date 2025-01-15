@@ -278,5 +278,9 @@
   "close": "Close",
   "add_item": "Add item",
   "remove_item": "Remove item",
-  "please_fill_all_required_fields": "Please fill all required fields"
+  "please_fill_all_required_fields": "Please fill all required fields",
+  "add_another_order": "Add another order",
+  "Receipt details": "Receipt details",
+  "order summary": "Order summary",
+  "pickup cost": "Pickup cost"
 }

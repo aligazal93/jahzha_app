@@ -33,8 +33,6 @@ class AppTextField extends StatefulWidget {
     this.textAlign = TextAlign.start,
   });
 
-
-
   final String? hint;
   final bool showRequiredSign;
   final String? Function(String?)? validator;

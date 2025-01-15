@@ -277,5 +277,9 @@
   "close": "اغلاق",
   "add_item": "اضف عنصر",
   "remove_item": "حذف العنصر",
-  "please_fill_all_required_fields": "الرجاء ملئ جميع الحقول المطلوبة"
+  "please_fill_all_required_fields": "الرجاء ملئ جميع الحقول المطلوبة",
+  "add_another_order": "اضف طلب اخر",
+  "Receipt details": "تفاصيل الاستلام",
+  "order summary": "ملخص الطلب",
+  "pickup cost": "تكلفة الاستلام"
 }

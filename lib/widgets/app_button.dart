@@ -41,7 +41,10 @@ class AppButton extends StatelessWidget {
     Color titleColor = AppColors.black,
     VoidCallback? onTap,
     bool isLoading = false,
+    double titleFontSize = 16,
     Axis constrainedAxis = Axis.vertical,
+    EdgeInsets? padding,
+    double? height,
   }) {
     return _OutlineAppButton(
       title: title,
@@ -50,6 +53,9 @@ class AppButton extends StatelessWidget {
       titleColor: titleColor,
       isLoading: isLoading,
       constrainedAxis: constrainedAxis,
+      titleFontSize: titleFontSize,
+      padding: padding,
+      height: height,
     );
   }
 
@@ -100,8 +106,10 @@ class _OutlineAppButton extends AppButton {
     super.titleColor = AppColors.black,
     required super.isLoading,
     super.constrainedAxis,
-    super.borderColor = AppColors.white
-
+    super.borderColor = AppColors.white,
+    super.titleFontSize = 16,
+    super.padding,
+    super.height,
   });
 
   @override
@@ -120,7 +128,7 @@ class _OutlineAppButton extends AppButton {
           radius: _radius,
           borderRadius: BorderRadius.circular(_radius),
           child: Container(
-            height: 48.height,
+            height: height ?? 48.height,
             alignment: Alignment.center,
             padding: padding ?? EdgeInsets.symmetric(horizontal: 48.width),
             child: AppText(
