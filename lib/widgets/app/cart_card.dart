@@ -7,8 +7,13 @@ import '../../core/helpers/app_colors.dart';
 import '../app_text.dart';
 
 class CartCard extends StatefulWidget {
-  const CartCard({Key? key, required this.shipment}) : super(key: key);
+  const CartCard({
+    Key? key,
+    required this.shipment,
+    required this.onDelete,
+  }) : super(key: key);
 
+  final void Function() onDelete;
   final CartShipment shipment;
 
   @override
@@ -85,9 +90,12 @@ class _CartCardState extends State<CartCard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Icon(
-                    FontAwesomeIcons.trashCan,
-                    color: AppColors.red,
+                  child: InkWell(
+                    onTap: widget.onDelete,
+                    child: Icon(
+                      FontAwesomeIcons.trashCan,
+                      color: AppColors.red,
+                    ),
                   ),
                 )
               ],

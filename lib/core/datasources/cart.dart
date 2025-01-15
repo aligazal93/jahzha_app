@@ -49,4 +49,22 @@ class CartDatasource {
     }
     return null;
   }
+
+  Future<bool> removeFromCart({required String id,}) async {
+    try {
+      final response = await NetworkUtils.post(
+        'delete-cart-item',
+        data: {'id': id},
+      );
+      final success = response.statusCode! < 300;
+      showSnackBar(
+        response.getMessage,
+        errorMessage: !success,
+      );
+      return success;
+    } catch (e) {
+      handleGenericException(e);
+    }
+    return false;
+  }
 }

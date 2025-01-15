@@ -13,7 +13,11 @@ class _Shipments extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return CartCard(shipment: shipments[index]);
+        final shipment = shipments[index];
+        return CartCard(
+          onDelete: () => cubit.removeFromCart(shipment),
+          shipment: shipment,
+        );
       },
       separatorBuilder: (context, index) => SizedBox(height: 12),
     );
