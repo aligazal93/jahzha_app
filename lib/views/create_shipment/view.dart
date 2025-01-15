@@ -30,6 +30,7 @@ import 'package:jahzha_app/widgets/empty_view.dart';
 import 'package:jahzha_app/widgets/image_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/helpers/utils.dart';
+import '../../core/models/shipping/shipping_offer.dart';
 import 'cubit.dart';
 
 part 'units/sender_destination.dart';
@@ -49,12 +50,12 @@ part 'units/create_shipment_app_bar.dart';
 class CreateShipmentView extends StatelessWidget {
   const CreateShipmentView({
     Key? key,
-    required this.offerID,
+    required this.offer,
     required this.inputs,
     required this.dto,
   }) : super(key: key);
 
-  final String offerID;
+  final ShippingOffer offer;
   final GetOffersDTO dto;
   final ShippingOfferInputs inputs;
 
@@ -64,7 +65,7 @@ class CreateShipmentView extends StatelessWidget {
       canPop: false,
       child: BlocProvider(
         create: (context) => CreateShipmentCubit(
-          offerID: offerID,
+          offer: offer,
           inputs: inputs,
           dto: dto,
         ),

@@ -20,21 +20,23 @@ class _Input extends StatelessWidget {
               final isReadOnly = input.type == ShippingInputType.readOnlyField;
               return AppTextField(
                 prefixIcon: !isReadOnly &&
-                    input.validation.type == ShippingInputValidationType.phone
+                        input.validation.type ==
+                            ShippingInputValidationType.phone
                     ? AppCountryPicker(
-                  initialPhoneCode: input.phoneCode,
-                  onSelect: (country, code) => input.phoneCode = code,
-                )
+                        initialPhoneCode: input.phoneCode,
+                        onSelect: (country, code) => input.phoneCode = code,
+                      )
                     : null,
                 controller: input.controller,
-                fillColor: isReadOnly ? AppColors.darkGrayBlue : AppColors.whiteBk,
+                fillColor:
+                    isReadOnly ? AppColors.darkGrayBlue : AppColors.whiteBk,
                 label: input.name,
                 suffixIcon: isReadOnly
                     ? Icon(
-                  FontAwesomeIcons.lock,
-                  color: AppColors.lightGray,
-                  size: 16,
-                )
+                        FontAwesomeIcons.lock,
+                        color: AppColors.lightGray,
+                        size: 16,
+                      )
                     : null,
                 inputType: input.validation.inputType,
                 onTap: isReadOnly ? () {} : null,
@@ -54,7 +56,8 @@ class _Input extends StatelessWidget {
                   if (input.selectedValue?.helpImage != null) ...[
                     SizedBox(height: 12),
                     InkWell(
-                      onTap: ImageView(url: input.selectedValue!.helpImage!).show,
+                      onTap:
+                          ImageView(url: input.selectedValue!.helpImage!).show,
                       child: AppNetworkImage(
                         url: input.selectedValue!.helpImage!,
                         // height: 260,
@@ -63,6 +66,51 @@ class _Input extends StatelessWidget {
                       ),
                     ),
                   ],
+                ],
+              );
+            } else if (input.type == ShippingInputType.radio) {
+              final isSelected = input.controller.text == '1';
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Checkbox(
+                        visualDensity:
+                            VisualDensity(horizontal: -4, vertical: -4),
+                        value: isSelected,
+                        activeColor: AppColors.primary,
+                        onChanged: (value) {
+                          input.controller.text = '${isSelected ? 0 : 1}';
+                          cubit.updateUI();
+                        },
+                      ),
+                      SizedBox(width: 8),
+                      Flexible(
+                        child: AppText(
+                          padding: EdgeInsets.only(
+                            top: 6,
+                          ),
+                          title: input.name,
+                        ),
+                      ),
+                      AppText(
+                        fontSize: 20,
+                        title: ' *',
+                        color: AppColors.red,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ],
+                  ),
+                  if (input.validation.required && !isSelected) ...[
+                    SizedBox(height: 8),
+                    AppText(
+                      title: 'required'.tr(),
+                      color: AppColors.red,
+                      fontSize: 12,
+                    ),
+                  ]
                 ],
               );
             }
@@ -132,7 +180,7 @@ class _DropMenuSheet extends StatefulWidget {
   Future<void> show() {
     return AppSheet.show(
       title: input.name,
-      subtitle: '',
+      subtitle: input.enableDropDownSearch ? null : '',
       child: this,
     );
   }
@@ -164,7 +212,7 @@ class _DropMenuSheetState extends State<_DropMenuSheet> {
     }
     final result = await ShippingDatasource().getDropDownItems(
       page: page,
-      offerID: widget.cubit.offerID,
+      offerID: widget.cubit.offer.id,
       inputID: widget.input.id!,
       search: txController.text.trim(),
     );
@@ -199,9 +247,7 @@ class _DropMenuSheetState extends State<_DropMenuSheet> {
   Widget build(BuildContext context) {
     final input = widget.input;
     final bottomPadding = EdgeInsets.only(
-      bottom: Utils.bottomDevicePadding == 0
-          ? 16.height
-          : Utils.bottomDevicePadding,
+      bottom: Platform.isAndroid ? 16.height : 0,
     );
     if (isLoading) {
       return SafeArea(
@@ -217,8 +263,9 @@ class _DropMenuSheetState extends State<_DropMenuSheet> {
           return Container(
             margin: bottomPadding,
             constraints: BoxConstraints(
-              maxHeight: context.height(input.enableDropDownSearch ? 1.25 : 2.5) -
-                  Utils.keyboardHeight(context),
+              maxHeight:
+                  context.height(input.enableDropDownSearch ? 1.5 : 2.5) -
+                      Utils.keyboardHeight(context),
             ),
             child: Column(
               children: [
@@ -261,6 +308,7 @@ class _DropMenuSheetState extends State<_DropMenuSheet> {
                       }
                       return ListView.separated(
                         itemCount: items.length,
+                        padding: EdgeInsets.zero,
                         itemBuilder: (context, index) {
                           final item = items[index];
                           final isSelected = input.selectedValue?.id == item.id;
@@ -298,7 +346,9 @@ class _DropMenuSheetState extends State<_DropMenuSheet> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
                                   border: Border.all(
-                                    color: isSelected ? AppColors.primary : AppColors.darkGrayBlue,
+                                    color: isSelected
+                                        ? AppColors.primary
+                                        : AppColors.darkGrayBlue,
                                   ),
                                 ),
                               ),
@@ -310,7 +360,7 @@ class _DropMenuSheetState extends State<_DropMenuSheet> {
                               title: item.name,
                             ),
                             visualDensity:
-                            VisualDensity(horizontal: -4, vertical: -4),
+                                VisualDensity(horizontal: -4, vertical: -4),
                             contentPadding: EdgeInsets.zero,
                             value: isSelected,
                             activeColor: AppColors.primary,

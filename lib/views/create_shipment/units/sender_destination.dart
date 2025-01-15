@@ -8,6 +8,7 @@ class _ShipperPage extends StatelessWidget {
     final cubit = CreateShipmentCubit.of(context);
     final inputs = cubit.inputs.shipper;
     return ListView.separated(
+      cacheExtent: inputs.length * 90,
       padding: EdgeInsets.only(top: 20),
       itemCount: inputs.length,
       itemBuilder: (context, index) {

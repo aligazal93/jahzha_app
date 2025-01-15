@@ -1,7 +1,13 @@
+import 'package:collection/collection.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jahzha_app/core/datasources/cart.dart';
+import 'package:jahzha_app/core/helpers/utils.dart';
+import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
+import 'package:jahzha_app/widgets/snack_bar.dart';
 
 import '../../core/datasources/shipping.dart';
 import '../../core/models/shipping/get_offers_dto.dart';
@@ -15,35 +21,60 @@ part 'states.dart';
 
 class CreateShipmentCubit extends Cubit<CreateShipmentStates> {
   CreateShipmentCubit({
-    required this.offerID,
+    required this.offer,
     required this.inputs,
     required this.dto,
   }) : super(CreateShipmentInit());
 
-  final String offerID;
+  final ShippingOffer offer;
   final GetOffersDTO dto;
   final ShippingOfferInputs inputs;
 
   static CreateShipmentCubit of(context) => BlocProvider.of(context);
 
-  final _datasource = ShippingDatasource();
   final formKey = GlobalKey<FormState>();
   final pageController = PageController();
   int currentPage = 0;
 
   Future<void> addToCart() async {
-    if (!formKey.currentState!.validate()) return;
-    RouteUtils.navigateTo(CartPageView());
+    if (!validate()) {
+      return;
+    }
+    await AppLoadingIndicator.show();
+    final result = await CartDatasource().addToCart(
+      offer: offer,
+      inputs: inputs,
+    );
+    await AppLoadingIndicator.hide();
+    if (result) {
+      RouteUtils.navigateAndPopUntilFirstPage(CartPageView());
+    }
   }
 
   void nextPage() {
-    if (!formKey.currentState!.validate()) return;
+    if (!validate()) {
+      return;
+    }
     currentPage++;
     pageController.nextPage(
       duration: Duration(milliseconds: 300),
       curve: Curves.ease,
     );
     _emit(CreateShipmentInit());
+  }
+
+  bool validate() {
+    if (!formKey.currentState!.validate() ||
+        (inputs.radios.firstWhereOrNull(
+                (e) => e.validation.required && e.controller.text != '1') !=
+            null)) {
+      showSnackBar(
+        'please_fill_all_required_fields'.tr(),
+        errorMessage: true,
+      );
+      return false;
+    }
+    return true;
   }
 
   void previousPage() async {

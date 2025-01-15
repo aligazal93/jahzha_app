@@ -79,6 +79,31 @@ class ShippingInput {
     }
     return null;
   }
+
+  ShippingInput copy() {
+    return ShippingInput(
+      id: id,
+      name: name,
+      requestKey: requestKey,
+      note: note,
+      defaultValue: defaultValue,
+      enableDropDownSearch: enableDropDownSearch,
+      type: type,
+      validation: validation,
+    );
+  }
+
+  Map<String, dynamic> toJson({required String replaceAsteriskWith}) {
+    return {
+      // TODO: [Create] Remove postcode replacement
+      '${requestKey.replaceFirst('*', replaceAsteriskWith).replaceFirst('postcode', 'postal_code')}': type == ShippingInputType.dropdown
+          ? selectedValue!.id
+          : controller.text.trim(),
+      if (requestKey.contains('phone'))
+        '${requestKey.replaceFirst('[phone]', '')}[dial_code]':
+            phoneCode.replaceFirst('+', '')
+    };
+  }
 }
 
 class ShippingValidation {

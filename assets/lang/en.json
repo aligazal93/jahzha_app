@@ -275,5 +275,8 @@
   "keep": "Keep",
   "discard_and_leave": "Discard and Leave",
   "discard_changes": "Discard changes?",
-  "close": "Close"
+  "close": "Close",
+  "add_item": "Add item",
+  "remove_item": "Remove item",
+  "please_fill_all_required_fields": "Please fill all required fields"
 }

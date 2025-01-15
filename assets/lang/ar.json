@@ -274,5 +274,8 @@
   "keep": "البقاء",
   "discard_and_leave": "التجاهل والخروج",
   "discard_changes": "تجاهل التغييرات ؟",
-  "close": "اغلاق"
+  "close": "اغلاق",
+  "add_item": "اضف عنصر",
+  "remove_item": "حذف العنصر",
+  "please_fill_all_required_fields": "الرجاء ملئ جميع الحقول المطلوبة"
 }

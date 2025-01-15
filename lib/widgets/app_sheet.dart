@@ -96,7 +96,6 @@ class AppSheet extends StatelessWidget {
                 ],
                 // SizedBox(height: 24.height),
                 child,
-                SizedBox(height: Utils.bottomDevicePadding),
               ],
             ),
           );
