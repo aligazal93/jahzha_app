@@ -14,9 +14,10 @@ class GetOffersDTO {
   bool? filterPriceInDescendingOrder;
   bool? orderByFastest;
   bool? orderByNewest;
+  bool? orderByCheapest;
 
   bool get isFilterApplied {
-    return orderByNewest != null ||
+    return orderByCheapest != null || orderByNewest != null ||
         orderByFastest != null ||
         filterPriceInDescendingOrder != null;
   }
@@ -28,6 +29,7 @@ class GetOffersDTO {
       if (orderByFastest != null)
         "order_by_fastest": orderByFastest! ? "1" : "0",
       if (orderByNewest != null) "order_by_newest": orderByNewest! ? "1" : "0",
+      if (orderByCheapest != null) "order_by_cheapest": orderByCheapest! ? "1" : "0",
     };
     if (isLocal) {
       return {

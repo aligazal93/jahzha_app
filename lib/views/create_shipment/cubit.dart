@@ -64,10 +64,7 @@ class CreateShipmentCubit extends Cubit<CreateShipmentStates> {
   }
 
   bool validate() {
-    if (!formKey.currentState!.validate() ||
-        (inputs.radios.firstWhereOrNull(
-                (e) => e.validation.required && e.controller.text != '1') !=
-            null)) {
+    if (!formKey.currentState!.validate() || !_validateRadios()) {
       showSnackBar(
         'please_fill_all_required_fields'.tr(),
         errorMessage: true,
@@ -75,6 +72,15 @@ class CreateShipmentCubit extends Cubit<CreateShipmentStates> {
       return false;
     }
     return true;
+  }
+
+  bool _validateRadios() {
+    if (currentPage != 2) {
+      return true;
+    }
+    return inputs.radios.firstWhereOrNull((e) {
+      return e.validation.required && e.controller.text != '1';
+    }) == null;
   }
 
   void previousPage() async {

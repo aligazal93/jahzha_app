@@ -37,79 +37,15 @@ class ResultBottomSheetView extends StatelessWidget {
                         ? 'expensive_first'.tr()
                         : 'cheapest_first'.tr(),
                 onChange: (v) {
-                  dto.filterPriceInDescendingOrder = v == 'expensive_first'.tr;
+                  if (v == null) {
+                    dto.filterPriceInDescendingOrder = null;
+                  } else {
+                    dto.filterPriceInDescendingOrder =
+                        v == 'expensive_first'.tr;
+                  }
                   cubit.updateUI();
                 },
                 items: ['cheapest_first'.tr(), 'expensive_first'.tr()],
-              ),
-              Builder(
-                builder: (context) {
-                  final isSelected = dto.orderByFastest ?? false;
-                  return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                    padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.blueLight),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              dto.orderByFastest = !isSelected;
-                              cubit.updateUI();
-                            },
-                            child: AnimatedContainer(
-                              duration: Duration(microseconds: 5000),
-                              height: 30,
-                              width: 30,
-                              curve: Curves.bounceInOut,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: AppColors.darkGray.theme,
-                                ),
-                                color: isSelected
-                                    ? AppColors.primary
-                                    : AppColors.darkGrayBlue,
-                              ),
-                              child: Icon(
-                                FontAwesomeIcons.check,
-                                color: AppColors.white.theme,
-                                size: 12,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                FontAwesomeIcons.rocket,
-                                size: 20,
-                                color: AppColors.blue,
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              AppText(
-                                title: 'fastest'.tr(),
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                color: AppColors.blue,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12,
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
               ),
               Builder(
                 builder: (context) {
@@ -122,14 +58,14 @@ class ResultBottomSheetView extends StatelessWidget {
                         color: AppColors.orangeLight),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              dto.orderByNewest = !isSelected;
-                              cubit.updateUI();
-                            },
-                            child: AnimatedContainer(
+                      child: InkWell(
+                        onTap: () {
+                          dto.orderByNewest = !isSelected;
+                          cubit.updateUI();
+                        },
+                        child: Row(
+                          children: [
+                            AnimatedContainer(
                               duration: Duration(microseconds: 5000),
                               height: 30,
                               width: 30,
@@ -151,30 +87,167 @@ class ResultBottomSheetView extends StatelessWidget {
                                 size: 12,
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                FontAwesomeIcons.star,
-                                size: 20,
-                                color: AppColors.primary,
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  FontAwesomeIcons.star,
+                                  size: 20,
+                                  color: AppColors.primary,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                AppText(
+                                  title: 'new'.tr(),
+                                  padding: EdgeInsets.symmetric(horizontal: 8),
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 12,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+              Builder(
+                builder: (context) {
+                  final isSelected = dto.orderByFastest ?? false;
+                  return Container(
+                    margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.blueLight),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: InkWell(
+                        onTap: () {
+                          dto.orderByFastest = !isSelected;
+                          cubit.updateUI();
+                        },
+                        child: Row(
+                          children: [
+                            AnimatedContainer(
+                              duration: Duration(microseconds: 5000),
+                              height: 30,
+                              width: 30,
+                              curve: Curves.bounceInOut,
+                              margin: EdgeInsets.symmetric(vertical: 10),
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: AppColors.darkGray.theme,
+                                ),
+                                color: isSelected
+                                    ? AppColors.primary
+                                    : AppColors.darkGrayBlue,
                               ),
-                              SizedBox(
-                                width: 8,
+                              child: Icon(
+                                FontAwesomeIcons.check,
+                                color: AppColors.white.theme,
+                                size: 12,
                               ),
-                              AppText(
-                                title: 'new'.tr(),
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12,
-                              )
-                            ],
-                          )
-                        ],
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  FontAwesomeIcons.rocket,
+                                  size: 20,
+                                  color: AppColors.blue,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                AppText(
+                                  title: 'fastest'.tr(),
+                                  padding: EdgeInsets.symmetric(horizontal: 8),
+                                  color: AppColors.blue,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 12,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+              Builder(
+                builder: (context) {
+                  final isSelected = dto.orderByCheapest ?? false;
+                  return Container(
+                    margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.orangeLight,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: InkWell(
+                        onTap: () {
+                          dto.orderByCheapest = !isSelected;
+                          cubit.updateUI();
+                        },
+                        child: Row(
+                          children: [
+                            AnimatedContainer(
+                              duration: Duration(microseconds: 5000),
+                              height: 30,
+                              width: 30,
+                              curve: Curves.bounceInOut,
+                              margin: EdgeInsets.symmetric(vertical: 10),
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: AppColors.darkGray.theme,
+                                ),
+                                color: isSelected
+                                    ? AppColors.primary
+                                    : AppColors.darkGrayBlue,
+                              ),
+                              child: Icon(
+                                FontAwesomeIcons.check,
+                                color: AppColors.white.theme,
+                                size: 12,
+                              ),
+                            ),
+                            SizedBox(width: 12),
+                            Row(
+                              children: [
+                                Icon(
+                                  FontAwesomeIcons.ticket,
+                                  size: 20,
+                                  color: AppColors.primary,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                AppText(
+                                  title: 'saving'.tr(),
+                                  padding: EdgeInsets.symmetric(horizontal: 8),
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 12,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -187,10 +260,12 @@ class ResultBottomSheetView extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppButton(
-                        onTap: dto.isFilterApplied ? () {
-                          cubit.filterOffers();
-                          RouteUtils.pop();
-                        } : null,
+                        onTap: dto.isFilterApplied
+                            ? () {
+                                cubit.filterOffers();
+                                RouteUtils.pop();
+                              }
+                            : null,
                         title: 'Show results'.tr(),
                         constrainedAxis: Axis.horizontal,
                         color: AppColors.primary,
@@ -218,7 +293,8 @@ class ResultBottomSheetView extends StatelessWidget {
                     ],
                   ],
                 ),
-              )
+              ),
+              if (Platform.isAndroid) SizedBox(height: 16),
             ],
           ),
         );

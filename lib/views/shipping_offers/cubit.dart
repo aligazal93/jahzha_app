@@ -74,6 +74,7 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
     dto.filterPriceInDescendingOrder = null;
     dto.orderByFastest = null;
     dto.orderByNewest = null;
+    dto.orderByCheapest = null;
     filteredOffers.clear();
     _emit(ShippingOffersInit());
   }
