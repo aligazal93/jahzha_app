@@ -23,11 +23,7 @@ class _Input extends StatelessWidget {
                         input.validation.type ==
                             ShippingInputValidationType.phone
                     ? AppCountryPicker(
-                  initialPhoneCode: input.phoneCode ??
-                            CountryCode.fromCountryCode((cubit.currentPage == 1
-                                    ? dto.destination?.countryCode
-                                    : dto.origin?.countryCode)!)
-                                .dialCode!,
+                  initialPhoneCode: input.phoneCode!,
                         onSelect: (country, code) => input.phoneCode = code,
                       )
                     : null,
@@ -134,6 +130,36 @@ class _Input extends StatelessWidget {
                   placeBounds: prediction.bounds!,
                   onSelected: (value) {
                     input.controller.text = value.structuredFormatting?.mainText ?? '';
+                    input.selectedPrediction = value;
+                  },
+                ),
+              );
+            } else if (input.type == ShippingInputType.map) {
+              final prediction = cubit.currentPage == 1 ? dto.destination : dto.origin;
+              return Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: GooglePlacesTextFormField(
+                  controller: input.controller,
+                  label: input.name,
+                  fillColor: AppColors.whiteBk,
+                  showRequiredSign: input.validation.required,
+                  validator: input.validate,
+                  countries: [
+                    prediction!.countryCode!
+                  ],
+                  placeType: PlaceType.address,
+                  placeBounds: prediction.bounds!,
+                  onSelected: (value) {
+                    final result = cubit.addPrediction(
+                      id: input.requestKey,
+                      v: value,
+                    );
+                    if (result) {
+                      input.selectedPrediction = value;
+                      input.controller.text = input.selectedPrediction!.description!;
+                    } else {
+                      input.controller.clear();
+                    }
                   },
                 ),
               );

@@ -1,8 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_places_flutter/model/prediction.dart';
 import 'package:jahzha_app/core/datasources/cart.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
@@ -35,6 +38,10 @@ class CreateShipmentCubit extends Cubit<CreateShipmentStates> {
   final formKey = GlobalKey<FormState>();
   final pageController = PageController();
   int currentPage = 0;
+  Map<String, Prediction?> predictions = {
+    "shipper['street']": null,
+    "receiver['street']": null,
+  };
 
   Future<void> addToCart() async {
     if (!validate()) {
@@ -105,6 +112,32 @@ class CreateShipmentCubit extends Cubit<CreateShipmentStates> {
 
   void updateUI() {
     _emit(CreateShipmentInit());
+  }
+
+  /// TO Handle Shipper and Receiver Address to be less than 15 km
+  bool addPrediction({
+    required String id,
+    required Prediction v,
+  }) {
+    predictions[id] = v;
+    final values = predictions.values;
+    if (values.contains(null)) {
+      return true;
+    }
+    final distance = Geolocator.distanceBetween(
+      double.parse(values.first!.lat!),
+      double.parse(values.first!.lng!),
+      double.parse(values.last!.lat!),
+      double.parse(values.last!.lng!),) / 100;
+    if (distance > 15) {
+      predictions[id] = null;
+      showSnackBar(
+        'distance_must_be_less_than_15km'.tr(),
+        errorMessage: true,
+      );
+      return false;
+    }
+    return true;
   }
 
   bool get isStateLoading {

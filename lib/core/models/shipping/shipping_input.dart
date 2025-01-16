@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:google_places_flutter/model/prediction.dart';
 import 'package:jahzha_app/core/helpers/validator.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_drop_down_item.dart';
 import 'package:world_zipcode_validator/world_zipcode_validator.dart';
@@ -13,6 +14,7 @@ class ShippingInput {
   final ShippingValidation validation;
   String? phoneCode;
   ShippingDropDownItem? selectedValue;
+  Prediction? selectedPrediction;
 
   /// For Getting DropDownItems
   final String? id;
@@ -38,7 +40,7 @@ class ShippingInput {
   });
 
   factory ShippingInput.fromJson(Map<String, dynamic> json) {
-    return ShippingInput(
+    final input = ShippingInput(
       id: json['id'],
       name: json['name'],
       requestKey: json['request_name'],
@@ -47,10 +49,12 @@ class ShippingInput {
       enableDropDownSearch: json['using_search'] ?? false,
       validation: ShippingValidation.fromJson(json['validation']),
       type: ShippingInputType.values.firstWhere(
-        (e) => e.id == json['type'],
+            (e) => e.id == json['type'],
         orElse: () => ShippingInputType.textField,
       ),
-    )..controller.text = json['value']?.toString() ?? '';
+    );
+    input.controller.text = json['value']?.toString() ?? '';
+    return input;
   }
 
   String? validate([String? countryCode]) {
@@ -75,6 +79,8 @@ class ShippingInput {
           !WorldZipcodeValidator.isValid(
               countryCode?.toLowerCase() ?? 'sa', value)) {
         return 'invalid_postal_code'.tr();
+      } else if (this.type == ShippingInputType.map && selectedPrediction == null) {
+        return 'required'.tr();
       }
     }
     return null;
@@ -100,7 +106,13 @@ class ShippingInput {
           : controller.text.trim(),
       if (requestKey.contains('phone'))
         '${requestKey.replaceFirst('[phone]', '')}[dial_code]':
-            phoneCode?.replaceFirst('+', '')
+            phoneCode?.replaceFirst('+', ''),
+      if (type == ShippingInputType.map)
+        ...{
+          requestKey: selectedPrediction!.description,
+          requestKey.replaceFirst('[street]', '[careem_location][lat]'): selectedPrediction!.lat,
+          requestKey.replaceFirst('[street]', '[careem_location][lng]'): selectedPrediction!.lng,
+        },
     };
   }
 }
@@ -154,10 +166,10 @@ class ShippingValidation {
 enum ShippingInputType {
   textField('input'),
   dropdown('select'),
-  // map('map'),
   readOnlyField('read_only'),
   radio('radios'),
   googlePlacesField('google_places_field'),
+  map('map'),
   textFieldArea('textarea');
 
   const ShippingInputType(this.id);

@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 
 import '../../widgets/snack_bar.dart';
@@ -34,14 +36,14 @@ class ShippingDatasource {
   }
 
   Future<ShippingOfferInputs?> getOfferInputs({
-    required String offerID,
+    required ShippingOffer offer,
     required PickupType type,
   }) async {
     try {
       final response = await NetworkUtils.post(
         'submit-shipping-offer',
         data: {
-          'offer_id': offerID,
+          'offer_id': offer.id,
           'pickup_type': type.id,
         },
       );

@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/models/shipping/get_offers_dto.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
@@ -53,11 +54,21 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
   }) async {
     await AppLoadingIndicator.show();
     final result = await _datasource.getOfferInputs(
-      offerID: offer.id,
+      offer: offer,
       type: offer.pickupType,
     );
     await AppLoadingIndicator.hide();
     if (result != null) {
+      for (final input in result.shipper) {
+        if (input.requestKey.contains('[phone]')) {
+          input.phoneCode = CountryCode.fromCountryCode(dto.origin!.countryCode!).dialCode;
+        }
+      }
+      for (final input in result.receiver) {
+        if (input.requestKey.contains('[phone]')) {
+          input.phoneCode = CountryCode.fromCountryCode(dto.destination!.countryCode!).dialCode;
+        }
+      }
       RouteUtils.navigateTo(CreateShipmentView(
         offer: offer,
         dto: dto,

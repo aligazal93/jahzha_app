@@ -285,5 +285,6 @@
   "pickup cost": "Pickup cost",
   "coupon_applied_with_value": "Coupon {} applied with value",
   "get_point_on_shipping": "Get {} point on shipping",
-  "price_may_vary_due_to_shipment_dimensions": "Price may vary due to shipment dimensions"
+  "price_may_vary_due_to_shipment_dimensions": "Price may vary due to shipment dimensions",
+  "distance_must_be_less_than_15km": "Distance between addresses must be less than 15km"
 }
