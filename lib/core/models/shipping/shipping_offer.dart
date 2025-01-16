@@ -14,6 +14,7 @@ class ShippingOffer {
   final bool pickupByCareem;
   final num pickupByCareemFees;
   final num pickupByCompanyFees;
+  final int? rewardPoints;
 
   PickupType pickupType = PickupType.myself;
   bool addToComparison = false;
@@ -43,6 +44,7 @@ class ShippingOffer {
     required this.pickupByCareem,
     required this.pickupByCareemFees,
     required this.pickupByCompanyFees,
+    required this.rewardPoints,
   });
 
   factory ShippingOffer.fromJson(Map<String, dynamic> json) {
@@ -60,6 +62,7 @@ class ShippingOffer {
       pickupByCareem: json['pickupOptions']?['pickupByCareem']?['pickupStatus'] ?? false,
       pickupByCareemFees: num.tryParse((json['pickupOptions']?['pickupByCareem']?['PickupFee']).toString()) ?? 0,
       pickupByCompanyFees: num.tryParse((json['pickupOptions']?['pickupByCurrentCompany']?['PickupFee']).toString()) ?? 0,
+      rewardPoints: int.tryParse(json['rewardPoints'].toString()) ?? 0,
     );
   }
 }

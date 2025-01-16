@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -107,6 +109,8 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                           title: 'Order now'.tr(),
                           onTap: () {},
                         ),
+                        if (Platform.isAndroid)
+                          SizedBox(height: 16),
                       ],
                     ),
                   );
@@ -230,16 +234,73 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
               title: 'Expected arrival date'.tr(),
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
               color: AppColors.txtGray,
             ),
-            AppText(
-              title: offer.estimatedDeliveryTime!,
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              color: AppColors.secondary,
+            Row(
+              children: [
+                SizedBox(width: 12),
+                Icon(
+                  FontAwesomeIcons.clock,
+                  color: AppColors.lightGray,
+                  size: 20,
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: AppText(
+                    title: offer.estimatedDeliveryTime!,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.lightGray,
+                  ),
+                ),
+                SizedBox(width: 12),
+              ],
             ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                SizedBox(width: 12),
+                Icon(
+                  FontAwesomeIcons.lifeRing,
+                  color: AppColors.lightGray,
+                  size: 20,
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: AppText(
+                    title: offer.insuranceText,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.lightGray,
+                  ),
+                ),
+                SizedBox(width: 12),
+              ],
+            ),
+            if (offer.rewardPoints != null) ...[
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  SizedBox(width: 12),
+                  Icon(
+                    FontAwesomeIcons.ticket,
+                    color: AppColors.primary,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: AppText(
+                      title: 'get_point_on_shipping'.tr(args: [offer.rewardPoints.toString()]),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  SizedBox(width: 12),
+                ],
+              ),
+            ],
             SizedBox(height: 12),
             Divider(),
           ],
@@ -312,6 +373,28 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                     ),
                   ],
                 ),
+                SizedBox(height: 12),
+                Row(
+                  children: [
+                    SizedBox(width: 12),
+                    Icon(
+                      FontAwesomeIcons.triangleExclamation,
+                      color: AppColors.primary,
+                      size: 20,
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: AppText(
+                        title: 'price_may_vary_due_to_shipment_dimensions'.tr(),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                    SizedBox(width: 12),
+                  ],
+                ),
+                SizedBox(height: 12),
                 AppButton(
                   color: AppColors.primary,
                   constrainedAxis: Axis.horizontal,

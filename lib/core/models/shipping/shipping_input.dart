@@ -11,7 +11,7 @@ class ShippingInput {
   final bool enableDropDownSearch;
   final ShippingInputType type;
   final ShippingValidation validation;
-  String phoneCode = '+966';
+  String? phoneCode;
   ShippingDropDownItem? selectedValue;
 
   /// For Getting DropDownItems
@@ -100,7 +100,7 @@ class ShippingInput {
           : controller.text.trim(),
       if (requestKey.contains('phone'))
         '${requestKey.replaceFirst('[phone]', '')}[dial_code]':
-            phoneCode.replaceFirst('+', '')
+            phoneCode?.replaceFirst('+', '')
     };
   }
 }
@@ -144,8 +144,6 @@ class ShippingValidation {
       return TextInputType.numberWithOptions();
     } else if (type == ShippingInputValidationType.email) {
       return TextInputType.emailAddress;
-    } else if (type == ShippingInputValidationType.postalCode) {
-      return TextInputType.numberWithOptions();
     } else if (type == ShippingInputValidationType.double) {
       return TextInputType.numberWithOptions(decimal: true);
     }

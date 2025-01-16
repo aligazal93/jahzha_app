@@ -84,7 +84,13 @@ class SendShippingView extends StatelessWidget {
                             countries: ['SA'],
                             placeType: PlaceType.cities,
                             onSelected: (value) => dto.origin = value,
-                            validator: (_) => Validator.empty(dto.origin?.city),
+                            validator: (_) {
+                              if (dto.origin?.city == null) {
+                                dto.originTXController.clear();
+                                return 'required'.tr();
+                              }
+                              return null;
+                            },
                             onClearData: () {
                               dto.origin = null;
                             },
@@ -109,7 +115,13 @@ class SendShippingView extends StatelessWidget {
                                 dto.destinationCountryTXController.text = value.country ?? '';
                                 cubit.updateUI();
                               },
-                              validator: (_) => Validator.empty(dto.destinationCountry?.city),
+                              validator: (_) {
+                                if (dto.destinationCountry?.city == null) {
+                                  dto.destinationCountryTXController.clear();
+                                  return 'required'.tr();
+                                }
+                                return null;
+                              },
                               onClearData: () {
                                 dto.destination = null;
                                 dto.destinationCountry = null;
@@ -131,8 +143,13 @@ class SendShippingView extends StatelessWidget {
                                 dto.destination = value;
                                 dto.destinationTXController.text = value.city ?? '';
                               },
-                              validator: (_) =>
-                                  Validator.empty(dto.destination?.city),
+                              validator: (_) {
+                                if (dto.destination?.city == null) {
+                                  dto.destinationTXController.clear();
+                                  return 'required'.tr();
+                                }
+                                return null;
+                              },
                               onClearData: () {
                                 dto.destination = null;
                               },

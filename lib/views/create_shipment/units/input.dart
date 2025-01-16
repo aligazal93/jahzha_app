@@ -23,7 +23,11 @@ class _Input extends StatelessWidget {
                         input.validation.type ==
                             ShippingInputValidationType.phone
                     ? AppCountryPicker(
-                        initialPhoneCode: input.phoneCode,
+                  initialPhoneCode: input.phoneCode ??
+                            CountryCode.fromCountryCode((cubit.currentPage == 1
+                                    ? dto.destination?.countryCode
+                                    : dto.origin?.countryCode)!)
+                                .dialCode!,
                         onSelect: (country, code) => input.phoneCode = code,
                       )
                     : null,

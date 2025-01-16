@@ -282,5 +282,7 @@
   "Receipt details": "تفاصيل الاستلام",
   "order summary": "ملخص الطلب",
   "pickup cost": "تكلفة الاستلام",
-  "coupon_applied_with_value": "تم تطبيق الكوبون {} بقيمة"
+  "coupon_applied_with_value": "تم تطبيق الكوبون {} بقيمة",
+  "get_point_on_shipping": "أحصل علي {} نقطة عند الشحن",
+  "price_may_vary_due_to_shipment_dimensions": "قد يختلف السعر مع أبعاد الشحنة"
 }
