@@ -7,6 +7,7 @@ import '../models/shipping/get_offers_dto.dart';
 import '../models/shipping/shipping_drop_down_item.dart';
 import '../models/shipping/shipping_offer.dart';
 import '../models/shipping/shipping_offer_inputs.dart';
+import '../models/shipping_lat_lng.dart';
 import '../network_utils/network_utils.dart';
 
 class ShippingDatasource {
@@ -38,6 +39,8 @@ class ShippingDatasource {
   Future<ShippingOfferInputs?> getOfferInputs({
     required ShippingOffer offer,
     required PickupType type,
+    ShippingLatLng? careemOriginLatLng,
+    ShippingLatLng? careemDestinationLatLng,
   }) async {
     try {
       final response = await NetworkUtils.post(
@@ -45,6 +48,13 @@ class ShippingDatasource {
         data: {
           'offer_id': offer.id,
           'pickup_type': type.id,
+          if (careemOriginLatLng != null &&
+              careemDestinationLatLng != null) ...{
+            'careem_origin_lat': careemOriginLatLng.lat,
+            'careem_origin_lng': careemOriginLatLng.lng,
+            'careem_destination_lat': careemDestinationLatLng.lat,
+            'careem_destination_lng': careemDestinationLatLng.lng,
+          },
         },
       );
       final success = response.statusCode! < 300;

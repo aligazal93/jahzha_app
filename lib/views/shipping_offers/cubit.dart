@@ -6,6 +6,7 @@ import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 
 import '../../core/datasources/shipping.dart';
+import '../../core/models/shipping_lat_lng.dart';
 import '../create_shipment/view.dart';
 
 part 'states.dart';
@@ -51,11 +52,15 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
 
   Future<void> orderOffer({
     required ShippingOffer offer,
+    ShippingLatLng? origin,
+    ShippingLatLng? destination,
   }) async {
     await AppLoadingIndicator.show();
     final result = await _datasource.getOfferInputs(
       offer: offer,
       type: offer.pickupType,
+      careemOriginLatLng: origin,
+      careemDestinationLatLng: destination,
     );
     await AppLoadingIndicator.hide();
     if (result != null) {

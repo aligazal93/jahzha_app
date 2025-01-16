@@ -128,7 +128,7 @@ class CreateShipmentCubit extends Cubit<CreateShipmentStates> {
       double.parse(values.first!.lat!),
       double.parse(values.first!.lng!),
       double.parse(values.last!.lat!),
-      double.parse(values.last!.lng!),) / 100;
+      double.parse(values.last!.lng!),) / 1000;
     if (distance > 15) {
       predictions[id] = null;
       showSnackBar(
