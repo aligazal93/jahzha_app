@@ -80,6 +80,7 @@ class ShippingOffersCubit extends Cubit<ShippingOffersStates> {
         inputs: result,
       ));
     }
+    updateUI();
   }
 
   void updateUI() {

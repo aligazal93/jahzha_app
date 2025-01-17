@@ -3,12 +3,13 @@ class CompareCard extends StatelessWidget {
   const CompareCard({Key? key, required this.titleCard, required this.value1,
     required this.value2,
     this.fontSize = 11,
-    this.color = AppColors.secondary
+    this.color = AppColors.secondary, this.isSelected
 
   }) : super(key: key);
   final String titleCard,value1,value2;
   final double fontSize;
   final Color color;
+  final bool? isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +17,34 @@ class CompareCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            child: AppText(
-              title: titleCard,
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              color: AppColors.secondary,
+            child: Row(
+              children: [
+                Expanded(
+                  child: AppText(
+                    title: titleCard,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.secondary,
+                  ),
+                ),
+                if (isSelected != null)
+                  Builder(
+                    builder: (context) {
+                      return Container(
+                        padding: EdgeInsets.all(4),
+                        child: Icon(
+                          FontAwesomeIcons.check,
+                          color: AppColors.white,
+                          size: 14,
+                        ),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isSelected! ? AppColors.primary : AppColors.darkGrayBlue,
+                        ),
+                      );
+                    },
+                  ),
+              ],
             ),
             margin: EdgeInsets.only(top: 16),
             padding: EdgeInsets.all(16),

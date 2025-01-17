@@ -38,10 +38,10 @@ class _CompanyCard extends StatelessWidget {
                         color: AppColors.primary,
                         size: 12,
                       ),
+                      SizedBox(width: 2),
                       AppText(
                         title: 'saving'.tr(),
                         fontSize: 10,
-                        padding: EdgeInsets.symmetric(horizontal: 10),
                         fontWeight: FontWeight.w700,
                         color: AppColors.primary,
                       ),
@@ -55,10 +55,10 @@ class _CompanyCard extends StatelessWidget {
                         color: AppColors.blue,
                         size: 12,
                       ),
+                      SizedBox(width: 2),
                       AppText(
                         title: 'fastest'.tr(),
                         fontSize: 10,
-                        padding: EdgeInsets.symmetric(horizontal: 10),
                         fontWeight: FontWeight.w700,
                         color: AppColors.blue,
                       ),
@@ -68,14 +68,14 @@ class _CompanyCard extends StatelessWidget {
                   Row(
                     children: [
                       Icon(
-                        FontAwesomeIcons.star,
+                        FontAwesomeIcons.solidStar,
                         color: AppColors.primary,
                         size: 12,
                       ),
+                      SizedBox(width: 2),
                       AppText(
                         title: 'new'.tr(),
                         fontSize: 10,
-                        padding: EdgeInsets.symmetric(horizontal: 10),
                         fontWeight: FontWeight.w700,
                         color: AppColors.primary,
                       ),

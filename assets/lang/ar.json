@@ -285,5 +285,8 @@
   "coupon_applied_with_value": "تم تطبيق الكوبون {} بقيمة",
   "get_point_on_shipping": "أحصل علي {} نقطة عند الشحن",
   "price_may_vary_due_to_shipment_dimensions": "قد يختلف السعر مع أبعاد الشحنة",
-  "distance_must_be_less_than_15km": "المسافة بين العناوين يجب ان تكون اقل من 15 كم"
+  "unknown": "غير معروف",
+  "unavailable": "غير متاح",
+  "distance_must_be_less_than_15km": "المسافة بين العناوين يجب ان تكون اقل من 15 كم",
+  "deliveryMethodNotAvailable": "طريقة التسليم غير متاحة لشركة الشحن"
 }

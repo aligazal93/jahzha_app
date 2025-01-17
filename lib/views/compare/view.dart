@@ -10,23 +10,73 @@ import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_network_image.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
+import 'package:jahzha_app/widgets/snack_bar.dart';
+
+import '../shipping_offers/view.dart';
 
 part 'units/line-v.dart';
+
 part 'units/company_card.dart';
+
 part 'units/compare_card.dart';
 
-class ComparingView extends StatelessWidget {
+class ComparingView extends StatefulWidget {
   const ComparingView({Key? key, required this.cubit}) : super(key: key);
 
   final ShippingOffersCubit cubit;
 
   @override
+  State<ComparingView> createState() => _ComparingViewState();
+}
+
+class _ComparingViewState extends State<ComparingView> {
+  PickupType pickupType = PickupType.myself;
+
+  void changePickupType(PickupType type) {
+    pickupType = type;
+    setState(() {});
+  }
+
+  void order(ShippingOffer offer) {
+    final companyMethodCheck = pickupType == PickupType.company && !offer.pickupByCompany;
+    final careemMethodCheck = pickupType == PickupType.careem && !offer.pickupByCareem;
+    if (companyMethodCheck || careemMethodCheck) {
+      showSnackBar(
+        'deliveryMethodNotAvailable',
+        errorMessage: true,
+      );
+      return;
+    }
+    offer.pickupType = pickupType;
+    if (pickupType == PickupType.careem) {
+      final originCountryCode = widget.cubit.dto.origin!.countryCode!;
+      final destinationCountryCode = widget.cubit.dto.origin!.countryCode!;
+      PickLocationForCareemView(
+        cubit: widget.cubit,
+        originCountryCode: originCountryCode,
+        destinationCountryCode: destinationCountryCode,
+        onPickLocation: (origin, destination) {
+          widget.cubit.orderOffer(
+            offer: offer,
+            origin: origin,
+            destination: destination,
+          );
+        },
+      ).show();
+    } else {
+      widget.cubit.orderOffer(
+        offer: offer..pickupType = pickupType,
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      bloc: cubit,
+      bloc: widget.cubit,
       builder: (context, state) {
-        final firstOffer = cubit.offers.first;
-        final secondOffer = cubit.offers.last;
+        final firstOffer = widget.cubit.comparisonOffers.first;
+        final secondOffer = widget.cubit.comparisonOffers.last;
         return Scaffold(
           appBar: CustomAppBar(
             title: 'Compare'.tr(),
@@ -50,8 +100,8 @@ class ComparingView extends StatelessWidget {
               ),
               CompareCard(
                 titleCard: 'Delivery time'.tr(),
-                value1: firstOffer.estimatedDeliveryTime ?? '',
-                value2: secondOffer.estimatedDeliveryTime ?? '',
+                value1: firstOffer.estimatedDeliveryTime ?? 'unknown'.tr(),
+                value2: secondOffer.estimatedDeliveryTime ?? 'unknown'.tr(),
               ),
               CompareCard(
                 titleCard: 'Protection cover'.tr(),
@@ -65,23 +115,61 @@ class ComparingView extends StatelessWidget {
               // ),
               CompareCard(
                 titleCard: 'tracking'.tr(),
-                value1: 'available - in the app'.tr(),
-                value2: 'available - in the app'.tr(),
+                value1: 'tracking available - in the app'.tr(),
+                value2: 'tracking available - in the app'.tr(),
               ),
-              CompareCard(
-                titleCard: 'Deliver to the representative'.tr(),
-                value1: ' ${firstOffer.pickupByCompanyFees} ' +
-                    ' ' +
-                    ' ${firstOffer.currency} ',
-                value2: ' ${secondOffer.pickupByCompanyFees} ' +
-                    ' ' +
-                    ' ${secondOffer.currency} ',
-                fontSize: 20,
-                color: AppColors.primary,
+              InkWell(
+                onTap: () => changePickupType(PickupType.myself),
+                child: CompareCard(
+                  isSelected: pickupType == PickupType.myself,
+                  titleCard: "Deliver to the nearest branch".tr(),
+                  value1: ' ${0.0} ' + ' ' + ' ${firstOffer.currency} ',
+                  value2: ' ${0.0} ' + ' ' + ' ${secondOffer.currency} ',
+                  fontSize: 20,
+                  color: AppColors.primary,
+                ),
+              ),
+              InkWell(
+                onTap: () => changePickupType(PickupType.company),
+                child: CompareCard(
+                  isSelected: pickupType == PickupType.company,
+                  titleCard: "Deliver to the representative".tr(),
+                  value1: !firstOffer.pickupByCompany
+                      ? 'unavailable'.tr()
+                      : ' ${firstOffer.pickupByCompanyFees} ' +
+                          ' ' +
+                          ' ${firstOffer.currency} ',
+                  value2: !secondOffer.pickupByCompany
+                      ? 'unavailable'.tr()
+                      : ' ${secondOffer.pickupByCompanyFees} ' +
+                          ' ' +
+                          ' ${secondOffer.currency} ',
+                  fontSize: 18,
+                  color: AppColors.primary,
+                ),
+              ),
+              InkWell(
+                onTap: () => changePickupType(PickupType.careem),
+                child: CompareCard(
+                  isSelected: pickupType == PickupType.careem,
+                  titleCard: "Delivery via Careem".tr(),
+                  value1: !firstOffer.pickupByCareem
+                      ? 'unavailable'.tr()
+                      : ' ${firstOffer.pickupByCareemFees} ' +
+                          ' ' +
+                          ' ${firstOffer.currency} ',
+                  value2: !secondOffer.pickupByCareem
+                      ? 'unavailable'.tr()
+                      : ' ${secondOffer.pickupByCareemFees} ' +
+                          ' ' +
+                          ' ${secondOffer.currency} ',
+                  fontSize: 18,
+                  color: AppColors.primary,
+                ),
               ),
               CompareCard(
                 titleCard: 'price'.tr(),
-                fontSize: 20,
+                fontSize: 18,
                 color: AppColors.primary,
                 value1:
                     ' ${firstOffer.price} ' + ' ' + ' ${firstOffer.currency} ',
@@ -98,7 +186,7 @@ class ComparingView extends StatelessWidget {
                         color: AppColors.primary,
                         padding: EdgeInsets.all(12),
                         constrainedAxis: Axis.horizontal,
-                        onTap: () => cubit.orderOffer(offer: firstOffer),
+                        onTap: () => order(firstOffer),
                         title: 'order now'.tr(),
                       ),
                     ),
@@ -110,7 +198,7 @@ class ComparingView extends StatelessWidget {
                         color: AppColors.primary,
                         padding: EdgeInsets.all(12),
                         constrainedAxis: Axis.horizontal,
-                        onTap: () => cubit.orderOffer(offer: secondOffer),
+                        onTap: () => order(secondOffer),
                         title: 'order now'.tr(),
                       ),
                     ),

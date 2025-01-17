@@ -1,7 +1,7 @@
 part of '../view.dart';
 
-class _PickLocationForCareem extends StatefulWidget {
-  const _PickLocationForCareem({
+class PickLocationForCareemView extends StatefulWidget {
+  const PickLocationForCareemView({
     Key? key,
     required this.cubit,
     required this.onPickLocation,
@@ -23,10 +23,10 @@ class _PickLocationForCareem extends StatefulWidget {
   }
 
   @override
-  State<_PickLocationForCareem> createState() => _PickLocationForCareemState();
+  State<PickLocationForCareemView> createState() => _PickLocationForCareemViewState();
 }
 
-class _PickLocationForCareemState extends State<_PickLocationForCareem> {
+class _PickLocationForCareemViewState extends State<PickLocationForCareemView> {
   Prediction? origin;
   Prediction? destination;
 

@@ -261,6 +261,8 @@
   "Deliver to the representative": "Deliver to the representative from (my address)",
   "Delivery via Careem": "Delivery via Careem",
   "tracking available - in the app": "available - in the app",
+  "unknown": "unknown",
+  "unavailable": "Unavailable",
   "reorder_result": "Reorder result",
   "cheapest_first": "Cheapest first",
   "expensive_first": "Expensive first",
@@ -286,5 +288,6 @@
   "coupon_applied_with_value": "Coupon {} applied with value",
   "get_point_on_shipping": "Get {} point on shipping",
   "price_may_vary_due_to_shipment_dimensions": "Price may vary due to shipment dimensions",
-  "distance_must_be_less_than_15km": "Distance between addresses must be less than 15km"
+  "distance_must_be_less_than_15km": "Distance between addresses must be less than 15km",
+  "deliveryMethodNotAvailable": "Delivery method not available for Shipping Company"
 }

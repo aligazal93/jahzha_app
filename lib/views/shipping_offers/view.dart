@@ -80,7 +80,7 @@ class ShippingOffersView extends StatelessWidget {
                           onComparisonTap: (v) => cubit.toggleComparison(offer),
                           onOrder: () {
                             if (offer.pickupType == PickupType.careem) {
-                              _PickLocationForCareem(
+                              PickLocationForCareemView(
                                 cubit: cubit,
                                 originCountryCode: dto.origin!.countryCode!,
                                 destinationCountryCode: dto.destination!.countryCode!,
