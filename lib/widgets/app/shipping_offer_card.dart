@@ -262,97 +262,93 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                 ),
               ),
             Divider(),
-            AnimatedOpacity(
-              opacity: isExpanded ? 1 : 0,
-              duration: Duration(milliseconds: 500),
-              child: Builder(
-                builder: (context) {
-                  if (!isExpanded) {
-                    return SizedBox.shrink();
-                  }
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (offer.estimatedDeliveryTime != null) ...[
-                        AppText(
-                          title: 'Expected arrival date'.tr(),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 16),
-                          color: AppColors.txtGray,
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(width: 12),
-                            Icon(
-                              FontAwesomeIcons.clock,
-                              color: AppColors.lightGray,
-                              size: 20,
-                            ),
-                            SizedBox(width: 8),
-                            Expanded(
-                              child: AppText(
-                                title: offer.estimatedDeliveryTime!,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.lightGray,
-                              ),
-                            ),
-                            SizedBox(width: 12),
-                          ],
-                        ),
-                      ],
-                      SizedBox(height: 16),
-                      Row(
-                        children: [
-                          SizedBox(width: 12),
-                          Icon(
-                            FontAwesomeIcons.lifeRing,
-                            color: AppColors.lightGray,
-                            size: 20,
-                          ),
-                          SizedBox(width: 8),
-                          Expanded(
-                            child: AppText(
-                              title: offer.insuranceText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.lightGray,
-                            ),
-                          ),
-                          SizedBox(width: 12),
-                        ],
+            AnimatedCrossFade(
+              duration: Duration(milliseconds: 400),
+              crossFadeState: isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+              firstChild: SizedBox.shrink(),
+              secondChild: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (offer.estimatedDeliveryTime != null) ...[
+                    AppText(
+                      title: 'Expected arrival date'.tr(),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 16,
                       ),
-                      if (offer.rewardPoints != null) ...[
-                        SizedBox(height: 16),
-                        Row(
-                          children: [
-                            SizedBox(width: 12),
-                            Icon(
-                              FontAwesomeIcons.ticket,
-                              color: AppColors.primary,
-                              size: 20,
-                            ),
-                            SizedBox(width: 8),
-                            Expanded(
-                              child: AppText(
-                                title: 'get_point_on_shipping'
-                                    .tr(args: [offer.rewardPoints.toString()]),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                            SizedBox(width: 12),
-                          ],
+                      color: isExpanded ? AppColors.txtGray : Colors.transparent,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 12),
+                        Icon(
+                          FontAwesomeIcons.clock,
+                          color: AppColors.lightGray,
+                          size: 20,
                         ),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: AppText(
+                            title: offer.estimatedDeliveryTime!,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.lightGray,
+                          ),
+                        ),
+                        SizedBox(width: 12),
                       ],
-                      SizedBox(height: 12),
-                      Divider(),
+                    ),
+                  ],
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      SizedBox(width: 12),
+                      Icon(
+                        FontAwesomeIcons.lifeRing,
+                        color: AppColors.lightGray,
+                        size: 20,
+                      ),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: AppText(
+                          title: offer.insuranceText,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.lightGray,
+                        ),
+                      ),
+                      SizedBox(width: 12),
                     ],
-                  );
-                },
+                  ),
+                  if (offer.rewardPoints != null) ...[
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        SizedBox(width: 12),
+                        Icon(
+                          FontAwesomeIcons.ticket,
+                          color: AppColors.primary,
+                          size: 20,
+                        ),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: AppText(
+                            title: 'get_point_on_shipping'
+                                .tr(args: [offer.rewardPoints.toString()]),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        SizedBox(width: 12),
+                      ],
+                    ),
+                  ],
+                  SizedBox(height: 12),
+                  Divider(),
+                ],
               ),
             ),
             Padding(
@@ -516,11 +512,11 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
     required bool isSelected,
     required VoidCallback onTap,
   }) {
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: () => onTap(),
-          child: AnimatedContainer(
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          AnimatedContainer(
             duration: Duration(microseconds: 5000),
             height: 24,
             width: 24,
@@ -540,23 +536,23 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
               size: 12,
             ),
           ),
-        ),
-        SizedBox(width: 8),
-        AppText(
-          title: title,
-          color: AppColors.secondary,
-          fontSize: 12,
-          padding: EdgeInsets.symmetric(horizontal: 4),
-        ),
-        if (price.isNotEmpty)
+          SizedBox(width: 8),
           AppText(
-            title: '( ${price} )',
-            color: AppColors.primary,
+            title: title,
+            color: AppColors.secondary,
+            fontSize: 12,
             padding: EdgeInsets.symmetric(horizontal: 4),
-            fontWeight: FontWeight.w700,
-            fontSize: 10,
-          )
-      ],
+          ),
+          if (price.isNotEmpty)
+            AppText(
+              title: '( ${price} )',
+              color: AppColors.primary,
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              fontWeight: FontWeight.w700,
+              fontSize: 10,
+            )
+        ],
+      ),
     );
   }
 }
