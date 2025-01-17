@@ -13,7 +13,7 @@ void showSnackBar(
   if (message.trim().isEmpty) {
     return;
   }
-  ScaffoldMessenger.of(RouteUtils.context).hideCurrentSnackBar();
+  ScaffoldMessenger.of(RouteUtils.context).clearSnackBars();
   ScaffoldMessenger.of(RouteUtils.context).showSnackBar(
     SnackBar(
       backgroundColor: errorMessage ? AppColors.red : color,
