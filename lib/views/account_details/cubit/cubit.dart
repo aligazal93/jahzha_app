@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
+import 'package:jahzha_app/core/models/logged_user.dart';
 import 'package:jahzha_app/core/network_utils/network_utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/account_details/cubit/states.dart';
@@ -17,27 +18,24 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
   AccountDetailsCubit() : super(AccountDetailsInitState());
 
   static AccountDetailsCubit of(context) => BlocProvider.of(context);
-  final formKey = GlobalKey<FormState>();
-  // String? birthdate = Utils.formatDate(CachingUtils.user?.data.birthdate);
-  final birthdateTXController = TextEditingController(text: Utils.formatDate(CachingUtils.user?.data.birthdate));
-  String? name = CachingUtils.user?.data.name;
-  String? email = CachingUtils.user?.data.email;
-  String? phone = CachingUtils.user?.data.phoneNumber;
-  String? gender = CachingUtils.user?.data.gender;
-  bool? isSelected;
 
-  void changeGender(String v) {
-    gender = v;
-    emit(AccountDetailsInitState());
+  final formKey = GlobalKey<FormState>();
+  final birthdateTXController = TextEditingController();
+  final nameTXController = TextEditingController();
+  final emailTXController = TextEditingController();
+  final phoneTXController = TextEditingController();
+  final genderTXController = TextEditingController();
+
+  Future<void> init() async {
+    final user = CachingUtils.user!.data;
+    birthdateTXController.text = Utils.formatDate(
+      user.birthdate,
+    );
+    nameTXController.text = user.name ?? '';
+    emailTXController.text = user.email ?? '';
+    phoneTXController.text = user.phoneNumber ?? '';
+    genderTXController.text = user.gender;
   }
-  // void selectDate() async {
-  //   final result = await DatePicker(onPick: (DateTime ) {
-  //     dateController.text = Utils.formatDate(result);
-  //   },);
-  //   if (result != null) {
-  //     dateController.text = Utils.formatDate(result);
-  //   }
-  // }
 
   void showChangeNumberSheet() {
     showModalBottomSheet(
@@ -54,7 +52,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
   }
 
   void toggleGender(String value) {
-    gender = value;
+    genderTXController.text = value;
     emit(AccountDetailsInitState());
   }
 
@@ -66,11 +64,11 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
       final response = await NetworkUtils.post(
         'update-info',
         data: {
-          "name": name,
-          "email": email,
-          "phone": phone,
+          "name": nameTXController.text,
+          "email": emailTXController.text,
+          "phone": phoneTXController.text,
           "birthdate": birthdateTXController.text,
-          "gender": gender,
+          "gender": genderTXController.text,
         },
       );
       final success = response.data['status_code'] == 200;
@@ -79,8 +77,8 @@ class AccountDetailsCubit extends Cubit<AccountDetailsStates> {
         RouteUtils.navigateTo(
           OtpUserVerifyView(
           userId: CachingUtils.user!.data.id,
-          email: email,
-          phone: phone,
+          email: emailTXController.text,
+          phone: phoneTXController.text,
           ),
         );
       } else {

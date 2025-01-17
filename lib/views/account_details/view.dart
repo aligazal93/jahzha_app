@@ -24,7 +24,7 @@ class AccountDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AccountDetailsCubit(),
+      create: (context) => AccountDetailsCubit()..init(),
       child: Scaffold(
         appBar: CustomAppBar(
           title: 'account details'.tr(),

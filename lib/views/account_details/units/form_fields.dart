@@ -25,21 +25,20 @@ class _FormFieldsState extends State<_FormFields> {
                     Expanded(
                       child: AppTextField(
                         label: 'Mobile number'.tr(),
-                        controller: TextEditingController(text: cubit.phone),
+                        controller: cubit.phoneTXController,
                         inputType: TextInputType.phone,
                         fillColor: AppColors.whiteBk,
                         suffixIcon: Image.asset('assets/images/edit.png'),
-                        onSaved: (v) => cubit.phone = v,
                         validator: Validator.phone,
                         maxLength: 9,
-                        hint: CachingUtils.user?.data.phoneNumber == null ? '' : CachingUtils.user?.data.phoneNumber,
                       ),
                     ),
+                    SizedBox(width: 8),
                     Padding(
-                      padding: const EdgeInsets.only(top: 40),
+                      padding: const EdgeInsets.only(top: 36),
                       child: Container(
                           width: 70,
-                          height: 60,
+                          height: 58,
                           decoration: BoxDecoration(
                               color: AppColors.primary,
                               border: Border.all(
@@ -64,16 +63,13 @@ class _FormFieldsState extends State<_FormFields> {
                 label: 'email Address'.tr(),
                 fillColor: AppColors.whiteBk,
                 inputType: TextInputType.emailAddress,
-                controller: TextEditingController(text: cubit.email),
-                onSaved: (v) => cubit.email = v,
+                controller: cubit.emailTXController,
                 validator: Validator.email,
                 suffixIcon: Image.asset('assets/images/edit.png'),
-                hint: CachingUtils.user?.data.email == null ? '' : CachingUtils.user?.data.email,
               ),
               AppTextField(
                 label: 'full name'.tr(),
-                controller: TextEditingController(text: cubit.name),
-                onSaved: (v) => cubit.name = v,
+                controller: cubit.nameTXController,
                 validator: Validator.name,
                 fillColor: AppColors.whiteBk,
               ),
@@ -100,73 +96,81 @@ class _FormFieldsState extends State<_FormFields> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          cubit.toggleGender('male');
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: AppColors.white,
-                              border: Border.all(
-                                  color: cubit.gender == 'male' ? AppColors.primary : AppColors.txtGray),),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(FontAwesomeIcons.person,color: cubit.gender == 'male' ? AppColors.primary : AppColors.secondary,size: 20,),
-                              SizedBox(width: 4,),
-                              AppText(
-                                textAlign: TextAlign.center,
-                                title: 'Male'.tr(),
-                                fontSize: 18,
-                                color: cubit.gender == 'male'
-                                    ? AppColors.primary
-                                    : AppColors.secondary,
+                child: Builder(
+                  builder: (context) {
+                    final isMale = cubit.genderTXController.text == 'male';
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              cubit.toggleGender('male');
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: AppColors.white,
+                                  border: Border.all(
+                                      color: isMale ? AppColors.primary : AppColors.txtGray),),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(FontAwesomeIcons.person,color: isMale ? AppColors.primary : AppColors.secondary,size: 20,),
+                                  SizedBox(width: 4,),
+                                  AppText(
+                                    textAlign: TextAlign.center,
+                                    title: 'Male'.tr(),
+                                    fontSize: 18,
+                                    color: isMale
+                                        ? AppColors.primary
+                                        : AppColors.secondary,
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 12,
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          cubit.toggleGender('female');
-
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: AppColors.white,
-                              border: Border.all(
-                                  color: cubit.gender == 'female'
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => cubit.toggleGender('female'),
+                            child: Container(
+                              padding: EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: AppColors.white,
+                                  border: Border.all(
+                                      color: !isMale
+                                          ? AppColors.primary
+                                          : AppColors.txtGray)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                  FontAwesomeIcons.personDress,
+                                  color: !isMale
                                       ? AppColors.primary
-                                      : AppColors.txtGray)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(FontAwesomeIcons.personDress,color: cubit.gender == 'female' ? AppColors.primary : AppColors.secondary,size: 20,),
-                              SizedBox(width: 4,),
-                              AppText(
-                                textAlign: TextAlign.center,
-                                title: 'Female'.tr(),
-                                fontSize: 18,
-                                color: cubit.gender == 'female' ? AppColors.primary : AppColors.secondary,
+                                      : AppColors.secondary,
+                                  size: 20,
+                                ),
+                                SizedBox(width: 4,),
+                                  AppText(
+                                    textAlign: TextAlign.center,
+                                    title: 'Female'.tr(),
+                                    fontSize: 18,
+                                    color: !isMale ? AppColors.primary : AppColors.secondary,
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  }
                 ),
               ),
               // AppDropDownMenu(
