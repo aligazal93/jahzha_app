@@ -15,6 +15,8 @@ class AppButton extends StatelessWidget {
     this.margin = EdgeInsets.zero,
     this.padding,
     this.height,
+    this.leading,
+    this.trailing,
     this.titleFontSize = 16,
     this.isLoading = false,
     this.constrainedAxis = Axis.vertical,
@@ -32,6 +34,8 @@ class AppButton extends StatelessWidget {
   final double titleFontSize;
   final bool isLoading;
   final Axis constrainedAxis;
+  final Widget? leading;
+  final Widget? trailing;
 
   double get _radius => 12;
 
@@ -78,12 +82,33 @@ class AppButton extends StatelessWidget {
             height: height ?? 55.height,
             padding: padding ?? EdgeInsets.symmetric(horizontal: 48.width),
             alignment: Alignment.center,
-            child: AppText(
-              title: title,
-              color: titleColor,
-              fontSize: titleFontSize,
-              fontWeight: FontWeight.w400,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (leading != null) ...[
+                  leading!,
+                  SizedBox(width: 8.width),
+                ],
+                Flexible(
+                  child: AppText(
+                    title: title,
+                    color: titleColor,
+                    fontSize: titleFontSize,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                if (trailing != null) ...[
+                  SizedBox(width: 8.width),
+                  trailing!,
+                ],
+              ],
             ),
+            // child: AppText(
+            //   title: title,
+            //   color: titleColor,
+            //   fontSize: titleFontSize,
+            //   fontWeight: FontWeight.w400,
+            // ),
             decoration: BoxDecoration(
               border: Border.all(
                 color: borderColor,

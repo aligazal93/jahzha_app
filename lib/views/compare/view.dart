@@ -37,6 +37,18 @@ class _ComparingViewState extends State<ComparingView> {
     setState(() {});
   }
 
+  num priceWithFees(ShippingOffer offer) {
+    final price = offer.price;
+    switch (pickupType) {
+      case PickupType.myself:
+        return price;
+      case PickupType.careem:
+        return price + offer.pickupByCareemFees;
+      case PickupType.company:
+        return price + offer.pickupByCompanyFees;
+    }
+  }
+
   void order(ShippingOffer offer) {
     final companyMethodCheck = pickupType == PickupType.company && !offer.pickupByCompany;
     final careemMethodCheck = pickupType == PickupType.careem && !offer.pickupByCareem;
@@ -64,9 +76,7 @@ class _ComparingViewState extends State<ComparingView> {
         },
       ).show();
     } else {
-      widget.cubit.orderOffer(
-        offer: offer..pickupType = pickupType,
-      );
+      widget.cubit.orderOffer(offer: offer);
     }
   }
 
@@ -148,6 +158,7 @@ class _ComparingViewState extends State<ComparingView> {
                   color: AppColors.primary,
                 ),
               ),
+              if (firstOffer.pickupByCareem || secondOffer.pickupByCareem)
               InkWell(
                 onTap: () => changePickupType(PickupType.careem),
                 child: CompareCard(
@@ -168,12 +179,12 @@ class _ComparingViewState extends State<ComparingView> {
                 ),
               ),
               CompareCard(
-                titleCard: 'price'.tr(),
+                titleCard: 'total_price'.tr(),
                 fontSize: 18,
                 color: AppColors.primary,
                 value1:
-                    ' ${firstOffer.price} ' + ' ' + ' ${firstOffer.currency} ',
-                value2: ' ${secondOffer.price} ' +
+                    ' ${priceWithFees(firstOffer)} ' + ' ' + ' ${firstOffer.currency} ',
+                value2: ' ${priceWithFees(secondOffer)} ' +
                     ' ' +
                     ' ${secondOffer.currency} ',
               ),

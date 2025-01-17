@@ -163,8 +163,10 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
             ),
             if (offer.isCheapest || offer.isFastest || offer.isNew)
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 8,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -173,7 +175,10 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                         child: UnconstrainedBox(
                           child: Container(
                             margin: EdgeInsets.symmetric(horizontal: 4),
-                            padding: EdgeInsets.all(12),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 12,
+                              horizontal: 12,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
                               color: AppColors.orangeLight,
@@ -186,9 +191,9 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                                   size: 12,
                                   color: AppColors.primary,
                                 ),
+                                SizedBox(width: 4),
                                 AppText(
                                   title: 'saving'.tr(),
-                                  padding: EdgeInsets.symmetric(horizontal: 8),
                                   color: AppColors.primary,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 12,
@@ -264,7 +269,9 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
             Divider(),
             AnimatedCrossFade(
               duration: Duration(milliseconds: 400),
-              crossFadeState: isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+              crossFadeState: isExpanded
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
               firstChild: SizedBox.shrink(),
               secondChild: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -278,7 +285,8 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                         horizontal: 12,
                         vertical: 16,
                       ),
-                      color: isExpanded ? AppColors.txtGray : Colors.transparent,
+                      color:
+                          isExpanded ? AppColors.txtGray : Colors.transparent,
                     ),
                     Row(
                       children: [
@@ -286,13 +294,13 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                         Icon(
                           FontAwesomeIcons.clock,
                           color: AppColors.lightGray,
-                          size: 20,
+                          size: 16,
                         ),
                         SizedBox(width: 8),
                         Expanded(
                           child: AppText(
                             title: offer.estimatedDeliveryTime!,
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: AppColors.lightGray,
                           ),
@@ -308,13 +316,13 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                       Icon(
                         FontAwesomeIcons.lifeRing,
                         color: AppColors.lightGray,
-                        size: 20,
+                        size: 16,
                       ),
                       SizedBox(width: 8),
                       Expanded(
                         child: AppText(
                           title: offer.insuranceText,
-                          fontSize: 14,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                           color: AppColors.lightGray,
                         ),
@@ -330,14 +338,14 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                         Icon(
                           FontAwesomeIcons.ticket,
                           color: AppColors.primary,
-                          size: 20,
+                          size: 16,
                         ),
                         SizedBox(width: 8),
                         Expanded(
                           child: AppText(
                             title: 'get_point_on_shipping'
                                 .tr(args: [offer.rewardPoints.toString()]),
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: AppColors.primary,
                           ),
@@ -398,107 +406,130 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
               ),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppText(
-                        title: 'price'.tr(),
-                        color: AppColors.secondary,
-                        fontSize: 16,
-                      ),
-                      AppText(
-                        title: '${offer.priceWithFees}',
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 30,
-                      ),
-                      AppText(
-                        title: offer.currency,
-                        color: AppColors.secondary,
-                        fontSize: 16,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      SizedBox(width: 12),
-                      Icon(
-                        FontAwesomeIcons.triangleExclamation,
-                        color: AppColors.primary,
-                        size: 16,
-                      ),
-                      SizedBox(width: 8),
-                      Expanded(
-                        child: AppText(
-                          title:
-                              'price_may_vary_due_to_shipment_dimensions'.tr(),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                      SizedBox(width: 12),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  AppButton(
-                    color: AppColors.primary,
-                    constrainedAxis: Axis.horizontal,
-                    height: 40,
-                    titleFontSize: 14,
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     AppText(
+                  //       title: 'price'.tr(),
+                  //       color: AppColors.secondary,
+                  //       fontSize: 16,
+                  //     ),
+                  //     AppText(
+                  //       title: '${offer.priceWithFees}',
+                  //       padding: EdgeInsets.symmetric(horizontal: 16),
+                  //       color: AppColors.primary,
+                  //       fontWeight: FontWeight.w700,
+                  //       fontSize: 30,
+                  //     ),
+                  //     AppText(
+                  //       title: offer.currency,
+                  //       color: AppColors.secondary,
+                  //       fontSize: 16,
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: 8),
+                  InkWell(
                     onTap: widget.onOrder,
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    title: 'Order now'.tr(),
-                  )
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 12,
+                      ),
+                      child: Row(
+                        children: [
+                          AppText(
+                            title: 'Order now'.tr(),
+                            color: AppColors.white,
+                          ),
+                          Spacer(),
+                          Container(
+                            padding: EdgeInsets.all(4),
+                            child: AppText(
+                              title: '${offer.priceWithFees} ${offer.currency}',
+                              color: AppColors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.black.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  InkWell(
+                    onTap: () {
+                      offer.addToComparison = !offer.addToComparison;
+                      setState(() {});
+                      widget.onComparisonTap(offer.addToComparison);
+                    },
+                    child: Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(microseconds: 5000),
+                          height: 24,
+                          width: 24,
+                          curve: Curves.bounceInOut,
+                          // margin: EdgeInsets.symmetric(vertical: 20),
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                              color: AppColors.darkGray.theme,
+                            ),
+                            color: offer.addToComparison
+                                ? AppColors.primary
+                                : AppColors.white,
+                          ),
+                          child: Icon(
+                            FontAwesomeIcons.check,
+                            color: AppColors.white.theme,
+                            size: 12,
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        AppText(
+                          title: 'Add to compare'.tr(),
+                          color: AppColors.secondary,
+                          padding: EdgeInsets.symmetric(horizontal: 4),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
             SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: InkWell(
-                onTap: () {
-                  offer.addToComparison = !offer.addToComparison;
-                  setState(() {});
-                  widget.onComparisonTap(offer.addToComparison);
-                },
-                child: Row(
-                  children: [
-                    AnimatedContainer(
-                      duration: Duration(microseconds: 5000),
-                      height: 30,
-                      width: 30,
-                      curve: Curves.bounceInOut,
-                      // margin: EdgeInsets.symmetric(vertical: 20),
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: AppColors.darkGray.theme,
-                        ),
-                        color: offer.addToComparison
-                            ? AppColors.primary
-                            : AppColors.darkGray,
-                      ),
-                      child: Icon(
-                        FontAwesomeIcons.check,
-                        color: AppColors.white.theme,
-                        size: 12,
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    AppText(
-                      title: 'Add to compare'.tr(),
-                      color: AppColors.secondary,
-                      padding: EdgeInsets.symmetric(horizontal: 4),
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                    ),
-                  ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(width: 12),
+                Icon(
+                  FontAwesomeIcons.triangleExclamation,
+                  color: AppColors.primary,
+                  size: 16,
                 ),
-              ),
+                SizedBox(width: 8),
+                Flexible(
+                  child: AppText(
+                    title: 'price_may_vary_due_to_shipment_dimensions'.tr(),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.primary,
+                  ),
+                ),
+                SizedBox(width: 12),
+              ],
             ),
           ],
         ),
