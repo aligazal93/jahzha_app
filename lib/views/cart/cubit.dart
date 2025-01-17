@@ -5,6 +5,8 @@ import 'package:jahzha_app/core/models/cart/cart_response.dart';
 import 'package:jahzha_app/core/models/cart/cart_shipment.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 
+import '../../widgets/app/home_app_bar.dart';
+
 part 'states.dart';
 
 class CartCubit extends Cubit<CartStates> {

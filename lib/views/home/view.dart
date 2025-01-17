@@ -31,7 +31,6 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: HomeAppBar(
         name: CachingUtils.user?.data.name == null ? 'in Jahzha'.tr() : CachingUtils.user?.data.name,
-        icon: FontAwesomeIcons.bagShopping,
         title: 'Welcome'.tr(),
       ),
       body: Container(

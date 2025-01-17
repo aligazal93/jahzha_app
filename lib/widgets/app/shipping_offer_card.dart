@@ -140,88 +140,95 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (offer.isCheapest)
                     Expanded(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: AppColors.orangeLight,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              FontAwesomeIcons.ticket,
-                              size: 12,
-                              color: AppColors.primary,
-                            ),
-                            AppText(
-                              title: 'saving'.tr(),
-                              padding: EdgeInsets.symmetric(horizontal: 8),
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12,
-                            ),
-                          ],
+                      child: UnconstrainedBox(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: AppColors.orangeLight,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.ticket,
+                                size: 12,
+                                color: AppColors.primary,
+                              ),
+                              AppText(
+                                title: 'saving'.tr(),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   if (offer.isFastest)
                     Expanded(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: AppColors.blueLight,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              FontAwesomeIcons.rocket,
-                              size: 12,
-                              color: AppColors.blue,
-                            ),
-                            AppText(
-                              title: 'fastest'.tr(),
-                              padding: EdgeInsets.symmetric(horizontal: 8),
-                              color: AppColors.blue,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12,
-                            ),
-                          ],
+                      child: UnconstrainedBox(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: AppColors.blueLight,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.rocket,
+                                size: 12,
+                                color: AppColors.blue,
+                              ),
+                              AppText(
+                                title: 'fastest'.tr(),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                color: AppColors.blue,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   if (offer.isNew)
                     Expanded(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: AppColors.orangeLight,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              FontAwesomeIcons.star,
-                              size: 12,
-                              color: AppColors.primary,
-                            ),
-                            AppText(
-                              title: 'new'.tr(),
-                              padding: EdgeInsets.symmetric(horizontal: 8),
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12,
-                            ),
-                          ],
+                      child: UnconstrainedBox(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: AppColors.orangeLight,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.star,
+                                size: 12,
+                                color: AppColors.primary,
+                              ),
+                              AppText(
+                                title: 'new'.tr(),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

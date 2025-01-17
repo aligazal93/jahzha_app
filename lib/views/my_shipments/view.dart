@@ -38,7 +38,6 @@ class _MyShipmentsViewState extends State<MyShipmentsView> with SingleTickerProv
       child: Scaffold(
         appBar: HomeAppBar(
           name: CachingUtils.user?.data.name == null ? 'in Jahzha'.tr() : CachingUtils.user?.data.name,
-          icon: FontAwesomeIcons.bagShopping,
           title: 'My shipments'.tr(),
         ),
         body: BlocBuilder<MyShipmentsCubit , MyShipmentsStates>(

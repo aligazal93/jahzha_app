@@ -1,5 +1,6 @@
 import 'package:jahzha_app/core/models/shipping/shipping_offer_inputs.dart';
 
+import '../../widgets/app/home_app_bar.dart';
 import '../../widgets/snack_bar.dart';
 import '../models/cart/cart_response.dart';
 import '../models/shipping/shipping_offer.dart';
@@ -20,6 +21,9 @@ class CartDatasource {
         }),
       );
       final success = response.statusCode! < 300;
+      if (success) {
+        CartButton.refreshCount();
+      }
       showSnackBar(
         response.getMessage,
         errorMessage: !success,
@@ -50,6 +54,25 @@ class CartDatasource {
     return null;
   }
 
+  Future<int> getCartCount() async {
+    try {
+      final response = await NetworkUtils.get(
+        'cart-items?page=1',
+      );
+      final success = response.statusCode! < 300;
+      if (success) {
+        return int.tryParse(response.data['additional_data']['total_items'].toString()) ?? 0;
+      }
+      showSnackBar(
+        response.getMessage,
+        errorMessage: true,
+      );
+    } catch (e) {
+      handleGenericException(e);
+    }
+    return 0;
+  }
+
   Future<bool> removeFromCart({required String id,}) async {
     try {
       final response = await NetworkUtils.post(
@@ -57,6 +80,9 @@ class CartDatasource {
         data: {'id': id},
       );
       final success = response.statusCode! < 300;
+      if (success) {
+        CartButton.refreshCount();
+      }
       showSnackBar(
         response.getMessage,
         errorMessage: !success,
