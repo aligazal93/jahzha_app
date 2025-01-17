@@ -41,116 +41,116 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
   @override
   Widget build(BuildContext context) {
     final offer = widget.offer;
-    return GestureDetector(
-      onTap: toggleExpansion,
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8),
-        padding: EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.tGray),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: AppNetworkImage(
-                        url: offer.company.logo,
-                        width: 64,
-                        height: 64,
-                      ),
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.tGray),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: AppNetworkImage(
+                      url: offer.company.logo,
+                      width: 64,
+                      height: 64,
                     ),
-                    SizedBox(width: 8),
-                    Flexible(
-                      child: AppText(
-                        title: offer.company.name,
-                        fontWeight: FontWeight.w700,
-                      ),
+                  ),
+                  SizedBox(width: 8),
+                  Flexible(
+                    child: AppText(
+                      title: offer.company.name,
+                      fontWeight: FontWeight.w700,
                     ),
-                    SizedBox(width: 8),
-                    InkWell(
-                      child: Icon(
-                        FontAwesomeIcons.circleInfo,
-                        size: 22,
-                        color: AppColors.txtGray,
-                      ),
-                      onTap: () {
-                        AppSheet.show(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              UnconstrainedBox(
-                                child: AppNetworkImage(
-                                  url: offer.company.logo,
-                                  height: 64,
-                                  width: 64,
-                                ),
+                  ),
+                  SizedBox(width: 8),
+                  InkWell(
+                    child: Icon(
+                      FontAwesomeIcons.circleInfo,
+                      size: 22,
+                      color: AppColors.txtGray,
+                    ),
+                    onTap: () {
+                      AppSheet.show(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            UnconstrainedBox(
+                              child: AppNetworkImage(
+                                url: offer.company.logo,
+                                height: 64,
+                                width: 64,
                               ),
-                              SizedBox(height: 12),
+                            ),
+                            SizedBox(height: 12),
+                            AppText(
+                              title: offer.company.name,
+                              textAlign: TextAlign.center,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            SizedBox(height: 12),
+                            if (offer.estimatedDeliveryTime != null) ...[
                               AppText(
-                                title: offer.company.name,
+                                title: 'Delivery time'.tr() +
+                                    ': ' +
+                                    offer.estimatedDeliveryTime!,
                                 textAlign: TextAlign.center,
-                                fontWeight: FontWeight.w700,
                               ),
                               SizedBox(height: 12),
-                              if (offer.estimatedDeliveryTime != null) ...[
-                                AppText(
-                                  title: 'Delivery time'.tr() +
-                                      ': ' +
-                                      offer.estimatedDeliveryTime!,
-                                  textAlign: TextAlign.center,
-                                ),
-                                SizedBox(height: 12),
-                              ],
-                              AppText(
-                                title: offer.price.toString() +
-                                    ' ' +
-                                    offer.currency,
-                                textAlign: TextAlign.center,
-                                color: AppColors.primary,
-                              ),
-                              SizedBox(height: 12),
-                              Html(data: offer.company.description),
-                              SizedBox(height: 12),
-                              AppButton(
-                                title: 'Order now'.tr(),
-                                onTap: () {},
-                              ),
-                              if (Platform.isAndroid) SizedBox(height: 16),
                             ],
-                          ),
-                        );
-                      },
-                    ),
-                    SizedBox(width: 16),
-                    // Spacer(),
-                    // Row(
-                    //   children: [
-                    //     Icon(
-                    //       FontAwesomeIcons.print,
-                    //       size: 18,
-                    //       color: AppColors.primary,
-                    //     ),
-                    //     AppText(
-                    //       color: AppColors.txtGray,
-                    //       fontSize: 12,
-                    //       title: 'Printing required'.tr(),
-                    //       fontWeight: FontWeight.w700,
-                    //       padding: EdgeInsets.symmetric(horizontal: 8),
-                    //     ),
-                    //   ],
-                    // ),
-                  ],
-                ),
-                PositionedDirectional(
-                  bottom: 0,
-                  top: 0,
-                  end: 16,
+                            AppText(
+                              title: offer.price.toString() +
+                                  ' ' +
+                                  offer.currency,
+                              textAlign: TextAlign.center,
+                              color: AppColors.primary,
+                            ),
+                            SizedBox(height: 12),
+                            Html(data: offer.company.description),
+                            SizedBox(height: 12),
+                            AppButton(
+                              title: 'Order now'.tr(),
+                              onTap: () {},
+                            ),
+                            if (Platform.isAndroid) SizedBox(height: 16),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(width: 16),
+                  // Spacer(),
+                  // Row(
+                  //   children: [
+                  //     Icon(
+                  //       FontAwesomeIcons.print,
+                  //       size: 18,
+                  //       color: AppColors.primary,
+                  //     ),
+                  //     AppText(
+                  //       color: AppColors.txtGray,
+                  //       fontSize: 12,
+                  //       title: 'Printing required'.tr(),
+                  //       fontWeight: FontWeight.w700,
+                  //       padding: EdgeInsets.symmetric(horizontal: 8),
+                  //     ),
+                  //   ],
+                  // ),
+                ],
+              ),
+              PositionedDirectional(
+                bottom: 0,
+                top: 0,
+                end: 16,
+                child: InkWell(
+                  onTap: toggleExpansion,
                   child: Icon(
                     isExpanded
                         ? FontAwesomeIcons.chevronUp
@@ -159,169 +159,148 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                     color: AppColors.lightGray,
                   ),
                 ),
-              ],
-            ),
-            if (offer.isCheapest || offer.isFastest || offer.isNew)
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 8,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (offer.isCheapest)
-                      Expanded(
-                        child: UnconstrainedBox(
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 4),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 12,
-                              horizontal: 12,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: AppColors.orangeLight,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FontAwesomeIcons.ticket,
-                                  size: 12,
-                                  color: AppColors.primary,
-                                ),
-                                SizedBox(width: 4),
-                                AppText(
-                                  title: 'saving'.tr(),
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (offer.isFastest)
-                      Expanded(
-                        child: UnconstrainedBox(
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 4),
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: AppColors.blueLight,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FontAwesomeIcons.rocket,
-                                  size: 12,
-                                  color: AppColors.blue,
-                                ),
-                                AppText(
-                                  title: 'fastest'.tr(),
-                                  padding: EdgeInsets.symmetric(horizontal: 8),
-                                  color: AppColors.blue,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (offer.isNew)
-                      Expanded(
-                        child: UnconstrainedBox(
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 4),
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: AppColors.orangeLight,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FontAwesomeIcons.star,
-                                  size: 12,
-                                  color: AppColors.primary,
-                                ),
-                                AppText(
-                                  title: 'new'.tr(),
-                                  padding: EdgeInsets.symmetric(horizontal: 8),
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
               ),
-            Divider(),
-            AnimatedCrossFade(
-              duration: Duration(milliseconds: 400),
-              crossFadeState: isExpanded
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-              firstChild: SizedBox.shrink(),
-              secondChild: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            ],
+          ),
+          if (offer.isCheapest || offer.isFastest || offer.isNew)
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 8,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (offer.estimatedDeliveryTime != null) ...[
-                    AppText(
-                      title: 'Expected arrival date'.tr(),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 16,
-                      ),
-                      color:
-                          isExpanded ? AppColors.txtGray : Colors.transparent,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: 12),
-                        Icon(
-                          FontAwesomeIcons.clock,
-                          color: AppColors.lightGray,
-                          size: 16,
-                        ),
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: AppText(
-                            title: offer.estimatedDeliveryTime!,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.lightGray,
+                  if (offer.isCheapest)
+                    Expanded(
+                      child: UnconstrainedBox(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: AppColors.orangeLight,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.ticket,
+                                size: 12,
+                                color: AppColors.primary,
+                              ),
+                              SizedBox(width: 4),
+                              AppText(
+                                title: 'saving'.tr(),
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(width: 12),
-                      ],
+                      ),
                     ),
-                  ],
-                  SizedBox(height: 16),
+                  if (offer.isFastest)
+                    Expanded(
+                      child: UnconstrainedBox(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: AppColors.blueLight,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.rocket,
+                                size: 12,
+                                color: AppColors.blue,
+                              ),
+                              AppText(
+                                title: 'fastest'.tr(),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                color: AppColors.blue,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (offer.isNew)
+                    Expanded(
+                      child: UnconstrainedBox(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: AppColors.orangeLight,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.star,
+                                size: 12,
+                                color: AppColors.primary,
+                              ),
+                              AppText(
+                                title: 'new'.tr(),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          Divider(),
+          AnimatedCrossFade(
+            duration: Duration(milliseconds: 400),
+            crossFadeState: isExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            firstChild: SizedBox.shrink(),
+            secondChild: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (offer.estimatedDeliveryTime != null) ...[
+                  AppText(
+                    title: 'Expected arrival date'.tr(),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 16,
+                    ),
+                    color:
+                        isExpanded ? AppColors.txtGray : Colors.transparent,
+                  ),
                   Row(
                     children: [
                       SizedBox(width: 12),
                       Icon(
-                        FontAwesomeIcons.lifeRing,
+                        FontAwesomeIcons.clock,
                         color: AppColors.lightGray,
                         size: 16,
                       ),
                       SizedBox(width: 8),
                       Expanded(
                         child: AppText(
-                          title: offer.insuranceText,
+                          title: offer.estimatedDeliveryTime!,
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
                           color: AppColors.lightGray,
@@ -330,209 +309,230 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                       SizedBox(width: 12),
                     ],
                   ),
-                  if (offer.rewardPoints != null) ...[
-                    SizedBox(height: 16),
-                    Row(
-                      children: [
-                        SizedBox(width: 12),
-                        Icon(
-                          FontAwesomeIcons.ticket,
-                          color: AppColors.primary,
-                          size: 16,
-                        ),
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: AppText(
-                            title: 'get_point_on_shipping'
-                                .tr(args: [offer.rewardPoints.toString()]),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.primary,
-                          ),
-                        ),
-                        SizedBox(width: 12),
-                      ],
+                ],
+                SizedBox(height: 16),
+                Row(
+                  children: [
+                    SizedBox(width: 12),
+                    Icon(
+                      FontAwesomeIcons.lifeRing,
+                      color: AppColors.lightGray,
+                      size: 16,
                     ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: AppText(
+                        title: offer.insuranceText,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.lightGray,
+                      ),
+                    ),
+                    SizedBox(width: 12),
                   ],
-                  SizedBox(height: 12),
-                  Divider(),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _pickingOption(
-                    title: "Deliver to the nearest branch".tr(),
-                    price: '',
-                    isSelected: offer.pickupType == PickupType.myself,
-                    onTap: () {
-                      offer.pickupType = PickupType.myself;
-                      setState(() {});
-                    },
-                  ),
-                  if (offer.pickupByCompany)
-                    _pickingOption(
-                      title: "Deliver to the representative".tr(),
-                      price: '${offer.pickupByCompanyFees} ${offer.currency}',
-                      isSelected: offer.pickupType == PickupType.company,
-                      onTap: () {
-                        offer.pickupType = PickupType.company;
-                        setState(() {});
-                      },
-                    ),
-                  if (offer.pickupByCareem)
-                    _pickingOption(
-                      title: "Delivery via Careem".tr(),
-                      price: '${offer.pickupByCareemFees} ${offer.currency}',
-                      isSelected: offer.pickupType == PickupType.careem,
-                      onTap: () {
-                        offer.pickupType = PickupType.careem;
-                        setState(() {});
-                      },
-                    ),
-                ],
-              ),
-            ),
-            SizedBox(height: 8),
-            Container(
-              padding: EdgeInsets.all(16),
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: AppColors.tGray,
-              ),
-              child: Column(
-                children: [
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     AppText(
-                  //       title: 'price'.tr(),
-                  //       color: AppColors.secondary,
-                  //       fontSize: 16,
-                  //     ),
-                  //     AppText(
-                  //       title: '${offer.priceWithFees}',
-                  //       padding: EdgeInsets.symmetric(horizontal: 16),
-                  //       color: AppColors.primary,
-                  //       fontWeight: FontWeight.w700,
-                  //       fontSize: 30,
-                  //     ),
-                  //     AppText(
-                  //       title: offer.currency,
-                  //       color: AppColors.secondary,
-                  //       fontSize: 16,
-                  //     ),
-                  //   ],
-                  // ),
-                  // SizedBox(height: 8),
-                  InkWell(
-                    onTap: widget.onOrder,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 12,
-                      ),
-                      child: Row(
-                        children: [
-                          AppText(
-                            title: 'Order now'.tr(),
-                            color: AppColors.white,
-                          ),
-                          Spacer(),
-                          Container(
-                            padding: EdgeInsets.all(4),
-                            child: AppText(
-                              title: '${offer.priceWithFees} ${offer.currency}',
-                              color: AppColors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.black.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
+                ),
+                if (offer.rewardPoints != null) ...[
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      SizedBox(width: 12),
+                      Icon(
+                        FontAwesomeIcons.ticket,
                         color: AppColors.primary,
+                        size: 16,
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  InkWell(
-                    onTap: () {
-                      offer.addToComparison = !offer.addToComparison;
-                      setState(() {});
-                      widget.onComparisonTap(offer.addToComparison);
-                    },
-                    child: Row(
-                      children: [
-                        AnimatedContainer(
-                          duration: Duration(microseconds: 5000),
-                          height: 24,
-                          width: 24,
-                          curve: Curves.bounceInOut,
-                          // margin: EdgeInsets.symmetric(vertical: 20),
-                          padding: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            border: Border.all(
-                              color: AppColors.darkGray.theme,
-                            ),
-                            color: offer.addToComparison
-                                ? AppColors.primary
-                                : AppColors.white,
-                          ),
-                          child: Icon(
-                            FontAwesomeIcons.check,
-                            color: AppColors.white.theme,
-                            size: 12,
-                          ),
-                        ),
-                        SizedBox(width: 8),
-                        AppText(
-                          title: 'Add to compare'.tr(),
-                          color: AppColors.secondary,
-                          padding: EdgeInsets.symmetric(horizontal: 4),
-                          fontWeight: FontWeight.w600,
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: AppText(
+                          title: 'get_point_on_shipping'
+                              .tr(args: [offer.rewardPoints.toString()]),
                           fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.primary,
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(width: 12),
+                    ],
                   ),
                 ],
-              ),
-            ),
-            SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(width: 12),
-                Icon(
-                  FontAwesomeIcons.triangleExclamation,
-                  color: AppColors.primary,
-                  size: 16,
-                ),
-                SizedBox(width: 8),
-                Flexible(
-                  child: AppText(
-                    title: 'price_may_vary_due_to_shipment_dimensions'.tr(),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.primary,
-                  ),
-                ),
-                SizedBox(width: 12),
+                SizedBox(height: 12),
+                Divider(),
               ],
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _pickingOption(
+                  title: "Deliver to the nearest branch".tr(),
+                  price: '',
+                  isSelected: offer.pickupType == PickupType.myself,
+                  onTap: () {
+                    offer.pickupType = PickupType.myself;
+                    setState(() {});
+                  },
+                ),
+                if (offer.pickupByCompany)
+                  _pickingOption(
+                    title: "Deliver to the representative".tr(),
+                    price: '${offer.pickupByCompanyFees} ${offer.currency}',
+                    isSelected: offer.pickupType == PickupType.company,
+                    onTap: () {
+                      offer.pickupType = PickupType.company;
+                      setState(() {});
+                    },
+                  ),
+                if (offer.pickupByCareem)
+                  _pickingOption(
+                    title: "Delivery via Careem".tr(),
+                    price: '${offer.pickupByCareemFees} ${offer.currency}',
+                    isSelected: offer.pickupType == PickupType.careem,
+                    onTap: () {
+                      offer.pickupType = PickupType.careem;
+                      setState(() {});
+                    },
+                  ),
+              ],
+            ),
+          ),
+          SizedBox(height: 8),
+          Container(
+            padding: EdgeInsets.all(16),
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: AppColors.tGray,
+            ),
+            child: Column(
+              children: [
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     AppText(
+                //       title: 'price'.tr(),
+                //       color: AppColors.secondary,
+                //       fontSize: 16,
+                //     ),
+                //     AppText(
+                //       title: '${offer.priceWithFees}',
+                //       padding: EdgeInsets.symmetric(horizontal: 16),
+                //       color: AppColors.primary,
+                //       fontWeight: FontWeight.w700,
+                //       fontSize: 30,
+                //     ),
+                //     AppText(
+                //       title: offer.currency,
+                //       color: AppColors.secondary,
+                //       fontSize: 16,
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(height: 8),
+                InkWell(
+                  onTap: widget.onOrder,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 12,
+                    ),
+                    child: Row(
+                      children: [
+                        AppText(
+                          title: 'Order now'.tr(),
+                          color: AppColors.white,
+                        ),
+                        Spacer(),
+                        Container(
+                          padding: EdgeInsets.all(4),
+                          child: AppText(
+                            title: '${offer.priceWithFees} ${offer.currency}',
+                            color: AppColors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.black.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 12),
+                InkWell(
+                  onTap: () {
+                    offer.addToComparison = !offer.addToComparison;
+                    setState(() {});
+                    widget.onComparisonTap(offer.addToComparison);
+                  },
+                  child: Row(
+                    children: [
+                      AnimatedContainer(
+                        duration: Duration(microseconds: 5000),
+                        height: 24,
+                        width: 24,
+                        curve: Curves.bounceInOut,
+                        // margin: EdgeInsets.symmetric(vertical: 20),
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(
+                            color: AppColors.darkGray.theme,
+                          ),
+                          color: offer.addToComparison
+                              ? AppColors.primary
+                              : AppColors.white,
+                        ),
+                        child: Icon(
+                          FontAwesomeIcons.check,
+                          color: AppColors.white.theme,
+                          size: 12,
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      AppText(
+                        title: 'Add to compare'.tr(),
+                        color: AppColors.secondary,
+                        padding: EdgeInsets.symmetric(horizontal: 4),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: 12),
+              Icon(
+                FontAwesomeIcons.triangleExclamation,
+                color: AppColors.primary,
+                size: 16,
+              ),
+              SizedBox(width: 8),
+              Flexible(
+                child: AppText(
+                  title: 'price_may_vary_due_to_shipment_dimensions'.tr(),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary,
+                ),
+              ),
+              SizedBox(width: 12),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -570,9 +570,10 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
           SizedBox(width: 8),
           AppText(
             title: title,
-            color: AppColors.secondary,
+            color: isSelected ? AppColors.secondary : AppColors.lightGray,
             fontSize: 12,
             padding: EdgeInsets.symmetric(horizontal: 4),
+            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w300,
           ),
           if (price.isNotEmpty)
             AppText(
