@@ -62,7 +62,7 @@ class ShippingInput {
 
   String? validate([String? countryCode]) {
     final value = controller.text.trim();
-    if (validation.required) {
+    if (validation.required || value.isNotEmpty) {
       final type = validation.type;
       final languageValidation = Validator.language(value: value, lang: inputLang.first);
       final emailValidation = Validator.email(value);

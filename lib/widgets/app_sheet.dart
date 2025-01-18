@@ -44,8 +44,7 @@ class AppSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BounceInUp(
-      curve: Curves.bounceOut,
+    return SlideInUp(
       duration: Duration(milliseconds: 500),
       child: BottomSheet(
         enableDrag: false,

@@ -107,8 +107,8 @@ class Validator {
     if (value == null || value.isEmpty) {
       return Utils.isAR ? 'مطلوب' : "Required";
     }
-    final RegExp englishRegex = RegExp(r'^[a-zA-Z\s]+$');
-    final RegExp arabicRegex = RegExp(r'^[\u0600-\u06FF\s]+$');
+    final englishRegex = RegExp('^[a-zA-Z0-9!@#\\\$%\\^&\\*\\(\\)_\\+\\-=\\[\\]\\{\\};:\'",<>\\.\\?/\\\\|`~\\s]*\$');
+    final arabicRegex = RegExp('^[\\u0600-\\u06FF\\u0750-\\u077F\\u08A0-\\u08FF0-9!@#\\\$%\\^&\\*\\(\\)_\\+\\-=\\[\\]\\{\\};:\'",<>\\.\\?/\\\\|`~\\s]*\$');
     if (lang == 'en' && englishRegex.hasMatch(value)) {
       return null;
     } else if (lang == 'ar' && arabicRegex.hasMatch(value)) {
