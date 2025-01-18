@@ -40,10 +40,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
             index: 1,
             icon: 'icon-2',
             title: 'My shipments'.tr(),
+            width: 20,
+            height: 20,
           ),
-          if (Utils.isAR) SizedBox(width: 20.width),
+          if (Utils.isAR) SizedBox(width: 12.width),
           Spacer(),
-          if (Utils.isAR) SizedBox(width: 20.width),
+          if (Utils.isAR) SizedBox(width: 12.width),
           _bottomNavItem(
             index: 2,
             title: 'Coupons'.tr(),
@@ -72,8 +74,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 
-  Widget _bottomNavItem(
-      {required int index, required String title, required String icon}) {
+  Widget _bottomNavItem({
+    required int index,
+    required String title,
+    required String icon,
+    double height = 24,
+    double width = 24,
+  }) {
     final cubit = NavBarCubit.of(context);
     final isActive = index == cubit.currentIndex;
     return Expanded(
@@ -84,17 +91,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-              child: Image.asset(
-                'assets/images/$icon.png',
-                height: 26,
-                color: isActive
-                    ? AppColors.secondary.theme
-                    : AppColors.GrayLight.theme,
-              ),
+            SizedBox(height: 12),
+            Image.asset(
+              'assets/images/$icon.png',
+              height: height,
+              width: width,
+              color: isActive
+                  ? AppColors.secondary.theme
+                  : AppColors.GrayLight.theme,
             ),
+            SizedBox(height: 8),
             AppText(
               title: title,
               color: isActive
@@ -102,7 +108,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   : AppColors.GrayLight.theme,
               fontWeight: FontWeight.w700,
               fontSize: 12,
-            )
+            ),
+            SizedBox(height: 4),
           ],
         ),
       ),

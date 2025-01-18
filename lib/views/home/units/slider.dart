@@ -9,7 +9,7 @@ class Slider extends StatefulWidget {
 
 class _SliderState extends State<Slider> {
   int currentIndex = 0;
-  static List<AppBanner> banners = [];
+  List<AppBanner> banners = [];
 
   @override
   void initState() {

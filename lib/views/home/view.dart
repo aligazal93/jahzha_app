@@ -16,6 +16,7 @@ import 'package:jahzha_app/views/order_tracking/view.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/home_app_bar.dart';
 import 'package:jahzha_app/widgets/app_network_image.dart';
+import 'package:jahzha_app/widgets/app_refresh_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
 import '../../core/datasources/general.dart';
@@ -24,66 +25,76 @@ part 'units/slider.dart';
 part 'units/service_card.dart';
 part 'units/customer_service_card.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBar(
-        name: CachingUtils.user?.data.name == null ? 'in Jahzha'.tr() : CachingUtils.user?.data.name,
+        name: CachingUtils.user?.data.name == null
+            ? 'in Jahzha'.tr()
+            : CachingUtils.user?.data.name,
         title: 'Welcome'.tr(),
       ),
-      body: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          Slider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
+      body: AppRefreshIndicator(
+        onRefresh: () async => setState(() {}),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            Slider(key: UniqueKey()),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: OurServicesCards(),
             ),
-            child: OurServicesCards(),
-          ),
-          SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
+            SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText(
+                    title: 'Customer services'.tr(),
+                    fontWeight: FontWeight.w700,
+                    textAlign:Utils.isAR ? TextAlign.start : TextAlign.left,
+                    color: AppColors.secondary,
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    fontSize: 16,
+                  ),
+                  Row(
+                    children: [
+                      CustomerServiceCard(
+                        onTap: () => NavBarCubit.of(context).toggleTab(2),
+                        image: 'coupons',
+                        title: 'Coupons'.tr(),
+                        colorCard: Color(0xFFE7F6FB),
+                      ),
+                      SizedBox(width: 12),
+                      CustomerServiceCard(
+                        onTap: () {
+                          RouteUtils.navigateTo(MyPointsView());
+                        },
+                        image: 'points',
+                        title: 'Points'.tr(),
+                        colorCard: Color(0XFFFFFAED),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppText(
-                  title: 'Customer services'.tr(),
-                  fontWeight: FontWeight.w700,
-                  textAlign:Utils.isAR ? TextAlign.start : TextAlign.left,
-                  color: AppColors.secondary,
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  fontSize: 16,
-                ),
-                Row(
-                  children: [
-                    CustomerServiceCard(
-                      onTap: () => NavBarCubit.of(context).toggleTab(2),
-                      image: 'coupons',
-                      title: 'Coupons'.tr(),
-                      colorCard: Color(0xFFE7F6FB),
-                    ),
-                    SizedBox(width: 12),
-                    CustomerServiceCard(
-                      onTap: () {
-                        RouteUtils.navigateTo(MyPointsView());
-                      },
-                      image: 'points',
-                      title: 'Points'.tr(),
-                      colorCard: Color(0XFFFFFAED),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          // SizedBox(height: 64.height),
-        ],
+            // SizedBox(height: 64.height),
+          ],
+        ),
       ),
     );
   }
