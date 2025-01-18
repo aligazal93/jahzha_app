@@ -10,6 +10,7 @@ class ShippingOffer {
   final bool isCheapest;
   final num price;
   final String currency;
+  final bool dropOffByUser;
   final bool pickupByCompany;
   final bool pickupByCareem;
   final num pickupByCareemFees;
@@ -40,6 +41,7 @@ class ShippingOffer {
     required this.isCheapest,
     required this.price,
     required this.currency,
+    required this.dropOffByUser,
     required this.pickupByCompany,
     required this.pickupByCareem,
     required this.pickupByCareemFees,
@@ -48,7 +50,10 @@ class ShippingOffer {
   });
 
   factory ShippingOffer.fromJson(Map<String, dynamic> json) {
-    return ShippingOffer(
+    final dropOffByUser = json['pickupOptions']?['userDropOff'] ?? false;
+    final pickUpByCompany = json['pickupOptions']?['pickupByCurrentCompany']?['pickupStatus'] ?? false;
+    final pickupByCareem = json['pickupOptions']?['pickupByCareem']?['pickupStatus'] ?? false;
+    final offer = ShippingOffer(
       id: json['id'],
       company: ShippingCompany.fromJson(json['company']),
       estimatedDeliveryTime: json['estimatedDeliveryTime'],
@@ -58,12 +63,21 @@ class ShippingOffer {
       isCheapest: json['isCheapest'],
       price: num.parse(json['totalPrice'].toString()),
       currency: json['currency'],
-      pickupByCompany: json['pickupOptions']?['pickupByCurrentCompany']?['pickupStatus'] ?? false,
-      pickupByCareem: json['pickupOptions']?['pickupByCareem']?['pickupStatus'] ?? false,
+      dropOffByUser: dropOffByUser,
+      pickupByCompany: pickUpByCompany,
+      pickupByCareem: pickupByCareem,
       pickupByCareemFees: num.tryParse((json['pickupOptions']?['pickupByCareem']?['PickupFee']).toString()) ?? 0,
       pickupByCompanyFees: num.tryParse((json['pickupOptions']?['pickupByCurrentCompany']?['PickupFee']).toString()) ?? 0,
       rewardPoints: int.tryParse(json['rewardPoints'].toString()) ?? 0,
     );
+    if (dropOffByUser) {
+      offer.pickupType = PickupType.myself;
+    } else if (pickUpByCompany) {
+      offer.pickupType = PickupType.company;
+    } else if (pickupByCareem) {
+      offer.pickupType = PickupType.careem;
+    }
+    return offer;
   }
 }
 

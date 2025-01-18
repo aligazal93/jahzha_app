@@ -50,9 +50,10 @@ class _ComparingViewState extends State<ComparingView> {
   }
 
   void order(ShippingOffer offer) {
+    final userDropOffMethodCheck = pickupType == PickupType.myself && !offer.dropOffByUser;
     final companyMethodCheck = pickupType == PickupType.company && !offer.pickupByCompany;
     final careemMethodCheck = pickupType == PickupType.careem && !offer.pickupByCareem;
-    if (companyMethodCheck || careemMethodCheck) {
+    if (userDropOffMethodCheck || companyMethodCheck || careemMethodCheck) {
       showSnackBar(
         'deliveryMethodNotAvailable',
         errorMessage: true,
@@ -128,18 +129,24 @@ class _ComparingViewState extends State<ComparingView> {
                 value1: 'tracking available - in the app'.tr(),
                 value2: 'tracking available - in the app'.tr(),
               ),
-              InkWell(
+              if (firstOffer.dropOffByUser || secondOffer.dropOffByUser)
+                InkWell(
                 onTap: () => changePickupType(PickupType.myself),
                 child: CompareCard(
                   isSelected: pickupType == PickupType.myself,
                   titleCard: "Deliver to the nearest branch".tr(),
-                  value1: ' ${0.0} ' + ' ' + ' ${firstOffer.currency} ',
-                  value2: ' ${0.0} ' + ' ' + ' ${secondOffer.currency} ',
-                  fontSize: 20,
+                  value1: !firstOffer.dropOffByUser
+                      ? 'unavailable'.tr()
+                      : ' ${0.0} ' + ' ' + ' ${firstOffer.currency} ',
+                  value2: !secondOffer.dropOffByUser
+                      ? 'unavailable'.tr()
+                      : ' ${0.0} ' + ' ' + ' ${secondOffer.currency} ',
+                  fontSize: 16,
                   color: AppColors.primary,
                 ),
               ),
-              InkWell(
+              if (firstOffer.pickupByCompany || secondOffer.pickupByCompany)
+                InkWell(
                 onTap: () => changePickupType(PickupType.company),
                 child: CompareCard(
                   isSelected: pickupType == PickupType.company,
@@ -154,12 +161,12 @@ class _ComparingViewState extends State<ComparingView> {
                       : ' ${secondOffer.pickupByCompanyFees} ' +
                           ' ' +
                           ' ${secondOffer.currency} ',
-                  fontSize: 18,
+                  fontSize: 16,
                   color: AppColors.primary,
                 ),
               ),
               if (firstOffer.pickupByCareem || secondOffer.pickupByCareem)
-              InkWell(
+                InkWell(
                 onTap: () => changePickupType(PickupType.careem),
                 child: CompareCard(
                   isSelected: pickupType == PickupType.careem,
@@ -174,7 +181,7 @@ class _ComparingViewState extends State<ComparingView> {
                       : ' ${secondOffer.pickupByCareemFees} ' +
                           ' ' +
                           ' ${secondOffer.currency} ',
-                  fontSize: 18,
+                  fontSize: 16,
                   color: AppColors.primary,
                 ),
               ),

@@ -9,7 +9,7 @@ class Slider extends StatefulWidget {
 
 class _SliderState extends State<Slider> {
   int currentIndex = 0;
-  List<AppBanner> banners = [];
+  static List<AppBanner> banners = [];
 
   @override
   void initState() {
@@ -18,7 +18,6 @@ class _SliderState extends State<Slider> {
   }
 
   void getBanners() async {
-    if (banners.isNotEmpty) return;
     banners = (await GeneralDatasource().getBanners()).cast<AppBanner>();
     rebuild();
   }

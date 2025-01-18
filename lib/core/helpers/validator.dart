@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:jahzha_app/core/network_utils/network_utils.dart';
 
 class Validator {
   static String? empty(String? value) {
@@ -97,5 +98,23 @@ class Validator {
       return 'minimum_weight_must_be_1_kg'.tr();
     }
     return null;
+  }
+
+  static String? language({
+    required String? value,
+    required String lang,
+  }) {
+    if (value == null || value.isEmpty) {
+      return Utils.isAR ? 'مطلوب' : "Required";
+    }
+    final RegExp englishRegex = RegExp(r'^[a-zA-Z\s]+$');
+    final RegExp arabicRegex = RegExp(r'^[\u0600-\u06FF\s]+$');
+    if (lang == 'en' && englishRegex.hasMatch(value)) {
+      return null;
+    } else if (lang == 'ar' && arabicRegex.hasMatch(value)) {
+      return null;
+    } else {
+      return Utils.isAR ? "استخدم الحروف ال${lang == 'en' ? 'انجليزية' : 'عربية'} فقط" : 'Use ${lang == 'en' ? 'English' : 'Arabic'} characters only';
+    }
   }
 }

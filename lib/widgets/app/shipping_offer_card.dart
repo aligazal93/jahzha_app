@@ -366,15 +366,16 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _pickingOption(
-                  title: "Deliver to the nearest branch".tr(),
-                  price: '',
-                  isSelected: offer.pickupType == PickupType.myself,
-                  onTap: () {
-                    offer.pickupType = PickupType.myself;
-                    setState(() {});
-                  },
-                ),
+                if (offer.dropOffByUser)
+                  _pickingOption(
+                    title: "Deliver to the nearest branch".tr(),
+                    price: '',
+                    isSelected: offer.pickupType == PickupType.myself,
+                    onTap: () {
+                      offer.pickupType = PickupType.myself;
+                      setState(() {});
+                    },
+                  ),
                 if (offer.pickupByCompany)
                   _pickingOption(
                     title: "Deliver to the representative".tr(),
@@ -576,7 +577,8 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                 text: TextSpan(
                   text: title,
                   style: TextStyle(
-                    color: isSelected ? AppColors.secondary : AppColors.lightGray,
+                    color:
+                        isSelected ? AppColors.secondary : AppColors.lightGray,
                     fontSize: 12,
                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.w300,
                     height: 20 / 12,
@@ -584,13 +586,13 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                   children: [
                     if (price.isNotEmpty)
                       TextSpan(
-                      text: ' ( ${price} )',
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
+                        text: ' ( ${price} )',
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),

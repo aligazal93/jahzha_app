@@ -27,6 +27,7 @@ class ShippingInput {
 
   /// required if type is read_only
   final String? defaultValue;
+  final List<String> inputLang;
 
   ShippingInput({
     required this.id,
@@ -37,6 +38,7 @@ class ShippingInput {
     required this.enableDropDownSearch,
     required this.type,
     required this.validation,
+    required this.inputLang,
   });
 
   factory ShippingInput.fromJson(Map<String, dynamic> json) {
@@ -47,6 +49,7 @@ class ShippingInput {
       note: json['input_note'],
       defaultValue: json['value']?.toString(),
       enableDropDownSearch: json['using_search'] ?? false,
+      inputLang: List.from((json['input_lang'] ?? ['ar', 'en'])),
       validation: ShippingValidation.fromJson(json['validation']),
       type: ShippingInputType.values.firstWhere(
             (e) => e.id == json['type'],
@@ -61,20 +64,27 @@ class ShippingInput {
     final value = controller.text.trim();
     if (validation.required) {
       final type = validation.type;
+      final languageValidation = Validator.language(value: value, lang: inputLang.first);
+      final emailValidation = Validator.email(value);
+      final phoneValidation = Validator.phone(value);
       if (value.isEmpty) {
         return 'required'.tr();
+      } else if ((this.type == ShippingInputType.textField || this.type == ShippingInputType.textFieldArea)
+          && inputLang.length == 1
+          && languageValidation != null) {
+        return languageValidation;
       } else if (validation.minLength != null && value.length < validation.minLength!) {
         return 'min_length_is'.tr() + ' ${validation.minLength}';
       } else if (validation.maxLength != null && value.length > validation.maxLength!) {
         return 'max_length_is'.tr() + ' ${validation.maxLength}';
-      } else if (type == ShippingInputValidationType.email && Validator.email(value) != null) {
-        return Validator.email(value);
+      } else if (type == ShippingInputValidationType.email && emailValidation != null) {
+        return emailValidation;
       } else if (type == ShippingInputValidationType.number && num.tryParse(value) == null) {
         return 'invalid_number'.tr();
       } else if (type == ShippingInputValidationType.double && double.tryParse(value) == null) {
         return 'invalid_number'.tr();
-      } else if (type == ShippingInputValidationType.phone && Validator.phone(value) != null) {
-        return Validator.phone(value);
+      } else if (type == ShippingInputValidationType.phone && phoneValidation != null) {
+        return phoneValidation;
       } else if (type == ShippingInputValidationType.postalCode &&
           !WorldZipcodeValidator.isValid(
               countryCode?.toLowerCase() ?? 'sa', value)) {
@@ -96,6 +106,7 @@ class ShippingInput {
       enableDropDownSearch: enableDropDownSearch,
       type: type,
       validation: validation,
+      inputLang: inputLang,
     );
   }
 

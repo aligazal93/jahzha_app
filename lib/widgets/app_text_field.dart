@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
@@ -31,6 +32,7 @@ class AppTextField extends StatefulWidget {
     this.maxLength,
     this.showRequiredSign = false,
     this.textAlign = TextAlign.start,
+    this.formatters,
   });
 
   final String? hint;
@@ -55,6 +57,7 @@ class AppTextField extends StatefulWidget {
   final TextEditingController? controller;
   final double vMargin;
   final double hMargin;
+  final List<TextInputFormatter>? formatters;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -124,6 +127,7 @@ class _AppTextFieldState extends State<AppTextField> {
             child: AbsorbPointer(
               absorbing: widget.onTap != null,
               child: TextFormField(
+                inputFormatters: widget.formatters,
                 focusNode: widget.focusNode,
                 controller: widget.controller,
                 cursorColor: AppColors.secondary,

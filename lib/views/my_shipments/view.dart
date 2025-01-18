@@ -11,6 +11,7 @@ import 'package:jahzha_app/widgets/app/home_app_bar.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
 import 'package:jahzha_app/widgets/loading_indicator.dart';
+
 part 'units/ship_card.dart';
 
 class MyShipmentsView extends StatefulWidget {
@@ -20,12 +21,15 @@ class MyShipmentsView extends StatefulWidget {
   State<MyShipmentsView> createState() => _MyShipmentsViewState();
 }
 
-class _MyShipmentsViewState extends State<MyShipmentsView> with SingleTickerProviderStateMixin {
+class _MyShipmentsViewState extends State<MyShipmentsView>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
+
   void dispose() {
     super.dispose();
     _tabController.dispose();
@@ -37,10 +41,12 @@ class _MyShipmentsViewState extends State<MyShipmentsView> with SingleTickerProv
       create: (context) => MyShipmentsCubit(),
       child: Scaffold(
         appBar: HomeAppBar(
-          name: CachingUtils.user?.data.name == null ? 'in Jahzha'.tr() : CachingUtils.user?.data.name,
+          name: CachingUtils.user?.data.name == null
+              ? 'in Jahzha'.tr()
+              : CachingUtils.user?.data.name,
           title: 'My shipments'.tr(),
         ),
-        body: BlocBuilder<MyShipmentsCubit , MyShipmentsStates>(
+        body: BlocBuilder<MyShipmentsCubit, MyShipmentsStates>(
           builder: (context, state) {
             final cubit = MyShipmentsCubit.of(context);
             return Column(
@@ -62,17 +68,24 @@ class _MyShipmentsViewState extends State<MyShipmentsView> with SingleTickerProv
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 12,horizontal: 12),
+                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                   child: AppTextField(
                     hint: 'Search for shipments'.tr(),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.asset('assets/images/search.png',width: 20,),
+                      child: UnconstrainedBox(
+                        child: Image.asset(
+                          'assets/images/search.png',
+                          width: 20,
+                          height: 20,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                state is MyShipmentsLoadingState ? LoadingIndicator() :
-                   cubit.getCurrentView
+                state is MyShipmentsLoadingState
+                    ? LoadingIndicator()
+                    : cubit.getCurrentView
               ],
             );
           },

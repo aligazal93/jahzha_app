@@ -2,7 +2,7 @@ part of '../view.dart';
 class CompareCard extends StatelessWidget {
   const CompareCard({Key? key, required this.titleCard, required this.value1,
     required this.value2,
-    this.fontSize = 11,
+    this.fontSize = 10,
     this.color = AppColors.secondary, this.isSelected
 
   }) : super(key: key);
