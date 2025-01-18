@@ -89,6 +89,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: Image.asset(
                 'assets/images/$icon.png',
+                height: 26,
                 color: isActive
                     ? AppColors.secondary.theme
                     : AppColors.GrayLight.theme,
@@ -99,7 +100,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               color: isActive
                   ? AppColors.secondary.theme
                   : AppColors.GrayLight.theme,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w700,
               fontSize: 12,
             )
           ],

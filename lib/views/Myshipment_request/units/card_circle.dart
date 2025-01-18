@@ -15,14 +15,14 @@ class CircleCard extends StatelessWidget {
         children: [
           Container(
               margin: EdgeInsets.symmetric(vertical: 8),
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                   border: Border.all(
                       color: activeColor
                   ),
                   borderRadius: BorderRadius.circular(120)
               ),
-              child: Image.asset(image,color: activeColor,)),
+              child: Image.asset(image,color: activeColor,width: 20,height: 30,),),
           AppText(
             title: title,
             fontSize: 12,

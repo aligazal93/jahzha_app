@@ -16,7 +16,7 @@ class AccountTile extends StatelessWidget {
         textAlign: Utils.isAR ? TextAlign.right : TextAlign.left,
 
       ),
-      leading: Image.asset('assets/images/${image}.png',color: AppColors.lightGray,width: 28,),
+      leading: Image.asset('assets/images/${image}.png',color: AppColors.lightGray,width: 24,),
       trailing:Icon( Utils.isAR ? FontAwesomeIcons.chevronLeft : FontAwesomeIcons.chevronRight ,size: 18,color: AppColors.secondary,),
     );
   }

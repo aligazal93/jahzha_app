@@ -14,7 +14,7 @@ class SupportButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/support.png'),
+          Image.asset('assets/images/support.png',width: 24,),
           AppText(
             padding: EdgeInsets.symmetric(horizontal: 16.width),
             textAlign: TextAlign.center,

@@ -19,7 +19,7 @@ class _SliderState extends State<Slider> {
 
   void getBanners() async {
     if (banners.isNotEmpty) return;
-    banners = await GeneralDatasource().getBanners();
+    banners = (await GeneralDatasource().getBanners()).cast<AppBanner>();
     rebuild();
   }
 

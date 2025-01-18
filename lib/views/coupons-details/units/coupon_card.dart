@@ -88,7 +88,7 @@ class CouponCard extends StatelessWidget {
                     onTap: () {
                       Utils.copyToClipboard(context, coupon);
                     },
-                    child: Icon(FontAwesomeIcons.solidCopy,color: AppColors.lightGray,))
+                    child:  Image.asset('assets/images/copy.png',width: 24,color: AppColors.lightGray,))
               ],
             ),
           ),

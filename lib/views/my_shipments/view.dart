@@ -65,8 +65,10 @@ class _MyShipmentsViewState extends State<MyShipmentsView> with SingleTickerProv
                   margin: EdgeInsets.symmetric(vertical: 12,horizontal: 12),
                   child: AppTextField(
                     hint: 'Search for shipments'.tr(),
-                    suffixIcon: Icon(FontAwesomeIcons.magnifyingGlass),
-
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset('assets/images/search.png',width: 20,),
+                    ),
                   ),
                 ),
                 state is MyShipmentsLoadingState ? LoadingIndicator() :
