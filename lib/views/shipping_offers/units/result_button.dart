@@ -14,7 +14,7 @@ class ResultButton extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 16),
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
@@ -27,14 +27,14 @@ class ResultButton extends StatelessWidget {
             Icon(
               FontAwesomeIcons.sliders,
               color: AppColors.primary,
-              size: 20,
+              size: 16,
             ),
             AppText(
               title: 'Filter results'.tr(),
               color: AppColors.primary,
               fontWeight: FontWeight.w700,
               padding: EdgeInsets.symmetric(horizontal: 12),
-              fontSize: 16,
+              fontSize: 14,
             ),
           ],
         ),

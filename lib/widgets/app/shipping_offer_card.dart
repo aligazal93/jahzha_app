@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
 import 'package:jahzha_app/widgets/app_network_image.dart';
 import 'package:jahzha_app/widgets/app_sheet.dart';
@@ -42,11 +43,15 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
   Widget build(BuildContext context) {
     final offer = widget.offer;
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8),
-      padding: EdgeInsets.symmetric(vertical: 12),
+      margin: EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.tGray),
+        color: AppColors.tGray,
+        border: Border.all(
+          color: AppColors.tGray,
+          width: 1.5,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,61 +76,61 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                     ),
                   ),
                   SizedBox(width: 8),
-                  InkWell(
-                    child: Icon(
-                      FontAwesomeIcons.circleInfo,
-                      size: 22,
-                      color: AppColors.txtGray,
-                    ),
-                    onTap: () {
-                      AppSheet.show(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            UnconstrainedBox(
-                              child: AppNetworkImage(
-                                url: offer.company.logo,
-                                height: 64,
-                                width: 64,
-                              ),
-                            ),
-                            SizedBox(height: 12),
-                            AppText(
-                              title: offer.company.name,
-                              textAlign: TextAlign.center,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            SizedBox(height: 12),
-                            if (offer.estimatedDeliveryTime != null) ...[
-                              AppText(
-                                title: 'Delivery time'.tr() +
-                                    ': ' +
-                                    offer.estimatedDeliveryTime!,
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: 12),
-                            ],
-                            AppText(
-                              title: offer.price.toString() +
-                                  ' ' +
-                                  offer.currency,
-                              textAlign: TextAlign.center,
-                              color: AppColors.primary,
-                            ),
-                            SizedBox(height: 12),
-                            Html(data: offer.company.description),
-                            SizedBox(height: 12),
-                            AppButton(
-                              title: 'Order now'.tr(),
-                              onTap: () {},
-                            ),
-                            if (Platform.isAndroid) SizedBox(height: 16),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(width: 16),
+                  // InkWell(
+                  //   child: Icon(
+                  //     FontAwesomeIcons.circleInfo,
+                  //     size: 22,
+                  //     color: AppColors.txtGray,
+                  //   ),
+                  //   onTap: () {
+                  //     AppSheet.show(
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.stretch,
+                  //         children: [
+                  //           UnconstrainedBox(
+                  //             child: AppNetworkImage(
+                  //               url: offer.company.logo,
+                  //               height: 64,
+                  //               width: 64,
+                  //             ),
+                  //           ),
+                  //           SizedBox(height: 12),
+                  //           AppText(
+                  //             title: offer.company.name,
+                  //             textAlign: TextAlign.center,
+                  //             fontWeight: FontWeight.w700,
+                  //           ),
+                  //           SizedBox(height: 12),
+                  //           if (offer.estimatedDeliveryTime != null) ...[
+                  //             AppText(
+                  //               title: 'Delivery time'.tr() +
+                  //                   ': ' +
+                  //                   offer.estimatedDeliveryTime!,
+                  //               textAlign: TextAlign.center,
+                  //             ),
+                  //             SizedBox(height: 12),
+                  //           ],
+                  //           AppText(
+                  //             title: offer.price.toString() +
+                  //                 ' ' +
+                  //                 offer.currency,
+                  //             textAlign: TextAlign.center,
+                  //             color: AppColors.primary,
+                  //           ),
+                  //           SizedBox(height: 12),
+                  //           Html(data: offer.company.description),
+                  //           SizedBox(height: 12),
+                  //           AppButton(
+                  //             title: 'Order now'.tr(),
+                  //             onTap: () {},
+                  //           ),
+                  //           if (Platform.isAndroid) SizedBox(height: 16),
+                  //         ],
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
+                  // SizedBox(width: 16),
                   // Spacer(),
                   // Row(
                   //   children: [
@@ -400,10 +405,10 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
           SizedBox(height: 8),
           Container(
             padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: AppColors.tGray,
+              color: AppColors.white,
             ),
             child: Column(
               children: [
@@ -482,9 +487,9 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                         // margin: EdgeInsets.symmetric(vertical: 20),
                         padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: AppColors.darkGray.theme,
+                            color: AppColors.darkGrayBlue,
                           ),
                           color: offer.addToComparison
                               ? AppColors.primary
@@ -559,7 +564,7 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
               border: Border.all(
                 color: AppColors.darkGray.theme,
               ),
-              color: isSelected ? AppColors.primary : AppColors.darkGray,
+              color: isSelected ? AppColors.primary : AppColors.white,
             ),
             child: Icon(
               FontAwesomeIcons.check,

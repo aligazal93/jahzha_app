@@ -29,9 +29,13 @@ import 'package:jahzha_app/widgets/snack_bar.dart';
 import 'cubit.dart';
 
 part 'units/pick_location_for_careem.dart';
+
 part 'units/info.dart';
+
 part 'units/result_button.dart';
+
 part 'units/result_bottom_sheet.dart';
+
 part 'units/info_bottom_sheet.dart';
 
 class ShippingOffersView extends StatelessWidget {
@@ -51,39 +55,60 @@ class ShippingOffersView extends StatelessWidget {
         dto: dto,
         isLocal: isLocal,
       )..getOffers(),
-      child: Scaffold(
-        appBar: CustomAppBar(
-          title: 'Offers available'.tr(),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: BlocBuilder<ShippingOffersCubit, ShippingOffersStates>(
-            builder: (context, state) {
-              final cubit = ShippingOffersCubit.of(context);
-              final offers = cubit.filteredOffers.isNotEmpty ? cubit.filteredOffers : cubit.offers;
-              if (cubit.isStateLoading) {
-                return AppLoadingIndicator();
-              } else if (offers.isEmpty) {
-                return EmptyView();
-              }
-              return Column(
-                children: [
-                  OffersInfo(),
-                  ResultButton(),
-                  Expanded(
-                    child: ListView.builder(
+      child: BlocBuilder<ShippingOffersCubit, ShippingOffersStates>(
+        builder: (context, state) {
+          final cubit = ShippingOffersCubit.of(context);
+          return Scaffold(
+            appBar: CustomAppBar(
+              title: 'Offers available'.tr(),
+              actions: [
+                if (!cubit.isStateLoading)
+                  IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.sliders,
+                      color: AppColors.primary,
+                      size: 20,
+                    ),
+                    onPressed: () => AppSheet.show(
+                      child: ResultBottomSheetView(cubit: cubit),
+                    ),
+                  ),
+              ],
+            ),
+            body: Builder(
+              builder: (context) {
+                final offers = cubit.filteredOffers.isNotEmpty
+                    ? cubit.filteredOffers
+                    : cubit.offers;
+                if (cubit.isStateLoading) {
+                  return AppLoadingIndicator();
+                } else if (offers.isEmpty) {
+                  return EmptyView();
+                }
+                return ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  children: [
+                    OffersInfo(),
+                    SizedBox(height: 20),
+                    // ResultButton(),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
                       itemCount: offers.length,
                       itemBuilder: (context, index) {
                         final offer = offers[index];
                         return ShippingOfferCard(
                           offer: offer,
-                          onComparisonTap: (v) => cubit.toggleComparison(offer),
+                          onComparisonTap: (v) =>
+                              cubit.toggleComparison(offer),
                           onOrder: () {
                             if (offer.pickupType == PickupType.careem) {
                               PickLocationForCareemView(
                                 cubit: cubit,
                                 originCountryCode: dto.origin!.countryCode!,
-                                destinationCountryCode: dto.destination!.countryCode!,
+                                destinationCountryCode:
+                                    dto.destination!.countryCode!,
                                 onPickLocation: (origin, destination) {
                                   cubit.orderOffer(
                                     offer: offer,
@@ -99,20 +124,21 @@ class ShippingOffersView extends StatelessWidget {
                         );
                       },
                     ),
-                  ),
-                  if (cubit.comparisonOffers.length == 2)
-                    AppButton(
-                      title: 'Compare'.tr(),
-                      onTap: () => RouteUtils.navigateTo(ComparingView(cubit: cubit)),
-                      color: AppColors.primary,
-                      margin: EdgeInsets.symmetric(vertical: 22),
-                      constrainedAxis: Axis.horizontal,
-                    ),
-                ],
-              );
-            },
-          ),
-        ),
+                    if (cubit.comparisonOffers.length == 2)
+                      AppButton(
+                        title: 'Compare'.tr(),
+                        onTap: () => RouteUtils.navigateTo(
+                            ComparingView(cubit: cubit)),
+                        color: AppColors.primary,
+                        margin: EdgeInsets.symmetric(vertical: 22),
+                        constrainedAxis: Axis.horizontal,
+                      ),
+                  ],
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }
