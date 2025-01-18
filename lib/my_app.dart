@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jahzha_app/core/extensions/build_context.dart';
 import 'package:jahzha_app/views/splash.dart';
 import 'core/helpers/app_colors.dart';
 import 'core/route_utils/route_utils.dart';
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             hoverColor: Colors.transparent,
-            fontFamily: "Alexandria",
+            fontFamily: context.localizedFontFamily.id,
             scaffoldBackgroundColor: AppColors.white,
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,

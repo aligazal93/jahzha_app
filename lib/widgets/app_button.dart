@@ -69,56 +69,66 @@ class AppButton extends StatelessWidget {
       constrainedAxis: constrainedAxis,
       child: Padding(
         padding: margin,
-        child: isLoading ? AppLoadingIndicator() : InkWell(
-          onTap: () {
-            if (onTap != null) {
-              onTap!();
-              Utils.dismissKeyboard();
-            }
-          },
-          radius: _radius,
-          borderRadius: BorderRadius.circular(_radius),
-          child: Container(
-            height: height ?? 55.height,
-            padding: padding ?? EdgeInsets.symmetric(horizontal: 48.width),
-            alignment: Alignment.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (leading != null) ...[
-                  leading!,
-                  SizedBox(width: 8.width),
-                ],
-                Flexible(
-                  child: AppText(
-                    title: title,
-                    color: titleColor,
-                    fontSize: titleFontSize,
-                    fontWeight: FontWeight.w400,
+        child: isLoading
+            ? AppLoadingIndicator()
+            : InkWell(
+                onTap: () {
+                  if (onTap != null) {
+                    onTap!();
+                    Utils.dismissKeyboard();
+                  }
+                },
+                radius: _radius,
+                borderRadius: BorderRadius.circular(_radius),
+                child: Container(
+                  height: height ?? 55.height,
+                  padding:
+                      padding ?? EdgeInsets.symmetric(horizontal: 48.width),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (leading != null) ...[
+                        leading!,
+                        SizedBox(width: 8.width),
+                      ],
+                      if (leading != null || trailing != null)
+                        Expanded(
+                          child: _text(),
+                        )
+                      else
+                        _text(),
+                      if (trailing != null) ...[
+                        SizedBox(width: 8.width),
+                        trailing!,
+                      ],
+                    ],
+                  ),
+                  // child: AppText(
+                  //   title: title,
+                  //   color: titleColor,
+                  //   fontSize: titleFontSize,
+                  //   fontWeight: FontWeight.w400,
+                  // ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: borderColor,
+                    ),
+                    borderRadius: BorderRadius.circular(_radius),
+                    color: onTap == null ? AppColors.lightGray : color,
                   ),
                 ),
-                if (trailing != null) ...[
-                  SizedBox(width: 8.width),
-                  trailing!,
-                ],
-              ],
-            ),
-            // child: AppText(
-            //   title: title,
-            //   color: titleColor,
-            //   fontSize: titleFontSize,
-            //   fontWeight: FontWeight.w400,
-            // ),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: borderColor,
               ),
-              borderRadius: BorderRadius.circular(_radius),
-              color: onTap == null ? AppColors.lightGray : color,
-            ),
-          ),
-        ),
       ),
+    );
+  }
+
+  Widget _text() {
+    return AppText(
+      title: title,
+      color: titleColor,
+      fontSize: titleFontSize,
+      fontWeight: FontWeight.w400,
     );
   }
 }
@@ -143,35 +153,37 @@ class _OutlineAppButton extends AppButton {
       constrainedAxis: constrainedAxis,
       child: Padding(
         padding: margin,
-        child: isLoading ? AppLoadingIndicator() : InkWell(
-          onTap: () {
-            if (onTap != null) {
-              onTap!();
-              Utils.dismissKeyboard();
-            }
-          },
-          radius: _radius,
-          borderRadius: BorderRadius.circular(_radius),
-          child: Container(
-            height: height ?? 48.height,
-            alignment: Alignment.center,
-            padding: padding ?? EdgeInsets.symmetric(horizontal: 48.width),
-            child: AppText(
-              title: title,
-              color: onTap == null ? AppColors.darkGray : titleColor,
-              fontSize: titleFontSize,
-              fontWeight: FontWeight.w600,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(_radius),
-              color: AppColors.white,
-              border: Border.all(
-                color: onTap == null ? AppColors.darkGray : color,
-                width: 1,
-              )
-            ),
-          ),
-        ),
+        child: isLoading
+            ? AppLoadingIndicator()
+            : InkWell(
+                onTap: () {
+                  if (onTap != null) {
+                    onTap!();
+                    Utils.dismissKeyboard();
+                  }
+                },
+                radius: _radius,
+                borderRadius: BorderRadius.circular(_radius),
+                child: Container(
+                  height: height ?? 48.height,
+                  alignment: Alignment.center,
+                  padding:
+                      padding ?? EdgeInsets.symmetric(horizontal: 48.width),
+                  child: AppText(
+                    title: title,
+                    color: onTap == null ? AppColors.darkGray : titleColor,
+                    fontSize: titleFontSize,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(_radius),
+                      color: AppColors.white,
+                      border: Border.all(
+                        color: onTap == null ? AppColors.darkGray : color,
+                        width: 1,
+                      )),
+                ),
+              ),
       ),
     );
   }

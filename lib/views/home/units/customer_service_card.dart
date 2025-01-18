@@ -10,7 +10,6 @@ class CustomerServiceCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 4),
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12), color: colorCard),

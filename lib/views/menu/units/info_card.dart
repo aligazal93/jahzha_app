@@ -117,9 +117,7 @@ class InfoCard extends StatelessWidget {
               },
               height: 40,
             ),
-            SizedBox(
-              width: 12,
-            ),
+            SizedBox(width: 12),
           ],
         ),
       ),

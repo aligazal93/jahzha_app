@@ -106,9 +106,7 @@ class OffersInfo extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           padding: EdgeInsets.symmetric(vertical: 8),
                         ),
-                        SizedBox(
-                          width: 12,
-                        ),
+                        SizedBox(width: 4),
                         AppText(
                           title: 'kgm'.tr(),
                           fontSize: 10,

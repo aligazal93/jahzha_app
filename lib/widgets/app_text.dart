@@ -1,62 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:jahzha_app/core/helpers/app_colors.dart';
+
+import '../core/helpers/app_colors.dart';
+
+enum AppFontFamily {
+  alexandria(id: "Alexandria"),
+  montserrat(id: "Montserrat");
+
+  const AppFontFamily({required this.id});
+  final String id;
+}
 
 class AppText extends StatelessWidget {
   final String title;
   final FontWeight fontWeight;
   final Color color;
-  final double fontSize;
+  final double? fontSize;
   final TextAlign? textAlign;
-  final TextDirection? textDirection;
   final TextDecoration? decoration;
   final TextOverflow? overflow;
   final int? maxLines;
   final bool? softWrap;
   final double? height;
-  final String? fontFamily;
+  final AppFontFamily? fontFamily;
   final EdgeInsetsGeometry padding;
   final void Function()? onTap;
 
   AppText({
+    Key? key,
     required this.title,
     this.color = AppColors.secondary,
-    this.fontSize = 14,
+    this.fontSize,
     this.textAlign,
     this.decoration,
     this.overflow,
-    this.fontWeight = FontWeight.w400,
+    this.fontWeight = FontWeight.w500,
     this.maxLines,
     this.height,
     this.fontFamily,
     this.softWrap,
     this.padding = EdgeInsets.zero,
     this.onTap,
-    this.textDirection,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _fontSize = (fontSize ?? 14) - 2;
     return Padding(
       padding: padding,
       child: InkWell(
         onTap: onTap,
         child: Text(
           title,
+          key: key,
           textAlign: textAlign ?? TextAlign.start,
-          textScaleFactor: 1,
+          textScaler: TextScaler.linear(1),
           style: TextStyle(
             color: color,
-            fontSize: fontSize,
-            height: height != null ? height! / fontSize : null,
+            fontSize: _fontSize,
+            height: height != null ? height! / _fontSize : null,
             decoration: decoration ?? TextDecoration.none,
             decorationStyle: TextDecorationStyle.solid,
+            decorationThickness: 2,
+            decorationColor: color,
             fontWeight: fontWeight,
-            fontFamily: fontFamily
+            fontFamily: fontFamily == null ? null : fontFamily!.id,
           ),
           overflow: overflow,
           maxLines: maxLines,
           softWrap: softWrap,
-          textDirection: textDirection ?? TextDirection.rtl,
         ),
       ),
     );

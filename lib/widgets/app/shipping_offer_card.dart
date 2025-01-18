@@ -169,10 +169,7 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
           ),
           if (offer.isCheapest || offer.isFastest || offer.isNew)
             Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8,
-                horizontal: 8,
-              ),
+              padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -285,14 +282,13 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                 if (offer.estimatedDeliveryTime != null) ...[
                   AppText(
                     title: 'Expected arrival date'.tr(),
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.w700,
                     padding: EdgeInsets.symmetric(
                       horizontal: 12,
                       vertical: 16,
                     ),
-                    color:
-                        isExpanded ? AppColors.txtGray : Colors.transparent,
+                    color: isExpanded ? AppColors.txtGray : Colors.transparent,
                   ),
                   Row(
                     children: [
@@ -573,21 +569,48 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
             ),
           ),
           SizedBox(width: 8),
-          AppText(
-            title: title,
-            color: isSelected ? AppColors.secondary : AppColors.lightGray,
-            fontSize: 12,
-            padding: EdgeInsets.symmetric(horizontal: 4),
-            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w300,
-          ),
-          if (price.isNotEmpty)
-            AppText(
-              title: '( ${price} )',
-              color: AppColors.primary,
+          Expanded(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 4),
-              fontWeight: FontWeight.w700,
-              fontSize: 10,
-            )
+              child: RichText(
+                text: TextSpan(
+                  text: title,
+                  style: TextStyle(
+                    color: isSelected ? AppColors.secondary : AppColors.lightGray,
+                    fontSize: 12,
+                    fontWeight: isSelected ? FontWeight.w700 : FontWeight.w300,
+                    height: 20 / 12,
+                  ),
+                  children: [
+                    if (price.isNotEmpty)
+                      TextSpan(
+                      text: ' ( ${price} )',
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          // AppText(
+          //   title: title,
+          //   color: isSelected ? AppColors.secondary : AppColors.lightGray,
+          //   fontSize: 12,
+          //   padding: EdgeInsets.symmetric(horizontal: 4),
+          //   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w300,
+          // ),
+          // if (price.isNotEmpty)
+          //   AppText(
+          //     title: '( ${price} )',
+          //     color: AppColors.primary,
+          //     padding: EdgeInsets.symmetric(horizontal: 4),
+          //     fontWeight: FontWeight.w700,
+          //     fontSize: 10,
+          //   ),
         ],
       ),
     );

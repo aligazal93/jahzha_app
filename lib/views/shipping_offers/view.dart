@@ -100,8 +100,7 @@ class ShippingOffersView extends StatelessWidget {
                         final offer = offers[index];
                         return ShippingOfferCard(
                           offer: offer,
-                          onComparisonTap: (v) =>
-                              cubit.toggleComparison(offer),
+                          onComparisonTap: (v) => cubit.toggleComparison(offer),
                           onOrder: () {
                             if (offer.pickupType == PickupType.careem) {
                               PickLocationForCareemView(
@@ -124,17 +123,25 @@ class ShippingOffersView extends StatelessWidget {
                         );
                       },
                     ),
-                    if (cubit.comparisonOffers.length == 2)
-                      AppButton(
-                        title: 'Compare'.tr(),
-                        onTap: () => RouteUtils.navigateTo(
-                            ComparingView(cubit: cubit)),
-                        color: AppColors.primary,
-                        margin: EdgeInsets.symmetric(vertical: 22),
-                        constrainedAxis: Axis.horizontal,
-                      ),
                   ],
                 );
+              },
+            ),
+            bottomNavigationBar: Builder(
+              builder: (context) {
+                if (cubit.comparisonOffers.length >= 2) {
+                  return SafeArea(
+                    child: AppButton(
+                      title: 'Compare'.tr(),
+                      margin: EdgeInsets.all(16),
+                      onTap: () =>
+                          RouteUtils.navigateTo(ComparingView(cubit: cubit)),
+                      color: AppColors.primary,
+                      constrainedAxis: Axis.horizontal,
+                    ),
+                  );
+                }
+                return SizedBox.shrink();
               },
             ),
           );
