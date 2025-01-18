@@ -9,13 +9,14 @@ class ShipmentsTrackingCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
+        padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(150),
             border: Border.all(
                 color: color
             )
         ),
-        child: Image.asset(image),
+        child: Image.asset(image,width: 30,),
       ),
     );
   }

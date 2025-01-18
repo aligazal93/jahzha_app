@@ -25,7 +25,7 @@ class BoxCard extends StatelessWidget {
           Row(
             children: [
               Container(
-                child: Image.asset('assets/images/box.png'),
+                child: Image.asset('assets/images/box.png',width: 24,),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: AppColors.darkGrayBlue.withOpacity(.3)

@@ -338,7 +338,7 @@ class MenuView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset('assets/images/logout.png'),
+                        Image.asset('assets/images/logout.png',width: 24,),
                         AppText(
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           textAlign: TextAlign.center,

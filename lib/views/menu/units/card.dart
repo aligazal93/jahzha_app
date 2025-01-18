@@ -10,7 +10,7 @@ class CardOne extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          Image.asset('assets/images/${image}.png',fit: BoxFit.cover,width: 30,),
+          Image.asset('assets/images/${image}.png',fit: BoxFit.cover,width: 26,),
           SizedBox(width: 12,),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -22,7 +22,7 @@ class _SplashViewState extends State<SplashView> {
       Duration(seconds: 4), () {
       CachingUtils.isLogged ?
       RouteUtils.navigateAndPopAll(NavBarView()) :
-      RouteUtils.navigateAndPopAll(LoginView());
+      RouteUtils.navigateAndPopAll(OnBoardingView());
     },
     );
   }

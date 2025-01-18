@@ -51,12 +51,13 @@ class NavBarView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 14),
                       width: 70,
+                      padding: EdgeInsets.all(16),
                       height: 70,
                       decoration: BoxDecoration(
                         color: AppColors.primary.theme,
                         borderRadius: BorderRadius.circular(500),
                       ),
-                      child: Image.asset('assets/images/icon-3.png'),
+                      child: Image.asset('assets/images/icon-3.png',width: 24,height: 24,fit: BoxFit.fill,),
                     ),
                     AppText(
                       title: 'Send Shipment'.tr(),

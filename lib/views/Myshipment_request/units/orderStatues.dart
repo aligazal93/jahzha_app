@@ -69,7 +69,7 @@ class OrderStatuesView extends StatelessWidget {
                           onTap: () {
                             Utils.copyToClipboard(context, '#53455345');
                           },
-                          child: Image.asset('assets/images/copy.png'),)
+                          child: Image.asset('assets/images/copy.png',width: 24,),)
                     ],
                   ),
                 ),
@@ -123,7 +123,7 @@ class OrderStatuesView extends StatelessWidget {
                         onTap: () {
                           Utils.copyToClipboard(context, '#53455345');
                         },
-                        child: Image.asset('assets/images/copy.png'),)
+                        child: Image.asset('assets/images/copy.png',width: 24,),)
                     ],
                   ),
                 ),
@@ -159,7 +159,7 @@ class OrderStatuesView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Center(child: Image.asset('assets/images/cancel.png'),),
+                      Center(child: Image.asset('assets/images/refused.png'),),
                       SizedBox(height: 12,),
                       AppText(
                         textAlign: TextAlign.center,
