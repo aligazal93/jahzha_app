@@ -42,9 +42,10 @@ class CartPageView extends StatelessWidget {
             final cubit = CartCubit.of(context);
             if (cubit.isStateLoading) {
               return AppLoadingIndicator();
-            } else if (cubit.cart == null) {
+            } else if (cubit.cart?.shipments.isEmpty ?? true) {
               return NoDataFoundView();
             }
+            print(cubit.cart);
             return SafeArea(
               child: AppPaginatedScroll(
                 items: cubit.cart!.shipments,
