@@ -41,8 +41,8 @@ class _LoginViewState extends State<LoginView> with SingleTickerProviderStateMix
               decoration: BoxDecoration(
                 color: AppColors.secondary,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(50),
-                  bottomRight: Radius.circular(50)
+                  bottomLeft: Radius.circular(28),
+                  bottomRight: Radius.circular(28)
                 )
               ),
               child: Column(

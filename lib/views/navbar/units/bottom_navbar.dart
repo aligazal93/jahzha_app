@@ -22,41 +22,42 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
-    final bottomPadding = Utils.bottomDevicePadding;
     return Container(
       padding: EdgeInsets.only(
-        top: 4.height,
-        bottom: bottomPadding == 0 ? 16.height : bottomPadding,
+        top: 4,
+        bottom: Utils.bottomDevicePadding == 0 ? 16 : 0,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _bottomNavItem(
-            index: 0,
-            icon: 'icon-1',
-            title: 'Home'.tr(),
-          ),
-          _bottomNavItem(
-            index: 1,
-            icon: 'icon-2',
-            title: 'My shipments'.tr(),
-            width: 20,
-            height: 20,
-          ),
-          if (Utils.isAR) SizedBox(width: 12.width),
-          Spacer(),
-          if (Utils.isAR) SizedBox(width: 12.width),
-          _bottomNavItem(
-            index: 2,
-            title: 'Coupons'.tr(),
-            icon: 'icon-4',
-          ),
-          _bottomNavItem(
-            index: 3,
-            title: 'Menu'.tr(),
-            icon: 'icon-5',
-          ),
-        ],
+      child: SafeArea(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _bottomNavItem(
+              index: 0,
+              icon: 'icon-1',
+              title: 'Home'.tr(),
+            ),
+            _bottomNavItem(
+              index: 1,
+              icon: 'icon-2',
+              title: 'My shipments'.tr(),
+              width: 20,
+              height: 20,
+            ),
+            if (Utils.isAR) SizedBox(width: 12.width),
+            Spacer(),
+            if (Utils.isAR) SizedBox(width: 12.width),
+            _bottomNavItem(
+              index: 2,
+              title: 'Coupons'.tr(),
+              icon: 'icon-4',
+            ),
+            _bottomNavItem(
+              index: 3,
+              title: 'Menu'.tr(),
+              icon: 'icon-5',
+            ),
+          ],
+        ),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
