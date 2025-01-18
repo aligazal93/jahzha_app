@@ -6,6 +6,7 @@ import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/views/coupons-details/cubit.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
+import 'package:jahzha_app/widgets/app/no_data_found.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
@@ -28,11 +29,11 @@ class CouponsDetailsView extends StatelessWidget {
             final cubit = CouponsDetailsCubit.of(context);
             final data = cubit.storeCouponsDetailsModel?.data;
             final storeData = data?.store;
-            final couponsData = data?.coupons;
-            if(state is CouponsDetailsLoading){
-              return Center(child: AppLoadingIndicator());
-            }else if (couponsData!.isEmpty && couponsData == null){
-              return Center(child: AppLoadingIndicator());
+            final couponsData = data?.coupons ?? [];
+            if(state is CouponsDetailsLoading) {
+              return AppLoadingIndicator();
+            }else if (couponsData.isEmpty){
+              return NoDataFoundView();
             }
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12,),
@@ -49,10 +50,10 @@ class CouponsDetailsView extends StatelessWidget {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
-                                      color: AppColors.tGray
-                                  )
+                                      color: AppColors.tGray,
+                                  ),
                               ),
-                              child: Image.network(storeData!.image,fit: BoxFit.cover,)
+                              child: Image.network(storeData!.image,fit: BoxFit.cover,),
                           ),
                         ),
                         Expanded(
