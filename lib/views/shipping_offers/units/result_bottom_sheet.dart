@@ -42,7 +42,7 @@ class ResultBottomSheetView extends StatelessWidget {
                       dto.filterPriceInDescendingOrder = null;
                     } else {
                       dto.filterPriceInDescendingOrder =
-                          v == 'expensive_first'.tr;
+                          v == 'expensive_first'.tr();
                     }
                     cubit.updateUI();
                   },

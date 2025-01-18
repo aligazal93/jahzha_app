@@ -15,8 +15,10 @@ class _CompanyCard extends StatelessWidget {
           children: [
             AppNetworkImage(
               url: offer.company.logo,
-              width: 64,
-              height: 64,
+              width: ShippingOfferCard.companyImageSize.width,
+              height: ShippingOfferCard.companyImageSize.height,
+              borderColor: AppColors.primary,
+              borderRadius: 12,
             ),
             AppText(
               title: offer.company.name,

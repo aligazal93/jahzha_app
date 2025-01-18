@@ -27,6 +27,8 @@ class ShippingOfferCard extends StatefulWidget {
   final void Function(bool v) onComparisonTap;
   final void Function() onOrder;
 
+  static const Size companyImageSize = Size(76, 56);
+
   @override
   State<ShippingOfferCard> createState() => _ShippingOfferCardState();
 }
@@ -64,8 +66,10 @@ class _ShippingOfferCardState extends State<ShippingOfferCard> {
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: AppNetworkImage(
                       url: offer.company.logo,
-                      width: 64,
-                      height: 64,
+                      width: ShippingOfferCard.companyImageSize.width,
+                      height: ShippingOfferCard.companyImageSize.height,
+                      borderColor: AppColors.primary,
+                      borderRadius: 12,
                     ),
                   ),
                   SizedBox(width: 8),

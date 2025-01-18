@@ -12,6 +12,7 @@ import 'package:jahzha_app/widgets/app_network_image.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/snack_bar.dart';
 
+import '../../widgets/app/shipping_offer_card.dart';
 import '../shipping_offers/view.dart';
 
 part 'units/line-v.dart';
