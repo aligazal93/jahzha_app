@@ -55,12 +55,17 @@ class SendShippingView extends StatelessWidget {
                               size: 16,
                               color: AppColors.lightGray,
                             ),
-                            suffixIcon: AppText(
-                              title: 'kg'.tr(),
-                              color: AppColors.txtGray,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              padding: EdgeInsets.symmetric(vertical: 14),
+                            suffixIcon: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AppText(
+                                  title: 'kg'.tr(),
+                                  color: AppColors.txtGray,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                ),
+                              ],
                             ),
                             label: 'Approximate weight'.tr(),
                             inputType: TextInputType.number,
