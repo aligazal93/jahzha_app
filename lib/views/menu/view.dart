@@ -226,12 +226,20 @@ class MenuView extends StatelessWidget {
                           RouteUtils.navigateTo(UsagePolicyView());
                         },
                       ),
+                      Divider(
+                        height: 8,
+                        color: AppColors.tGray,
+                      ),
                       AccountTile(
                         image: 'shield',
                         title: 'privacy policy'.tr(),
                         onTap: () {
                           RouteUtils.navigateTo(PrivacyPolicyView());
                         },
+                      ),
+                      Divider(
+                        height: 8,
+                        color: AppColors.tGray,
                       ),
                       AccountTile(
                         image: 'coupons',
@@ -241,6 +249,10 @@ class MenuView extends StatelessWidget {
                             PointPolicyView(),
                           );
                         },
+                      ),
+                      Divider(
+                        height: 8,
+                        color: AppColors.tGray,
                       ),
                       ListTile(
                         onTap: () {
