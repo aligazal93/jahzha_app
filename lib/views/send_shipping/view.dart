@@ -50,6 +50,11 @@ class SendShippingView extends StatelessWidget {
                           ),
                           AppTextField(
                             fillColor: AppColors.whiteBk,
+                            prefixIcon: Icon(
+                              FontAwesomeIcons.weightHanging,
+                              size: 16,
+                              color: AppColors.lightGray,
+                            ),
                             suffixIcon: AppText(
                               title: 'kg'.tr(),
                               color: AppColors.txtGray,
