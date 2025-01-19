@@ -61,7 +61,7 @@ class ShippingOffer {
       isNew: json['isNew'],
       isFastest: json['isFastest'],
       isCheapest: json['isCheapest'],
-      price: num.parse(json['totalPrice'].toString()),
+      price: num.parse(json['totalPrice'].toString().replaceAll(',', '')),
       currency: json['currency'],
       dropOffByUser: dropOffByUser,
       pickupByCompany: pickUpByCompany,

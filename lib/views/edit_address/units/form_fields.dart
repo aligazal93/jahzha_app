@@ -15,7 +15,7 @@ class _FormFields extends StatelessWidget {
             'السعودية',
           ],
           onChange: (p0) {},
-          label: 'Country'.tr(),
+          label: 'country'.tr(),
         ),
         AppDropDownMenu(
           validator: (p0) {},

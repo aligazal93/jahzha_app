@@ -16,6 +16,7 @@ class AppTextField extends StatefulWidget {
     this.inputType = TextInputType.text,
     this.onTap,
     this.label,
+    this.minLines,
     this.maxLines = 1,
     this.borderColor = AppColors.darkGrayBlue,
     this.fillColor = Colors.transparent,
@@ -44,7 +45,8 @@ class AppTextField extends StatefulWidget {
   final TextInputType inputType;
   final VoidCallback? onTap;
   final String? label;
-  final int maxLines;
+  final int? minLines;
+  final int? maxLines;
   final Color borderColor;
   final int? maxLength;
   final Color fillColor;
@@ -138,6 +140,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 maxLength: widget.maxLength,
                 textInputAction: TextInputAction.done,
                 keyboardType: widget.inputType,
+                minLines: widget.minLines,
                 maxLines: widget.maxLines,
                 onSaved: widget.onSaved,
                 obscureText: _showPassword!,
@@ -188,5 +191,5 @@ class _AppTextFieldState extends State<AppTextField> {
     );
   }
 
-  double get _radius => widget.maxLines > 1 ? 22 : 14;
+  double get _radius => (widget.maxLines ?? 0) > 1 ? 22 : 14;
 }

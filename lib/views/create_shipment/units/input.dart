@@ -209,6 +209,8 @@ class _DropMenu extends StatelessWidget {
         color: AppColors.lightGray,
         size: 16,
       ),
+      minLines: 1,
+      maxLines: null,
       onTap: _DropMenuSheet(
         cubit: CreateShipmentCubit.of(context),
         input: input,

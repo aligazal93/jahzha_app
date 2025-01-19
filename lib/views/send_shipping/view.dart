@@ -70,7 +70,7 @@ class SendShippingView extends StatelessWidget {
                           SizedBox(height: 12),
                           if (!isLocal) ...[
                             AppTextField(
-                              label: "Country".tr(),
+                              label: "sender_country".tr(),
                               hint: "Saudi Arabia".tr(),
                               fillColor: AppColors.whiteBk,
                               onTap: () {},
@@ -104,7 +104,7 @@ class SendShippingView extends StatelessWidget {
                           SizedBox(height: 12),
                           if (!isLocal) ...[
                             GooglePlacesTextFormField(
-                              label: 'Country'.tr(),
+                              label: 'receiver_country'.tr(),
                               fillColor: AppColors.whiteBk,
                               controller: dto.destinationCountryTXController,
                               placeType: PlaceType.cities,

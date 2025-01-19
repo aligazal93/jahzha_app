@@ -68,21 +68,22 @@ class _ShipmentPage extends StatelessWidget {
               separatorBuilder: (context, index) => SizedBox(height: 8),
             ),
           ],
-          _addItem(
-            onTap: () {
-              inputs.addAdditionalShipment();
-              cubit.updateUI();
-            },
-          ),
           ListView.separated(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.only(top: 20),
+            padding: EdgeInsets.only(top: 8),
             itemCount: radios.length,
             itemBuilder: (context, index) {
               return _Input(input: radios[index]);
             },
             separatorBuilder: (context, index) => SizedBox(height: 8),
+          ),
+          SizedBox(height: 16),
+          _addItem(
+            onTap: () {
+              inputs.addAdditionalShipment();
+              cubit.updateUI();
+            },
           ),
         ],
       ),
@@ -98,21 +99,22 @@ class _ShipmentPage extends StatelessWidget {
           child: AppText(
             title: 'add_item'.tr(),
             fontSize: 16,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w600,
           ),
         ),
         InkWell(
           onTap: onTap,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
               color: AppColors.primary,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
               FontAwesomeIcons.plus,
               // FontAwesomeIcons.minus,
               color: Colors.white,
+              size: 20,
             ),
           ),
         ),
@@ -129,20 +131,21 @@ class _ShipmentPage extends StatelessWidget {
           child: AppText(
             title: 'remove_item'.tr(),
             fontSize: 16,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w600,
           ),
         ),
         InkWell(
           onTap: onTap,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
               color: Colors.redAccent,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
               FontAwesomeIcons.minus,
               color: Colors.white,
+              size: 20,
             ),
           ),
         ),
