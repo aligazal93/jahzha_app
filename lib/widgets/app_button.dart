@@ -37,7 +37,7 @@ class AppButton extends StatelessWidget {
   final Widget? leading;
   final Widget? trailing;
 
-  double get _radius => 12;
+  double get _radius => 8;
 
   factory AppButton.outline({
     required String title,
