@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
+import 'package:jahzha_app/core/helpers/utils.dart';
+import 'package:lottie/lottie.dart';
 
 import '../core/helpers/app_colors.dart';
 import '../core/route_utils/route_utils.dart';
@@ -11,7 +13,7 @@ class AppLoadingIndicator extends StatelessWidget {
   const AppLoadingIndicator({
     super.key,
     this.padding,
-    this.unconstrained = true,
+    this.unconstrained = false,
   });
 
   final EdgeInsetsGeometry? padding;
@@ -32,7 +34,13 @@ class AppLoadingIndicator extends StatelessWidget {
       barrierDismissible: false,
       barrierColor: Colors.black.withOpacity(0.7),
       builder: (context) {
-        return AppLoadingIndicator();
+        return UnconstrainedBox(
+          child: Lottie.asset(
+            'assets/lottie/loading.json',
+            width: 120,
+            height: 120,
+          ),
+        );
       },
     );
   }
@@ -72,9 +80,10 @@ class AppLoadingIndicator extends StatelessWidget {
         radius: 12.radius,
         padding: _isVisible ? EdgeInsets.all(32.width) : EdgeInsets.zero,
         color: _isVisible ? AppColors.white : Colors.transparent,
-        child: CircularProgressIndicator(
-          color: AppColors.primary,
-          strokeWidth: 1.5,
+        child: Lottie.asset(
+          'assets/lottie/loading.json',
+          width: 80,
+          height: 80,
         ),
       ),
     );

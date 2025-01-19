@@ -89,6 +89,7 @@ flutter:
     - assets/lang/ar.json
     - assets/lang/en.json
     - assets/images/lottie/
+    - shorebird.yaml
 
   fonts:
     - family: Montserrat
