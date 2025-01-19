@@ -30,8 +30,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.jahzha.app"
-    compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    compileSdkVersion 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
