@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_places_flutter/model/place_type.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/validator.dart';
@@ -74,6 +75,11 @@ class SendShippingView extends StatelessWidget {
                               hint: "Saudi Arabia".tr(),
                               fillColor: AppColors.whiteBk,
                               onTap: () {},
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.globe,
+                                size: 16,
+                                color: AppColors.lightGray,
+                              ),
                             ),
                             SizedBox(height: 12),
                           ],
@@ -82,6 +88,11 @@ class SendShippingView extends StatelessWidget {
                             fillColor: AppColors.whiteBk,
                             controller: dto.originTXController,
                             countries: ['SA'],
+                            prefixIcon: Icon(
+                              FontAwesomeIcons.locationDot,
+                              size: 16,
+                              color: AppColors.lightGray,
+                            ),
                             placeType: PlaceType.cities,
                             onSelected: (value) => dto.origin = value,
                             validator: (_) {
@@ -108,6 +119,11 @@ class SendShippingView extends StatelessWidget {
                               fillColor: AppColors.whiteBk,
                               controller: dto.destinationCountryTXController,
                               placeType: PlaceType.cities,
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.globe,
+                                size: 16,
+                                color: AppColors.lightGray,
+                              ),
                               onSelected: (value) {
                                 dto.destination = null;
                                 dto.destinationTXController.clear();
@@ -139,6 +155,11 @@ class SendShippingView extends StatelessWidget {
                                   ? ['SA']
                                   : [dto.destinationCountry!.countryCode!],
                               placeType: PlaceType.cities,
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.locationDot,
+                                size: 16,
+                                color: AppColors.lightGray,
+                              ),
                               onSelected: (value) {
                                 dto.destination = value;
                                 dto.destinationTXController.text = value.city ?? '';

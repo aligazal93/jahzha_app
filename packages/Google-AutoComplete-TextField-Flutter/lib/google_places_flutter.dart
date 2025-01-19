@@ -111,7 +111,7 @@ class _GooglePlaceAutoCompleteTextFieldState
             ),
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: TextFormField(
@@ -129,11 +129,17 @@ class _GooglePlaceAutoCompleteTextFieldState
                 validator: widget.validator,
               ),
             ),
-            (!widget.isCrossBtnShown)
-                ? SizedBox()
-                : isCrossBtn && _showCrossIconWidget()
-                    ? IconButton(onPressed: clearData, icon: Icon(Icons.close))
-                    : SizedBox()
+            if (widget.isCrossBtnShown && _showCrossIconWidget())
+              InkWell(
+                onTap: clearData,
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 16, top: 14),
+                  child: Icon(
+                    Icons.close,
+                    size: 20,
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -325,6 +331,7 @@ class _GooglePlaceAutoCompleteTextFieldState
   }
 
   void clearData() {
+    widget.onClearData?.call();
     widget.textEditingController.clear();
     if (_cancelToken?.isCancelled == false) {
       _cancelToken?.cancel();

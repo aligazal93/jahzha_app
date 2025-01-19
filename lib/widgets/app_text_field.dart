@@ -163,7 +163,7 @@ class _AppTextFieldState extends State<AppTextField> {
                     ),
                     onPressed: ()=> setState(()=> _showPassword = !_showPassword!),
                   ) : null,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16.width, vertical: 19.height),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.width),
                   border: _border(widget.borderColor),
                   enabledBorder: _border(widget.borderColor),
                   focusedBorder: _border(AppColors.primary, width: 1),
@@ -191,5 +191,5 @@ class _AppTextFieldState extends State<AppTextField> {
     );
   }
 
-  double get _radius => (widget.maxLines ?? 0) > 1 ? 22 : 14;
+  double get _radius => (widget.maxLines ?? 0) > 1 ? 8 : 8;
 }

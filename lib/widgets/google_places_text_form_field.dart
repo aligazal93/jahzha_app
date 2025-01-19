@@ -22,6 +22,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
     this.placeBounds,
     this.validator,
     this.onClearData,
+    this.prefixIcon,
     this.showRequiredSign = true,
   }) : super(key: key);
 
@@ -35,6 +36,7 @@ class GooglePlacesTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final VoidCallback? onClearData;
   final bool showRequiredSign;
+  final Widget? prefixIcon;
 
   @override
   State<GooglePlacesTextFormField> createState() =>
@@ -146,10 +148,17 @@ class _GooglePlacesTextFormFieldState extends State<GooglePlacesTextFormField> {
           placeType: widget.placeType,
           language: context.locale.languageCode,
           boxDecoration: BoxDecoration(),
+          textStyle: TextStyle(
+            color: AppColors.secondary.theme,
+            fontSize: 12,
+          ),
           inputDecoration: InputDecoration(
+            prefixIcon: widget.prefixIcon,
             filled: true,
             fillColor: widget.fillColor,
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.width, vertical: 19.height),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.width,
+            ),
             border: _border(AppColors.darkGrayBlue),
             enabledBorder: _border(AppColors.darkGrayBlue),
             focusedBorder: _border(AppColors.primary, width: 1),
@@ -172,5 +181,5 @@ class _GooglePlacesTextFormFieldState extends State<GooglePlacesTextFormField> {
     );
   }
 
-  double get _radius => 14;
+  double get _radius => 8;
 }
