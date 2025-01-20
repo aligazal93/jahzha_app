@@ -20,26 +20,6 @@ class _ShipmentPage extends StatelessWidget {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             padding: EdgeInsets.only(top: 20),
-            itemCount: generalInputs.length,
-            itemBuilder: (context, index) {
-              return _Input(input: generalInputs[index]);
-            },
-            separatorBuilder: (context, index) => SizedBox(height: 8),
-          ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.only(top: 20),
-            itemCount: dimensionsInputs.length,
-            itemBuilder: (context, index) {
-              return _Input(input: dimensionsInputs[index]);
-            },
-            separatorBuilder: (context, index) => SizedBox(height: 8),
-          ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.only(top: 20),
             itemCount: itemsInputs.length,
             itemBuilder: (context, index) {
               return _Input(input: itemsInputs[index]);
@@ -68,6 +48,26 @@ class _ShipmentPage extends StatelessWidget {
               separatorBuilder: (context, index) => SizedBox(height: 8),
             ),
           ],
+          ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.only(top: 20),
+            itemCount: dimensionsInputs.length,
+            itemBuilder: (context, index) {
+              return _Input(input: dimensionsInputs[index]);
+            },
+            separatorBuilder: (context, index) => SizedBox(height: 8),
+          ),
+          ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.only(top: 20),
+            itemCount: generalInputs.length,
+            itemBuilder: (context, index) {
+              return _Input(input: generalInputs[index]);
+            },
+            separatorBuilder: (context, index) => SizedBox(height: 8),
+          ),
           ListView.separated(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),

@@ -19,14 +19,7 @@ class _Input extends StatelessWidget {
                 input.type == ShippingInputType.readOnlyField) {
               final isReadOnly = input.type == ShippingInputType.readOnlyField;
               return AppTextField(
-                prefixIcon: !isReadOnly &&
-                        input.validation.type ==
-                            ShippingInputValidationType.phone
-                    ? AppCountryPicker(
-                  initialPhoneCode: input.phoneCode!,
-                        onSelect: (country, code) => input.phoneCode = code,
-                      )
-                    : null,
+                prefixIcon: _prefixIcon(input: input),
                 controller: input.controller,
                 fillColor:
                     isReadOnly ? AppColors.darkGrayBlue : AppColors.whiteBk,
@@ -114,28 +107,30 @@ class _Input extends StatelessWidget {
                 ],
               );
             } else if (input.type == ShippingInputType.googlePlacesField) {
-              final prediction = cubit.currentPage == 1 ? dto.destination : dto.origin;
+              final prediction =
+                  cubit.currentPage == 1 ? dto.destination : dto.origin;
               return Padding(
                 padding: const EdgeInsets.only(top: 12),
                 child: GooglePlacesTextFormField(
                   controller: input.controller,
                   label: input.name,
+                  prefixIcon: _prefixIcon(input: input),
                   fillColor: AppColors.whiteBk,
                   showRequiredSign: input.validation.required,
                   validator: input.validate,
-                  countries: [
-                    prediction!.countryCode!
-                  ],
+                  countries: [prediction!.countryCode!],
                   placeType: PlaceType.address,
                   placeBounds: prediction.bounds!,
                   onSelected: (value) {
-                    input.controller.text = value.structuredFormatting?.mainText ?? '';
+                    input.controller.text =
+                        value.structuredFormatting?.mainText ?? '';
                     input.selectedPrediction = value;
                   },
                 ),
               );
             } else if (input.type == ShippingInputType.map) {
-              final prediction = cubit.currentPage == 1 ? dto.destination : dto.origin;
+              final prediction =
+                  cubit.currentPage == 1 ? dto.destination : dto.origin;
               return Padding(
                 padding: const EdgeInsets.only(top: 12),
                 child: GooglePlacesTextFormField(
@@ -144,9 +139,8 @@ class _Input extends StatelessWidget {
                   fillColor: AppColors.whiteBk,
                   showRequiredSign: input.validation.required,
                   validator: input.validate,
-                  countries: [
-                    prediction!.countryCode!
-                  ],
+                  prefixIcon: _prefixIcon(input: input),
+                  countries: [prediction!.countryCode!],
                   placeType: PlaceType.address,
                   placeBounds: prediction.bounds!,
                   onSelected: (value) {
@@ -156,7 +150,8 @@ class _Input extends StatelessWidget {
                     );
                     if (result) {
                       input.selectedPrediction = value;
-                      input.controller.text = input.selectedPrediction!.description!;
+                      input.controller.text =
+                          input.selectedPrediction!.description!;
                     } else {
                       input.controller.clear();
                     }
@@ -202,6 +197,7 @@ class _DropMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppTextField(
+      prefixIcon: _prefixIcon(input: input),
       fillColor: AppColors.whiteBk,
       showRequiredSign: input.validation.required,
       suffixIcon: Icon(
@@ -220,6 +216,30 @@ class _DropMenu extends StatelessWidget {
       validator: (v) => input.validate(),
     );
   }
+}
+
+Widget? _prefixIcon({
+  required ShippingInput input,
+}) {
+  final isReadOnly = input.type == ShippingInputType.readOnlyField;
+  if (!isReadOnly &&
+      input.validation.type == ShippingInputValidationType.phone) {
+    return AppCountryPicker(
+      initialPhoneCode: input.phoneCode!,
+      onSelect: (country, code) => input.phoneCode = code,
+    );
+  }
+  if (input.icon != null) {
+    return UnconstrainedBox(
+      child: AppNetworkImage(
+        url: input.icon!,
+        width: 24,
+        height: 24,
+        color: AppColors.lightGray,
+      ),
+    );
+  }
+  return null;
 }
 
 class _DropMenuSheet extends StatefulWidget {

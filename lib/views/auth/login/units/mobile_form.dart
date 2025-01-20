@@ -39,47 +39,42 @@ class ViaMobileForm extends StatelessWidget {
               color: AppColors.txtGray,
               fontSize: 14,
             ),
-            Container(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Container(
-                      child: AppTextField(
-                        fillColor: AppColors.tGray,
-                        hint: '5XXXXXXXXX',
-                        textAlign: TextAlign.left,
-                        inputType: TextInputType.number,
-                        onSaved: (v) => cubit.phone = v,
-                        validator: Validator.phone,
-                        maxLength: 9,
-                      ),
+            AppTextField(
+              suffixIcon: Utils.isAR ? Padding(
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppText(
+                      title: '+966',
+                      color: AppColors.lightGray,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Container(
-                        width: 70,
-                        height: 60,
-                        decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            border: Border.all(
-                              color: AppColors.darkGrayBlue,
-                            ),
-                            borderRadius: BorderRadius.circular(12)),
-                        child: Center(
-                          child: AppText(
-                            title: '966+',
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.white,
-                            padding: EdgeInsets.symmetric(horizontal: 8),
-                            textAlign: TextAlign.center,
-                          ),
-                        )),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ) : null,
+              prefixIcon: !Utils.isAR ? Padding(
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppText(
+                      title: '+966',
+                      color: AppColors.lightGray,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                    ),
+                  ],
+                ),
+              ) : null,
+              fillColor: AppColors.tGray,
+              hint: '5XXXXXXXXX',
+              textAlign: TextAlign.left,
+              inputType: TextInputType.number,
+              onSaved: (v) => cubit.phone = v,
+              validator: Validator.phone,
+              maxLength: 9,
             ),
             AppButton(
                 title: 'Continue'.tr(),

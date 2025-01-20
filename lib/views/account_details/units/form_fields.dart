@@ -18,46 +18,42 @@ class _FormFieldsState extends State<_FormFields> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: AppTextField(
-                        label: 'Mobile number'.tr(),
-                        controller: cubit.phoneTXController,
-                        inputType: TextInputType.phone,
-                        fillColor: AppColors.whiteBk,
-                        suffixIcon: Image.asset('assets/images/edit.png'),
-                        validator: Validator.phone,
-                        maxLength: 9,
+              AppTextField(
+                suffixIcon: Utils.isAR ? Padding(
+                  padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppText(
+                        title: '+966',
+                        color: AppColors.lightGray,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
                       ),
-                    ),
-                    SizedBox(width: 8),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 36),
-                      child: Container(
-                          width: 70,
-                          height: 58,
-                          decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              border: Border.all(
-                                color: AppColors.darkGrayBlue,
-                              ),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Center(
-                            child: AppText(
-                              title: '966+',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.white,
-                              padding: EdgeInsets.symmetric(horizontal: 8),
-                              textAlign: TextAlign.center,
-                            ),
-                          )),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ) : null,
+                prefixIcon: !Utils.isAR ? Padding(
+                  padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppText(
+                        title: '+966',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                        color: AppColors.lightGray,
+                      ),
+                    ],
+                  ),
+                ) : null,
+                label: 'Mobile number'.tr(),
+                textAlign: Utils.isAR ? TextAlign.end : TextAlign.start,
+                controller: cubit.phoneTXController,
+                inputType: TextInputType.phone,
+                fillColor: AppColors.whiteBk,
+                validator: Validator.phone,
+                maxLength: 9,
               ),
               AppTextField(
                 label: 'email Address'.tr(),

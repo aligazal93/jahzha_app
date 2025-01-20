@@ -9,6 +9,7 @@ import 'package:world_zipcode_validator/world_zipcode_validator.dart';
 class ShippingInput {
   final controller = TextEditingController();
   final String name;
+  final String? icon;
   final bool enableDropDownSearch;
   final ShippingInputType type;
   final ShippingValidation validation;
@@ -32,6 +33,7 @@ class ShippingInput {
   ShippingInput({
     required this.id,
     required this.name,
+    required this.icon,
     required this.requestKey,
     required this.note,
     required this.defaultValue,
@@ -45,6 +47,7 @@ class ShippingInput {
     final input = ShippingInput(
       id: json['id'],
       name: json['name'],
+      icon: json['icon'],
       requestKey: json['request_name'],
       note: json['input_note'],
       defaultValue: json['value']?.toString(),
@@ -107,6 +110,7 @@ class ShippingInput {
       type: type,
       validation: validation,
       inputLang: inputLang,
+      icon: icon,
     );
   }
 

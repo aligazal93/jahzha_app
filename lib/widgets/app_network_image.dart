@@ -16,6 +16,7 @@ class AppNetworkImage extends StatelessWidget {
   final Alignment? alignment;
   final Color? borderColor;
   final Color? bgColor;
+  final Color? color;
   final BoxShape? shape;
   final Widget? child;
 
@@ -26,6 +27,7 @@ class AppNetworkImage extends StatelessWidget {
     this.height,
     this.borderRadius,
     this.alignment,
+    this.color,
     this.borderColor,
     this.bgColor,
     this.shape,
@@ -44,6 +46,8 @@ class AppNetworkImage extends StatelessWidget {
           width: width,
           height: height,
           fit: fit,
+          colorFilter:
+              color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
           alignment: alignment ?? Alignment.center,
           placeholderBuilder: (_) => _loading(),
         ),
@@ -64,13 +68,19 @@ class AppNetworkImage extends StatelessWidget {
           child: child == null
               ? ClipRRect(
                   borderRadius: BorderRadius.circular(borderRadius ?? 5),
-                  child: Image(image: imageProvider),
+                  child: Image(
+                    image: imageProvider,
+                    color: color,
+                  ),
                 )
               : child,
           decoration: decoration.copyWith(
             image: DecorationImage(
               image: imageProvider,
               fit: fit,
+              colorFilter: color != null
+                  ? ColorFilter.mode(Colors.transparent, BlendMode.srcIn)
+                  : null,
             ),
           ),
           alignment: alignment ?? Alignment.center,
@@ -91,11 +101,9 @@ class AppNetworkImage extends StatelessWidget {
   }
 
   Widget _loading() {
-    return UnconstrainedBox(
-      child: CircularProgressIndicator(
-        strokeWidth: 1.5,
-        color: AppColors.primary,
-      ),
+    return CircularProgressIndicator(
+      strokeWidth: 1.5,
+      color: AppColors.primary,
     );
   }
 
