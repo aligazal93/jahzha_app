@@ -19,13 +19,15 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 4), () {
-      CachingUtils.isLogged ?
-      RouteUtils.navigateAndPopAll(NavBarView()) :
-      RouteUtils.navigateAndPopAll(OnBoardingView());
-    },
+      Duration(seconds: 4),
+      () {
+        CachingUtils.isLogged
+            ? RouteUtils.navigateAndPopAll(NavBarView())
+            : RouteUtils.navigateAndPopAll(OnBoardingView());
+      },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,16 +36,22 @@ class _SplashViewState extends State<SplashView> {
         height: double.infinity,
         child: Stack(
           children: [
-            Image.asset('assets/images/splash.png',fit: BoxFit.cover,width: double.infinity,),
+            Image.asset(
+              'assets/images/splash_background.png',
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
             Positioned(
               left: 0,
               top: 0,
               bottom: 0,
               right: 0,
-              child: FlipInY(
-                delay: Duration(milliseconds:500),
+              child: FadeInDownBig(
+                delay: Duration(milliseconds: 500),
                 child: Container(
-                  child:  Image.asset('assets/images/logo.png',),
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                  ),
                 ),
               ),
             ),

@@ -101,6 +101,14 @@ class AppNetworkImage extends StatelessWidget {
   }
 
   Widget _loading() {
+    if ((height ?? 100) > 40 || ((width ?? 100)  > 40)) {
+      return UnconstrainedBox(
+        child: CircularProgressIndicator(
+          strokeWidth: 1.5,
+          color: AppColors.primary,
+        ),
+      );
+    }
     return CircularProgressIndicator(
       strokeWidth: 1.5,
       color: AppColors.primary,

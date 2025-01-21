@@ -292,5 +292,7 @@
   "get_point_on_shipping": "Get {} point on shipping",
   "price_may_vary_due_to_shipment_dimensions": "Price may vary due to shipment dimensions",
   "distance_must_be_less_than_15km": "Distance between addresses must be less than 15km",
-  "deliveryMethodNotAvailable": "Delivery method not available for Shipping Company"
+  "deliveryMethodNotAvailable": "Delivery method not available for Shipping Company",
+  "checkout": "Checkout",
+  "payment_methods": "Payment Methods"
 }

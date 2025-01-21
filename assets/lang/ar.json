@@ -291,5 +291,7 @@
   "unavailable": "غير متاح",
   "distance_must_be_less_than_15km": "المسافة بين العناوين يجب ان تكون اقل من 15 كم",
   "deliveryMethodNotAvailable": "طريقة التسليم غير متاحة لشركة الشحن",
-  "total_price": "اجمالي السعر"
+  "total_price": "اجمالي السعر",
+  "checkout": "الدفع",
+  "payment_methods": "طرق الدفع"
 }

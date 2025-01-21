@@ -31,6 +31,7 @@ class _Coupon extends StatelessWidget {
               AppButton(
                 title: (isCouponApplied ? 'cancel' : 'apply').tr(),
                 color: isCouponApplied ? AppColors.red : AppColors.primary,
+                height: 0,
                 margin: EdgeInsets.symmetric(
                   vertical: 8,
                 ),
@@ -48,10 +49,14 @@ class _Coupon extends StatelessWidget {
         ),
         if (isCouponApplied)
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 14,
+            ),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: AppColors.orangeLight),
+              borderRadius: BorderRadius.circular(12),
+              color: AppColors.orangeLight,
+            ),
             child: Row(
               children: [
                 Expanded(
@@ -73,7 +78,9 @@ class _Coupon extends StatelessWidget {
           ),
         AppButton(
           title: 'Completion of payment'.tr(),
-          onTap: () {},
+          onTap: () => RouteUtils.navigateTo(CheckoutView(
+            cart: cubit.cart!,
+          )),
           color: AppColors.primary,
           constrainedAxis: Axis.horizontal,
           margin: EdgeInsets.symmetric(vertical: 16),
