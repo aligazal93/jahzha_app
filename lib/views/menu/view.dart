@@ -7,7 +7,6 @@ import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
-import 'package:jahzha_app/views/Myshipment_request/view.dart';
 import 'package:jahzha_app/views/about_us/view.dart';
 import 'package:jahzha_app/views/account_details/view.dart';
 import 'package:jahzha_app/views/addreses/view.dart';
@@ -17,6 +16,7 @@ import 'package:jahzha_app/views/language/view.dart';
 import 'package:jahzha_app/views/my_balance/view.dart';
 import 'package:jahzha_app/views/my_coupons/view.dart';
 import 'package:jahzha_app/views/my_points/view.dart';
+import 'package:jahzha_app/views/navbar/cubit/cubit.dart';
 import 'package:jahzha_app/views/point_policy/view.dart';
 import 'package:jahzha_app/views/privacy_policy/view.dart';
 import 'package:jahzha_app/views/terms_conditions/view.dart';
@@ -53,22 +53,21 @@ class MenuView extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 4),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                color: AppColors.tGray,
-                              ),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: CardOne(
-                            image: 'menu-1',
-                            title: 'My shipments'.tr(),
-                            content: 'Shipment details'.tr(),
-                            onTap: () {
-                              RouteUtils.navigateTo(MyShipmentsRequestView());
-                            },
-                          )),
+                        margin: EdgeInsets.symmetric(horizontal: 4),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.tGray,
+                            ),
+                            borderRadius: BorderRadius.circular(12)),
+                        child: CardOne(
+                          image: 'menu-1',
+                          title: 'My shipments'.tr(),
+                          content: 'Shipment details'.tr(),
+                          onTap: () => NavBarCubit.of(context).toggleTab(1),
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: Container(
@@ -264,8 +263,8 @@ class MenuView extends StatelessWidget {
                           title: 'language'.tr(),
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          textAlign: Utils.isAR ? TextAlign.right : TextAlign.left,
-
+                          textAlign:
+                              Utils.isAR ? TextAlign.right : TextAlign.left,
                         ),
                         leading: Icon(
                           FontAwesomeIcons.earthAfrica,
@@ -350,7 +349,10 @@ class MenuView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset('assets/images/logout.png',width: 24,),
+                        Image.asset(
+                          'assets/images/logout.png',
+                          width: 24,
+                        ),
                         AppText(
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           textAlign: TextAlign.center,

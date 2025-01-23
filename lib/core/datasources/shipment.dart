@@ -1,11 +1,11 @@
-import 'package:jahzha_app/core/models/order/order.dart';
 import 'package:jahzha_app/widgets/snack_bar.dart';
 
-import '../models/order/order_details.dart';
+import '../models/shipment/shipment.dart';
+import '../models/shipment/shipment_details.dart';
 import '../network_utils/network_utils.dart';
 
-class OrderDatasource {
-  Future<List<Order>> getOrders({
+class ShipmentDatasource {
+  Future<List<Shipment>> getMyShipments({
     required int page,
   }) async {
     try {
@@ -15,7 +15,7 @@ class OrderDatasource {
       final success = response.statusCode! < 300;
       if (success) {
         return (response.data['data'] as List).map((e) {
-          return Order.fromJson(e);
+          return Shipment.fromJson(e);
         }).toList();
       }
     } catch (e) {
@@ -24,7 +24,7 @@ class OrderDatasource {
     return [];
   }
 
-  Future<OrderDetails?> getOrderDetails({
+  Future<ShipmentDetails?> getShipmentDetails({
     required int id,
   }) async {
     try {
@@ -34,7 +34,7 @@ class OrderDatasource {
       );
       final success = response.statusCode! < 300;
       if (success) {
-        return OrderDetails.fromJson(response.data);
+        return ShipmentDetails.fromJson(response.data);
       }
       showSnackBar(
         response.getMessage,

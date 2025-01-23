@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 
-class Order {
+class Shipment {
   final int id;
   final String trackingCode;
   final String deliveryType;
@@ -8,7 +8,7 @@ class Order {
   final String delivery;
   final String expectedArrivalTime;
 
-  Order({
+  Shipment({
     required this.id,
     required this.trackingCode,
     required this.deliveryType,
@@ -17,8 +17,8 @@ class Order {
     required this.expectedArrivalTime,
   });
 
-  factory Order.fromJson(Map<String, dynamic> json) {
-    return Order(
+  factory Shipment.fromJson(Map<String, dynamic> json) {
+    return Shipment(
       id: json['id'],
       trackingCode: json['track_number'],
       deliveryType: json['delivery_type'],

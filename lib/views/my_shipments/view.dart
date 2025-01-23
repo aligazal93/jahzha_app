@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/widgets/app/home_app_bar.dart';
 import 'package:jahzha_app/widgets/app/no_data_found.dart';
-import 'package:jahzha_app/widgets/app/order_card.dart';
+import 'package:jahzha_app/widgets/app/shipment_card.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_paginated_scroll.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
@@ -36,7 +36,7 @@ class MyShipmentsView extends StatelessWidget {
         body: BlocBuilder<MyShipmentsCubit, MyShipmentsStates>(
           builder: (context, state) {
             final cubit = MyShipmentsCubit.of(context);
-            final orders = cubit.orders;
+            final orders = cubit.shipments;
             if (cubit.isStateLoading) {
               return AppLoadingIndicator();
             } else if (orders.isEmpty) {

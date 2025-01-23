@@ -1,16 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/core/helpers/utils.dart';
-import 'package:jahzha_app/views/Myshipment_request/units/card_circle.dart';
-import 'package:jahzha_app/views/Myshipment_request/units/qr_code.dart';
-import 'package:jahzha_app/widgets/app_button.dart';
-import 'package:jahzha_app/widgets/app_text.dart';
-import 'package:jahzha_app/widgets/app_text_field.dart';
+part of '../view.dart';
 
-class OrderDetailsView extends StatelessWidget {
-  const OrderDetailsView({Key? key}) : super(key: key);
+class _DetailsView extends StatelessWidget {
+  const _DetailsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -35,7 +35,7 @@ class Utils {
     pattern.allMatches(text).forEach((match) => print(match.group(0)));
   }
 
- static void closeKeyboard() => FocusScope.of(RouteUtils.context).unfocus();
+  static void closeKeyboard() => FocusScope.of(RouteUtils.context).unfocus();
 
   static String getAssetPNGPath(String image) {
     return 'assets/images/$image.png';
@@ -65,7 +65,8 @@ class Utils {
   static Future<File?> getFileFromUrl(String url) async {
     try {
       final documentDirectory = await getApplicationDocumentsDirectory();
-      final fileName = documentDirectory.path + '/' + getFileNameFromURL(url, '/');
+      final fileName =
+          documentDirectory.path + '/' + getFileNameFromURL(url, '/');
       final file = File(fileName);
       if (await file.exists()) {
         return file;
@@ -127,19 +128,11 @@ class Utils {
     return '${((hours > 12) ? hours - 12 : hours == 0 ? 12 : hours).toString().padLeft(2, '0')}:${(value.minute).toString().padLeft(2, '0')} ${value.period.name.toUpperCase()}';
   }
 
-  static copyToClipboard(BuildContext context, String text) {
+  static copyToClipboard(String text) {
     Clipboard.setData(ClipboardData(text: text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: AppText(
-          title: 'Copied'.tr(),
-          fontSize: 14,
-          color: AppColors.white.theme,
-          fontWeight: FontWeight.w700,
-        ),
-        duration: Duration(seconds: 2),
-        backgroundColor: AppColors.primary,
-      ),
+    showSnackBar(
+      'copied'.tr(),
+      color: AppColors.secondary,
     );
   }
 
@@ -164,18 +157,16 @@ class Utils {
         onSurface: AppColors.secondary,
       ),
       textTheme: TextTheme(
-        displayLarge: TextStyle(
-          fontSize: 10,
-        ),
-        bodyLarge: TextStyle(
-          color: AppColors.primary,
-        ),
-        labelSmall: TextStyle(
-          color: AppColors.secondary,
-          fontSize: 16,
-          fontWeight: FontWeight.w700
-        )
-      ),
+          displayLarge: TextStyle(
+            fontSize: 10,
+          ),
+          bodyLarge: TextStyle(
+            color: AppColors.primary,
+          ),
+          labelSmall: TextStyle(
+              color: AppColors.secondary,
+              fontSize: 16,
+              fontWeight: FontWeight.w700)),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
@@ -190,6 +181,7 @@ class Utils {
     double fileSizeInMB = fileSizeInKB / 1024;
     return fileSizeInMB;
   }
+
   //
   // static Future<int> getVideoLengthInSeconds(File file) async {
   //   VideoPlayerController? controller;
@@ -238,20 +230,19 @@ class Utils {
       {bool removeAppBarSize = true}) {
     MediaQueryData mediaQuery = MediaQuery.of(RouteUtils.context);
     fraction = (removeAppBarSize
-        ? (mediaQuery.size.height -
-        AppBar().preferredSize.height -
-        mediaQuery.padding.top)
-        : (mediaQuery.size.height - mediaQuery.viewPadding.top)) /
+            ? (mediaQuery.size.height -
+                AppBar().preferredSize.height -
+                mediaQuery.padding.top)
+            : (mediaQuery.size.height - mediaQuery.viewPadding.top)) /
         (fraction == 0 ? 1 : fraction);
     return fraction;
   }
 
   static double sizeFromWidth(double fraction) {
-    fraction = MediaQuery.of(RouteUtils.context).size.width / (fraction == 0 ? 1 : fraction);
+    fraction = MediaQuery.of(RouteUtils.context).size.width /
+        (fraction == 0 ? 1 : fraction);
     return fraction;
   }
-
-
 
   static Map<String, List<Map<String, TimeOfDay>>> getWorkTimes() {
     return {
@@ -265,7 +256,8 @@ class Utils {
     };
   }
 
-  static List<Map<String, dynamic>> formatWorkTimes(Map<String, List<Map<String, TimeOfDay>>> workTimes) {
+  static List<Map<String, dynamic>> formatWorkTimes(
+      Map<String, List<Map<String, TimeOfDay>>> workTimes) {
     List<Map<String, dynamic>> formattedWorkTimes = [];
     for (var key in workTimes.keys) {
       for (var item in workTimes[key]!) {
@@ -278,7 +270,6 @@ class Utils {
     }
     return formattedWorkTimes;
   }
-
 }
 
 void handleGenericException(dynamic e) {
@@ -296,7 +287,7 @@ void handleGenericException(dynamic e) {
   };
   try {
     logError(e, e.stackTrace);
-  } catch  (_, s) {
+  } catch (_, s) {
     logError(e, s);
   }
 }

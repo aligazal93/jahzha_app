@@ -1,14 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/views/Myshipment_request/units/tracking_circle.dart';
-import 'package:jahzha_app/views/Myshipment_request/units/tracking_info.dart';
-import 'package:jahzha_app/views/order_tracking/view.dart';
-import 'package:jahzha_app/widgets/app_text.dart';
+part of '../view.dart';
 
-class ShipOrderTracking extends StatelessWidget {
-  const ShipOrderTracking({Key? key}) : super(key: key);
+class _TrackingView extends StatelessWidget {
+  const _TrackingView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +9,8 @@ class ShipOrderTracking extends StatelessWidget {
       margin: EdgeInsets.all(12),
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: AppColors.tGray
-        )
-      ),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: AppColors.tGray)),
       child: Column(
         children: [
           AppText(
@@ -35,7 +25,7 @@ class ShipOrderTracking extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
-                ShipmentsTrackingCircle(
+                _trackingCard(
                   image: 'assets/images/tr-1.png',
                   color: AppColors.green,
                 ),
@@ -46,7 +36,7 @@ class ShipOrderTracking extends StatelessWidget {
                     color: AppColors.tGray,
                   ),
                 ),
-                ShipmentsTrackingCircle(
+                _trackingCard(
                   image: 'assets/images/tr-2.png',
                   color: AppColors.green,
                 ),
@@ -57,7 +47,7 @@ class ShipOrderTracking extends StatelessWidget {
                     color: AppColors.tGray,
                   ),
                 ),
-                ShipmentsTrackingCircle(
+                _trackingCard(
                   image: 'assets/images/tr-3.png',
                   color: AppColors.primary,
                 ),
@@ -68,7 +58,7 @@ class ShipOrderTracking extends StatelessWidget {
                     color: AppColors.tGray,
                   ),
                 ),
-                ShipmentsTrackingCircle(
+                _trackingCard(
                   image: 'assets/images/tr-4.png',
                   color: AppColors.txtGray,
                 ),
@@ -91,36 +81,119 @@ class ShipOrderTracking extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          ShipTrackingInfo(
+          _trackingInfo(
             time: '4/5/2024 - 12:12 PM',
             title: 'تم أستلام الشحنة - المملكة العربية السعودية',
             circleColor: AppColors.green,
             colorBk: AppColors.tGray,
           ),
-          ShipTrackingInfo(
+          _trackingInfo(
             time: '4/5/2024 - 12:12 PM',
             title: 'تم أستلام معومات الشحنه بنجاح',
             circleColor: AppColors.green,
             colorBk: AppColors.white,
           ),
-          ShipTrackingInfo(
+          _trackingInfo(
             time: '4/5/2024 - 12:12 PM',
             title: 'تم نقل الشحنة إلى الاردن',
             circleColor: AppColors.primary,
             colorBk: AppColors.tGray,
           ),
-          ShipTrackingInfo(
+          _trackingInfo(
             time: '4/5/2024 - 12:12 PM',
             title: ' تم شحن الشحنة بنجاح إلى الأمارات',
             circleColor: AppColors.darkGrayBlue,
             colorBk: AppColors.white,
           ),
-          ShipTrackingInfo(
+          _trackingInfo(
             time: '4/5/2024 - 12:12 PM',
             title: 'تم توصيل الشحنة بنجاح',
             circleColor: AppColors.darkGrayBlue,
             colorBk: AppColors.white,
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _trackingCard({
+    required String image,
+    required Color color,
+  }) {
+    return Expanded(
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(150),
+            border: Border.all(color: color)),
+        child: Image.asset(
+          image,
+          width: 30,
+        ),
+      ),
+    );
+  }
+
+  Widget _trackingInfo({
+    required Color colorBk,
+    required Color circleColor,
+    required String title,
+    required String time,
+  }) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          color: colorBk, border: Border.all(color: AppColors.tGray)),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                Icon(
+                  FontAwesomeIcons.solidCircle,
+                  size: 8,
+                  color: AppColors.darkGrayBlue,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Icon(
+                    FontAwesomeIcons.solidCircleCheck,
+                    color: circleColor,
+                  ),
+                ),
+                Icon(
+                  FontAwesomeIcons.solidCircle,
+                  size: 8,
+                  color: AppColors.darkGrayBlue,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText(
+                  title: title,
+                  color: AppColors.secondary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                AppText(
+                  title: time,
+                  color: AppColors.txtGray,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

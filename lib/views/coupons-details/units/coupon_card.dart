@@ -85,10 +85,13 @@ class CouponCard extends StatelessWidget {
               children: [
                 AppText(title: coupon),
                 InkWell(
-                    onTap: () {
-                      Utils.copyToClipboard(context, coupon);
-                    },
-                    child:  Image.asset('assets/images/copy.png',width: 24,color: AppColors.lightGray,))
+                  onTap: () => Utils.copyToClipboard(coupon),
+                  child: Image.asset(
+                    'assets/images/copy.png',
+                    width: 24,
+                    color: AppColors.lightGray,
+                  ),
+                )
               ],
             ),
           ),

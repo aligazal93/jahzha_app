@@ -6,13 +6,13 @@ class _Orders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = MyShipmentsCubit.of(context);
-    final orders = cubit.orders;
+    final orders = cubit.shipments;
     return Expanded(
       child: ListView.separated(
         padding: EdgeInsets.only(bottom: 40),
         itemBuilder: (context, index) {
-          return OrderCard(
-            order: orders[index],
+          return ShipmentCard(
+            shipment: orders[index],
           );
         },
         separatorBuilder: (context, index) =>

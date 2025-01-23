@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jahzha_app/core/datasources/order.dart';
-import 'package:jahzha_app/core/models/order/order.dart';
+import 'package:jahzha_app/core/datasources/shipment.dart';
+
+import '../../core/models/shipment/shipment.dart';
 
 part 'states.dart';
 
@@ -9,18 +10,18 @@ class MyShipmentsCubit extends Cubit<MyShipmentsStates> {
 
   static MyShipmentsCubit of(context) => BlocProvider.of(context);
 
-  final _datasource = OrderDatasource();
-  List<Order> orders = [];
+  final _datasource = ShipmentDatasource();
+  List<Shipment> shipments = [];
 
-  Future<List<Order>> getShipments({
+  Future<List<Shipment>> getShipments({
     int page = 1,
   }) async {
     if (page == 1) {
-      orders.clear();
+      shipments.clear();
       _emit(MyShipmentsLoading());
     }
-    final result = await _datasource.getOrders(page: page);
-    orders.addAll(result);
+    final result = await _datasource.getMyShipments(page: page);
+    shipments.addAll(result);
     _emit(MyShipmentsInit());
     return result;
   }

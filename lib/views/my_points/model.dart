@@ -72,7 +72,7 @@ class Data {
   final String? type;
   final int points;
   final DateTime createdAt;
-  final Shipment? shipment;
+  final _Shipment? shipment;
 
   Data({
     required this.id,
@@ -87,7 +87,7 @@ class Data {
     type: json["type"],
     points: json["points"],
     createdAt: DateTime.parse(json["created_at"]),
-    shipment: json["shipment"] == null ? null : Shipment.fromJson(json["shipment"]),
+    shipment: json["shipment"] == null ? null : _Shipment.fromJson(json["shipment"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -99,16 +99,16 @@ class Data {
   };
 }
 
-class Shipment {
+class _Shipment {
   final int id;
   final String shipmentNumber;
 
-  Shipment({
+  _Shipment({
     required this.id,
     required this.shipmentNumber,
   });
 
-  factory Shipment.fromJson(Map<String, dynamic> json) => Shipment(
+  factory _Shipment.fromJson(Map<String, dynamic> json) => _Shipment(
     id: json["id"],
     shipmentNumber: json["shipment_number"],
   );

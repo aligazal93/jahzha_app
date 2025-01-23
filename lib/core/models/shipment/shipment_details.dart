@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 
-class OrderDetails {
+class ShipmentDetails {
   final int id;
   final _Person shipper;
   final _Person receiver;
@@ -9,7 +9,7 @@ class OrderDetails {
   final String careemTrackingURL;
   final List<_TrackingStep> trackingSteps;
 
-  OrderDetails({
+  ShipmentDetails({
     required this.id,
     required this.shipper,
     required this.receiver,
@@ -19,10 +19,10 @@ class OrderDetails {
     required this.trackingSteps,
   });
 
-  factory OrderDetails.fromJson(Map<String, dynamic> json) {
+  factory ShipmentDetails.fromJson(Map<String, dynamic> json) {
     final data = json['data'] ?? {};
     final additional = json['additional_data'] ?? {};
-    return OrderDetails(
+    return ShipmentDetails(
       id: data['id'],
       shipper: _Person.fromJson(data['shipper_details']),
       receiver: _Person.fromJson(data['receiver_details']),
