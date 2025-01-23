@@ -206,7 +206,7 @@
   "Confirmation" : "Confirmation",
   "Implemented" : "Implemented",
   "request is done" : "request is done",
-  "Implementation number" : "Implementation number",
+  "Implementation number" : "Payment ID",
   "The tracking code will appear here after the order is executed" : "The tracking code will appear here after the order is executed",
   "Retrieve the request" : "Retrieve the request",
   "Order canceled" : "Order canceled",
@@ -298,5 +298,6 @@
   "waybill": "Waybill",
   "invoice": "Invoice",
   "confirmed": "Confirmed",
-  "copied": "Copied"
+  "copied": "Copied",
+  "Files": "Files"
 }

@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ShipmentDetails {
   final int id;
@@ -6,7 +7,7 @@ class ShipmentDetails {
   final _Person receiver;
   final _Shipment shipment;
   final List<_File> files;
-  final String careemTrackingURL;
+  final String? careemTrackingURL;
   final List<_TrackingStep> trackingSteps;
 
   ShipmentDetails({
@@ -77,7 +78,7 @@ class _Shipment {
     return _Shipment(
       weight: json['weight'].toString(),
       shippingPrice: json['shipping_price'],
-      expectedArrivalText: json['expected_arrival_text'],
+      expectedArrivalText: json['expected_arrival_text'] ?? 'unknown'.tr(),
       trackNumber: json['track_number'],
       paymentTransactionID: json['payment_transaction_id'],
       createdAt: json['created_at'],

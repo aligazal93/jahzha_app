@@ -204,7 +204,7 @@
   "Confirmation" : "تأكيد",
   "Implemented" : "تم التنفيذ",
   "request is done" : "تم الطلب",
-  "Implementation number" : "رقم التنفيذ",
+  "Implementation number" : "كود الدفع",
   "The tracking code will appear here after the order is executed" : "سيظهر رمز التتبع هنا بعد تنفيذ الطلب",
   "Retrieve the request" : "استرجاع الطلب",
   "Order canceled" : "تم إلغاء الطلب",
@@ -297,5 +297,6 @@
   "waybill": "بوليصة",
   "invoice": "فاتورة",
   "confirmed": "مؤكد",
-  "copied": "تم النسخ"
+  "copied": "تم النسخ",
+  "Files": "ملفات"
 }
