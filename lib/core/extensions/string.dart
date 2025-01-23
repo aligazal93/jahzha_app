@@ -59,4 +59,8 @@ extension StringExtension on String {
     arabic = arabic.replaceAll('٩', '9');
     return arabic;
   }
+
+  String forceLeftToRight() {
+    return '\u200E$this';
+  }
 }

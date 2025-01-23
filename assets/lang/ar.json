@@ -212,6 +212,7 @@
   "Receiving address" : "عنوان الاستلام",
   "The senders mobile number": "رقم جوال الراسل",
   "The receiver mobile number": "رقم جوال المرسل اليه",
+  "track_order_via_careem": "تتبع الشحنة عبر كريم",
   "Expected arrival time" : "الوقت المتوقع للوصول",
   "An example of text could be in this space": "مثال على نص قد يكون في هذا المكان",
   "Implementation code": "رمز التنفيذ",

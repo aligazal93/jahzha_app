@@ -61,7 +61,9 @@ dependencies:
   world_zipcode_validator: ^0.0.2
   collection: ^1.17.0
   country_code_picker: ^3.1.0
-  
+  # Generating QR Code
+  qr_flutter: ^4.1.0
+
 dependency_overrides:
   firebase_core_platform_interface: ^4.8.0
   package_info_plus: any

@@ -57,7 +57,7 @@ class _StatusView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppText(
-                        title: '#${details.shipment.trackNumber}',
+                        title: '#${details.shipment.trackNumber}'.forceLeftToRight(),
                         fontSize: 14,
                         color: AppColors.secondary,
                       ),
@@ -114,7 +114,7 @@ class _StatusView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppText(
-                        title: '#${details.shipment.paymentTransactionID}',
+                        title: '#${details.shipment.paymentTransactionID}'.forceLeftToRight(),
                         fontSize: 14,
                         color: AppColors.secondary,
                       ),
@@ -130,43 +130,55 @@ class _StatusView extends StatelessWidget {
                   ),
                 ),
                 if (details.files.isNotEmpty) ...[
-                  SizedBox(height: 10),
-                  AppText(
-                    fontSize: 14,
-                    title: 'Files'.tr(),
-                    color: AppColors.secondary,
-                    fontWeight: FontWeight.w500,
-                  ),
                   SizedBox(height: 14),
                   ...details.files.map((e) {
-                    return InkWell(
-                      onTap: () => Launcher.openUrl(e.url),
-                      child: Container(
-                        margin: EdgeInsets.only(bottom: 12),
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: AppColors.tGray),
-                          color: AppColors.whiteBk,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: AppText(
-                                title: '${e.type.tr()}',
-                                fontSize: 14,
-                                color: AppColors.secondary,
-                              ),
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppText(
+                            title: e.type.tr(),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          SizedBox(height: 12),
+                          SizedBox(
+                            width: context.width(1),
+                            child: QRCodeCard(
+                              data: e.url,
                             ),
-                            Icon(
-                              FontAwesomeIcons.qrcode,
-                              size: 20,
-                              color: AppColors.txtGray,
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     );
+                    // return InkWell(
+                    //   onTap: () => Launcher.openUrl(e.url),
+                    //   child: Container(
+                    //     margin: EdgeInsets.only(bottom: 12),
+                    //     padding: EdgeInsets.all(12),
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(12),
+                    //       border: Border.all(color: AppColors.tGray),
+                    //       color: AppColors.whiteBk,
+                    //     ),
+                    //     child: Row(
+                    //       children: [
+                    //         Expanded(
+                    //           child: AppText(
+                    //             title: '${e.type.tr()}',
+                    //             fontSize: 14,
+                    //             color: AppColors.secondary,
+                    //           ),
+                    //         ),
+                    //         Icon(
+                    //           FontAwesomeIcons.qrcode,
+                    //           size: 20,
+                    //           color: AppColors.txtGray,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // );
                   }),
                 ]
                 // Container(

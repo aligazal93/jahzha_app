@@ -5,12 +5,15 @@ class _TrackingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = ShipmentDetailsCubit.of(context);
+    final details = cubit.details!;
     return Container(
       margin: EdgeInsets.all(12),
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.tGray)),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppColors.tGray),
+      ),
       child: Column(
         children: [
           AppText(
@@ -65,9 +68,7 @@ class _TrackingView extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
           Align(
             alignment: Alignment.centerRight,
             child: AppText(
@@ -78,39 +79,28 @@ class _TrackingView extends StatelessWidget {
               title: 'Your shipments journey'.tr(),
             ),
           ),
-          SizedBox(
-            height: 8,
+          SizedBox(height: 8),
+          ListView.builder(
+            itemCount: details.trackingSteps.length,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              final step = details.trackingSteps[index];
+              return _trackingInfo(
+                time: step.time,
+                title: step.statusText,
+                circleColor: step.active ? AppColors.green : AppColors.red,
+                colorBk: index.isEven ? AppColors.tGray : AppColors.white,
+              );
+            },
           ),
-          _trackingInfo(
-            time: '4/5/2024 - 12:12 PM',
-            title: 'تم أستلام الشحنة - المملكة العربية السعودية',
-            circleColor: AppColors.green,
-            colorBk: AppColors.tGray,
-          ),
-          _trackingInfo(
-            time: '4/5/2024 - 12:12 PM',
-            title: 'تم أستلام معومات الشحنه بنجاح',
-            circleColor: AppColors.green,
-            colorBk: AppColors.white,
-          ),
-          _trackingInfo(
-            time: '4/5/2024 - 12:12 PM',
-            title: 'تم نقل الشحنة إلى الاردن',
-            circleColor: AppColors.primary,
-            colorBk: AppColors.tGray,
-          ),
-          _trackingInfo(
-            time: '4/5/2024 - 12:12 PM',
-            title: ' تم شحن الشحنة بنجاح إلى الأمارات',
-            circleColor: AppColors.darkGrayBlue,
-            colorBk: AppColors.white,
-          ),
-          _trackingInfo(
-            time: '4/5/2024 - 12:12 PM',
-            title: 'تم توصيل الشحنة بنجاح',
-            circleColor: AppColors.darkGrayBlue,
-            colorBk: AppColors.white,
-          ),
+          if (details.careemTrackingURL != null)
+            AppButton(
+              margin: EdgeInsets.only(top: 12),
+              title: 'track_order_via_careem'.tr(),
+              onTap: () => Launcher.openUrl(details.careemTrackingURL!),
+            ),
         ],
       ),
     );
