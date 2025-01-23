@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
+import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/widgets/app/home_app_bar.dart';
 import 'package:jahzha_app/widgets/app/no_data_found.dart';
 import 'package:jahzha_app/widgets/app/shipment_card.dart';
@@ -39,8 +41,6 @@ class MyShipmentsView extends StatelessWidget {
             final orders = cubit.shipments;
             if (cubit.isStateLoading) {
               return AppLoadingIndicator();
-            } else if (orders.isEmpty) {
-              return NoDataFoundView();
             }
             return AppPaginatedScroll(
               onRefresh: cubit.getShipments,

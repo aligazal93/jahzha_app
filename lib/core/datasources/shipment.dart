@@ -6,11 +6,13 @@ import '../network_utils/network_utils.dart';
 
 class ShipmentDatasource {
   Future<List<Shipment>> getMyShipments({
+    String? trackNumber,
     required int page,
   }) async {
     try {
       final response = await NetworkUtils.post(
         'user-shipments?page=$page',
+        data: {if (trackNumber?.trim().isNotEmpty ?? false) 'track_number': trackNumber},
       );
       final success = response.statusCode! < 300;
       if (success) {

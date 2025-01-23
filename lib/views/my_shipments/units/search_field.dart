@@ -5,9 +5,12 @@ class _SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = MyShipmentsCubit.of(context);
     return AppTextField(
       hint: 'Search for shipments'.tr(),
-      suffixIcon: Padding(
+      controller: cubit.searchTXController,
+      onChanged: (_) => cubit.search(),
+      prefixIcon: Padding(
         padding: const EdgeInsets.all(8.0),
         child: UnconstrainedBox(
           child: Image.asset(
@@ -17,6 +20,16 @@ class _SearchField extends StatelessWidget {
           ),
         ),
       ),
+      suffixIcon: cubit.searchTXController.text.isEmpty
+          ? null
+          : InkWell(
+              onTap: cubit.resetSearch,
+              child: Icon(
+                FontAwesomeIcons.xmark,
+                color: AppColors.txtGray,
+                size: 20,
+              ),
+            ),
     );
   }
 }

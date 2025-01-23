@@ -7,6 +7,9 @@ class _Orders extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = MyShipmentsCubit.of(context);
     final orders = cubit.shipments;
+    if (!cubit.isStateLoading && orders.isEmpty) {
+      return NoDataFoundView();
+    }
     return Expanded(
       child: ListView.separated(
         padding: EdgeInsets.only(bottom: 40),
