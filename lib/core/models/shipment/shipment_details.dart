@@ -50,9 +50,9 @@ class _Person {
 
   factory _Person.fromJson(Map<String, dynamic> json) {
     return _Person(
-      name: json['name'],
-      phone: json['phone'],
-      address: json['address'],
+      name: json['name'] ?? 'unknown'.tr(),
+      phone: json['phone'] ?? 'unknown'.tr(),
+      address: json['address'] ?? 'unknown'.tr(),
     );
   }
 }
