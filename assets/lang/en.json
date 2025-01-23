@@ -294,5 +294,9 @@
   "distance_must_be_less_than_15km": "Distance between addresses must be less than 15km",
   "deliveryMethodNotAvailable": "Delivery method not available for Shipping Company",
   "checkout": "Checkout",
-  "payment_methods": "Payment Methods"
+  "payment_methods": "Payment Methods",
+  "waybill": "Waybill",
+  "invoice": "Invoice",
+  "confirmed": "Confirmed",
+  "copied": "Copied"
 }

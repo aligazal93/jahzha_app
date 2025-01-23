@@ -1,92 +1,61 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
-import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/views/my_shipments/cubit/cubit.dart';
-import 'package:jahzha_app/views/my_shipments/cubit/states.dart';
-import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/home_app_bar.dart';
-import 'package:jahzha_app/widgets/app_text.dart';
+import 'package:jahzha_app/widgets/app/no_data_found.dart';
+import 'package:jahzha_app/widgets/app/order_card.dart';
+import 'package:jahzha_app/widgets/app_loading_indicator.dart';
+import 'package:jahzha_app/widgets/app_paginated_scroll.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
-import 'package:jahzha_app/widgets/loading_indicator.dart';
 
-part 'units/ship_card.dart';
+import 'cubit.dart';
+part 'units/search_field.dart';
+part 'units/orders.dart';
 
-class MyShipmentsView extends StatefulWidget {
+class MyShipmentsView extends StatelessWidget {
   const MyShipmentsView({Key? key}) : super(key: key);
 
   @override
-  State<MyShipmentsView> createState() => _MyShipmentsViewState();
-}
-
-class _MyShipmentsViewState extends State<MyShipmentsView>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  void initState() {
-    _tabController = TabController(length: 3, vsync: this);
-    super.initState();
-  }
-
-  void dispose() {
-    super.dispose();
-    _tabController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    if (!CachingUtils.isLogged) {
+      return Scaffold(
+        appBar: HomeAppBar(
+          name: 'in Jahzha'.tr(),
+          title: 'My shipments'.tr(),
+        ),
+      );
+    }
     return BlocProvider(
-      create: (context) => MyShipmentsCubit(),
+      create: (context) => MyShipmentsCubit()..getShipments(),
       child: Scaffold(
         appBar: HomeAppBar(
-          name: CachingUtils.user?.data.name == null
-              ? 'in Jahzha'.tr()
-              : CachingUtils.user?.data.name,
+          name: CachingUtils.user?.data.name,
           title: 'My shipments'.tr(),
         ),
         body: BlocBuilder<MyShipmentsCubit, MyShipmentsStates>(
           builder: (context, state) {
             final cubit = MyShipmentsCubit.of(context);
-            return Column(
-              children: [
-                Row(
+            final orders = cubit.orders;
+            if (cubit.isStateLoading) {
+              return AppLoadingIndicator();
+            } else if (orders.isEmpty) {
+              return NoDataFoundView();
+            }
+            return AppPaginatedScroll(
+              onRefresh: cubit.getShipments,
+              items: orders,
+              getPaginatedItems: (page) => cubit.getShipments(page: page),
+              builder: (context) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
                   children: [
-                    ShipCard(
-                      title: 'Underway'.tr(),
-                      index: 0,
-                    ),
-                    ShipCard(
-                      title: 'Finished'.tr(),
-                      index: 1,
-                    ),
-                    ShipCard(
-                      title: 'Canceled'.tr(),
-                      index: 2,
-                    ),
+                    _SearchField(),
+                    SizedBox(height: 12),
+                    _Orders(),
                   ],
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                  child: AppTextField(
-                    hint: 'Search for shipments'.tr(),
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: UnconstrainedBox(
-                        child: Image.asset(
-                          'assets/images/search.png',
-                          width: 20,
-                          height: 20,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                state is MyShipmentsLoadingState
-                    ? LoadingIndicator()
-                    : cubit.getCurrentView
-              ],
+              ),
             );
           },
         ),

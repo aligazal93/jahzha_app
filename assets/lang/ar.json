@@ -293,5 +293,9 @@
   "deliveryMethodNotAvailable": "طريقة التسليم غير متاحة لشركة الشحن",
   "total_price": "اجمالي السعر",
   "checkout": "الدفع",
-  "payment_methods": "طرق الدفع"
+  "payment_methods": "طرق الدفع",
+  "waybill": "بوليصة",
+  "invoice": "فاتورة",
+  "confirmed": "مؤكد",
+  "copied": "تم النسخ"
 }

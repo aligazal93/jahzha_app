@@ -4,11 +4,6 @@ import 'package:jahzha_app/views/Myshipment_request/cubit/states.dart';
 import 'package:jahzha_app/views/Myshipment_request/units/orderDetails.dart';
 import 'package:jahzha_app/views/Myshipment_request/units/orderStatues.dart';
 import 'package:jahzha_app/views/Myshipment_request/units/orderTracking.dart';
-import 'package:jahzha_app/views/my_shipments/units/Canceled.dart';
-import 'package:jahzha_app/views/my_shipments/units/finished.dart';
-import 'package:jahzha_app/views/order_tracking/view.dart';
-
-
 
 class ShipmentRequestCubit extends Cubit<ShipmentsRequestsStates> {
   ShipmentRequestCubit() : super(ShipmentsRequestsInitState());
@@ -40,7 +35,4 @@ class ShipmentRequestCubit extends Cubit<ShipmentsRequestsStates> {
   }
 
   Widget get getCurrentView => pages[currentIndex];
-
-
-
 }

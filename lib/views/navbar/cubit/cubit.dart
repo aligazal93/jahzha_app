@@ -11,30 +11,15 @@ class NavBarCubit extends Cubit<NavBarStates> {
 
   static NavBarCubit of(context) => BlocProvider.of(context);
 
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   int currentIndex = 0;
-
-  final pages = [
-    HomeView(),
-    MyShipmentsView(),
-    CouponsView(),
-    MenuView(),
-
-  ];
 
   void openDrawer() {
     scaffoldKey.currentState?.openDrawer();
   }
 
-
   void toggleTab(int value) {
     currentIndex = value;
     emit(NavBarInitState());
   }
-
-  Widget get getCurrentView => pages[currentIndex];
-
-
-
 }
