@@ -20,16 +20,16 @@ class _SearchField extends StatelessWidget {
           ),
         ),
       ),
-      suffixIcon: cubit.searchTXController.text.isEmpty
-          ? null
-          : InkWell(
+      suffixIcon: cubit.isSearching
+          ? InkWell(
               onTap: cubit.resetSearch,
               child: Icon(
                 FontAwesomeIcons.xmark,
                 color: AppColors.txtGray,
                 size: 20,
               ),
-            ),
+            )
+          : null,
     );
   }
 }

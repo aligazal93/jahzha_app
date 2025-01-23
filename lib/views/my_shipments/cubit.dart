@@ -27,7 +27,7 @@ class MyShipmentsCubit extends Cubit<MyShipmentsStates> {
     if (page == 1) {
       shipments.clear();
       _emit(MyShipmentsLoading());
-      await AppLoadingIndicator.show();
+      // if (isSearching) await AppLoadingIndicator.show();
     }
     final result = await _datasource.getMyShipments(
       page: page,
@@ -35,9 +35,7 @@ class MyShipmentsCubit extends Cubit<MyShipmentsStates> {
     );
     shipments.addAll(result);
     _emit(MyShipmentsInit());
-    if (page == 1) {
-      await AppLoadingIndicator.hide();
-    }
+    // if (isSearching && page == 1) await AppLoadingIndicator.hide();
     return result;
   }
 
@@ -64,6 +62,10 @@ class MyShipmentsCubit extends Cubit<MyShipmentsStates> {
     searchTXController.dispose();
     _searchTimer?.cancel();
     return super.close();
+  }
+
+  bool get isSearching {
+    return searchTXController.text.trim().isNotEmpty;
   }
 
   bool get isStateLoading {
