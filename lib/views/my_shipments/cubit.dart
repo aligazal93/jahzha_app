@@ -19,6 +19,7 @@ class MyShipmentsCubit extends Cubit<MyShipmentsStates> {
   final searchTXController = TextEditingController();
   List<Shipment> shipments = [];
   Timer? _searchTimer;
+  String? pendingText;
 
   Future<List<Shipment>> getShipments({
     int page = 1,
@@ -33,10 +34,13 @@ class MyShipmentsCubit extends Cubit<MyShipmentsStates> {
       page: page,
       trackNumber: searchTXController.text,
     );
-    shipments.addAll(result);
+    if (result != null) {
+      if (pendingText == null) pendingText = result.pendingShipmentText;
+      shipments.addAll(result.shipments);
+    }
     _emit(MyShipmentsInit());
     // if (isSearching && page == 1) await AppLoadingIndicator.hide();
-    return result;
+    return result?.shipments ?? [];
   }
 
   Future<void> search() async {

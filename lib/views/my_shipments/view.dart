@@ -9,9 +9,12 @@ import 'package:jahzha_app/widgets/app/no_data_found.dart';
 import 'package:jahzha_app/widgets/app/shipment_card.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_paginated_scroll.dart';
+import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
 
 import 'cubit.dart';
+
+part 'units/pending_message.dart';
 part 'units/search_field.dart';
 part 'units/orders.dart';
 
@@ -51,6 +54,7 @@ class MyShipmentsView extends StatelessWidget {
                 child: Column(
                   children: [
                     _SearchField(),
+                    _PendingMessage(),
                     SizedBox(height: 12),
                     _Orders(),
                   ],

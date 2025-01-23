@@ -1,11 +1,12 @@
 import 'package:jahzha_app/widgets/snack_bar.dart';
 
+import '../models/shipment/my_shipments_response.dart';
 import '../models/shipment/shipment.dart';
 import '../models/shipment/shipment_details.dart';
 import '../network_utils/network_utils.dart';
 
 class ShipmentDatasource {
-  Future<List<Shipment>> getMyShipments({
+  Future<MyShipmentsResponse?> getMyShipments({
     String? trackNumber,
     required int page,
   }) async {
@@ -16,14 +17,12 @@ class ShipmentDatasource {
       );
       final success = response.statusCode! < 300;
       if (success) {
-        return (response.data['data'] as List).map((e) {
-          return Shipment.fromJson(e);
-        }).toList();
+        return MyShipmentsResponse.fromJson(response.data);
       }
     } catch (e) {
       handleGenericException(e);
     }
-    return [];
+    return null;
   }
 
   Future<ShipmentDetails?> getShipmentDetails({
