@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jahzha_app/core/extensions/build_context.dart';
 import 'package:jahzha_app/views/splash.dart';
@@ -18,30 +19,41 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(393, 852),
-      minTextAdapt: true,
-      splitScreenMode: false,
-      child:SplashView(),
-      builder: (_, child) => KeyboardPopScaffold(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: AppColors.primary,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+      child: ScreenUtilInit(
+        designSize: context.isMobile ? const Size(375, 812) : const Size(744, 1133),
+        minTextAdapt: true,
+        splitScreenMode: true,
         child: MaterialApp(
           title: 'جهزها',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             hoverColor: Colors.transparent,
+            useMaterial3: false,
             fontFamily: context.localizedFontFamily.id,
             scaffoldBackgroundColor: AppColors.white,
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             focusColor: Colors.transparent,
             primaryColor: AppColors.primary,
+            dividerColor: AppColors.black.withOpacity(0.8),
           ),
           onGenerateRoute: onGenerateRoute,
           navigatorKey: navigatorKey,
-          home: child,
           localizationsDelegates: context.localizationDelegates,
-          supportedLocales: [Locale('ar'), Locale('en')],
+          supportedLocales: context.supportedLocales,
           locale: context.locale,
+          home: SplashView(),
+          builder: (_, child) => KeyboardPopScaffold(
+            child: child!,
+          ),
         ),
       ),
     );
