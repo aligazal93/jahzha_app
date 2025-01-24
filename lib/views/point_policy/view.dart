@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/views/point_policy/cubit.dart';
-import 'package:jahzha_app/views/privacy_policy/cubit.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/no_data_found.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';

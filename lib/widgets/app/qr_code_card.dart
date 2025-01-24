@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRCodeCard extends StatelessWidget {

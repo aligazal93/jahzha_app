@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/network_utils/network_utils.dart';
 import 'package:jahzha_app/views/about_us/about_features_model.dart';
 import 'package:jahzha_app/views/about_us/about_us_model.dart';

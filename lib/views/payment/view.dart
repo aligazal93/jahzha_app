@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../core/helpers/utils.dart';
 import '../../core/route_utils/route_utils.dart';
-import '../../widgets/app_app_bar.dart';
 import '../../widgets/app_loading_indicator.dart';
 import '../../widgets/snack_bar.dart';
 import '../navbar/view.dart';

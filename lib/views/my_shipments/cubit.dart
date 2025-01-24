@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/datasources/shipment.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
-import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 
 import '../../core/models/shipment/shipment.dart';
 

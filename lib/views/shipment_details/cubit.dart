@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/datasources/shipment.dart';
-import '../../core/datasources/shipping.dart';
 import '../../core/models/shipment/shipment_details.dart';
 
 part 'states.dart';

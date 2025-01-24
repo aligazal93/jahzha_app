@@ -11,6 +11,7 @@ import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 part 'units/coupon_card.dart';
 
 class CouponsDetailsView extends StatelessWidget {

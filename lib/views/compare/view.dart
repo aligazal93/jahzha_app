@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
@@ -15,11 +14,9 @@ import 'package:jahzha_app/widgets/snack_bar.dart';
 import '../../widgets/app/shipping_offer_card.dart';
 import '../shipping_offers/view.dart';
 
-part 'units/line-v.dart';
-
 part 'units/company_card.dart';
-
 part 'units/compare_card.dart';
+part 'units/line-v.dart';
 
 class ComparingView extends StatefulWidget {
   const ComparingView({Key? key, required this.cubit}) : super(key: key);

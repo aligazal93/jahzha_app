@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
-import '../route_utils/route_utils.dart';
+
 import 'local_notification.dart';
 
 class FirebaseMessagingUtils {

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
-import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:lottie/lottie.dart';
 
 import '../core/helpers/app_colors.dart';

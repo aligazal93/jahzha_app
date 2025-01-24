@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
+
 import '../../widgets/app_text.dart';
 import '../../widgets/basic_card_decoration.dart';
 import '../caching_utils/caching_utils.dart';

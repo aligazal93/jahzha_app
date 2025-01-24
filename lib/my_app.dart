@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jahzha_app/core/extensions/build_context.dart';
 import 'package:jahzha_app/views/splash.dart';
+
 import 'core/helpers/app_colors.dart';
 import 'core/route_utils/route_utils.dart';
 import 'widgets/pop_scaffold.dart';

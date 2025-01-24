@@ -9,9 +9,10 @@ import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_drop_down_menu.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
+
+part 'units/confirm_button.dart';
 part 'units/form_fields.dart';
 part 'units/primary_address.dart';
-part 'units/confirm_button.dart';
 
 class EditAddressView extends StatelessWidget {
   const EditAddressView({Key? key}) : super(key: key);

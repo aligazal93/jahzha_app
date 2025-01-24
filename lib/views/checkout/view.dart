@@ -11,9 +11,8 @@ import '../../core/helpers/app_colors.dart';
 import '../../widgets/app_text.dart';
 import 'cubit.dart';
 
-part 'units/receipt.dart';
-
 part 'units/payment_methods.dart';
+part 'units/receipt.dart';
 
 class CheckoutView extends StatelessWidget {
   const CheckoutView({

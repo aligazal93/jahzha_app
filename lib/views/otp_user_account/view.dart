@@ -10,6 +10,7 @@ import 'package:jahzha_app/views/otp_user_account/cubit.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/pin_code_field.dart';
+
 part 'units/resend_code_section.dart';
 
 class OtpUserVerifyView extends StatelessWidget {

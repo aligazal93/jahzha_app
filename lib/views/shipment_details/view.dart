@@ -13,15 +13,13 @@ import 'package:jahzha_app/widgets/app/no_data_found.dart';
 import 'package:jahzha_app/widgets/app/qr_code_card.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
+
 import '../../widgets/app_button.dart';
 
 part 'units/details_view.dart';
-
-part 'units/tracking_view.dart';
-
 part 'units/status_view.dart';
-
 part 'units/tab_bar.dart';
+part 'units/tracking_view.dart';
 
 class ShipmentDetailsView extends StatelessWidget {
   const ShipmentDetailsView({

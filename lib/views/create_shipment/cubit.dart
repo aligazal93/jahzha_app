@@ -1,20 +1,15 @@
 import 'package:collection/collection.dart';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'package:jahzha_app/core/datasources/cart.dart';
-import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/snack_bar.dart';
 
-import '../../core/datasources/shipping.dart';
 import '../../core/models/shipping/get_offers_dto.dart';
-import '../../core/models/shipping/shipping_drop_down_item.dart';
 import '../../core/models/shipping/shipping_offer_inputs.dart';
 import '../../core/route_utils/route_utils.dart';
 import '../../widgets/alerting_dialog.dart';

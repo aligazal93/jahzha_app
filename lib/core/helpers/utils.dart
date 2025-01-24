@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jahzha_app/core/extensions/string.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
-import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../widgets/snack_bar.dart';

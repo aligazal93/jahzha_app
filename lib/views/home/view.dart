@@ -1,19 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/models/app_banner.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
-import 'package:jahzha_app/views/coupons/view.dart';
 import 'package:jahzha_app/views/home/units/our_services_cards.dart';
 import 'package:jahzha_app/views/my_points/view.dart';
 import 'package:jahzha_app/views/navbar/cubit/cubit.dart';
-import 'package:jahzha_app/views/order_tracking/view.dart';
-import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/home_app_bar.dart';
 import 'package:jahzha_app/widgets/app_network_image.dart';
 import 'package:jahzha_app/widgets/app_refresh_indicator.dart';
@@ -21,10 +16,10 @@ import 'package:jahzha_app/widgets/app_text.dart';
 
 import '../../core/datasources/general.dart';
 import '../../core/helpers/app_status.dart';
-import '../send_shipping/view.dart';
-part 'units/slider.dart';
-part 'units/service_card.dart';
+
 part 'units/customer_service_card.dart';
+part 'units/service_card.dart';
+part 'units/slider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);

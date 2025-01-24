@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/views/about_us/cubit.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
@@ -10,6 +9,7 @@ import 'package:jahzha_app/widgets/app/no_data_found.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_network_image.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
+
 part 'units/about_card.dart';
 
 class AboutsUsView extends StatelessWidget {

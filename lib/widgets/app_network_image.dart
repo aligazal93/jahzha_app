@@ -5,8 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
 
 import '../core/helpers/app_colors.dart';
-import '../core/helpers/utils.dart';
-import 'app_loading_indicator.dart';
 
 class AppNetworkImage extends StatelessWidget {
   final String url;

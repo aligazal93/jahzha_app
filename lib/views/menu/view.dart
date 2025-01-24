@@ -9,14 +9,11 @@ import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/about_us/view.dart';
 import 'package:jahzha_app/views/account_details/view.dart';
-import 'package:jahzha_app/views/addreses/view.dart';
 import 'package:jahzha_app/views/contact_us/view.dart';
 import 'package:jahzha_app/views/jahzha_company/view.dart';
 import 'package:jahzha_app/views/language/view.dart';
-import 'package:jahzha_app/views/my_balance/view.dart';
 import 'package:jahzha_app/views/my_coupons/view.dart';
 import 'package:jahzha_app/views/my_points/view.dart';
-import 'package:jahzha_app/views/navbar/cubit/cubit.dart';
 import 'package:jahzha_app/views/point_policy/view.dart';
 import 'package:jahzha_app/views/privacy_policy/view.dart';
 import 'package:jahzha_app/views/terms_conditions/view.dart';
@@ -25,12 +22,9 @@ import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_dialog.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
-part 'units/info_card.dart';
-
-part 'units/card.dart';
-
 part 'units/account_tile.dart';
-
+part 'units/card.dart';
+part 'units/info_card.dart';
 part 'units/support_button.dart';
 
 class MenuView extends StatelessWidget {

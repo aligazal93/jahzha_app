@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/material.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
-import 'package:jahzha_app/views/auth/login/view.dart';
 import 'package:jahzha_app/views/navbar/view.dart';
 import 'package:jahzha_app/views/onBoarding/view.dart';
 

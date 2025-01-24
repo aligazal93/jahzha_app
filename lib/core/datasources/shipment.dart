@@ -1,7 +1,6 @@
 import 'package:jahzha_app/widgets/snack_bar.dart';
 
 import '../models/shipment/my_shipments_response.dart';
-import '../models/shipment/shipment.dart';
 import '../models/shipment/shipment_details.dart';
 import '../network_utils/network_utils.dart';
 

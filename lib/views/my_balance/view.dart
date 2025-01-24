@@ -1,12 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/views/my_balance/view.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
+
 part 'units/balance_card.dart';
 part 'units/empty_wallet.dart';
 

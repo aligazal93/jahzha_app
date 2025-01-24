@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/network_utils/network_utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/otp/view.dart';
-import 'package:jahzha_app/widgets/snack_bar.dart';
 
 part 'states.dart';
 

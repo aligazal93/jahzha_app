@@ -19,13 +19,10 @@ import 'package:jahzha_app/widgets/app_text_field.dart';
 
 import 'cubit.dart';
 
-part 'units/receipt.dart';
-
 part 'units/coupon.dart';
-
-part 'units/shipments_count.dart';
-
+part 'units/receipt.dart';
 part 'units/shipments.dart';
+part 'units/shipments_count.dart';
 
 class CartPageView extends StatelessWidget {
   const CartPageView({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +10,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_places_flutter/model/place_type.dart';
 import 'package:jahzha_app/core/datasources/shipping.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/core/helpers/app_text_field_formatters.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
-import 'package:jahzha_app/core/helpers/validator.dart';
 import 'package:jahzha_app/core/models/shipping/get_offers_dto.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_drop_down_item.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_input.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer_inputs.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
-import 'package:jahzha_app/views/cart/view.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_country_picker.dart';
-import 'package:jahzha_app/widgets/app_drop_down_menu.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_network_image.dart';
 import 'package:jahzha_app/widgets/app_paginated_scroll.dart';
@@ -33,23 +28,18 @@ import 'package:jahzha_app/widgets/empty_view.dart';
 import 'package:jahzha_app/widgets/google_places_text_form_field.dart';
 import 'package:jahzha_app/widgets/image_view.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../core/helpers/utils.dart';
 import '../../core/models/shipping/shipping_offer.dart';
 import 'cubit.dart';
 
-part 'units/sender_destination.dart';
-
-part 'units/receiving_destination.dart';
-
-part 'units/delivery_card.dart';
-
-part 'units/ship_info.dart';
-
 part 'units/buttons.dart';
-
-part 'units/input.dart';
-
 part 'units/create_shipment_app_bar.dart';
+part 'units/delivery_card.dart';
+part 'units/input.dart';
+part 'units/receiving_destination.dart';
+part 'units/sender_destination.dart';
+part 'units/ship_info.dart';
 
 class CreateShipmentView extends StatelessWidget {
   const CreateShipmentView({

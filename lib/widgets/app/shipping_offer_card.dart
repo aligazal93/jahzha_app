@@ -1,18 +1,10 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
 import 'package:jahzha_app/widgets/app_network_image.dart';
-import 'package:jahzha_app/widgets/app_sheet.dart';
 
 import '../../core/helpers/app_colors.dart';
-import '../../core/route_utils/route_utils.dart';
-import '../../views/shipping_offers/view.dart';
-import '../app_button.dart';
 import '../app_text.dart';
 
 class ShippingOfferCard extends StatefulWidget {

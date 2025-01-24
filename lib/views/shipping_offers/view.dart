@@ -8,13 +8,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_places_flutter/model/place_type.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/models/shipping/get_offers_dto.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
 import 'package:jahzha_app/core/models/shipping_lat_lng.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
-import 'package:jahzha_app/views/shipping_offers/units/accordion.dart';
 import 'package:jahzha_app/views/compare/view.dart';
+import 'package:jahzha_app/views/shipping_offers/units/accordion.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/shipping_offer_card.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
@@ -28,15 +27,11 @@ import 'package:jahzha_app/widgets/snack_bar.dart';
 
 import 'cubit.dart';
 
-part 'units/pick_location_for_careem.dart';
-
 part 'units/info.dart';
-
-part 'units/result_button.dart';
-
-part 'units/result_bottom_sheet.dart';
-
 part 'units/info_bottom_sheet.dart';
+part 'units/pick_location_for_careem.dart';
+part 'units/result_bottom_sheet.dart';
+part 'units/result_button.dart';
 
 class ShippingOffersView extends StatelessWidget {
   const ShippingOffersView({

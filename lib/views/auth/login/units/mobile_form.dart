@@ -1,15 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/validator.dart';
 import 'package:jahzha_app/core/network_utils/network_utils.dart';
-import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/auth/login/cubit.dart';
-import 'package:jahzha_app/views/otp/view.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
-import 'package:jahzha_app/widgets/app_drop_down_menu.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
 

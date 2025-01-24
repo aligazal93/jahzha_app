@@ -14,9 +14,9 @@ import 'package:jahzha_app/widgets/app_text_field.dart';
 
 import 'cubit.dart';
 
+part 'units/orders.dart';
 part 'units/pending_message.dart';
 part 'units/search_field.dart';
-part 'units/orders.dart';
 
 class MyShipmentsView extends StatelessWidget {
   const MyShipmentsView({Key? key}) : super(key: key);

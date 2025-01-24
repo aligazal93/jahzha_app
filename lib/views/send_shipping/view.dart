@@ -6,7 +6,6 @@ import 'package:google_places_flutter/model/place_type.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/validator.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
-import 'package:jahzha_app/widgets/app/solid_appbar.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
@@ -14,11 +13,9 @@ import 'package:jahzha_app/widgets/app_text_field.dart';
 import '../../widgets/google_places_text_form_field.dart';
 import 'cubit.dart';
 
-part 'units/shipment_fields.dart';
-
 part 'units/receiver_fields.dart';
-
 part 'units/sender_fields.dart';
+part 'units/shipment_fields.dart';
 
 class SendShippingView extends StatelessWidget {
   const SendShippingView({

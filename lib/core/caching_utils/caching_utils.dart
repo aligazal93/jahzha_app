@@ -1,11 +1,10 @@
 import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
-import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/models/logged_user.dart';
 import 'package:jahzha_app/core/network_utils/network_utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/splash.dart';
-import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/snack_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

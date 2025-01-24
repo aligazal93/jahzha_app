@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jahzha_app/views/coupons/view.dart';
-import 'package:jahzha_app/views/home/view.dart';
-import 'package:jahzha_app/views/menu/view.dart';
-import 'package:jahzha_app/views/my_shipments/view.dart';
 import 'package:jahzha_app/views/navbar/cubit/states.dart';
 
 class NavBarCubit extends Cubit<NavBarStates> {

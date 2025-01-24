@@ -6,8 +6,9 @@ import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
-part 'units/tracking_circle.dart';
+
 part 'units/tracking-info.dart';
+part 'units/tracking_circle.dart';
 
 class OrderTrackingView extends StatelessWidget {
   const OrderTrackingView({Key? key}) : super(key: key);

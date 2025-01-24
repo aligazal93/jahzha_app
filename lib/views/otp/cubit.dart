@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
-import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/network_utils/network_utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/navbar/view.dart';
