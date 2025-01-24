@@ -20,6 +20,7 @@ import 'package:jahzha_app/widgets/app_refresh_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
 import '../../core/datasources/general.dart';
+import '../../core/helpers/app_status.dart';
 import '../send_shipping/view.dart';
 part 'units/slider.dart';
 part 'units/service_card.dart';
@@ -33,6 +34,13 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+
+  @override
+  void initState() {
+    AppStatusUtils.getAppStatus();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

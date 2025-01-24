@@ -49,91 +49,88 @@ class MenuView extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               children: [
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: Container(
+                //         margin: EdgeInsets.symmetric(horizontal: 4),
+                //         padding:
+                //             EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                //         decoration: BoxDecoration(
+                //             border: Border.all(
+                //               color: AppColors.tGray,
+                //             ),
+                //             borderRadius: BorderRadius.circular(12)),
+                //         child: CardOne(
+                //           image: 'menu-1',
+                //           title: 'My shipments'.tr(),
+                //           content: 'Shipment details'.tr(),
+                //           onTap: () => NavBarCubit.of(context).toggleTab(1),
+                //         ),
+                //       ),
+                //     ),
+                //     Expanded(
+                //       child: Container(
+                //           width: 140,
+                //           margin: EdgeInsets.symmetric(horizontal: 10),
+                //           padding:
+                //               EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                //           decoration: BoxDecoration(
+                //               border: Border.all(
+                //                 color: AppColors.tGray,
+                //               ),
+                //               borderRadius: BorderRadius.circular(12)),
+                //           child: CardOne(
+                //             image: 'menu-2',
+                //             title: 'Wallet'.tr(),
+                //             content: '0.00' + ' ' + 'SAR'.tr(),
+                //             onTap: () {
+                //               RouteUtils.navigateTo(MyBalanceView());
+                //             },
+                //           )),
+                //     ),
+                //   ],
+                // ),
                 Row(
                   children: [
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.tGray,
-                            ),
-                            borderRadius: BorderRadius.circular(12)),
-                        child: CardOne(
-                          image: 'menu-1',
-                          title: 'My shipments'.tr(),
-                          content: 'Shipment details'.tr(),
-                          onTap: () => NavBarCubit.of(context).toggleTab(1),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                          width: 140,
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 8),
                           decoration: BoxDecoration(
                               border: Border.all(
                                 color: AppColors.tGray,
                               ),
                               borderRadius: BorderRadius.circular(12)),
                           child: CardOne(
-                            image: 'menu-2',
-                            title: 'Wallet'.tr(),
-                            content: '0.00' + ' ' + 'SAR'.tr(),
-                            onTap: () {
-                              RouteUtils.navigateTo(MyBalanceView());
-                            },
+                            image: 'menu-3',
+                            title: 'My points'.tr(),
+                            // content: '1000' + " " + "Point".tr(),
+                            onTap: () =>
+                                RouteUtils.navigateTo(MyPointsView()),
+                          )),
+                    ),
+                    Expanded(
+                      child: Container(
+                          width: 140,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 8),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.tGray,
+                              ),
+                              borderRadius: BorderRadius.circular(12)),
+                          child: CardOne(
+                            image: 'menu-4',
+                            title: 'My coupons'.tr(),
+                            // content: '4' + ' ' + "Valid coupons".tr(),
+                            onTap: () =>
+                                RouteUtils.navigateTo(MyCouponsView()),
                           )),
                     ),
                   ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 4),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 8),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: AppColors.tGray,
-                                ),
-                                borderRadius: BorderRadius.circular(12)),
-                            child: CardOne(
-                              image: 'menu-3',
-                              title: 'My points'.tr(),
-                              content: '1000' + " " + "Point".tr(),
-                              onTap: () =>
-                                  RouteUtils.navigateTo(MyPointsView()),
-                            )),
-                      ),
-                      Expanded(
-                        child: Container(
-                            width: 140,
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 8),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: AppColors.tGray,
-                                ),
-                                borderRadius: BorderRadius.circular(12)),
-                            child: CardOne(
-                              image: 'menu-4',
-                              title: 'My coupons'.tr(),
-                              content: '4' + ' ' + "Valid coupons".tr(),
-                              onTap: () =>
-                                  RouteUtils.navigateTo(MyCouponsView()),
-                            )),
-                      ),
-                    ],
-                  ),
                 ),
                 AppText(
                   title: 'the account'.tr().capitalize,

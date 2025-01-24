@@ -45,7 +45,6 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-
 		<key>NSCameraUsageDescription</key>
     	<string>App would like to use your camera to edit your profile photo</string>
     	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -56,8 +55,6 @@
     	<string>Location is required to detect user latitude and longitude for easy location picking when requesting order.</string>
     	<key>NSLocationWhenInUseUsageDescription</key>
     	<string>Location is required to detect user latitude and longitude for easy location picking when requesting order.</string>
-    	<key>NSMicrophoneUsageDescription</key>
-    	<string>Used to capture audio for Voice Notes in chats</string>
     	<key>NSPhotoLibraryUsageDescription</key>
     	<string>$(PRODUCT_NAME) would like access to your photo gallery,to help you set your profile</string>
     	<key>UIApplicationSupportsIndirectInputEvents</key>

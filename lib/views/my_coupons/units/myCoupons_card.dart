@@ -99,7 +99,11 @@ class MyCouponsCard extends StatelessWidget {
                 status.title.tr() == CouponsStatus.notUsed.title.tr()
                     ? InkWell(
                         onTap: () => Utils.copyToClipboard(code),
-                        child: Image.asset('assets/images/copy.png'),
+                        child: Image.asset(
+                          'assets/images/copy.png',
+                          width: 24,
+                          height: 24,
+                        ),
                       )
                     : SizedBox()
               ],

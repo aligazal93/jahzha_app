@@ -1,7 +1,15 @@
 part of '../view.dart';
+
 class CardOne extends StatelessWidget {
-  const CardOne({Key? key, required this.image, required this.title, required this.content, required this.onTap}) : super(key: key);
-  final String image,title,content;
+  const CardOne({
+    Key? key,
+    required this.image,
+    required this.title,
+    this.content,
+    required this.onTap,
+  }) : super(key: key);
+  final String image, title;
+  final String? content;
   final Function() onTap;
 
   @override
@@ -10,8 +18,14 @@ class CardOne extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          Image.asset('assets/images/${image}.png',fit: BoxFit.cover,width: 26,),
-          SizedBox(width: 12,),
+          Image.asset(
+            'assets/images/${image}.png',
+            fit: BoxFit.cover,
+            width: 26,
+          ),
+          SizedBox(
+            width: 12,
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -21,13 +35,15 @@ class CardOne extends StatelessWidget {
                 fontSize: 14,
                 color: AppColors.secondary,
               ),
-              SizedBox(height: 8,),
-              AppText(
-                title: content,
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-                color: AppColors.txtGray,
-              ),
+              if (content != null) ...[
+                SizedBox(height: 8),
+                AppText(
+                  title: content!,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  color: AppColors.txtGray,
+                ),
+              ],
             ],
           )
         ],
