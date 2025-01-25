@@ -130,16 +130,47 @@ class _StatusView extends StatelessWidget {
                   ),
                 ),
                 if (details.files.isNotEmpty) ...[
-                  SizedBox(height: 14),
+                  SizedBox(height: 24),
                   ...details.files.map((e) {
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
+                      padding: const EdgeInsets.only(bottom: 24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          AppText(
-                            title: e.type.tr(),
-                            fontWeight: FontWeight.w700,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: AppText(
+                                  title: e.type.tr(),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              AppButton(
+                                title: 'print'.tr(),
+                                height: 32,
+                                padding: EdgeInsets.symmetric(horizontal: 24),
+                                titleFontSize: 12,
+                                onTap: () async {
+                                  AppLoadingIndicator.show();
+                                  final response = await Dio().get(
+                                    e.url,
+                                    options: Options(
+                                      responseType: ResponseType.bytes,
+                                    ),
+                                  );
+                                  AppLoadingIndicator.hide();
+                                  if (response.statusCode == 200) {
+                                    print(response.data);
+                                    Share.shareXFiles([
+                                      XFile.fromData(
+                                        response.data,
+                                        mimeType: 'application/pdf',
+                                      )
+                                    ]);
+                                  }
+                                },
+                              ),
+                            ],
                           ),
                           SizedBox(height: 12),
                           SizedBox(

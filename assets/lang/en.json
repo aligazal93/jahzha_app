@@ -233,6 +233,7 @@
   "empty_field" : "empty_field",
   "write_email" : "write_email",
   "write_correct_email": "write_correct_email",
+  "print": "Print",
   "write_phone" : "write_phone",
   "write_correct_phone" : "write_correct_phone",
   "write_name" : "write_name",
