@@ -305,5 +305,9 @@
   "invoice": "فاتورة",
   "confirmed": "مؤكد",
   "copied": "تم النسخ",
-  "Files": "ملفات"
+  "Files": "ملفات",
+  "edit_receiver_address": "تعديل عنوان الاستلام",
+  "editing_address_pending": "برجاء الانتظار بينما نقوم بتحديث عنوان المستلم",
+  "address": "العنوان",
+  "postal_code": "الرمز البريدي"
 }

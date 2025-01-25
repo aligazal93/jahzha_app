@@ -9,9 +9,8 @@ class _TrackingView extends StatelessWidget {
     final details = cubit.details!;
     return Container(
       margin: EdgeInsets.all(12),
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.tGray),
       ),
       child: Column(
@@ -133,7 +132,12 @@ class _TrackingView extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: colorBk, border: Border.all(color: AppColors.tGray)),
+        color: colorBk,
+        border: Border.all(color: AppColors.tGray),
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(16),
+        ),
+      ),
       child: Row(
         children: [
           Expanded(

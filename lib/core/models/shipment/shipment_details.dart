@@ -9,6 +9,7 @@ class ShipmentDetails {
   final List<_File> files;
   final String? careemTrackingURL;
   final List<_TrackingStep> trackingSteps;
+  final canEditReceiverAddress;
 
   ShipmentDetails({
     required this.id,
@@ -18,6 +19,7 @@ class ShipmentDetails {
     required this.files,
     required this.careemTrackingURL,
     required this.trackingSteps,
+    required this.canEditReceiverAddress,
   });
 
   factory ShipmentDetails.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class ShipmentDetails {
       trackingSteps: ((additional['tracking_response'] ?? []) as List)
           .map((e) => _TrackingStep.fromJson(e))
           .toList(),
+      canEditReceiverAddress: additional['is_receiver_address_pending'].toString() == 'false',
     );
   }
 }

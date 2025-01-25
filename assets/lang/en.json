@@ -306,5 +306,9 @@
   "invoice": "Invoice",
   "confirmed": "Confirmed",
   "copied": "Copied",
-  "Files": "Files"
+  "Files": "Files",
+  "edit_receiver_address": "Edit Receiver Address",
+  "editing_address_pending": "Please wait, the address is being edited",
+  "address": "Address",
+  "postal_code": "Postal Code"
 }
