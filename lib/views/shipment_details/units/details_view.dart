@@ -20,7 +20,6 @@ class _DetailsView extends StatelessWidget {
                 .tr(),
             constrainedAxis: Axis.horizontal,
             height: 48,
-            titleFontSize: details.canEditReceiverAddress ? 14 : 12,
             padding: EdgeInsets.zero,
             onTap: details.canEditReceiverAddress
                 ? () => RouteUtils.navigateTo(EditReceiverView(shipmentID: cubit.id))
