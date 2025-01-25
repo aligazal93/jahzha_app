@@ -77,10 +77,20 @@ class _Coupon extends StatelessWidget {
             ),
           ),
         AppButton(
-          title: 'Completion of payment'.tr(),
-          onTap: () => RouteUtils.navigateTo(CheckoutView(
-            cart: cubit.cart!,
-          )),
+          title: (AppStatusUtils.isAppProduction
+                  ? 'Completion of payment'
+                  : 'Order Now')
+              .tr(),
+          onTap: () {
+            if (AppStatusUtils.isAppProduction) {
+              RouteUtils.navigateTo(CheckoutView(
+                cart: cubit.cart!,
+              ));
+              return;
+            }
+            RouteUtils.navigateAndPopAll(NavBarView());
+            showSnackBar('Order placed successfully'.tr());
+          },
           color: AppColors.primary,
           constrainedAxis: Axis.horizontal,
           margin: EdgeInsets.symmetric(vertical: 16),

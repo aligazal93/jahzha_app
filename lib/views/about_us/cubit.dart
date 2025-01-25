@@ -32,7 +32,6 @@ class AboutUsCubit extends Cubit<AboutUsStates> {
   }
 
   Future<void> aboutUsData() async {
-    emit(AboutUsLoading());
     try {
       final response = await NetworkUtils.get(
         'about'
@@ -41,10 +40,8 @@ class AboutUsCubit extends Cubit<AboutUsStates> {
     } catch (e) {
       handleGenericException(e);
     }
-    emit(AboutUsInit());
   }
   Future<void> aboutFeaturesData() async {
-    emit(AboutUsLoading());
     try {
       final response = await NetworkUtils.get(
           'about-features'
@@ -53,7 +50,6 @@ class AboutUsCubit extends Cubit<AboutUsStates> {
     } catch (e) {
       handleGenericException(e);
     }
-    emit(AboutUsInit());
   }
 
 

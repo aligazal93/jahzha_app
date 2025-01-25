@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
+import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:upgrader/upgrader.dart';
 
@@ -17,7 +19,7 @@ class AppStatusUtils {
 
   static final _dio = Dio(
     BaseOptions(
-      baseUrl: 'https://quickclean-27487-default-rtdb.firebaseio.com/',
+      baseUrl: 'https://jahzha-bbf0d-default-rtdb.firebaseio.com/',
     ),
   );
 
@@ -36,7 +38,6 @@ class AppStatusUtils {
     } catch (e) {
       _isAppProduction = true;
     }
-    print(_isAppProduction);
   }
 
   static Future<bool> _isVersionProduction() async {
@@ -62,41 +63,63 @@ class AppStatusUtils {
     await _upgrader.initialize();
     final isUpdateAvailable = await _upgrader.isUpdateAvailable();
     if (isUpdateAvailable) {
-      AppDialog.show(
-        dismissible: false,
-        child: Column(
-          children: [
-            Icon(
-              FontAwesomeIcons.wrench,
-              color: AppColors.primary,
-              size: 64.height,
-            ),
-            SizedBox(height: 40.height),
-            AppText(
-              title: Utils.isAR ? 'يتوفر تحديث جديد' : 'New update available',
-              fontSize: 18.font,
-              fontWeight: FontWeight.w700,
-            ),
-            SizedBox(height: 12.height),
-            AppText(
-              title: 'V(${_upgrader.currentAppStoreVersion})',
-              fontWeight: FontWeight.w700,
-            ),
-            SizedBox(height: 12.height),
-            AppText(
-              title: Utils.isAR ? 'من فضلك قم بتحديث التطبيق للمتابعة' : 'Please update the app to continue',
-              padding: EdgeInsets.symmetric(horizontal: 32.width),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 24.height),
-            AppButton(
+      RouteUtils.navigateAndPopAll(Scaffold(
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 64.width),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: 90.height),
+              SpinPerfect(
+                infinite: true,
+                duration: Duration(milliseconds: 2500),
+                child: Icon(
+                  FontAwesomeIcons.gear,
+                  color: AppColors.primary,
+                  size: 90.height,
+                ),
+              ),
+              SizedBox(height: 40.height),
+              AppText(
+                title: Utils.isAR ? 'يتوفر تحديث جديد' : 'New update available',
+                fontSize: 18.font,
+                fontWeight: FontWeight.w700,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 12.height),
+              AppText(
+                title: 'V(${_upgrader.currentAppStoreVersion})',
+                fontWeight: FontWeight.w700,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 12.height),
+              AppText(
+                title: Utils.isAR ? 'من فضلك قم بتحديث التطبيق للمتابعة' : 'Please update the app to continue',
+                padding: EdgeInsets.symmetric(horizontal: 32.width),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: SafeArea(
+          child: Flash(
+            delay: Duration(milliseconds: 1000),
+            duration: Duration(milliseconds: 2500),
+            child: AppButton(
               title: Utils.isAR ? 'تحديث' : 'Update',
               height: 48,
+              margin: EdgeInsets.only(
+                bottom: 16,
+                left: 64.width,
+                right: 64.width,
+              ),
+              constrainedAxis: Axis.horizontal,
               onTap: _upgrader.sendUserToAppStore,
             ),
-          ],
+          ),
         ),
-      );
+      ));
     }
     return isUpdateAvailable;
   }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
+import 'package:jahzha_app/core/helpers/app_status.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/checkout/view.dart';
 import 'package:jahzha_app/views/navbar/view.dart';
@@ -16,6 +17,7 @@ import 'package:jahzha_app/widgets/app_loading_indicator.dart';
 import 'package:jahzha_app/widgets/app_paginated_scroll.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
+import 'package:jahzha_app/widgets/snack_bar.dart';
 
 import 'cubit.dart';
 

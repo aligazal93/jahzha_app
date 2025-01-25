@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
+import 'package:jahzha_app/core/helpers/app_status.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/navbar/view.dart';
 import 'package:jahzha_app/views/onBoarding/view.dart';
@@ -18,8 +19,12 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 4),
-      () {
+      Duration(milliseconds: 2500),
+      () async {
+        final isUpdateAvailable = await AppStatusUtils.showUpdateVersionDialog();
+        if (isUpdateAvailable) {
+          return;
+        }
         CachingUtils.isLogged
             ? RouteUtils.navigateAndPopAll(NavBarView())
             : RouteUtils.navigateAndPopAll(OnBoardingView());

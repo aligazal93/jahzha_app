@@ -15,10 +15,15 @@ class _SenderFields extends StatelessWidget {
           AppTextField(
             label: "sender_country".tr(),
             hint: "Saudi Arabia".tr(),
-            fillColor: AppColors.white,
+            fillColor: AppColors.lightGray.withOpacity(0.2),
             onTap: () {},
             prefixIcon: Icon(
               FontAwesomeIcons.globe,
+              size: 16,
+              color: AppColors.lightGray,
+            ),
+            suffixIcon: Icon(
+              FontAwesomeIcons.lock,
               size: 16,
               color: AppColors.lightGray,
             ),

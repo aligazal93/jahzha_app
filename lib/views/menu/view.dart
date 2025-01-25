@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/extensions/string.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
+import 'package:jahzha_app/core/helpers/app_status.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
 import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
@@ -273,61 +274,61 @@ class MenuView extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                AppButton(
-                  title: 'Delete account'.tr(),
-                  color: AppColors.red,
-                  constrainedAxis: Axis.horizontal,
-                  onTap: () {
-                    AppDialog.show(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.userSlash,
-                            color: AppColors.red,
-                            size: 50,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            child: AppText(
-                              title:
-                                  'Are you about to delete your account?'.tr(),
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.secondary,
-                              fontSize: 14,
+                if (!AppStatusUtils.isAppProduction) ...[
+                  SizedBox(height: 20),
+                  AppButton(
+                    title: 'Delete account'.tr(),
+                    color: AppColors.red,
+                    constrainedAxis: Axis.horizontal,
+                    onTap: () {
+                      AppDialog.show(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.userSlash,
+                              color: AppColors.red,
+                              size: 50,
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                AppButton(
-                                  title: 'cancel'.tr(),
-                                  onTap: () => RouteUtils.pop(),
-                                  titleFontSize: 12,
-                                  color: AppColors.secondary,
-                                ),
-                                SizedBox(
-                                  width: 6,
-                                ),
-                                AppButton(
-                                  title: 'Delete account'.tr(),
-                                  onTap: CachingUtils.signOut,
-                                  titleFontSize: 12,
-                                  color: AppColors.red,
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              child: AppText(
+                                title:
+                                'Are you about to delete your account?'.tr(),
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.secondary,
+                                fontSize: 14,
+                              ),
                             ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AppButton(
+                                    title: 'cancel'.tr(),
+                                    onTap: () => RouteUtils.pop(),
+                                    titleFontSize: 12,
+                                    color: AppColors.secondary,
+                                  ),
+                                  SizedBox(
+                                    width: 6,
+                                  ),
+                                  AppButton(
+                                    title: 'Delete account'.tr(),
+                                    onTap: CachingUtils.signOut,
+                                    titleFontSize: 12,
+                                    color: AppColors.red,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
                 InkWell(
                   onTap: CachingUtils.signOut,
                   child: Container(

@@ -30,8 +30,7 @@ class AboutsUsView extends StatelessWidget {
             final aboutFeaturesData = cubit.aboutFeaturesModel?.data;
             if(state is AboutUsLoading){
               return AppLoadingIndicator();
-              // TODO || oR &&
-            }else if(aboutData == null || aboutFeaturesData == null){
+            } else if(aboutData == null || aboutFeaturesData == null){
               return NoDataFoundView();
             }
             return ListView(

@@ -69,17 +69,20 @@ class AppNetworkImage extends StatelessWidget {
                   child: Image(
                     image: imageProvider,
                     color: color,
+                    fit: fit,
+                    width: double.infinity,
+                    height: double.infinity,
                   ),
                 )
               : child,
           decoration: decoration.copyWith(
-            image: DecorationImage(
+            image: child != null ? DecorationImage(
               image: imageProvider,
               fit: fit,
               colorFilter: color != null
                   ? ColorFilter.mode(Colors.transparent, BlendMode.srcIn)
                   : null,
-            ),
+            ) : null,
           ),
           alignment: alignment ?? Alignment.center,
         );
