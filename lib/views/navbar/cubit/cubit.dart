@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jahzha_app/views/navbar/cubit/states.dart';
 
 class NavBarCubit extends Cubit<NavBarStates> {
-  NavBarCubit() : super(NavBarInitState());
+  NavBarCubit({required this.currentIndex}) : super(NavBarInitState());
 
   static NavBarCubit of(context) => BlocProvider.of(context);
 

@@ -134,7 +134,7 @@ class CartDatasource {
 
   Future<List<PaymentMethod>> getPaymentMethods() async {
     try {
-      final response = await NetworkUtils.get('payment-methods');
+      final response = await NetworkUtils.get('shipment-payment-methods');
       final success = response.statusCode! < 300;
       if (success) {
         return (response.data['data']['payment_methods'] as List).map((e) => PaymentMethod.fromJson(e)).toList();
@@ -154,7 +154,7 @@ class CartDatasource {
       );
       if (checkoutID != null) {
         final response = await NetworkUtils.post(
-          'payment-link',
+          'shipment-payment-link',
           data: {
             'checkout_id': checkoutID,
             'payment_method_id': paymentMethodID
@@ -178,7 +178,7 @@ class CartDatasource {
   Future<String?> _getCheckoutID({required String paymentMethodID}) async {
     try {
       final response = await NetworkUtils.post(
-        'process-payment',
+        'shipment-process-payment',
         data: {'payment_method_id': paymentMethodID},
       );
       final success = response.statusCode! < 300;

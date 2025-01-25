@@ -16,6 +16,7 @@ class ShippingOffer {
   final num pickupByCareemFees;
   final num pickupByCompanyFees;
   final int? rewardPoints;
+  final bool isLocal;
 
   PickupType pickupType = PickupType.myself;
   bool addToComparison = false;
@@ -47,6 +48,7 @@ class ShippingOffer {
     required this.pickupByCareemFees,
     required this.pickupByCompanyFees,
     required this.rewardPoints,
+    required this.isLocal,
   });
 
   factory ShippingOffer.fromJson(Map<String, dynamic> json) {
@@ -55,6 +57,7 @@ class ShippingOffer {
     final pickupByCareem = json['pickupOptions']?['pickupByCareem']?['pickupStatus'] ?? false;
     final offer = ShippingOffer(
       id: json['id'],
+      isLocal: json['shippingType'] == 'domestic',
       company: ShippingCompany.fromJson(json['company']),
       estimatedDeliveryTime: json['estimatedDeliveryTime'],
       insuranceText: json['insuranceText'],

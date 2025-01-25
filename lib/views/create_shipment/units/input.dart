@@ -43,19 +43,21 @@ class _Input extends StatelessWidget {
               );
             } else if (input.type == ShippingInputType.dropdown) {
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _DropMenu(input: input),
                   if (input.selectedValue?.helpImage != null) ...[
                     SizedBox(height: 12),
                     InkWell(
-                      onTap:
-                          ImageView(url: input.selectedValue!.helpImage!).show,
-                      child: AppNetworkImage(
+                      onTap: ImageView(
                         url: input.selectedValue!.helpImage!,
-                        // height: 260,
-                        borderColor: AppColors.darkGrayBlue,
-                        borderRadius: 16,
+                      ).show,
+                      child: FutureBuilder<bool>(
+                        key: Key(input.name),
+                        future: Future.delayed(Duration(milliseconds: 1500), () => true),
+                        initialData: false,
+                        builder: (_, s) => !s.data! ? SizedBox() : Image.network(
+                          input.selectedValue!.helpImage!,
+                        ),
                       ),
                     ),
                   ],
@@ -175,9 +177,10 @@ class _Input extends StatelessWidget {
               "html": Style(
                 color: AppColors.lightGray,
                 fontSize: FontSize(12),
-                lineHeight: LineHeight(24 / 12),
+                // lineHeight: LineHeight(24 / 12),
               ),
             },
+            shrinkWrap: true,
             onLinkTap: (url, attributes, element) {
               if (url == null) return;
               launchUrl(Uri.parse(url));

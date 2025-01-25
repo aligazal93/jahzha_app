@@ -78,13 +78,15 @@ class _ShipmentPage extends StatelessWidget {
             },
             separatorBuilder: (context, index) => SizedBox(height: 8),
           ),
-          SizedBox(height: 16),
-          _addItem(
-            onTap: () {
-              inputs.addAdditionalShipment();
-              cubit.updateUI();
-            },
-          ),
+         if (!cubit.offer.isLocal) ...[
+           SizedBox(height: 16),
+           _addItem(
+             onTap: () {
+               inputs.addAdditionalShipment();
+               cubit.updateUI();
+             },
+           ),
+         ],
         ],
       ),
     );

@@ -19,12 +19,16 @@ import '../my_shipments/view.dart';
 part 'units/send_shipment_sheet.dart';
 
 class NavBarView extends StatelessWidget {
+  const NavBarView({Key? key, this.initialViewIndex = 0}) : super(key: key);
+
+  final int initialViewIndex;
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => NavBarCubit(),
+          create: (context) => NavBarCubit(currentIndex: initialViewIndex),
         ),
         BlocProvider(
           create: (context) => StoreCouponsCubit()..getAllCouponsStore(),

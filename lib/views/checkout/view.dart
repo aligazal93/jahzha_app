@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jahzha_app/core/helpers/utils.dart';
 import 'package:jahzha_app/core/models/cart/cart_response.dart';
 import 'package:jahzha_app/widgets/app/app_bar.dart';
 import 'package:jahzha_app/widgets/app/no_data_found.dart';
@@ -52,7 +54,7 @@ class CheckoutView extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 16),
                   _PaymentMethods(),
                   /// Payment methods
                 ],

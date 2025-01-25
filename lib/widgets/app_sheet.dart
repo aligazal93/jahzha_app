@@ -45,7 +45,7 @@ class AppSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SlideInUp(
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 300),
       child: BottomSheet(
         enableDrag: false,
         backgroundColor: Colors.transparent,

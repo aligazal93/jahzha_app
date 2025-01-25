@@ -66,8 +66,8 @@ class _ImageViewState extends State<ImageView> {
       ),
       body: SizedBox(
         // alignment: Alignment.center,
-        width: double.infinity,
-        height: double.infinity,
+        width: context.width(1),
+        height: context.height(1),
         child: InteractiveViewer(
           child: RotatedBox(
             quarterTurns: rotation,
@@ -88,6 +88,7 @@ class _ImageViewState extends State<ImageView> {
     return AppNetworkImage(
       url: widget.url,
       fit: boxFit[boxFitIndex],
+
     );
   }
 }

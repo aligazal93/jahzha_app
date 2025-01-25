@@ -21,11 +21,11 @@ class _PaymentMethods extends StatelessWidget {
                 children: [
                   AppNetworkImage(
                     url: method.image,
-                    width: 48,
-                    height: 48,
+                    width: 40,
+                    height: 32,
                     bgColor: Colors.transparent,
-                    borderRadius: 8,
-                    borderColor: AppColors.lightGray,
+                    borderRadius: 4,
+                    fit: BoxFit.contain,
                   ),
                   SizedBox(width: 12),
                   Expanded(
@@ -34,10 +34,17 @@ class _PaymentMethods extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
+                  Icon(
+                    Utils.isAR
+                        ? FontAwesomeIcons.chevronLeft
+                        : FontAwesomeIcons.chevronRight,
+                    size: 16,
+                    color: AppColors.lightGray,
+                  ),
                 ],
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(8),
                 color: AppColors.tGray,
               ),
             ),
