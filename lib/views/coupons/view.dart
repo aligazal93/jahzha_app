@@ -9,6 +9,7 @@ import 'package:jahzha_app/views/coupons/cubit.dart';
 import 'package:jahzha_app/widgets/app/home_app_bar.dart';
 import 'package:jahzha_app/widgets/app/no_data_found.dart';
 import 'package:jahzha_app/widgets/app_loading_indicator.dart';
+import 'package:jahzha_app/widgets/app_refresh_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
 class CouponsView extends StatelessWidget {
@@ -20,50 +21,61 @@ class CouponsView extends StatelessWidget {
       create: (context) => StoreCouponsCubit()..getAllCouponsStore(),
       child: Scaffold(
         appBar: HomeAppBar(
-          name: CachingUtils.user?.data.name == null ? 'in Jahzha'.tr() : CachingUtils.user?.data.name,
+          name: CachingUtils.user?.data.name == null
+              ? 'in Jahzha'.tr()
+              : CachingUtils.user?.data.name,
           title: 'My coupons'.tr(),
         ),
-        body: BlocBuilder<StoreCouponsCubit , StoreCouponsStates>(
+        body: BlocBuilder<StoreCouponsCubit, StoreCouponsStates>(
           builder: (context, state) {
             final cubit = StoreCouponsCubit.of(context);
             final data = cubit.storeCouponsModel?.data;
-            if(state is StoreCouponsLoading){
-              return Center(child: AppLoadingIndicator());
-            }else if (data == null){
-              return Center(child: NoDataFoundView());
+            if (state is StoreCouponsLoading) {
+              return AppLoadingIndicator();
+            } else if (data == null) {
+              return NoDataFoundView();
             }
-            return Container(
-                margin: EdgeInsets.symmetric(horizontal: 12),
-                child:GridView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: data.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Number of columns in the grid
-                    crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 8.0,
-                  ),
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () => RouteUtils.navigateTo(CouponsDetailsView(
-                        id: data[index].id,
-                      )),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                  color: AppColors.tGray
-                              )
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.network(data[index].image,width: 100,),
-                              Center(child: AppText(title: data[index].name,textAlign: TextAlign.center,fontSize: 12,fontWeight: FontWeight.w700,))
-                            ],
-                          )
+            return AppRefreshIndicator(
+              onRefresh: cubit.getAllCouponsStore,
+              child: GridView.builder(
+                itemCount: data.length,
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Number of columns in the grid
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                ),
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () => RouteUtils.navigateTo(CouponsDetailsView(
+                      id: data[index].id,
+                    )),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.tGray),
                       ),
-                    );
-                  },)
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.network(
+                            data[index].image,
+                            width: 100,
+                          ),
+                          Center(
+                            child: AppText(
+                              title: data[index].name,
+                              textAlign: TextAlign.center,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
             );
           },
         ),

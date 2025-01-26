@@ -21,6 +21,7 @@ import 'package:jahzha_app/views/terms_conditions/view.dart';
 import 'package:jahzha_app/views/usage_policy/view.dart';
 import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_dialog.dart';
+import 'package:jahzha_app/widgets/app_refresh_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
 part 'units/account_tile.dart';
@@ -28,337 +29,356 @@ part 'units/card.dart';
 part 'units/info_card.dart';
 part 'units/support_button.dart';
 
-class MenuView extends StatelessWidget {
+class MenuView extends StatefulWidget {
   const MenuView({Key? key}) : super(key: key);
 
   @override
+  State<MenuView> createState() => _MenuViewState();
+}
+
+class _MenuViewState extends State<MenuView> {
+
+  @override
+  void initState() {
+    getUserAndCache(CachingUtils.token!).then((value) {
+     if (mounted) setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final user = CachingUtils.user!;
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
           InfoCard(),
           Expanded(
-            child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              children: [
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: Container(
-                //         margin: EdgeInsets.symmetric(horizontal: 4),
-                //         padding:
-                //             EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                //         decoration: BoxDecoration(
-                //             border: Border.all(
-                //               color: AppColors.tGray,
-                //             ),
-                //             borderRadius: BorderRadius.circular(12)),
-                //         child: CardOne(
-                //           image: 'menu-1',
-                //           title: 'My shipments'.tr(),
-                //           content: 'Shipment details'.tr(),
-                //           onTap: () => NavBarCubit.of(context).toggleTab(1),
-                //         ),
-                //       ),
-                //     ),
-                //     Expanded(
-                //       child: Container(
-                //           width: 140,
-                //           margin: EdgeInsets.symmetric(horizontal: 10),
-                //           padding:
-                //               EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                //           decoration: BoxDecoration(
-                //               border: Border.all(
-                //                 color: AppColors.tGray,
-                //               ),
-                //               borderRadius: BorderRadius.circular(12)),
-                //           child: CardOne(
-                //             image: 'menu-2',
-                //             title: 'Wallet'.tr(),
-                //             content: '0.00' + ' ' + 'SAR'.tr(),
-                //             onTap: () {
-                //               RouteUtils.navigateTo(MyBalanceView());
-                //             },
-                //           )),
-                //     ),
-                //   ],
-                // ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 4),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 8),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                color: AppColors.tGray,
-                              ),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: CardOne(
-                            image: 'menu-3',
-                            title: 'My points'.tr(),
-                            // content: '1000' + " " + "Point".tr(),
-                            onTap: () =>
-                                RouteUtils.navigateTo(MyPointsView()),
-                          )),
-                    ),
-                    Expanded(
-                      child: Container(
-                          width: 140,
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 8),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                color: AppColors.tGray,
-                              ),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: CardOne(
-                            image: 'menu-4',
-                            title: 'My coupons'.tr(),
-                            // content: '4' + ' ' + "Valid coupons".tr(),
-                            onTap: () =>
-                                RouteUtils.navigateTo(MyCouponsView()),
-                          )),
-                    ),
-                  ],
-                ),
-                AppText(
-                  title: 'the account'.tr().capitalize,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.txtGray,
-                  textAlign: Utils.isAR ? TextAlign.start : TextAlign.left,
-                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-                  fontSize: 16,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 12),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.tGray)),
-                  child: Column(
+            child: AppRefreshIndicator(
+              onRefresh: () async {
+                await getUserAndCache(CachingUtils.token!);
+                if (mounted) setState(() {});
+              },
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                children: [
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Container(
+                  //         margin: EdgeInsets.symmetric(horizontal: 4),
+                  //         padding:
+                  //             EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                  //         decoration: BoxDecoration(
+                  //             border: Border.all(
+                  //               color: AppColors.tGray,
+                  //             ),
+                  //             borderRadius: BorderRadius.circular(12)),
+                  //         child: CardOne(
+                  //           image: 'menu-1',
+                  //           title: 'My shipments'.tr(),
+                  //           content: 'Shipment details'.tr(),
+                  //           onTap: () => NavBarCubit.of(context).toggleTab(1),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: Container(
+                  //           width: 140,
+                  //           margin: EdgeInsets.symmetric(horizontal: 10),
+                  //           padding:
+                  //               EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                  //           decoration: BoxDecoration(
+                  //               border: Border.all(
+                  //                 color: AppColors.tGray,
+                  //               ),
+                  //               borderRadius: BorderRadius.circular(12)),
+                  //           child: CardOne(
+                  //             image: 'menu-2',
+                  //             title: 'Wallet'.tr(),
+                  //             content: '0.00' + ' ' + 'SAR'.tr(),
+                  //             onTap: () {
+                  //               RouteUtils.navigateTo(MyBalanceView());
+                  //             },
+                  //           )),
+                  //     ),
+                  //   ],
+                  // ),
+                  Row(
                     children: [
-                      // AccountTile(
-                      //   image: 'location',
-                      //   title: 'addresses'.tr(),
-                      //   onTap: () {
-                      //     RouteUtils.navigateTo(AddressesView());
-                      //   },
-                      // ),
-                      // Divider(
-                      //   height: 8,
-                      // ),
-                      AccountTile(
-                        image: 'chats',
-                        title: 'call us'.tr(),
-                        onTap: () {
-                          RouteUtils.navigateTo(ContactUsView());
-                        },
+                      Expanded(
+                        child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: 4),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 8),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.tGray,
+                                ),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: CardOne(
+                              image: 'menu-3',
+                              title: 'My points'.tr(),
+                              content: '${user.totalPoints}' + " " + "Point".tr(),
+                              onTap: () =>
+                                  RouteUtils.navigateTo(MyPointsView()),
+                            )),
                       ),
-                      Divider(
-                        height: 8,
-                        color: AppColors.tGray,
-                      ),
-                      AccountTile(
-                        image: 'about',
-                        title: 'Jahzha for businesses'.tr(),
-                        onTap: () {
-                          RouteUtils.navigateTo(JahzhaForCompaniesView());
-                        },
+                      Expanded(
+                        child: Container(
+                            width: 140,
+                            margin: EdgeInsets.symmetric(horizontal: 10),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 8),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.tGray,
+                                ),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: CardOne(
+                              image: 'menu-4',
+                              title: 'My coupons'.tr(),
+                              content: '${user.totalCoupons}' + ' ' + "Valid coupons".tr(),
+                              onTap: () =>
+                                  RouteUtils.navigateTo(MyCouponsView()),
+                            )),
                       ),
                     ],
                   ),
-                ),
-                AppText(
-                  title: 'About the App'.tr(),
-                  textAlign: Utils.isAR ? TextAlign.start : TextAlign.left,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.txtGray,
-                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-                  fontSize: 16,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 12),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.tGray)),
-                  child: Column(
-                    children: [
-                      AccountTile(
-                        image: 'info',
-                        title: 'about us'.tr(),
-                        onTap: () {
-                          RouteUtils.navigateTo(AboutsUsView());
-                        },
-                      ),
-                      Divider(
-                        height: 8,
-                        color: AppColors.tGray,
-                      ),
-                      AccountTile(
-                        image: 'terms',
-                        title: 'Terms and Conditions'.tr(),
-                        onTap: () {
-                          RouteUtils.navigateTo(TermsAndConditions());
-                        },
-                      ),
-                      Divider(
-                        color: AppColors.tGray,
-                        height: 8,
-                      ),
-                      AccountTile(
-                        image: 'usage',
-                        title: 'Usage policy'.tr(),
-                        onTap: () {
-                          RouteUtils.navigateTo(UsagePolicyView());
-                        },
-                      ),
-                      Divider(
-                        height: 8,
-                        color: AppColors.tGray,
-                      ),
-                      AccountTile(
-                        image: 'shield',
-                        title: 'privacy policy'.tr(),
-                        onTap: () {
-                          RouteUtils.navigateTo(PrivacyPolicyView());
-                        },
-                      ),
-                      Divider(
-                        height: 8,
-                        color: AppColors.tGray,
-                      ),
-                      AccountTile(
-                        image: 'coupons',
-                        title: 'point policy'.tr(),
-                        onTap: () {
-                          RouteUtils.navigateTo(
-                            PointPolicyView(),
-                          );
-                        },
-                      ),
-                      Divider(
-                        height: 8,
-                        color: AppColors.tGray,
-                      ),
-                      ListTile(
-                        onTap: () {
-                          RouteUtils.navigateTo(
-                            ChooseLanguageView(),
-                          );
-                        },
-                        title: AppText(
-                          title: 'language'.tr(),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          textAlign:
-                              Utils.isAR ? TextAlign.right : TextAlign.left,
-                        ),
-                        leading: Icon(
-                          FontAwesomeIcons.earthAfrica,
-                          color: AppColors.lightGray,
-                          size: 22,
-                        ),
-                        trailing: Icon(
-                          Utils.isAR
-                              ? FontAwesomeIcons.chevronLeft
-                              : FontAwesomeIcons.chevronRight,
-                          size: 18,
-                          color: AppColors.secondary,
-                        ),
-                      ),
-                    ],
+                  AppText(
+                    title: 'the account'.tr().capitalize,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.txtGray,
+                    textAlign: Utils.isAR ? TextAlign.start : TextAlign.left,
+                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                    fontSize: 16,
                   ),
-                ),
-                if (!AppStatusUtils.isAppProduction) ...[
-                  SizedBox(height: 20),
-                  AppButton(
-                    title: 'Delete account'.tr(),
-                    color: AppColors.red,
-                    constrainedAxis: Axis.horizontal,
-                    onTap: () {
-                      AppDialog.show(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              FontAwesomeIcons.userSlash,
-                              color: AppColors.red,
-                              size: 50,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 14),
-                              child: AppText(
-                                title:
-                                'Are you about to delete your account?'.tr(),
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.secondary,
-                                fontSize: 14,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  AppButton(
-                                    title: 'cancel'.tr(),
-                                    onTap: () => RouteUtils.pop(),
-                                    titleFontSize: 12,
-                                    color: AppColors.secondary,
-                                  ),
-                                  SizedBox(
-                                    width: 6,
-                                  ),
-                                  AppButton(
-                                    title: 'Delete account'.tr(),
-                                    onTap: CachingUtils.signOut,
-                                    titleFontSize: 12,
-                                    color: AppColors.red,
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ],
-                InkWell(
-                  onTap: CachingUtils.signOut,
-                  child: Container(
-                    padding: EdgeInsets.all(12),
+                  Container(
                     margin: EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.red),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.tGray)),
+                    child: Column(
                       children: [
-                        Image.asset(
-                          'assets/images/logout.png',
-                          width: 24,
+                        // AccountTile(
+                        //   image: 'location',
+                        //   title: 'addresses'.tr(),
+                        //   onTap: () {
+                        //     RouteUtils.navigateTo(AddressesView());
+                        //   },
+                        // ),
+                        // Divider(
+                        //   height: 8,
+                        // ),
+                        AccountTile(
+                          image: 'chats',
+                          title: 'call us'.tr(),
+                          onTap: () {
+                            RouteUtils.navigateTo(ContactUsView());
+                          },
                         ),
-                        AppText(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          textAlign: TextAlign.center,
-                          title: 'sign out'.tr(),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.red,
+                        Divider(
+                          height: 8,
+                          color: AppColors.tGray,
+                        ),
+                        AccountTile(
+                          image: 'about',
+                          title: 'Jahzha for businesses'.tr(),
+                          onTap: () {
+                            RouteUtils.navigateTo(JahzhaForCompaniesView());
+                          },
                         ),
                       ],
                     ),
                   ),
-                ),
-                SizedBox(height: 92.height),
-              ],
+                  AppText(
+                    title: 'About the App'.tr(),
+                    textAlign: Utils.isAR ? TextAlign.start : TextAlign.left,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.txtGray,
+                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                    fontSize: 16,
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.tGray)),
+                    child: Column(
+                      children: [
+                        AccountTile(
+                          image: 'info',
+                          title: 'about us'.tr(),
+                          onTap: () {
+                            RouteUtils.navigateTo(AboutsUsView());
+                          },
+                        ),
+                        Divider(
+                          height: 8,
+                          color: AppColors.tGray,
+                        ),
+                        AccountTile(
+                          image: 'terms',
+                          title: 'Terms and Conditions'.tr(),
+                          onTap: () {
+                            RouteUtils.navigateTo(TermsAndConditions());
+                          },
+                        ),
+                        Divider(
+                          color: AppColors.tGray,
+                          height: 8,
+                        ),
+                        AccountTile(
+                          image: 'usage',
+                          title: 'Usage policy'.tr(),
+                          onTap: () {
+                            RouteUtils.navigateTo(UsagePolicyView());
+                          },
+                        ),
+                        Divider(
+                          height: 8,
+                          color: AppColors.tGray,
+                        ),
+                        AccountTile(
+                          image: 'shield',
+                          title: 'privacy policy'.tr(),
+                          onTap: () {
+                            RouteUtils.navigateTo(PrivacyPolicyView());
+                          },
+                        ),
+                        Divider(
+                          height: 8,
+                          color: AppColors.tGray,
+                        ),
+                        AccountTile(
+                          image: 'coupons',
+                          title: 'point policy'.tr(),
+                          onTap: () {
+                            RouteUtils.navigateTo(
+                              PointPolicyView(),
+                            );
+                          },
+                        ),
+                        Divider(
+                          height: 8,
+                          color: AppColors.tGray,
+                        ),
+                        ListTile(
+                          onTap: () {
+                            RouteUtils.navigateTo(
+                              ChooseLanguageView(),
+                            );
+                          },
+                          title: AppText(
+                            title: 'language'.tr(),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            textAlign:
+                                Utils.isAR ? TextAlign.right : TextAlign.left,
+                          ),
+                          leading: Icon(
+                            FontAwesomeIcons.earthAfrica,
+                            color: AppColors.lightGray,
+                            size: 22,
+                          ),
+                          trailing: Icon(
+                            Utils.isAR
+                                ? FontAwesomeIcons.chevronLeft
+                                : FontAwesomeIcons.chevronRight,
+                            size: 18,
+                            color: AppColors.secondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (!AppStatusUtils.isAppProduction) ...[
+                    SizedBox(height: 20),
+                    AppButton(
+                      title: 'Delete account'.tr(),
+                      color: AppColors.red,
+                      constrainedAxis: Axis.horizontal,
+                      onTap: () {
+                        AppDialog.show(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.userSlash,
+                                color: AppColors.red,
+                                size: 50,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 14),
+                                child: AppText(
+                                  title:
+                                  'Are you about to delete your account?'.tr(),
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.secondary,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    AppButton(
+                                      title: 'cancel'.tr(),
+                                      onTap: () => RouteUtils.pop(),
+                                      titleFontSize: 12,
+                                      color: AppColors.secondary,
+                                    ),
+                                    SizedBox(
+                                      width: 6,
+                                    ),
+                                    AppButton(
+                                      title: 'Delete account'.tr(),
+                                      onTap: CachingUtils.signOut,
+                                      titleFontSize: 12,
+                                      color: AppColors.red,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                  InkWell(
+                    onTap: CachingUtils.signOut,
+                    child: Container(
+                      padding: EdgeInsets.all(12),
+                      margin: EdgeInsets.symmetric(vertical: 12),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.red),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/logout.png',
+                            width: 24,
+                          ),
+                          AppText(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            textAlign: TextAlign.center,
+                            title: 'sign out'.tr(),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.red,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 92.height),
+                ],
+              ),
             ),
           ),
         ],

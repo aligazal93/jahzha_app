@@ -1,39 +1,43 @@
-// To parse this JSON data, do
-//
-//     final loggedUser = loggedUserFromJson(jsonString);
-
-import 'dart:convert';
-
-LoggedUser loggedUserFromJson(String str) => LoggedUser.fromJson(json.decode(str));
-
-String loggedUserToJson(LoggedUser data) => json.encode(data.toJson());
-
 class LoggedUser {
   final int statusCode;
   final String message;
   final Data data;
-  final List<dynamic> additionalData;
+  final num totalPoints;
+  final num walletBalance;
+  final num totalCoupons;
 
   LoggedUser({
     required this.statusCode,
     required this.message,
     required this.data,
-    required this.additionalData,
+    required this.totalCoupons,
+    required this.walletBalance,
+    required this.totalPoints,
   });
 
-  factory LoggedUser.fromJson(Map<String, dynamic> json) => LoggedUser(
-    statusCode: json["status_code"],
-    message: json["message"],
-    data: Data.fromJson(json["data"]),
-    additionalData: List<dynamic>.from(json["additional_data"].map((x) => x)),
-  );
+  factory LoggedUser.fromJson(Map<String, dynamic> json) {
+    return LoggedUser(
+      statusCode: json["status_code"],
+      message: json["message"],
+      data: Data.fromJson(json["data"]),
+      totalCoupons: json['additional_data'].toString() == '[]' ? 0 : num.tryParse(json['additional_data']['totalCoupons'].toString()) ?? 0,
+      totalPoints:  json['additional_data'].toString() == '[]' ? 0 : num.tryParse(json['additional_data']['totalPoints'].toString()) ?? 0,
+      walletBalance:  json['additional_data'].toString() == '[]' ? 0 : num.tryParse(json['additional_data']['walletBalance'].toString()) ?? 0,
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-    "status_code": statusCode,
-    "message": message,
-    "data": data.toJson(),
-    "additional_data": List<dynamic>.from(additionalData.map((x) => x)),
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      "status_code": statusCode,
+      "message": message,
+      "data": data.toJson(),
+      "additional_data": {
+        "totalCoupons": totalCoupons,
+        "totalPoints": totalPoints,
+        "walletBalance": walletBalance,
+      },
+    };
+  }
 }
 
 class Data {
@@ -49,39 +53,47 @@ class Data {
 
   Data({
     required this.id,
-     this.name,
-     this.phoneNumber,
-     this.email,
-     this.birthdate,
+    this.name,
+    this.phoneNumber,
+    this.email,
+    this.birthdate,
     required this.country,
     required this.gender,
     required this.isBlocked,
     required this.maximumNumberOfInternationalShipments,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"],
-    name: json["name"] == null ? null : json["name"],
-    phoneNumber: json["phone_number"] == null ? null : json["phone_number"],
-    email: json["email"] == null ?  null: json["email"],
-    birthdate: json["birthdate"] == null ? null : DateTime.parse(json["birthdate"]),
-    country: Country.fromJson(json["country"]),
-    gender: json["gender"],
-    isBlocked: json["is_blocked"],
-    maximumNumberOfInternationalShipments: json["maximum_number_of_international_shipments"],
-  );
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      id: json["id"],
+      name: json["name"] == null ? null : json["name"],
+      phoneNumber: json["phone_number"] == null ? null : json["phone_number"],
+      email: json["email"] == null ? null : json["email"],
+      birthdate:
+          json["birthdate"] == null ? null : DateTime.parse(json["birthdate"]),
+      country: Country.fromJson(json["country"]),
+      gender: json["gender"],
+      isBlocked: json["is_blocked"],
+      maximumNumberOfInternationalShipments:
+          json["maximum_number_of_international_shipments"],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "phone_number": phoneNumber,
-    "email": email,
-    "birthdate": "${birthdate!.year.toString().padLeft(4, '0')}-${birthdate!.month.toString().padLeft(2, '0')}-${birthdate!.day.toString().padLeft(2, '0')}",
-    "country": country.toJson(),
-    "gender": gender,
-    "is_blocked": isBlocked,
-    "maximum_number_of_international_shipments": maximumNumberOfInternationalShipments,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "name": name,
+      "phone_number": phoneNumber,
+      "email": email,
+      "birthdate":
+          "${birthdate!.year.toString().padLeft(4, '0')}-${birthdate!.month.toString().padLeft(2, '0')}-${birthdate!.day.toString().padLeft(2, '0')}",
+      "country": country.toJson(),
+      "gender": gender,
+      "is_blocked": isBlocked,
+      "maximum_number_of_international_shipments":
+          maximumNumberOfInternationalShipments,
+    };
+  }
 }
 
 class Country {
@@ -91,11 +103,15 @@ class Country {
     required this.name,
   });
 
-  factory Country.fromJson(Map<String, dynamic> json) => Country(
-    name: json["name"],
-  );
+  factory Country.fromJson(Map<String, dynamic> json) {
+    return Country(
+      name: json["name"],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-    "name": name,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+    };
+  }
 }

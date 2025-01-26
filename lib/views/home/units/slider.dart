@@ -37,8 +37,8 @@ class _SliderState extends State<Slider> {
       return SizedBox();
     }
     return Container(
-      height: Utils.sizeFromHeight(4),
-      padding: EdgeInsets.symmetric(vertical: 20),
+      height: 140.height,
+      // padding: EdgeInsets.symmetric(vertical: 20),
       child: CarouselSlider(
         options: CarouselOptions(),
         items: banners.map((i) {
