@@ -1,3 +1,4 @@
+import 'package:jahzha_app/core/firebase_messaging_utils/firebase_messaging_utils.dart';
 import 'package:jahzha_app/core/models/walkthrough.dart';
 
 import '../models/app_banner.dart';
@@ -32,5 +33,16 @@ class GeneralDatasource {
       handleGenericException(e);
     }
     return [];
+  }
+
+  Future<void> sendFCMToken() async {
+    try {
+      await NetworkUtils.post(
+        'create-device-token',
+        data: {'device_token': await FirebaseMessagingUtils.instance.getFCM()},
+      );
+    } catch (e) {
+      handleGenericException(e);
+    }
   }
 }

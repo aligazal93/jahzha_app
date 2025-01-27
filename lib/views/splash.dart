@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
+import 'package:jahzha_app/core/datasources/general.dart';
 import 'package:jahzha_app/core/helpers/app_status.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/navbar/view.dart';
@@ -24,6 +25,9 @@ class _SplashViewState extends State<SplashView> {
         final isUpdateAvailable = await AppStatusUtils.showUpdateVersionDialog();
         if (isUpdateAvailable) {
           return;
+        }
+        if (!CachingUtils.isLogged) {
+          GeneralDatasource().sendFCMToken();
         }
         CachingUtils.isLogged
             ? RouteUtils.navigateAndPopAll(NavBarView())

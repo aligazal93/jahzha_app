@@ -4,6 +4,8 @@ import 'package:jahzha_app/core/network_utils/network_utils.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
 import 'package:jahzha_app/views/otp/view.dart';
 
+import '../../../core/firebase_messaging_utils/firebase_messaging_utils.dart';
+
 part 'states.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
@@ -33,16 +35,20 @@ class AuthCubit extends Cubit<AuthStates> {
     try {
       final response = await NetworkUtils.post(
         'register',
-        data:  {
-          "telephone" : phone,
-        },);
+        data: {
+          "telephone": phone,
+          'device_token': await FirebaseMessagingUtils.instance.getFCM(),
+        },
+      );
       final data = response.data;
       if (data['status_code'] == 200) {
         // Go To Verify Page
-        RouteUtils.navigateTo(OtpView(
-          phone: phone!,
-          userId: data['data']['user_id'],
-        ),);
+        RouteUtils.navigateTo(
+          OtpView(
+            phone: phone!,
+            userId: data['data']['user_id'],
+          ),
+        );
       }
     } catch (e) {
       handleGenericException(e);
@@ -57,23 +63,24 @@ class AuthCubit extends Cubit<AuthStates> {
     try {
       final response = await NetworkUtils.post(
         'register',
-        data:  {
+        data: {
           "email": email,
-        },);
+          'device_token': await FirebaseMessagingUtils.instance.getFCM(),
+        },
+      );
       final data = response.data;
       if (data['status_code'] == 200) {
         // Go To Verify Page
-        RouteUtils.navigateTo(OtpView(
-          email: email,
-          userId: data['data']['user_id'],
-        ),);
+        RouteUtils.navigateTo(
+          OtpView(
+            email: email,
+            userId: data['data']['user_id'],
+          ),
+        );
       }
     } catch (e) {
       handleGenericException(e);
     }
     emit(AuthInit());
   }
-
-
-
 }

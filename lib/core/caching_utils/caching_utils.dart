@@ -8,6 +8,8 @@ import 'package:jahzha_app/views/splash.dart';
 import 'package:jahzha_app/widgets/snack_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../firebase_messaging_utils/firebase_messaging_utils.dart';
+
 class CachingUtils {
   static const String _cachingUserKey = 'logged_user';
   static const String _cachingTokenKey = 'access_token';
@@ -42,6 +44,9 @@ class CachingUtils {
     try {
       final response = await NetworkUtils.post(
         'logout',
+        data: {
+          'device_token': await FirebaseMessagingUtils.instance.getFCM(),
+        },
       );
       if (response.statusCode == 200) {
         showSnackBar(response.data['message']);
