@@ -53,7 +53,7 @@ class _ComparingViewState extends State<ComparingView> {
     final careemMethodCheck = pickupType == PickupType.careem && !offer.pickupByCareem;
     if (userDropOffMethodCheck || companyMethodCheck || careemMethodCheck) {
       showSnackBar(
-        'deliveryMethodNotAvailable',
+        'deliveryMethodNotAvailable'.tr(),
         errorMessage: true,
       );
       return;

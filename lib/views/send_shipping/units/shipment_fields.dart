@@ -28,9 +28,15 @@ class _ShipmentFields extends StatelessWidget {
         ],
       ),
       label: 'Approximate weight'.tr(),
-      inputType: TextInputType.number,
+      inputType: TextInputType.numberWithOptions(
+        // signed: true,
+        decimal: true,
+      ),
       controller: dto.weightTXController,
       validator: Validator.weight,
+      formatters: [
+        AppTextFieldFormatters.disallowArabicNumbers,
+      ],
     );
   }
 }

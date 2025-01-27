@@ -9,6 +9,8 @@ import 'package:jahzha_app/widgets/app_button.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
 
+import '../../../../core/helpers/app_text_field_formatters.dart';
+
 class ViaMobileForm extends StatelessWidget {
   const ViaMobileForm({Key? key}) : super(key: key);
 
@@ -67,10 +69,13 @@ class ViaMobileForm extends StatelessWidget {
               fillColor: AppColors.tGray,
               hint: '5XXXXXXXXX',
               textAlign: TextAlign.left,
-              inputType: TextInputType.number,
+              inputType: TextInputType.numberWithOptions(),
               onSaved: (v) => cubit.phone = v,
               validator: Validator.phone,
               maxLength: 9,
+              formatters: [
+                AppTextFieldFormatters.disallowArabicNumbers,
+              ],
             ),
             AppButton(
                 title: 'Continue'.tr(),

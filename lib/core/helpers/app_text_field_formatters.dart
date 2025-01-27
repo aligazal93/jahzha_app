@@ -12,4 +12,8 @@ abstract class AppTextFieldFormatters {
   static final arabic = FilteringTextInputFormatter.allow(
     RegExp(r'^[\u0600-\u06FF\s]*$'),
   );
+
+  static final disallowArabicNumbers = FilteringTextInputFormatter.deny(
+    RegExp(r'[٠-٩]'),
+  );
 }

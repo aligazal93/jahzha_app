@@ -50,10 +50,11 @@ class _FormFieldsState extends State<_FormFields> {
                 label: 'Mobile number'.tr(),
                 textAlign: Utils.isAR ? TextAlign.end : TextAlign.start,
                 controller: cubit.phoneTXController,
-                inputType: TextInputType.phone,
+                inputType: TextInputType.numberWithOptions(),
                 fillColor: AppColors.whiteBk,
                 validator: Validator.phone,
                 maxLength: 9,
+                formatters: [AppTextFieldFormatters.disallowArabicNumbers],
               ),
               AppTextField(
                 label: 'email Address'.tr(),
