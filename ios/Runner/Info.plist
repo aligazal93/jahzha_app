@@ -62,5 +62,35 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+		<key>NSAppleMusicUsageDescription</key>
+    	<string>App user your it</string>
+    	<key>NSSiriUsageDescription</key>
+    	<string>App user your it</string>
+    	<key>NSBluetoothAlwaysUsageDescription</key>
+    	<string>Our app uses bluetooth to find, connect and transfer data between different devices</string>
+    	<key>NSBluetoothPeripheralUsageDescription</key>
+    	<string>App bluetooth use.</string>
+    	<key>NSCalendarsUsageDescription</key>
+    	<string>App user your calendar.</string>
+    	<key>NSCameraUsageDescription</key>
+    	<string>App would like to use your camera to update profile image</string>
+    	<key>NSContactsUsageDescription</key>
+    	<string>App would like access to your Contacts and upload it to our servers to help us to find your friends and family using ${PRODUCT_NAME} and allow you to chat with them</string>
+    	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    	<string>Location is required to detect user latitude and longitude for easy location picking when adding new shipment.</string>
+    	<key>NSLocationAlwaysUsageDescription</key>
+    	<string>Location is required to detect user latitude and longitude for easy location picking when adding new shipment.</string>
+    	<key>NSLocationUsageDescription</key>
+    	<string>Location is required to detect user latitude and longitude for easy location picking when adding new shipment</string>
+    	<key>NSLocationWhenInUseUsageDescription</key>
+    	<string>Location is required to detect user latitude and longitude for easy location picking when adding new shipment</string>
+    	<key>NSMicrophoneUsageDescription</key>
+    	<string>Used to capture audio for searching</string>
+    	<key>NSMotionUsageDescription</key>
+    	<string>App motion use.</string>
+    	<key>NSPhotoLibraryUsageDescription</key>
+    	<string>$(PRODUCT_NAME) would like access to your photo gallery, to help you set your profile photo</string>
+    	<key>NSSpeechRecognitionUsageDescription</key>
+    	<string>App speech recognition use.</string>
 </dict>
 </plist>

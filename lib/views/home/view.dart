@@ -17,6 +17,7 @@ import 'package:jahzha_app/widgets/app_text.dart';
 
 import '../../core/datasources/general.dart';
 import '../../core/helpers/app_status.dart';
+import '../../core/permission_manager/permissions_section.dart';
 
 part 'units/customer_service_card.dart';
 
@@ -53,6 +54,12 @@ class _HomeViewState extends State<HomeView> {
           padding: EdgeInsets.zero,
           children: [
             Slider(key: UniqueKey()),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: AppPermissionsSections(),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,
