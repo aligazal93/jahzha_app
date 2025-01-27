@@ -312,5 +312,8 @@
   "address": "Address",
   "postal_code": "Postal Code",
   "something_went_wrong": "Something went wrong",
-  "session_expired": "Session expired"
+  "session_expired": "Session expired",
+  "browse_the_app": "Browse the app as guest",
+  "login_to_continue": "You have first to log in to continue",
+  "login": "Login"
 }

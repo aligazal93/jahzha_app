@@ -12,6 +12,7 @@ import 'package:jahzha_app/widgets/app_paginated_scroll.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
 
+import '../../widgets/app/login_to_continue_view.dart';
 import 'cubit.dart';
 
 part 'units/orders.dart';
@@ -24,12 +25,7 @@ class MyShipmentsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!CachingUtils.isLogged) {
-      return Scaffold(
-        appBar: HomeAppBar(
-          name: 'in Jahzha'.tr(),
-          title: 'My shipments'.tr(),
-        ),
-      );
+      return LoginToContinueView(hideAppBar: true);
     }
     return BlocProvider(
       create: (context) => MyShipmentsCubit()..getShipments(),

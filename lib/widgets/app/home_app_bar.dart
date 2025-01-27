@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/datasources/cart.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
@@ -75,7 +76,7 @@ class CartButton extends StatelessWidget {
       stream: _streamController.stream,
       builder: (context, snapshot) => FutureBuilder<int>(
         initialData: 0,
-        future: CartDatasource().getCartCount(),
+        future: CachingUtils.isLogged ? CartDatasource().getCartCount() : null,
         builder: (context, snapshot) {
           return InkWell(
             onTap: () => RouteUtils.navigateTo(CartPageView()),

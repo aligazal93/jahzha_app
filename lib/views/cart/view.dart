@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/helpers/app_status.dart';
 import 'package:jahzha_app/core/route_utils/route_utils.dart';
@@ -19,6 +20,7 @@ import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/app_text_field.dart';
 import 'package:jahzha_app/widgets/snack_bar.dart';
 
+import '../../widgets/app/login_to_continue_view.dart';
 import 'cubit.dart';
 
 part 'units/coupon.dart';
@@ -31,6 +33,9 @@ class CartPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!CachingUtils.isLogged) {
+      return LoginToContinueView();
+    }
     return BlocProvider(
       create: (context) => CartCubit()..getCart(),
       child: Scaffold(

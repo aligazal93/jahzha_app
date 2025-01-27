@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/views/coupons/cubit.dart';
 import 'package:jahzha_app/views/navbar/cubit/cubit.dart';
@@ -9,6 +10,7 @@ import 'package:jahzha_app/views/navbar/units/bottom_navbar.dart';
 import 'package:jahzha_app/widgets/app_sheet.dart';
 import 'package:jahzha_app/widgets/loading_indicator.dart';
 
+import '../../widgets/app/login_to_continue_view.dart';
 import '../../widgets/app_text.dart';
 import '../coupons/view.dart';
 import '../home/units/our_services_cards.dart';
@@ -50,7 +52,7 @@ class NavBarView extends StatelessWidget {
                     HomeView(),
                     MyShipmentsView(),
                     CouponsView(),
-                    MenuView(),
+                    CachingUtils.isLogged ? MenuView() : LoginToContinueView(hideAppBar: true),
                   ][cubit.currentIndex],
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             floatingActionButton: UnconstrainedBox(

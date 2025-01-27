@@ -311,5 +311,8 @@
   "address": "العنوان",
   "postal_code": "الرمز البريدي",
   "something_went_wrong": "حدث خطأ ما",
-  "session_expired": "انتهت الجلسة"
+  "session_expired": "انتهت الجلسة",
+  "browse_the_app": "تصفح التطبيق كزائر",
+  "login_to_continue": "يجب عليك تسجيل الدخول اولا للمتابعة",
+  "login": "تسجيل الدخول"
 }

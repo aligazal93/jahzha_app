@@ -13,40 +13,35 @@ class BoardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 22),
-                child: AppNetworkImage(
-                  url: image,
-                  width: 228.width,
-                  height: 228.width,
-                ),
-              ),
-              if (title != null)
-                AppText(
-                  title: title!,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w900,
-                  color: AppColors.secondary,
-                ),
-              if (description != null)
-                AppText(
-                  title: description!,
-                  fontSize: 14,
-                  textAlign: TextAlign.center,
-                  height: 25,
-                  color: AppColors.txtGray,
-                  fontWeight: FontWeight.w400,
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                )
-            ],
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 22),
+          child: AppNetworkImage(
+            url: image,
+            width: 200.width,
+            height: 200.width,
           ),
         ),
+        if (title != null)
+          AppText(
+            padding: EdgeInsets.only(top: 60.height),
+            title: title!,
+            fontSize: 16,
+            fontWeight: FontWeight.w900,
+            color: AppColors.secondary,
+          ),
+        if (description != null)
+          AppText(
+            title: description!,
+            fontSize: 14,
+            textAlign: TextAlign.center,
+            height: 25,
+            color: AppColors.txtGray,
+            fontWeight: FontWeight.w400,
+            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          )
       ],
-      mainAxisAlignment: MainAxisAlignment.center,
     );
   }
 }

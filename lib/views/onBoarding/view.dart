@@ -43,25 +43,27 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
+        child: Column(
           children: [
             if (walkthrough.isNotEmpty) ...[
-              PageView(
-                onPageChanged: (index) {
-                  setState(() {
-                    onLastPage = (index == walkthrough.length - 1);
-                  });
-                },
-                controller: _controller,
-                children: [
-                  ...walkthrough.map((e) {
-                    return BoardCard(
-                      image: e.image,
-                      title: e.title,
-                      description: e.description,
-                    );
-                  }),
-                ],
+              Expanded(
+                child: PageView(
+                  onPageChanged: (index) {
+                    setState(() {
+                      onLastPage = (index == walkthrough.length - 1);
+                    });
+                  },
+                  controller: _controller,
+                  children: [
+                    ...walkthrough.map((e) {
+                      return BoardCard(
+                        image: e.image,
+                        title: e.title,
+                        description: e.description,
+                      );
+                    }),
+                  ],
+                ),
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -76,9 +78,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         axisDirection: Axis.horizontal,
                         effect: SlideEffect(
                           activeDotColor: AppColors.yellow,
-                          dotHeight: 10,
+                          dotHeight: 6,
                           dotColor: AppColors.darkGrayBlue,
-                          dotWidth: 22,
+                          dotWidth: 16,
+                          spacing: 4,
                         ),
                       ),
                       Container(
@@ -108,14 +111,13 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                                 titleFontSize: 15,
                               ),
                       ),
-                      if (!onLastPage)
-                        AppText(
-                          title: 'Skip'.tr(),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.lightGray,
-                          onTap: () => RouteUtils.navigateTo(LoginView()),
-                        ),
+                      AppText(
+                        title: onLastPage ? '' : 'Skip'.tr(),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.lightGray,
+                        onTap: onLastPage ? null : () => RouteUtils.navigateTo(LoginView()),
+                      ),
                     ],
                   ),
                 ),
@@ -123,17 +125,13 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             ] else
               AppLoadingIndicator(),
             if (walkthrough.isEmpty)
-              PositionedDirectional(
-                top: 8,
-                end: 8,
-                child: BasicCard(
-                  child: AppText(
-                    title: 'Skip'.tr(),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.lightGray,
-                    onTap: () => RouteUtils.navigateTo(LoginView()),
-                  ),
+              BasicCard(
+                child: AppText(
+                  title: 'Skip'.tr(),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.lightGray,
+                  onTap: () => RouteUtils.navigateTo(LoginView()),
                 ),
               ),
           ],

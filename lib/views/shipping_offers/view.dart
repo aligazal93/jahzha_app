@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_places_flutter/model/place_type.dart';
 import 'package:google_places_flutter/model/prediction.dart';
+import 'package:jahzha_app/core/caching_utils/caching_utils.dart';
 import 'package:jahzha_app/core/helpers/app_colors.dart';
 import 'package:jahzha_app/core/models/shipping/get_offers_dto.dart';
 import 'package:jahzha_app/core/models/shipping/shipping_offer.dart';
@@ -25,6 +26,7 @@ import 'package:jahzha_app/widgets/empty_view.dart';
 import 'package:jahzha_app/widgets/google_places_text_form_field.dart';
 import 'package:jahzha_app/widgets/snack_bar.dart';
 
+import '../../widgets/app/login_to_continue_view.dart';
 import 'cubit.dart';
 
 part 'units/info.dart';
@@ -97,6 +99,10 @@ class ShippingOffersView extends StatelessWidget {
                           offer: offer,
                           onComparisonTap: (v) => cubit.toggleComparison(offer),
                           onOrder: () {
+                            if (!CachingUtils.isLogged) {
+                              RouteUtils.navigateTo(LoginToContinueView());
+                              return;
+                            }
                             if (offer.pickupType == PickupType.careem) {
                               PickLocationForCareemView(
                                 cubit: cubit,

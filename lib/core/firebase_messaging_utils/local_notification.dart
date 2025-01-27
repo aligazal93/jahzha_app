@@ -87,6 +87,8 @@ class LocalNotification {
     //   ),
     // );
   }
+
+  bool _isVisible = false;
 }
 
 class _Notification extends StatefulWidget {
@@ -102,6 +104,11 @@ class _Notification extends StatefulWidget {
   final VoidCallback onTap;
 
   Future<void> show() {
+    if (LocalNotification.instance._isVisible) {
+      RouteUtils.pop();
+      LocalNotification.instance._isVisible = false;
+    }
+    LocalNotification.instance._isVisible = true;
     return showDialog(
       barrierColor: Colors.transparent,
       barrierDismissible: false,
@@ -135,6 +142,7 @@ class _NotificationState extends State<_Notification> {
   @override
   void dispose() {
     timer?.cancel();
+    LocalNotification.instance._isVisible = false;
     super.dispose();
   }
 

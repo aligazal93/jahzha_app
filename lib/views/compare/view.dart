@@ -11,6 +11,9 @@ import 'package:jahzha_app/widgets/app_network_image.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:jahzha_app/widgets/snack_bar.dart';
 
+import '../../core/caching_utils/caching_utils.dart';
+import '../../core/route_utils/route_utils.dart';
+import '../../widgets/app/login_to_continue_view.dart';
 import '../../widgets/app/shipping_offer_card.dart';
 import '../shipping_offers/view.dart';
 
@@ -48,6 +51,10 @@ class _ComparingViewState extends State<ComparingView> {
   }
 
   void order(ShippingOffer offer) {
+    if (!CachingUtils.isLogged) {
+      RouteUtils.navigateTo(LoginToContinueView());
+      return;
+    }
     final userDropOffMethodCheck = pickupType == PickupType.myself && !offer.dropOffByUser;
     final companyMethodCheck = pickupType == PickupType.company && !offer.pickupByCompany;
     final careemMethodCheck = pickupType == PickupType.careem && !offer.pickupByCareem;
