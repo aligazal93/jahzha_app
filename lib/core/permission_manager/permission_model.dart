@@ -28,9 +28,9 @@ List<PermissionModel> _permissions = [
   //   icon: FontAwesomeIcons.camera,
   // ),
   PermissionModel(
-    permission: Permission.camera,
-    title: Utils.isAR ? 'فعل الكاميرا لتتمكن من تحديث صورة الحساب' : 'Enable camera to update profile picture',
-    icon: FontAwesomeIcons.camera,
+    permission: Permission.notification,
+    title: Utils.isAR ? 'فعل الاشعارات لتتمكن من تلقي جميع تحديثاتنا' : 'Enable notifications to receive all updates',
+    icon: FontAwesomeIcons.solidBell,
   ),
   if (Platform.isIOS)
     PermissionModel(
@@ -39,9 +39,9 @@ List<PermissionModel> _permissions = [
       icon: FontAwesomeIcons.solidImage,
     ),
   PermissionModel(
-    permission: Permission.notification,
-    title: Utils.isAR ? 'فعل الاشعارات لتتمكن من تلقي جميع تحديثاتنا' : 'Enable notifications to receive all updates',
-    icon: FontAwesomeIcons.solidBell,
+    permission: Permission.camera,
+    title: Utils.isAR ? 'فعل الكاميرا لتتمكن من تحديث صورة الحساب' : 'Enable camera to update profile picture',
+    icon: FontAwesomeIcons.camera,
   ),
 ];
 
