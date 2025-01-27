@@ -309,5 +309,7 @@
   "edit_receiver_address": "تعديل عنوان الاستلام",
   "editing_address_pending": "برجاء الانتظار بينما نقوم بتحديث عنوان المستلم",
   "address": "العنوان",
-  "postal_code": "الرمز البريدي"
+  "postal_code": "الرمز البريدي",
+  "something_went_wrong": "حدث خطأ ما",
+  "session_expired": "انتهت الجلسة"
 }
