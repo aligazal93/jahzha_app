@@ -81,11 +81,9 @@ class JahzhaForCompaniesView extends StatelessWidget {
                         fillColor: AppColors.tGray,
                         hint: 'shipment type'.tr(),
                         validator: (v) => Validator.empty(v),
-                        onChange: (v) {
-                          cubit.changeShipmentType(v);
-                        },
-                        //TODO TRANSLATE
-                        items: ['Air_freight', 'Sea_shipping', 'Land_shipping'],
+                        onChange: (v) => cubit.shipmentType = v,
+                        modeling: true,
+                        items: ShipmentType.values.map((e) => e).toList(),
                         value: cubit.shipmentType,
                       ),
                       AppTextField(

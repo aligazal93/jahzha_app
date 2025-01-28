@@ -304,6 +304,7 @@
   "waybill": "بوليصة",
   "invoice": "فاتورة",
   "confirmed": "مؤكد",
+  "Select PDF File": "اختر ملف PDF",
   "copied": "تم النسخ",
   "Files": "ملفات",
   "edit_receiver_address": "تعديل عنوان الاستلام",
@@ -314,5 +315,8 @@
   "session_expired": "انتهت الجلسة",
   "browse_the_app": "تصفح التطبيق كزائر",
   "login_to_continue": "يجب عليك تسجيل الدخول اولا للمتابعة",
-  "login": "تسجيل الدخول"
+  "login": "تسجيل الدخول",
+  "Land_shipping": "شحن بري",
+  "Sea_shipping": "شحن بحري",
+  "Air_freight": "شحن جوي"
 }

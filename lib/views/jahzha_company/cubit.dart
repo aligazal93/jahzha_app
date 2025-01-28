@@ -27,8 +27,8 @@ class CompanyRequestsCubit extends Cubit<CompanyRequestsStates> {
       mobile,
       country,
       companyName,
-      goodsType,
-      shipmentType;
+      goodsType;
+  ShipmentType? shipmentType;
   dynamic averageShipmentsPerMonth,
       averageShipmentWeight,
       averageDimensionsPerShipment;
@@ -42,7 +42,7 @@ class CompanyRequestsCubit extends Cubit<CompanyRequestsStates> {
     formKey.currentState?.save();
     if (formKey.currentState?.validate() == false) return;
     if (file == null) {
-      showSnackBar('Select Medical History File', errorMessage: true);
+      showSnackBar('Select PDF File'.tr(), errorMessage: true);
       return;
     }
     emit(CompanyRequestsLoading());
@@ -108,7 +108,7 @@ class CompanyRequestsCubit extends Cubit<CompanyRequestsStates> {
       'email': email,
       'mobile_number': mobile,
       'country': country,
-      'shipment_type': shipmentType,
+      'shipment_type': shipmentType!.id,
       'company_name': companyName,
       'average_shipments_per_month': averageShipmentsPerMonth,
       'average_shipment_weight': averageShipmentWeight,
@@ -116,18 +116,10 @@ class CompanyRequestsCubit extends Cubit<CompanyRequestsStates> {
       'average_dimensions_per_shipment': averageDimensionsPerShipment
     };
     final formData = FormData.fromMap(data);
+    if (file != null)
     formData.files
         .addAll({MapEntry('file', await MultipartFile.fromFile(file!.path))});
     return formData;
-  }
-
-  void changeShipmentType(String v) {
-    if (v == 'Air_freight' || v == 'Sea_shipping' || v == 'Land_shipping') {
-      shipmentType = v;
-    } else {
-      shipmentType = 'Unknown';
-    }
-    emit(CompanyRequestsInit());
   }
 
   void selectMedicalHistory() async {
@@ -152,59 +144,12 @@ class CompanyRequestsCubit extends Cubit<CompanyRequestsStates> {
   }
 }
 
-Future<void> _showMyDialog(BuildContext context) async {
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button for close dialog!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.solidSquareCheck,
-                color: AppColors.green,
-                size: 46,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              AppText(
-                textAlign: TextAlign.center,
-                title: 'Your request has been received successfully'.tr(),
-                fontSize: 16,
-                color: AppColors.secondary,
-                padding: EdgeInsets.symmetric(vertical: 12),
-                fontWeight: FontWeight.w700,
-              ),
-              AppText(
-                textAlign: TextAlign.center,
-                title:
-                    'We will contact you as soon as possible to obtain a price quote. Thank you'
-                        .tr(),
-                fontSize: 14,
-                color: AppColors.txtGray,
-                fontWeight: FontWeight.w700,
-              ),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          AppButton(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            title: 'Home'.tr(),
-            color: AppColors.primary,
-            titleFontSize: 16,
-            constrainedAxis: Axis.horizontal,
-            onTap: () {
-              RouteUtils.navigateTo(NavBarView());
-            },
-          ),
-          SizedBox(
-            height: 20,
-          ),
-        ],
-      );
-    },
-  );
+enum ShipmentType {
+  airFreight('Air_freight'),
+  seaShipping('Sea_shipping'),
+  landShipping('Land_shipping');
+
+  const ShipmentType(this.id);
+  final String id;
+  String get name => id.tr();
 }

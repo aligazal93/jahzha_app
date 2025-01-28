@@ -36,7 +36,6 @@ class OtpCubit extends Cubit<OtpStates> {
       final data = response.data;
       if(data['status_code'] == 200){
         await getUserAndCache(data['data']['access_token']);
-        showSnackBar(data['message'],color: AppColors.green);
         RouteUtils.navigateAndPopAll(NavBarView());
       } else {
         showSnackBar(data['message'],errorMessage: true);

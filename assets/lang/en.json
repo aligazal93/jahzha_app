@@ -315,5 +315,9 @@
   "session_expired": "Session expired",
   "browse_the_app": "Browse the app as guest",
   "login_to_continue": "You have first to log in to continue",
-  "login": "Login"
+  "login": "Login",
+  "Land_shipping": "Land Shipping",
+  "Sea_shipping": "Sea Shipping",
+  "Air_freight": "Air Freight",
+  "Select PDF File": "Select PDF File"
 }

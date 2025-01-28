@@ -98,7 +98,7 @@ class NetworkUtils {
   }
 
   static void _logResponse(Response response) {
-    if (response.statusCode == 401) {
+    if (CachingUtils.isLogged && response.statusCode == 401) {
       showSnackBar(
         'session_expired'.tr(),
         errorMessage: true,
