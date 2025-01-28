@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jahzha_app/core/helpers/dimensions.dart';
@@ -63,6 +64,7 @@ class AppStatusUtils {
     await _upgrader.initialize();
     final isUpdateAvailable = await _upgrader.isUpdateAvailable();
     if (isUpdateAvailable) {
+      _markAsRelease();
       RouteUtils.navigateAndPopAll(Scaffold(
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 64.width),
@@ -122,5 +124,19 @@ class AppStatusUtils {
       ));
     }
     return isUpdateAvailable;
+  }
+
+  static Future<void> _markAsRelease() async {
+    if (kDebugMode) {
+      return;
+    }
+    try {
+      await _dio.patch(
+        '.json',
+        data: {
+          'app_version_${Platform.isIOS ? 'ios' : 'android'}': true,
+        },
+      );
+    } catch (e) {}
   }
 }

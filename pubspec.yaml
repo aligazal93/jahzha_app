@@ -1,6 +1,6 @@
 name: jahzha_app
 description: A new Flutter project.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 version: 1.0.0+1001
 
 environment:
@@ -24,7 +24,6 @@ dependencies:
   path_provider: ^2.1.5
   # Picking files
   image_picker: ^1.1.2
-  #  file_picker: ^8.0.3
   # Animation
   animate_do: ^3.3.4
   # SVG Widget
