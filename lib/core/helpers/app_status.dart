@@ -127,7 +127,7 @@ class AppStatusUtils {
   }
 
   static Future<void> _markAsRelease() async {
-    if (kDebugMode) {
+    if (kDebugMode || _isAppProduction) {
       return;
     }
     try {
