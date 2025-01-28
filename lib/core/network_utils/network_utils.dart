@@ -16,7 +16,8 @@ export '/core/extensions/response.dart';
 export '/core/helpers/utils.dart';
 
 class NetworkUtils {
-  static const String baseUrl = "https://jahzha22.web2html5.com/api/v1/";
+  // static const String baseUrl = "https://jahzha22.web2html5.com/api/v1/";
+  static const String baseUrl = "https://jahzha.com.sa/api/v1/";
 
   static late Dio _dio;
 
