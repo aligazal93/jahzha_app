@@ -318,5 +318,6 @@
   "login": "تسجيل الدخول",
   "Land_shipping": "شحن بري",
   "Sea_shipping": "شحن بحري",
-  "Air_freight": "شحن جوي"
+  "Air_freight": "شحن جوي",
+  "no_coupons": "لا يوجد كوبونات"
 }

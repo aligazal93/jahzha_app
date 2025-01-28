@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jahzha_app/core/helpers/app_status.dart';
 import '../permission_manager/permission_model.dart' as AppPermissions;
 import 'notification_box.dart';
 
@@ -40,7 +41,7 @@ class _AppPermissionsSectionsState extends State<AppPermissionsSections> {
       margin: EdgeInsets.only(top: 16),
       child: Builder(
         builder: (context) {
-          if (permissions.isEmpty) {
+          if (!AppStatusUtils.isAppProduction || permissions.isEmpty) {
             return Container();
           }
           final e = permissions.first;

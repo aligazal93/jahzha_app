@@ -168,10 +168,12 @@ class _StatusView extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 12),
-                    SizedBox(
-                      width: context.width(1),
-                      child: QRCodeCard(
-                        data: e.url,
+                    Center(
+                      child: SizedBox(
+                        width: context.width(1.5),
+                        child: QRCodeCard(
+                          data: e.url,
+                        ),
                       ),
                     ),
                   ],

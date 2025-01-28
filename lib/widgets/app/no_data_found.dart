@@ -5,7 +5,9 @@ import 'package:jahzha_app/widgets/app_text.dart';
 import 'package:lottie/lottie.dart';
 
 class NoDataFoundView extends StatelessWidget {
-  const NoDataFoundView({Key? key}) : super(key: key);
+  const NoDataFoundView({Key? key, this.title}) : super(key: key);
+
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class NoDataFoundView extends StatelessWidget {
             height: 12,
           ),
           AppText(
-            title: Utils.isAR ? 'لا يوجد بيانات لعرضها' : 'No Data Available',
+            title: title ?? (Utils.isAR ? 'لا يوجد بيانات لعرضها' : 'No Data Available'),
             fontSize: 18,
             color: AppColors.primary.theme,
             fontWeight: FontWeight.w700,

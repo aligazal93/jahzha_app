@@ -14,17 +14,18 @@ class _DetailsView extends StatelessWidget {
         children: [
           if (AppStatusUtils.isAppProduction)
             AppButton(
-            title: (details.canEditReceiverAddress
-                ? 'edit_receiver_address'
-                : 'editing_address_pending')
-                .tr(),
-            constrainedAxis: Axis.horizontal,
-            height: 48,
-            padding: EdgeInsets.zero,
-            onTap: details.canEditReceiverAddress
-                ? () => RouteUtils.navigateTo(EditReceiverView(shipmentID: cubit.id))
-                : null,
-          ),
+              title: (details.canEditReceiverAddress
+                      ? 'edit_receiver_address'
+                      : 'editing_address_pending')
+                  .tr(),
+              constrainedAxis: Axis.horizontal,
+              height: 48,
+              padding: EdgeInsets.zero,
+              onTap: details.canEditReceiverAddress
+                  ? () => RouteUtils.navigateTo(
+                      EditReceiverView(shipmentID: cubit.id))
+                  : null,
+            ),
           SizedBox(height: 12),
           Center(
             child: AppText(

@@ -33,7 +33,7 @@ class CouponsDetailsView extends StatelessWidget {
             final couponsData = data?.coupons ?? [];
             if(state is CouponsDetailsLoading) {
               return AppLoadingIndicator();
-            }else if (couponsData.isEmpty){
+            }else if (data == null){
               return NoDataFoundView();
             }
             return Padding(
@@ -107,18 +107,27 @@ class CouponsDetailsView extends StatelessWidget {
                   ),
                   SizedBox(height: 20,),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: couponsData.length,
-                      itemBuilder: (context, index) {
-                        return CouponCard(
-                          availabilityText: couponsData[index].availabilityText,
-                          coupon: couponsData[index].coupon,
-                          couponId: couponsData[index].couponId,
-                          discountValue: couponsData[index].discountValue,
-                          featureOne: couponsData[index].feature1,
-                          featureTwo: couponsData[index].feature2,
-                        );
-                      },),
+                    child: Builder(
+                      builder: (context) {
+                        // if (couponsData.isEmpty) {
+                        //   return NoDataFoundView(
+                        //     title: "no_coupons".tr(),
+                        //   );
+                        // }
+                        return ListView.builder(
+                          itemCount: couponsData.length,
+                          itemBuilder: (context, index) {
+                            return CouponCard(
+                              availabilityText: couponsData[index].availabilityText,
+                              coupon: couponsData[index].coupon,
+                              couponId: couponsData[index].couponId,
+                              discountValue: couponsData[index].discountValue,
+                              featureOne: couponsData[index].feature1,
+                              featureTwo: couponsData[index].feature2,
+                            );
+                          },);
+                      }
+                    ),
                   )
                 ],
               ),
