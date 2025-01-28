@@ -12,7 +12,6 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../core/helpers/utils.dart';
 import '../../core/route_utils/route_utils.dart';
 import '../../widgets/app_loading_indicator.dart';
-import '../../widgets/snack_bar.dart';
 import '../navbar/view.dart';
 
 class PaymentView extends StatefulWidget {

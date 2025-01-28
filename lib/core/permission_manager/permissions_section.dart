@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jahzha_app/core/helpers/app_status.dart';
+
 import '../permission_manager/permission_model.dart' as AppPermissions;
 import 'notification_box.dart';
 

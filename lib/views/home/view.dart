@@ -20,9 +20,7 @@ import '../../core/helpers/app_status.dart';
 import '../../core/permission_manager/permissions_section.dart';
 
 part 'units/customer_service_card.dart';
-
 part 'units/service_card.dart';
-
 part 'units/slider.dart';
 
 class HomeView extends StatefulWidget {

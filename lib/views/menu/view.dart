@@ -24,8 +24,6 @@ import 'package:jahzha_app/widgets/app_dialog.dart';
 import 'package:jahzha_app/widgets/app_refresh_indicator.dart';
 import 'package:jahzha_app/widgets/app_text.dart';
 
-import '../../core/permission_manager/permissions_section.dart';
-
 part 'units/account_tile.dart';
 part 'units/card.dart';
 part 'units/info_card.dart';

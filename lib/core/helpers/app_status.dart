@@ -11,7 +11,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:upgrader/upgrader.dart';
 
 import '../../widgets/app_button.dart';
-import '../../widgets/app_dialog.dart';
 import '../../widgets/app_text.dart';
 import 'app_colors.dart';
 import 'utils.dart';
